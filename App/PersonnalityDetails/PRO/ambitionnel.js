@@ -1,0 +1,85 @@
+const IMAGE = require('../../../assets/images/stats/ambitionnel-pro.png');
+
+export default {
+  title: ['COMPÉTITIF / INDIVIDUALISTE', 'COMPÉTITIVE / INDIVIDUALISTE'],
+  personnality: 'PERSONNALITE COMPETITIVE',
+  content: `Ton besoin de défier la concurrence et d’agir constamment pour évoluer fait de toi quelqu’un de véritablement entreprenant.
+Ta compétitivité au travail te confère une personnalité hautement productive qui te permet de te hisser au sommet en rivalisant avec les meilleurs.
+
+★ PROFESSIONNELLEMENT :
+tu aimes démontrer tes compétences et ta supériorité dans l’action, tu es capable d’assumer une charge de travail considérable.
+tu fais d’ailleurs partie des personnalités les plus ambitieuses que YOU’S ait détecté.
+
+★ SELON TA PHILOSOPHIE :
+La compétition est fondamentale, elle tient un rôle essentiel dans ta vie professionnelle au point de la mettre en avant dans la plupart des choses que tu entreprends.
+D’ailleurs, tu te motives tellement que les objectifs imposés par ta hiérarchie, te paraissent souvent beaucoup plus simples à réaliser que les défis que tu t'imposes à
+toi-même. 
+Tes exigences personnelles t'aident et t'incitent constamment à placer la barre plus haute pour devenir plus efficace dans les tâches que l’on te confie au sein de l’entreprise.
+
+★ DE NATURE ASSURÉE DEPUIS L'ENFANCE :
+Tu as suffisamment pris confiance en toi pour t'engager pleinement quand la situation
+l’exige. 
+Tu sais que tu peux compter sur ta motivation à tout moment pour aller puiser dans tes ressources.
+pour toi, c’est d’abord le besoin d’être impactant dans ce que tu fais qui t'encourage chaque jour un peu plus à t'épanouir professionnellement.
+
+★ COMME TOUS LES AMBITIONNELS AU TRAVAIL :
+ta personnalité perfectionniste et spontanée est un exemple pour les autres. 
+Tu sais impressionner tes collègues grâce à ta détermination.
+tu aimes te dépasser et montrer l’étendue de tes performances aux yeux de tous. 
+Tu cherches à être le meilleur dans ce que tu entreprends.
+
+★ TU ES UN PERFORMEUR NÉ :
+Tu sais déployer une énergie colossale et montrer un grand intérêt pour le travail que tu fais.
+
+★ POUR TOI :
+« LA DIFFICULTÉ DE RÉUSSIR NE FAIT QU’AJOUTER A LA NÉCESSITÉ D’ENTREPRENDRE »
+
+★ CEPENDANT :
+Ton hyper compétitivité t'oblige encore à contrôler de façon excessive ton environnement professionnel. 
+Tu es trop obstiné.
+Il t'arrive encore trop souvent d’imposer ton rythme sans véritablement chercher à coopérer avec tes collègues, 
+tu fais trop souvent cavalier seul.
+D’ailleurs tu es tellement confiant vis-à-vis de tes compétences que tu as des difficultés à déléguer, à laisser les autres faire où même tout simplement à être tolérant quand tout ne se passe pas comme prévu. 
+Tu n'as pas assez confiance en l’autre et trop en toi-même.
+Ce qui te rend trop individualiste pour t'intéresser aux autres et coopérer convenablement au sein de l’entreprise.`,
+  stats: {
+    image: IMAGE,
+    stats: [
+      { title: 'Ambition productivité', letter: 'E', value: '19' },
+      { title: 'Compassion et attention portée vers autrui', letter: 'C', value: '12' },
+      { title: 'Analyse et stratégie', letter: 'L', value: '16' },
+      { title: 'Patience et calme', letter: 'T', value: '06' },
+      { title: 'Volontariat et investissement personnel', letter: 'E', value: '18' },
+      { title: 'Consciencieux et méthodique', letter: 'L', value: '17' },
+      { title: 'Fléxibilité et adaptation', letter: 'T', value: '09' },
+      { title: 'Humilité', letter: 'T', value: '08' },
+      { title: 'Curiosité et intérets', letter: 'E', value: '18' },
+      { title: 'Estime de soi et confiance', letter: 'L', value: '17' },
+      { title: 'Arangement et diplomate', letter: 'T', value: '08' },
+      { title: 'Écoute et réconfort', letter: 'C', value: '07' },
+      { title: 'Capacité d\'influence', letter: 'L', value: '16' },
+      { title: 'Communication et spontanéité', letter: 'E', value: '18' },
+      { title: 'Serviabilité et dévouement', letter: 'C', value: '14' },
+      { title: 'Bienveillance et coopération', letter: 'C', value: '09' },
+      { title: 'Éxtraversion et aisance en publique', letter: 'E', value: '18' },
+      { title: 'Organisation et gestion', letter: 'L', value: '16' },
+      { title: 'Acceptation de l\'autre et diplomatie', letter: 'T', value: '07' },
+      { title: 'Convivialité et concilience', letter: 'C', value: '12' },
+    ],
+    results: [
+      { title: 'Entreprenariat', value: '18.2' },
+      { title: 'Leadership', value: '16.4' },
+      { title: 'Collaboration', value: '10.8' },
+      { title: 'Tolérance', value: '7.6' },
+    ],
+    note: '13.3',
+    advice: 'Sois plus tolérant à l\'égard des autres',
+    type: 'Entreprenant',
+    attitudes: [
+      { title: 'Attitude conflictuelle', value: 'ÉLEVÉE' },
+      { title: 'Attitude hésitante', value: 'FAIBLE' },
+      { title: 'Attitude insouciante', value: 'FAIBLE' },
+      { title: 'Attitude posessive', value: 'ÉLEVÉE' },
+    ]
+  }
+};

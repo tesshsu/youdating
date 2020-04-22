@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "you's",
+    "slug": "yous",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
+    "platforms": ["ios", "android", "web"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#FF2200"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 20000
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.test.yous"
+    },
+    "facebookAppId": "510619869796975",
+    "facebookDisplayName": "Yous APP",
+    "facebookScheme": "fb510619869796975",
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "yous",
+            "project": "yous",
+            "authToken": "a5413b3e9dcb47c78161e1ef11a4b457c4c02516ddd94cf6991805431ba345c8"
+          }
+        }
+      ]
+    }
+  }
+}

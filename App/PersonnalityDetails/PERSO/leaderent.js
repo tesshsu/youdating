@@ -1,0 +1,85 @@
+const IMAGE = require('../../../assets/images/stats/leaderent-perso.png');
+
+export default {
+  title: ['LEADER / A L\'ECOUTE', 'LEADER / A L\'ECOUTE'],
+  personnality: 'PERSONNALITE LEADER',
+  content: `Ton besoin impératif de tout gérer en influençant la vie des autres fait de vous un véritable dirigeant.
+Ton éternel leadership te confère une personnalité particulièrement persuasive qui te permet de convaincre et de fédérer avec aisance de nombreuses personnes derrière toi.
+
+★ DE MANIÈRE GÉNÉRALE :
+Tu aimes intégrer les gens dans tes projets tout en saisissant les opportunités qui se présentent à toi pour atteindre tes objectifs personnels.
+Tu fais d’ailleurs partie des personnalités les plus consciencieuses que YOU’S ait détecté.
+
+★ SELON TA PHILOSOPHIE :
+Le leadership est primordial, il tient un rôle essentiel dans ta vie personnelle au point de le mettre en avant dans la plupart des choses que tu entreprends.
+D’ailleurs tu réfléchis tellement que tu as du mal à t'arrêter.
+La réflexion te stimule fortement et te pousse constamment à mettre de nouvelles stratégies en place en vue d’être plus efficace.
+Ta perspicacité t'aide et t'incite très souvent à te servir des compétences de chacun pour optimiser ce qui peut l’être et ainsi parvenir à tes fins de la manière la plus constructive
+possible.
+
+★ DE NATURE CONCERNÉE DEPUIS L'ENFANCE :
+Tu as suffisamment pris confiance en toi pour tout analyser dès la première approche. 
+Tu sais que tu peux compter sur ton organisation à tout moment pour gérer la situation avec sang-froid. 
+Tu recherches avant tout à maîtriser tes compétences.
+Pour toi, c’est d’abord le besoin de faire des choix cohérents qui t'encouragent chaque jour un peu plus à t'épanouir personnellement.
+
+★ COMME TOUS LES LEADERENT QUI SE RESPECTENT :
+Ta personnalité réfléchie et décisionnaire fait figure d’autorité pour les autres.
+Tu sais comment capter l’attention de ton entourage grâce à ta pertinence.
+Tu aimes être le chef d’orchestre, celui qui attribue les rôles et qui donne les directives au sein du groupe.
+
+★ TU ES UN STRATÈGE NÉ :
+Tu sais déployer une forte énergie et une grande confiance en toi pour convaincre et motiver les gens d’adhérer à tes projets.
+
+★ POUR TOI :
+  « VOIR LE POSSIBLE LÀ OÙ LES AUTRES VOIENT L’IMPOSSIBLE, TELLE EST LA CLEF DU SUCCÈS »
+
+★ CEPENDANT :
+Ton LEADERSHIP t'oblige encore trop régulièrement à contrôler ton environnement personnel. 
+Tu prends trop d’initiatives.
+Il t'arrive encore de ne pas suffisamment collaborer en prenant seul des décisions qui pourraient être prises collectivement.
+Tu es tellement investi dans la gestion et l’organisation de ta vie que tu as des difficultés à accepter les avis ou les idées qui viennent de l’extérieur.
+Pour toi, l’avis des gens prend une place importante mais pas suffisamment.
+Tu t'écoutes d’abord avant d’écouter les autres.
+Ce qui t'empêche d’être plus à l’écoute des réels besoins de ton entourage.`,
+  stats: {
+    image: IMAGE,
+    stats: [
+      { title: 'Ambition productivité', letter: 'E', value: '15' },
+      { title: 'Compassion et attention portée vers autrui', letter: 'C', value: '13' },
+      { title: 'Analyse et stratégie', letter: 'L', value: '18' },
+      { title: 'Patience et calme', letter: 'T', value: '10' },
+      { title: 'Volontariat et investissement personnel', letter: 'E', value: '14' },
+      { title: 'Consciencieux et méthodique', letter: 'L', value: '17' },
+      { title: 'Fléxibilité et adaptation', letter: 'T', value: '11' },
+      { title: 'Humilité', letter: 'T', value: '10' },
+      { title: 'Curiosité et intérets', letter: 'E', value: '17' },
+      { title: 'Estime de soi et confiance', letter: 'L', value: '16' },
+      { title: 'Arangement et diplomate', letter: 'T', value: '12' },
+      { title: 'Écoute et réconfort', letter: 'C', value: '14' },
+      { title: 'Capacité d\'influence', letter: 'L', value: '18' },
+      { title: 'Communication et spontanéité', letter: 'E', value: '13' },
+      { title: 'Serviabilité et dévouement', letter: 'C', value: '11' },
+      { title: 'Bienveillance et coopération', letter: 'C', value: '12' },
+      { title: 'Éxtraversion et aisance en publique', letter: 'E', value: '14' },
+      { title: 'Organisation et gestion', letter: 'L', value: '18' },
+      { title: 'Acceptation de l\'autre et diplomatie', letter: 'T', value: '11' },
+      { title: 'Convivialité et concilience', letter: 'C', value: '12' },
+    ],
+    results: [
+      { title: 'Entreprenariat', value: '14.6' },
+      { title: 'Leadership', value: '17.4' },
+      { title: 'Collaboration', value: '12.4' },
+      { title: 'Tolérance', value: '10.8' },
+    ],
+    note: '13.8',
+    advice: 'Pour mieux collaborer sois plus à l\'écoute',
+    type: 'Dirigeant',
+    attitudes: [
+      { title: 'Attitude conflictuelle', value: 'ÉLEVÉE' },
+      { title: 'Attitude hésitante', value: 'FAIBLE' },
+      { title: 'Attitude insouciante', value: 'FAIBLE' },
+      { title: 'Attitude posessive', value: 'ÉLEVÉE' },
+    ]
+  }
+};
