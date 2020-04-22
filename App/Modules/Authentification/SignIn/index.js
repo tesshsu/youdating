@@ -34,8 +34,8 @@ export default function AuthentificationSignIn() {
   return (
     <Formik
       initialValues={{
-        email: '',
-        password: ''
+        email: 'laristo1@hotmail.fr',
+        password: 'Keinanoam24$'
       }}
       onSubmit={async ({ email, password }) => {
         try {
@@ -45,17 +45,12 @@ export default function AuthentificationSignIn() {
           );
         } catch (err) {
           Alert.alert('Authentification', 'Identifiants incorrects');
+		  //Alert.alert('Error', err);
         }
       }}
     >
-      { ({ handleChange, handleSubmit, values }) => (
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior="padding"
-        >
-          <View
-            style={styles.scrollViewContainer}
-          >
+      { ({ handleChange, handleSubmit, values }) => (       
+        <View style={styles.scrollViewContainer} >
             <ScrollView
               style={styles.scrollView}
               contentContainerStyle={styles.content}
@@ -90,29 +85,21 @@ export default function AuthentificationSignIn() {
                   secureTextEntry: true,
                 }}
               />
-            </ScrollView>
-            <LinearGradient
-              style={styles.footer}
-              colors={['#ffffff00', 'white']}
-              start={[0, 0]}
-              end={[0, 1]}
-            >
-              <AuthentificationButton
+			  <AuthentificationButton
                 text="LOGIN"
                 containerStyle={styles.submitButton}
                 onPress={handleSubmit}
               />
-              <TouchableOpacity
+			  <TouchableOpacity
                 style={styles.link}
                 onPress={() => NavigationHelper.navigate('AuthentificationSignUp')}
               >
                 <Text style={styles.linkText}>
                   SIGN UP
                 </Text>
-              </TouchableOpacity>
-            </LinearGradient>
-          </View>
-        </KeyboardAvoidingView>
+              </TouchableOpacity> 
+            </ScrollView>               
+        </View>    
       )}
     </Formik>
   );
