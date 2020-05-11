@@ -193,30 +193,14 @@ export default function AuthentificationSignUp() {
     }
   }, [isLoading, results]);
 
-  return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior="padding"
-    >
-      <SafeAreaView
-        style={styles.scrollViewContainer}
-      >
-        
-        <ScrollView
+  return ( 
+    <ScrollView
           ref={scrollViewRef}
           style={styles.fill}
           contentContainerStyle={styles.scrollViewContent}
           keyboardShouldPersistTaps="handled"
         >
-          <Text style={styles.yousTitleText}>{'You\'s'}</Text>
-          <Text style={styles.subTitleText}>Application de rencontre</Text>
-          <Text style={styles.subSubTitleText}>Reseau 3.0</Text>
-          <FacebookConnectButton />
-          <View style={styles.or}>
-            <View style={styles.bar} />
-            <Text style={styles.orText}>ou</Text>
-            <View style={styles.bar} />
-          </View>
+          <Text style={styles.createAccountText}></Text>
           <Text style={styles.createAccountText}>crée un compte</Text>
           <TextField
             scrollViewRef={scrollViewRef}
@@ -391,8 +375,6 @@ export default function AuthentificationSignUp() {
               </Text>
             </TouchableOpacity>
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+    </ScrollView>    
   );
 }
