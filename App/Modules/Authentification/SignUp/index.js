@@ -7,10 +7,11 @@ import {
   ScrollView,
   Text,
   View,
+  Button,
   TouchableOpacity,
   Alert,
   ActivityIndicator,
-  SafeAreaView,
+  SafeAreaView, Image,
 } from 'react-native';
 import { useFormik } from 'formik';
 import moment from 'moment';
@@ -28,7 +29,8 @@ import TextField from '../../Global/TextField';
 import AuthentificationButton from '../../Global/AuthentificationButton';
 import useLogguedUser from '../../../Hooks/useLogguedUser';
 import { moderateScale } from '../../../Helpers/ScaleHelper';
-
+import Images from '../../../Assets/images';
+import { LinearGradient } from 'expo-linear-gradient';
 function checkAge(birthday) {
   const birthdayMoment = moment.unix(birthday);
 
@@ -194,38 +196,18 @@ export default function AuthentificationSignUp() {
   }, [isLoading, results]);
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior="padding"
-    >
-      <SafeAreaView
-        style={styles.scrollViewContainer}
-      >
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          isDarkModeEnabled={false}
-          mode="date"
-          headerTextIOS="Date de naissance"
-          confirmTextIOS="Confirmer"
-          cancelTextIOS="Annuler"
-          locale="fr_FR"
-          date={values.birthday ? moment(moment.unix(values.birthday)).toDate() : new Date()}
-          onConfirm={(date) => {
-            const timestamp = moment(date).unix();
-
-            handleChange('birthday')(timestamp.toString());
-            setIsDatePickerVisible(false);
-          }}
-          onCancel={() => setIsDatePickerVisible(false)}
-        />
-        <ScrollView
+    <View style={styles.scrollViewContainer} >
+      <View style={styles.backgroundContainer}>
+        <Image style={styles.bakcgroundImage} source={Images.back_img_signIn} />
+      </View>
+      <ScrollView
           ref={scrollViewRef}
           style={styles.fill}
           contentContainerStyle={styles.scrollViewContent}
           keyboardShouldPersistTaps="handled"
         >
           <Text style={styles.yousTitleText}>{'You\'s'}</Text>
-          <Text style={styles.subTitleText}>Application de rencontre</Text>
+          <Text style={styles.subTitleText}>LA RELATION SUR MESURE</Text>
           <Text style={styles.subSubTitleText}>Reseau 3.0</Text>
           <FacebookConnectButton />
           <View style={styles.or}>
@@ -274,141 +256,22 @@ export default function AuthentificationSignUp() {
               onChangeText: handleChange('passwordConfirmation')
             }}
           />
-          <TextField
-            scrollViewRef={scrollViewRef}
-            containerStyle={styles.textField}
-            label="Nom"
-            error={errors.lastName}
-            textInputProps={{
-              placeholder: 'Nom',
-              autoCapitalize: 'words',
-              textContentType: 'familyName',
-              value: values.lastName,
-              onChangeText: handleChange('lastName')
-            }}
-          />
-          <TextField
-            scrollViewRef={scrollViewRef}
-            containerStyle={styles.textField}
-            label="Prénom"
-            error={errors.firstName}
-            textInputProps={{
-              placeholder: 'Prénom',
-              autoCapitalize: 'words',
-              textContentType: 'name',
-              value: values.firstName,
-              onChangeText: handleChange('firstName')
-            }}
-          />
-          <TouchableOpacity onPress={chooseGender}>
-            <View pointerEvents="none">
-              <TextField
-                scrollViewRef={scrollViewRef}
-                containerStyle={styles.textField}
-                label="Vous êtes"
-                error={errors.gender}
-                textInputProps={{
-                  value: values.gender === 'MALE' ? 'Un Homme' : 'Une Femme',
-                  editable: false
-                }}
-              />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setIsDatePickerVisible(true)}
-          >
-            <Text style={styles.birthdaylabelText}>
-                Date de naissance
-            </Text>
-            <View style={styles.birthdayRow} pointerEvents="none">
-              <TextField
-                containerStyle={styles.birthdayTextField}
-                textInputProps={{
-                  placeholder: 'JJ',
-                  autoCapitalize: 'none',
-                  value: values.birthday ? moment.unix(values.birthday).format('DD') : '',
-                }}
-              />
-              <TextField
-                containerStyle={styles.birthdayTextField}
-                textInputProps={{
-                  placeholder: 'MM',
-                  value: values.birthday ? moment.unix(values.birthday).format('MM') : '',
-                }}
-              />
-              <TextField
-                containerStyle={[
-                  styles.birthdayTextField,
-                  { marginRight: 0 }
-                ]}
-                textInputProps={{
-                  placeholder: 'YYYY',
-                  value: values.birthday ? moment.unix(values.birthday).format('YYYY') : '',
-                }}
-              />
-            </View>
-            {errors.birthday && <Text style={styles.errorText}>{ errors.birthday }</Text>}
-          </TouchableOpacity>
-          <TextField
-            scrollViewRef={scrollViewRef}
-            label="Adresse"
-            containerStyle={styles.textField}
-            error={errors.formattedAddress}
-            textInputProps={{
-              placeholder: 'Adresse',
-              autoCapitalize: 'sentences',
-              textContentType: 'addressCityAndState',
-              value: selectedPlace ? selectedPlace.description : address,
-              onChangeText: (val) => {
-                setSelectedPlace(null);
-                setAddress(val);
-              }
-            }}
-          />
-          { isLoading && (
-            <ActivityIndicator
-              style={styles.loader}
-              size="large"
-              color="black"
-            />
-          )}
-          { selectedPlace === null && results.predictions.map(p => (
-            <TouchableOpacity
-              key={p.place_id}
-              onPress={() => {
-                handleChange('formattedAddress')(p.description);
-                setSelectedPlace(p);
-              }}
-              style={styles.predictionButton}
-            >
-              <Feather
-                style={styles.predictionMarker}
-                name="map-pin"
-                size={moderateScale(15)}
-                color="#84B5E4"
-              />
-              <Text style={styles.predictionText}>
-                { p.description }
-              </Text>
-            </TouchableOpacity>
-          ))}
           <View style={styles.footer}>
-            <AuthentificationButton
-              text="Créer mon compte"
-              containerStyle={styles.nextButton}
-              onPress={handleSubmit}
-            />
-            <TouchableOpacity
-              style={styles.link}
-              onPress={() => NavigationHelper.navigate('AuthentificationSignIn')}
-            >
-              <Text style={styles.linkText}>
-                SIGN IN
-              </Text>
-            </TouchableOpacity>
+            <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                            style={styles.linearGradient}
+                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+              <Text style={styles.buttonText}> suivant </Text>
+            </LinearGradient>
+              <TouchableOpacity
+                style={styles.link}
+                onPress={() => NavigationHelper.navigate('AuthentificationSignIn')}
+              >
+                <Text style={styles.linkText}>
+                  SIGN IN
+                </Text>
+              </TouchableOpacity>
           </View>
         </ScrollView>
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+      </View>
   );
 }

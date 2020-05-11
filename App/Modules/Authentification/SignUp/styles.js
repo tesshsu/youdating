@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { verticalScale, scale, moderateScale } from '../../../Helpers/ScaleHelper';
-
+import colors from '../../../Assets/css';
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -15,26 +15,38 @@ export default StyleSheet.create({
     paddingVertical: verticalScale(20),
     alignItems: 'stretch'
   },
+  backgroundContainer: {
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  bakcgroundImage: {
+    flex: 1,
+    width: null,
+    height: null
+  },
   yousTitleText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(26),
-    color: 'black',
+    color: colors.PINK,
     textAlign: 'center',
     textTransform: 'uppercase',
-    marginBottom: verticalScale(13)
+    marginTop: verticalScale(43)
   },
   subTitleText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(20),
-    color: '#84B5E4',
+    color: colors.PINK,
     textAlign: 'center',
-    textTransform: 'uppercase',
-    marginBottom: verticalScale(16)
+    textTransform: 'uppercase'
   },
   subSubTitleText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(10),
-    color: 'black',
+    color: colors.PINK,
     textAlign: 'center',
     textTransform: 'uppercase',
     marginBottom: verticalScale(42)
@@ -47,19 +59,20 @@ export default StyleSheet.create({
   bar: {
     flex: 1,
     height: 1,
-    backgroundColor: '#BFB9B9'
+    backgroundColor: colors.WHITE
   },
   orText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(14),
     textTransform: 'uppercase',
+    color: colors.WHITE,
     paddingHorizontal: scale(22)
   },
   createAccountText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(18),
-    color: 'black',
-    alignSelf: 'flex-start'
+    textAlign: 'center',
+    color: colors.WHITE
   },
   textField: {
     marginTop: verticalScale(23)
@@ -76,6 +89,20 @@ export default StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase',
     color: 'black'
+  },
+  linearGradient: {
+    marginTop: moderateScale(43),
+    flex: 1,
+    paddingLeft: 40,
+    paddingRight: 40,
+    borderRadius: 20
+  },
+  buttonText: {
+    fontSize: 18,
+    textAlign: 'center',
+    margin: 10,
+    color: '#ffffff',
+    backgroundColor: 'transparent',
   },
   scrollViewContainer: {
     flex: 1,

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import {
-  KeyboardAvoidingView,
   ScrollView,
   Text,
   View,
@@ -17,8 +16,7 @@ import useLogguedUser from '../../../Hooks/useLogguedUser';
 import AuthentificationButton from '../../Global/AuthentificationButton';
 import FacebookConnectButton from '../../Global/FacebookConnectButton';
 import TextField from '../../Global/TextField';
-
-const back_img_signIn = require("../../../../assets/images/signUpBackground.png");
+import Images from '../../../Assets/images';
 
 export default function AuthentificationSignIn() {
   const {
@@ -54,7 +52,7 @@ export default function AuthentificationSignIn() {
       { ({ handleChange, handleSubmit, values }) => (
         <View style={styles.scrollViewContainer} >
           <View style={styles.backgroundContainer}>
-            <Image style={styles.bakcgroundImage} source={back_img_signIn} />
+            <Image style={styles.bakcgroundImage} source={Images.back_img_signIn} />
           </View>
           <ScrollView
             style={styles.scrollView}
