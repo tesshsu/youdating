@@ -44,31 +44,6 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     justifyContent: 'flex-end'
   },
-  subTitleText: {
-    fontFamily: 'NewTaiLue-Bold',
-    fontSize: moderateScale(20),
-    color: '#d412c7',
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    marginBottom: verticalScale(56)
-  },
-  or: {
-    marginVertical: verticalScale(23),
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  bar: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#fff'
-  },
-  orText: {
-    fontFamily: 'NewTaiLue-Bold',
-    fontSize: moderateScale(14),
-    textTransform: 'uppercase',
-    color: '#fff',
-    paddingHorizontal: scale(22)
-  },
   createAccountText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(18),

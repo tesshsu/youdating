@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { verticalScale, scale, moderateScale } from '../../Helpers/ScaleHelper';
-
+import colors from '../../Assets/css';
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -46,7 +46,7 @@ export default StyleSheet.create({
   subTitleText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(20),
-    color: '#d412c7',
+    color: colors.WHITE,
     textAlign: 'center',
     textTransform: 'uppercase',
     marginBottom: verticalScale(56)
@@ -59,13 +59,13 @@ export default StyleSheet.create({
   bar: {
     flex: 1,
     height: 1,
-    backgroundColor: '#fff'
+    backgroundColor: colors.WHITE
   },
   orText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(14),
     textTransform: 'uppercase',
-    color: '#fff',
+    color: colors.WHITE,
     paddingHorizontal: scale(22)
   },
   createAccountText: {
@@ -82,6 +82,20 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginTop: verticalScale(30),
     backgroundColor: '#d412c7'
+  },
+  linearGradient: {
+    marginTop: moderateScale(43),
+    flex: 1,
+    paddingLeft: 40,
+    paddingRight: 40,
+    borderRadius: 20
+  },
+  buttonText: {
+    fontSize: 18,
+    textAlign: 'center',
+    margin: 10,
+    color: colors.WHITE,
+    backgroundColor: 'transparent',
   },
   link: {
     marginVertical: verticalScale(30)

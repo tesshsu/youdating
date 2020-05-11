@@ -10,6 +10,7 @@ import {
   Button,
   TouchableOpacity,
   Alert,
+  Linking,
   ActivityIndicator,
   SafeAreaView, Image,
 } from 'react-native';
@@ -260,7 +261,7 @@ export default function AuthentificationSignUp() {
             <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
                             style={styles.linearGradient}
                             start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-              <Text style={styles.buttonText}> suivant </Text>
+              <Text style={styles.buttonText} onPress={ ()=> Linking.openURL('https://google.com') }> suivant </Text>
             </LinearGradient>
               <TouchableOpacity
                 style={styles.link}
