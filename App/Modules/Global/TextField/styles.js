@@ -9,13 +9,14 @@ export default StyleSheet.create({
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(14),
     textTransform: 'uppercase',
-    color: '#837777',
+    color: '#fff',
     marginBottom: verticalScale(7)
   },
   textInput: {
     height: verticalScale(33),
-    borderColor: '#BFB9B9',
+    borderColor: '#fff',
     borderWidth: 1,
+    backgroundColor: '#fff',
     paddingVertical: verticalScale(10),
     paddingHorizontal: scale(16),
     borderRadius: verticalScale(13),

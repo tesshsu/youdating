@@ -8,13 +8,14 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: verticalScale(23),
-    borderColor: '#4A6EA8',
-    borderWidth: 1,
-    backgroundColor: 'white',
+    borderColor: '#d412c7',
+    borderWidth: 2,
+    fontWeight: 'bold',
+    backgroundColor: 'transparent',
     alignSelf: 'center'
   },
   buttonText: {
-    color: '#4A6EA8',
+    color: '#d412c7',
     textAlign: 'center',
     textTransform: 'uppercase',
   }

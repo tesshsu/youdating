@@ -15,7 +15,7 @@ import {
 import { useFormik } from 'formik';
 import moment from 'moment';
 import * as Yup from 'yup';
-
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import useGoogleAutocomplete from 'use-google-autocomplete';
 import { useDebounce } from 'use-debounce';
 import { Feather } from '@expo/vector-icons';
@@ -193,14 +193,46 @@ export default function AuthentificationSignUp() {
     }
   }, [isLoading, results]);
 
-  return ( 
-    <ScrollView
+  return (
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
+    >
+      <SafeAreaView
+        style={styles.scrollViewContainer}
+      >
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          isDarkModeEnabled={false}
+          mode="date"
+          headerTextIOS="Date de naissance"
+          confirmTextIOS="Confirmer"
+          cancelTextIOS="Annuler"
+          locale="fr_FR"
+          date={values.birthday ? moment(moment.unix(values.birthday)).toDate() : new Date()}
+          onConfirm={(date) => {
+            const timestamp = moment(date).unix();
+
+            handleChange('birthday')(timestamp.toString());
+            setIsDatePickerVisible(false);
+          }}
+          onCancel={() => setIsDatePickerVisible(false)}
+        />
+        <ScrollView
           ref={scrollViewRef}
           style={styles.fill}
           contentContainerStyle={styles.scrollViewContent}
           keyboardShouldPersistTaps="handled"
         >
-          <Text style={styles.createAccountText}></Text>
+          <Text style={styles.yousTitleText}>{'You\'s'}</Text>
+          <Text style={styles.subTitleText}>Application de rencontre</Text>
+          <Text style={styles.subSubTitleText}>Reseau 3.0</Text>
+          <FacebookConnectButton />
+          <View style={styles.or}>
+            <View style={styles.bar} />
+            <Text style={styles.orText}>ou</Text>
+            <View style={styles.bar} />
+          </View>
           <Text style={styles.createAccountText}>crée un compte</Text>
           <TextField
             scrollViewRef={scrollViewRef}
@@ -375,6 +407,8 @@ export default function AuthentificationSignUp() {
               </Text>
             </TouchableOpacity>
           </View>
-    </ScrollView>    
+        </ScrollView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }

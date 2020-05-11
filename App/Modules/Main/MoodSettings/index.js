@@ -6,7 +6,7 @@ import React, {
 import { Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-//import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import PageHeader from '../../Global/PageHeader';
 import styles from './styles';
 import useCurrentMood from '../../../Hooks/useCurrentMood';

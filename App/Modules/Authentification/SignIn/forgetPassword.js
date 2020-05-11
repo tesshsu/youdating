@@ -20,7 +20,7 @@ import TextField from '../../Global/TextField';
 
 const back_img_signIn = require("../../../../assets/images/signUpBackground.png");
 
-export default function AuthentificationSignIn() {
+export default function ForgetPassword() {
   const {
     signIn,
     isAuthentificated,
@@ -36,18 +36,13 @@ export default function AuthentificationSignIn() {
 
   return (
     <Formik
-      initialValues={{
-        email: 'laristo1@hotmail.fr',
-        password: 'Keinanoam24$'
-      }}
-      onSubmit={async ({ email, password }) => {
+      onSubmit={async ({ email }) => {
         try {
           await signIn(
-            email.trim(),
-            password.trim()
+            email.trim()
           );
         } catch (err) {
-          Alert.alert('Authentification', 'Identifiants incorrects');
+          Alert.alert('Authentification', 'Identifiants EMAIL incorrects');
         }
       }}
     >
@@ -60,13 +55,7 @@ export default function AuthentificationSignIn() {
             style={styles.scrollView}
             contentContainerStyle={styles.content}
           >
-            <Text style={styles.subTitleText}>{'Bonjour\nBienvenue sur You\'s'}</Text>
-            <FacebookConnectButton />
-            <View style={styles.or}>
-              <View style={styles.bar} />
-              <Text style={styles.orText}>ou</Text>
-              <View style={styles.bar} />
-            </View>
+            <Text style={styles.subTitleText}>{'MOT DE PASS OUBLIE ?'}</Text>
             <TextField
               containerStyle={styles.textField}
               label="ADRESS EMAIL"
@@ -79,27 +68,8 @@ export default function AuthentificationSignIn() {
                 value: values.email,
               }}
             />
-            <TextField
-              containerStyle={styles.textField}
-              label="MOT DE PASSE"
-              textInputProps={{
-                autoCapitalize: 'none',
-                placeholder: 'mot de passe',
-                onChangeText: handleChange('password'),
-                value: values.password,
-                secureTextEntry: true,
-              }}
-            />
-            <TouchableOpacity
-              style={styles.link}
-              onPress={() => NavigationHelper.navigate('ForgetPassword')}
-            >
-              <Text style={styles.linkText}>
-                mot de pass oublie
-              </Text>
-            </TouchableOpacity>
             <AuthentificationButton
-              text="LOGIN"
+              text="SOUMETTRE"
               containerStyle={styles.submitButton}
               onPress={handleSubmit}
             />
