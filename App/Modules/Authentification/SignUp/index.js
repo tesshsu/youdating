@@ -23,6 +23,7 @@ import { useDebounce } from 'use-debounce';
 import { Feather } from '@expo/vector-icons';
 
 import ENV from '../../../environment';
+import globalStyles from '../styles';
 import styles from './styles';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
 import FacebookConnectButton from '../../Global/FacebookConnectButton';
@@ -197,9 +198,9 @@ export default function AuthentificationSignUp() {
   }, [isLoading, results]);
 
   return (
-    <View style={styles.scrollViewContainer} >
-      <View style={styles.backgroundContainer}>
-        <Image style={styles.bakcgroundImage} source={Images.back_img_signIn} />
+    <View style={globalStyles.scrollViewContainer} >
+      <View style={globalStyles.backgroundContainer}>
+        <Image style={globalStyles.bakcgroundImage} source={Images.back_img_signIn} />
       </View>
       <ScrollView
           ref={scrollViewRef}
@@ -211,15 +212,15 @@ export default function AuthentificationSignUp() {
           <Text style={styles.subTitleText}>LA RELATION SUR MESURE</Text>
           <Text style={styles.subSubTitleText}>Reseau 3.0</Text>
           <FacebookConnectButton />
-          <View style={styles.or}>
-            <View style={styles.bar} />
-            <Text style={styles.orText}>ou</Text>
-            <View style={styles.bar} />
+          <View style={globalStyles.or}>
+            <View style={globalStyles.bar} />
+            <Text style={globalStyles.orText}>ou</Text>
+            <View style={globalStyles.bar} />
           </View>
           <Text style={styles.createAccountText}>crée un compte</Text>
           <TextField
             scrollViewRef={scrollViewRef}
-            containerStyle={styles.textField}
+            containerStyle={globalStyles.textField}
             label="Email"
             error={errors.email}
             textInputProps={{
@@ -233,7 +234,7 @@ export default function AuthentificationSignUp() {
           />
           <TextField
             scrollViewRef={scrollViewRef}
-            containerStyle={styles.textField}
+            containerStyle={globalStyles.textField}
             label="Mot de passe"
             error={errors.password}
             textInputProps={{
@@ -246,7 +247,7 @@ export default function AuthentificationSignUp() {
           />
           <TextField
             scrollViewRef={scrollViewRef}
-            containerStyle={styles.textField}
+            containerStyle={globalStyles.textField}
             label="Confirmation du mot de passe"
             error={errors.passwordConfirmation}
             textInputProps={{
@@ -259,15 +260,15 @@ export default function AuthentificationSignUp() {
           />
           <View style={styles.footer}>
             <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={styles.linearGradient}
+                            style={globalStyles.linearGradient}
                             start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-              <Text style={styles.buttonText} onPress={ ()=> Linking.openURL('https://google.com') }> suivant </Text>
+              <Text style={globalStyles.buttonText} onPress={ ()=> Linking.openURL('https://google.com') }> suivant </Text>
             </LinearGradient>
               <TouchableOpacity
-                style={styles.link}
+                style={globalStyles.link}
                 onPress={() => NavigationHelper.navigate('AuthentificationSignIn')}
               >
-                <Text style={styles.linkText}>
+                <Text style={globalStyles.linkText}>
                   SIGN IN
                 </Text>
               </TouchableOpacity>

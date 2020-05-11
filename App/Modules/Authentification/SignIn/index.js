@@ -51,12 +51,12 @@ export default function AuthentificationSignIn() {
       }}
     >
       { ({ handleChange, handleSubmit, values }) => (
-        <View style={styles.scrollViewContainer} >
-          <View style={styles.backgroundContainer}>
-            <Image style={styles.bakcgroundImage} source={Images.back_img_signIn} />
+        <View style={globalStyles.scrollViewContainer} >
+          <View style={globalStyles.backgroundContainer}>
+            <Image style={globalStyles.bakcgroundImage} source={Images.back_img_signIn} />
           </View>
           <ScrollView
-            style={styles.scrollView}
+            style={globalStyles.scrollView}
             contentContainerStyle={styles.content}
           >
             <Text style={globalStyles.subTitleText}>{'Bonjour\nBienvenue sur You\'s'}</Text>
@@ -67,7 +67,7 @@ export default function AuthentificationSignIn() {
               <View style={globalStyles.bar} />
             </View>
             <TextField
-              containerStyle={styles.textField}
+              containerStyle={globalStyles.textField}
               label="ADRESS EMAIL"
               textInputProps={{
                 autoCapitalize: 'none',
@@ -79,7 +79,7 @@ export default function AuthentificationSignIn() {
               }}
             />
             <TextField
-              containerStyle={styles.textField}
+              containerStyle={globalStyles.textField}
               label="MOT DE PASSE"
               textInputProps={{
                 autoCapitalize: 'none',
@@ -90,10 +90,10 @@ export default function AuthentificationSignIn() {
               }}
             />
             <TouchableOpacity
-              style={styles.link}
+              style={globalStyles.link}
               onPress={() => NavigationHelper.navigate('ForgetPassword')}
             >
-              <Text style={styles.linkText}>
+              <Text style={globalStyles.linkText}>
                 mot de pass oublie
               </Text>
             </TouchableOpacity>
@@ -103,10 +103,10 @@ export default function AuthentificationSignIn() {
               <Text style={globalStyles.buttonText} onPress={handleSubmit}> LOGIN </Text>
             </LinearGradient>
             <TouchableOpacity
-              style={styles.link}
+              style={globalStyles.link}
               onPress={() => NavigationHelper.navigate('AuthentificationSignUp')}
             >
-              <Text style={styles.linkText}>
+              <Text style={globalStyles.linkText}>
                 SIGN UP
               </Text>
             </TouchableOpacity>

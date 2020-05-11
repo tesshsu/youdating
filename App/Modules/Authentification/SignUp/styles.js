@@ -10,24 +10,6 @@ export default StyleSheet.create({
   fill: {
     flex: 1,
   },
-  scrollViewContent: {
-    paddingHorizontal: scale(63),
-    paddingVertical: verticalScale(20),
-    alignItems: 'stretch'
-  },
-  backgroundContainer: {
-    flex: 1,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-  },
-  bakcgroundImage: {
-    flex: 1,
-    width: null,
-    height: null
-  },
   yousTitleText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(26),
@@ -51,62 +33,11 @@ export default StyleSheet.create({
     textTransform: 'uppercase',
     marginBottom: verticalScale(42)
   },
-  or: {
-    marginVertical: verticalScale(23),
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  bar: {
-    flex: 1,
-    height: 1,
-    backgroundColor: colors.WHITE
-  },
-  orText: {
-    fontFamily: 'NewTaiLue-Bold',
-    fontSize: moderateScale(14),
-    textTransform: 'uppercase',
-    color: colors.WHITE,
-    paddingHorizontal: scale(22)
-  },
   createAccountText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(18),
     textAlign: 'center',
     color: colors.WHITE
-  },
-  textField: {
-    marginTop: verticalScale(23)
-  },
-  nextButton: {
-    marginTop: verticalScale(30)
-  },
-  link: {
-    marginTop: verticalScale(30)
-  },
-  linkText: {
-    fontFamily: 'NewTaiLue-Bold',
-    fontSize: moderateScale(13),
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    color: 'black'
-  },
-  linearGradient: {
-    marginTop: moderateScale(43),
-    flex: 1,
-    paddingLeft: 40,
-    paddingRight: 40,
-    borderRadius: 20
-  },
-  buttonText: {
-    fontSize: 18,
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff',
-    backgroundColor: 'transparent',
-  },
-  scrollViewContainer: {
-    flex: 1,
-    position: 'relative',
   },
   footer: {
     justifyContent: 'center',
