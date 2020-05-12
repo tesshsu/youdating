@@ -46,7 +46,7 @@ export default function SettingsCard(props) {
 }
 
 SettingsCard.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   rightLabel: PropTypes.string,
   containerStyle: ViewPropTypes.style
 };

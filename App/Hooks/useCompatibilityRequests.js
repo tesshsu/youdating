@@ -16,7 +16,7 @@ export default function useCompatibilityRequests() {
     try {
       await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.fetchAll());
     } catch (err) {
-      Alert.alert('Erreur', 'Impossible de récupérer les demandes de compatibilités');
+      console.log('error compatibility requests', err);
     }
   }, [dispatch]);
 

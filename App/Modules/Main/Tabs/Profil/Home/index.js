@@ -25,9 +25,7 @@ import DropDown from '../../../../Global/DropDown';
 import useCompatibilityRequests from '../../../../../Hooks/useCompatibilityRequests';
 
 const TAB_SCENES = [
-  { title: 'moods', key: 'moods', View: Moods },
   { title: 'personnalité', key: 'personnality', View: Personnality },
-  { title: 'statistiques', key: 'stats', View: Stats },
   { title: 'description', key: 'skills', View: Skills },
 ];
 

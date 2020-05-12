@@ -11,7 +11,9 @@ export async function registerPushNotifications(userId) {
 
     const token = await Notifications.getExpoPushTokenAsync();
 
-    await API.User.updateDeviceToken(userId, Constants.installationId, token);
+    if (Constants.isDevice){
+      await API.User.updateDeviceToken(userId, Constants.installationId, token);
+    }
   } catch (err) {
     console.warn(err);
   }
