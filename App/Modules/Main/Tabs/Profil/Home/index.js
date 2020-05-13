@@ -3,7 +3,7 @@ import {
   Alert, KeyboardAvoidingView, View,
 } from 'react-native';
 import { FontAwesome5, Feather } from '@expo/vector-icons';
-
+import styles from './styles';
 import moment from 'moment';
 import { verticalScale, scale } from '../../../../../Helpers/ScaleHelper';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
@@ -11,7 +11,7 @@ import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import useLogguedUser from '../../../../../Hooks/useLogguedUser';
 import Profile, { ActionButton } from '../../../../Global/Profile';
 import HeaderAvatarButton from './HeaderAvatarButton';
-import StickyAvatarButton from './StickyAvatarButton';
+import ImageButton from '../../../../Global/ImageButton';
 import {
   Moods,
   Personnality,
@@ -23,12 +23,11 @@ import { useViews } from '../../../../../Hooks/useViews';
 import Tabs from '../../../../Global/Profile/Tabs';
 import DropDown from '../../../../Global/DropDown';
 import useCompatibilityRequests from '../../../../../Hooks/useCompatibilityRequests';
-
+const IMAGE_MOOD = require('../../../../../../assets/icons/btn-mood.png');
 const TAB_SCENES = [
   { title: 'personnalité', key: 'personnality', View: Personnality },
   { title: 'description', key: 'skills', View: Skills },
 ];
-
 export default function MainTabsProfilHome() {
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser, uploadAvatar } = useLogguedUser();
@@ -36,7 +35,7 @@ export default function MainTabsProfilHome() {
   const { fetchAll: fetchAllViews } = useViews();
   const { fetchAll: fetchAllCompatibilityRequests } = useCompatibilityRequests();
   const [actionsDropDownToggled, setActionsDropDownToggled] = useState(false);
-
+  
 
   const { avatar } = logguedUser.moods[currentMood];
   const imageSource = avatar || logguedUser.avatar;
@@ -90,88 +89,35 @@ export default function MainTabsProfilHome() {
             <HeaderAvatarButton onMedia={startUploadAvatar} />
           )}
           HeaderTopRightComponent={(
-            <Feather
-              name="more-vertical"
-              color={moodInfos.color}
-              size={28}
-              onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
-            />
-          )}
-          leftColumnActions={[
-            <ActionButton
-              key="a"
-              primary
-              onPress={() => NavigationHelper.navigate('MainTabsProfilGoodFeelings')}
-              text="Good feeling"
-              iconName="thumbs-up"
-            />,
-            <ActionButton
-              key="b"
-              primary
-              onPress={() => NavigationHelper.navigate('MainTabsProfilViews')}
-              text="Vues"
-              iconName="eye"
-            />,
-            <ActionButton
-              key="c"
-              primary
-              onPress={() => NavigationHelper.navigate('MainTabsProfilAttractions')}
-              text="Attractions"
-              IconProvider={FontAwesome5}
-              iconName="magnet"
-              iconOffset={{
-                x: scale(1),
-                y: verticalScale(3)
-              }}
-            />
-          ]}
-          rightColumnActions={[
-            <DropDown
-              key="a"
-              childHeight={verticalScale(10)}
-              isToggled={actionsDropDownToggled}
-            >
+		  <ImageButton
+			  imageSource={IMAGE_MOOD}
+			  imageStyle={styles.iconStyle}
+			  onPress={() => NavigationHelper.navigate('MainTabsTchat')}
+			/>
+          )}         
+		  rightColumnActions={[
               <ActionButton
-                onPress={() => NavigationHelper.navigate('MainTabsProfilSearch')}
-                text="Recherche"
-                iconName="search"
-              />
+                onPress={() => NavigationHelper.navigate('MainTabsTchat')}
+                text="MESSAGERIE"
+                iconName="message-square"
+              />,
+              <ActionButton
+                onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}
+                text="COMPATBILITER"
+                iconName="refresh-cw"
+                iconOffset={{
+                  x: scale(2)
+                }}
+              />,
               <ActionButton
                 onPress={() => NavigationHelper.navigate('MainTabsProfilInvite')}
-                text="Inviter"
+                text="INVITE"
                 iconName="user-plus"
                 iconOffset={{
                   x: scale(2)
                 }}
               />
-              <ActionButton
-                onPress={() => NavigationHelper.navigate('MainMoodSettings')}
-                text="Réglages"
-                IconProvider={FontAwesome5}
-                iconName="sliders-h"
-                iconOffset={{
-                  y: verticalScale(2)
-                }}
-              />
-            </DropDown>,
-            <ActionButton
-              key="b"
-              onPress={() => setActionsDropDownToggled(!actionsDropDownToggled)}
-              text="Actions"
-              IconProvider={FontAwesome5}
-              iconName={actionsDropDownToggled ? 'minus' : 'plus'}
-              iconOffset={{
-                x: scale(1),
-                y: verticalScale(3)
-              }}
-            />
-          ]}
-          StickyAvatarImageComponent={(
-            <StickyAvatarButton
-              imageSource={imageSource}
-              onMedia={startUploadAvatar}
-            />
-          )}
+          ]}         
           TabComponent={(
             <Tabs
               scenes={TAB_SCENES}

@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-
 import { moderateScale, scale, verticalScale } from '../../../Helpers/ScaleHelper';
-
+import colors from '../../../Assets/css';
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -16,7 +15,7 @@ export default StyleSheet.create({
   button: {
     height: verticalScale(72),
     borderWidth: 2,
-    borderColor: '#DCDADA',
+    borderColor: colors.PINK,
     backgroundColor: 'white',
     shadowColor: 'black',
     shadowOpacity: 0.3,
@@ -29,7 +28,7 @@ export default StyleSheet.create({
     elevation: 2
   },
   buttonText: {
-    color: '#DCDADA',
+    color: colors.PINK,
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(15),
     textAlign: 'center',

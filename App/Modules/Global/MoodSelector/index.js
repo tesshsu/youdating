@@ -4,7 +4,6 @@ import {
   ViewPropTypes
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import styles from './styles';
@@ -35,14 +34,8 @@ export default function MoodSelector(props) {
           { color: inverted ? moodInfos.color : 'white' }
         ]}
       >
-        {`MOOD ${moodInfos.title}`}
+        {`${moodInfos.title}`}
       </Text>
-      <Feather
-        style={styles.icon}
-        name="chevron-down"
-        size={30}
-        color={inverted ? moodInfos.color : 'white'}
-      />
     </TouchableOpacity>
   );
 }

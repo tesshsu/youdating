@@ -65,8 +65,8 @@ TabView.propTypes = {
       key: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       View: PropTypes.func
-    }).isRequired
-  ).isRequired,
+    })
+  ),
   onIndexChange: PropTypes.func,
   labelStyle: Text.propTypes.style,
 };

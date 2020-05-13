@@ -77,7 +77,7 @@ export default function Profile(props) {
         isToggled={isToggled}
         firstName={firstName}
         personnality={personnality}
-        ImageComponent={StickyAvatarImageComponent}
+        StickyAvatarImageComponent={StickyAvatarImageComponent}
       />
       <ScrollTopButton isToggled={isToggled} onPress={onScrollTopButtonPress} />
     </>
@@ -102,7 +102,7 @@ Profile.propTypes = {
   city: PropTypes.string.isRequired,
   HeaderTopLeftComponent: PropTypes.element,
   HeaderTopRightComponent: PropTypes.element,
-  StickyAvatarImageComponent: PropTypes.element.isRequired,
+  StickyAvatarImageComponent: PropTypes.element,
   leftColumnActions: PropTypes.arrayOf(PropTypes.element),
   rightColumnActions: PropTypes.arrayOf(PropTypes.element),
   TabComponent: PropTypes.element.isRequired

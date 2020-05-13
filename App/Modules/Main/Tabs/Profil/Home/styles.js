@@ -31,4 +31,9 @@ export default StyleSheet.create({
     shadowOffset: { y: 0, x: 0 },
     elevation: 2
   },
+  iconStyle: {
+    width: verticalScale(30),
+    height: verticalScale(30),
+    resizeMode: 'cover'
+  }
 });
