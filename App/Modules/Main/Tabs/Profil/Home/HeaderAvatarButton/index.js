@@ -18,6 +18,7 @@ const mediaOptions = {
 export default function HeaderAvatarButton(props) {
   const {
     onMedia,
+	iconName
   } = props;
 
   const { moodInfos, currentMood } = useCurrentMood();
@@ -27,16 +28,16 @@ export default function HeaderAvatarButton(props) {
       <View style={styles.photoButtonUploadContainer}>
         <CircularProgress
           containerStyle={styles.photoButtonUploadProgressContainer}
-          size={verticalScale(28)}
+          size={verticalScale(30)}
           strokeWidth={2}
           color="white"
           progress={upload.progress}
         />
         <View>
           <Feather
-            name="x"
+            name={iconName}
             color={moodInfos.color}
-            size={verticalScale(20)}
+            size={verticalScale(30)}
             onPress={onCancelUpload}
           />
         </View>
@@ -52,7 +53,7 @@ export default function HeaderAvatarButton(props) {
       renderUpload={renderUpload}
     >
       <Feather
-        name="instagram"
+        name={iconName}
         color={moodInfos.color}
         size={verticalScale(25)}
       />

@@ -9,6 +9,11 @@ export default StyleSheet.create({
   headerTextContainer: {
     position: 'relative'
   },
+  topHeaderProfile: {
+    height: '100%',
+    position: 'relative',
+    marginTop: verticalScale(23),
+  },
   headerText: {
     fontFamily: 'Gadugi-Bold',
     fontSize: moderateScale(16),

@@ -2,8 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
   Alert, KeyboardAvoidingView, View,
 } from 'react-native';
-import { FontAwesome5, Feather } from '@expo/vector-icons';
-import styles from './styles';
+import Styles from './styles';
 import moment from 'moment';
 import { verticalScale, scale } from '../../../../../Helpers/ScaleHelper';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
@@ -11,19 +10,16 @@ import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import useLogguedUser from '../../../../../Hooks/useLogguedUser';
 import Profile, { ActionButton } from '../../../../Global/Profile';
 import HeaderAvatarButton from './HeaderAvatarButton';
-import ImageButton from '../../../../Global/ImageButton';
 import {
-  Moods,
   Personnality,
-  Skills,
-  Stats
+  Skills
 } from './Tabs';
 import useGoodFeelings from '../../../../../Hooks/useGoodFeelings';
 import { useViews } from '../../../../../Hooks/useViews';
 import Tabs from '../../../../Global/Profile/Tabs';
-import DropDown from '../../../../Global/DropDown';
+import ImageButton from '../../../../Global/ImageButton';
 import useCompatibilityRequests from '../../../../../Hooks/useCompatibilityRequests';
-const IMAGE_MOOD = require('../../../../../../assets/icons/btn-mood.png');
+const IMAGE_SETTING = require('../../../../../../assets/icons/menu_setting.png');
 const TAB_SCENES = [
   { title: 'personnalité', key: 'personnality', View: Personnality },
   { title: 'description', key: 'skills', View: Skills },
@@ -35,7 +31,7 @@ export default function MainTabsProfilHome() {
   const { fetchAll: fetchAllViews } = useViews();
   const { fetchAll: fetchAllCompatibilityRequests } = useCompatibilityRequests();
   const [actionsDropDownToggled, setActionsDropDownToggled] = useState(false);
-  
+
 
   const { avatar } = logguedUser.moods[currentMood];
   const imageSource = avatar || logguedUser.avatar;
@@ -75,9 +71,9 @@ export default function MainTabsProfilHome() {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, backgroundColor: 'white' }}
-      behavior="position"
+      behavior={Platform.OS === "ios" ? "padding" : null}
     >
-      <View style={{ height: '100%', position: 'relative' }}>
+      <View style={Styles.topHeaderProfile} >
         <Profile
           imageSource={imageSource}
           firstName={logguedUser.firstName}
@@ -86,16 +82,16 @@ export default function MainTabsProfilHome() {
           personnality={logguedUser.personnalities.main}
           subPersonnality="Personnalité compétitive"
           HeaderTopLeftComponent={(
-            <HeaderAvatarButton onMedia={startUploadAvatar} />
+            <HeaderAvatarButton onMedia={startUploadAvatar} iconName="instagram"/>
           )}
           HeaderTopRightComponent={(
-		  <ImageButton
-			  imageSource={IMAGE_MOOD}
-			  imageStyle={styles.iconStyle}
-			  onPress={() => NavigationHelper.navigate('MainTabsTchat')}
-			/>
-          )}         
-		  rightColumnActions={[
+            <ImageButton
+              imageSource={IMAGE_SETTING}
+              imageStyle={Styles.iconStyle}
+              onPress={() => NavigationHelper.navigate('MainMoodSettings')}
+            />
+          )}
+		      rightColumnActions={[
               <ActionButton
                 onPress={() => NavigationHelper.navigate('MainTabsTchat')}
                 text="MESSAGERIE"
@@ -117,7 +113,7 @@ export default function MainTabsProfilHome() {
                   x: scale(2)
                 }}
               />
-          ]}         
+          ]}
           TabComponent={(
             <Tabs
               scenes={TAB_SCENES}
