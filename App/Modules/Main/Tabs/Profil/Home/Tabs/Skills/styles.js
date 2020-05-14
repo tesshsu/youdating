@@ -11,47 +11,6 @@ export default StyleSheet.create({
     textTransform: 'uppercase',
     textAlign: 'center'
   },
-  assetsRow: {
-    marginTop: verticalScale(30),
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  assetText: {
-    fontFamily: 'NewTaiLue-Regular',
-    fontSize: moderateScale(15),
-    marginBottom: verticalScale(12),
-    color: '#B0ABAB'
-  },
-  lifeStyleButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: verticalScale(13)
-  },
-  lifeStyleText: {
-    marginLeft: scale(17),
-    fontFamily: 'NewTaiLue-Bold',
-    fontSize: moderateScale(16),
-    color: '#BBBABA'
-  },
-  sliderContainer: {
-    marginTop: verticalScale(18),
-    marginBottom: verticalScale(15)
-  },
-  slider: {
-    alignSelf: 'center',
-  },
-  sliderLabelText: {
-    fontFamily: 'NewTaiLue-Regular',
-    fontSize: moderateScale(15),
-    color: '#868686',
-    textAlign: 'left',
-    marginTop: verticalScale(10),
-    marginBottom: verticalScale(2),
-    marginLeft: scale(12)
-  },
-  sliderLabelRow: {
-    flexDirection: 'row'
-  },
   descriptionContainer: {
     marginHorizontal: verticalScale(10),
     justifyContent: 'center',
@@ -62,5 +21,15 @@ export default StyleSheet.create({
     fontSize: moderateScale(18),
     textAlign: 'center',
     color: '#BBBABA',
+  },
+  avatarContainer: {
+    padding: scale(3),
+    marginBottom: verticalScale(3),
+    marginLeft: scale(2),
+    marginRight: scale(2)
+  },
+  imageBackground: {
+    height: verticalScale(64),
+    width: scale(100)
   }
 });

@@ -42,7 +42,9 @@ export default function Personnality() {
 
   const {
     title,
-    content
+    content,
+	advice,
+	personnality
   } = useMemo(() => PERSONNALITY_DETAILS[currentMood][personnalities.main], [currentMood, personnalities]);
 
   return (
@@ -59,31 +61,40 @@ export default function Personnality() {
       <Text style={styles.paragraph}>
         { content }
       </Text>
-      <View style={styles.section}>
-        <MoodText style={styles.sectionTitle}>Avis sur votre personnalité</MoodText>
-        <View style={styles.sliderContainer}>
-          <CustomSlider
-            containerStyle={[styles.slider, { marginBottom: verticalScale(30) }]}
-            value={skills.opinion || 0}
-            step={1}
-            min={0}
-            max={11}
-            labels={[
-              { label: '10%', value: 1 },
-              { label: '20%', value: 2 },
-              { label: '30%', value: 3 },
-              { label: '40%', value: 4 },
-              { label: '50%', value: 5 },
-              { label: '60%', value: 6 },
-              { label: '70%', value: 7 },
-              { label: '80%', value: 8 },
-              { label: '90%', value: 9 },
-              { label: '100%', value: 10 },
-            ]}
-            onValueChange={value => setOpinion(value)}
-          />
-        </View>
+      <View style={styles.line}>
+        <Text
+			style={[
+			  styles.title,
+			  { color: moodInfos.color }
+			]}
+		  >CONSEIL
+		</Text>
+		<Text style={styles.paragraph}>
+        { advice }
+        </Text>      
       </View>
+	  <View style={styles.line}>
+	    <Text style={styles.blackText}>
+          AMBITIONNEL
+        </Text>
+		<Text
+			style={[
+			  styles.title,
+			  { color: moodInfos.color }
+			]}
+		  >CONQUERANT
+		</Text>
+		<Text
+			style={[
+			  styles.title,
+			  { color: moodInfos.color }
+			]}
+		  >EMOTIONS
+		</Text>
+		<Text style={styles.shortDescription}>
+        {personnality}
+      </Text>
+	  </View>
     </>
   );
 }

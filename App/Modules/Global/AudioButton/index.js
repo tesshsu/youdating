@@ -57,7 +57,7 @@ export default function AudioButton(props) {
       soundRef.current = sound;
     } catch (err) {
       console.warn(err);
-      Alert.alert('Erreur', 'Impossible de charger le son');
+      //Alert.alert('Erreur', err);
       setIsLoading(false);
     }
   }, [onPlaybackStatusUpdate, uri]);

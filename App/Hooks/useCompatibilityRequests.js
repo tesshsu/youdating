@@ -24,7 +24,7 @@ export default function useCompatibilityRequests() {
     try {
       await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.fetchById(id));
     } catch (err) {
-      Alert.alert('Erreur', 'Impossible de récupérer la demande de compatibilité');
+      Alert.alert('useCompatibilityRequests', err);
     }
   }, [dispatch]);
 
@@ -32,7 +32,7 @@ export default function useCompatibilityRequests() {
     try {
       await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.accept(id, currentMood));
     } catch (err) {
-      Alert.alert('Erreur', 'Impossible d\'accepter la demande de compatibilité');
+      Alert.alert('useCompatibilityRequests currentMood', err);
     }
   }, [currentMood, dispatch]);
 
@@ -40,7 +40,7 @@ export default function useCompatibilityRequests() {
     try {
       await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.create(target, currentMood));
     } catch (err) {
-      Alert.alert('Erreur', 'Impossible de créer la demande de compatibilité');
+      Alert.alert('useCompatibilityRequests target', err);
     }
   }, [currentMood, dispatch]);
 

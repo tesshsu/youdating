@@ -32,7 +32,7 @@ export default function useConversation() {
     try {
       await dispatch(ACTIVE_CONVERSATIONS_ACTIONS.fetchMessages());
     } catch (err) {
-      Alert.alert('Erreur', 'Impossible de récupérer la liste des messages');
+      console.log('fetchMessages', err);
     }
   }, [dispatch]);
 
@@ -40,7 +40,7 @@ export default function useConversation() {
     try {
       await dispatch(CONVERSATIONS_ACTIONS.fetchConversation(mood, conversationId));
     } catch (err) {
-      Alert.alert('Erreur', 'Impossible de récupérer la conversation');
+      console.log('fetchConversation', err);
     }
   }, [dispatch]);
 
@@ -48,7 +48,7 @@ export default function useConversation() {
     try {
       await dispatch(CONVERSATIONS_ACTIONS.fetchConversations(currentMood));
     } catch (err) {
-      Alert.alert('Erreur', 'Impossible de récupérer la liste des conversations');
+      console.log('fetchConversations', err);
     }
   }, [dispatch, currentMood]);
 

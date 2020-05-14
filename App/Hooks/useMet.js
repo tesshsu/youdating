@@ -20,7 +20,7 @@ export default function useMet() {
     try {
       await dispatch(MET_ACTIONS.searchNear(currentMood));
     } catch (err) {
-      Alert.alert('Erreur', 'Impossible de récupérer les résultats');
+      Alert.alert('searchNear', err);
     }
   }, [currentMood, dispatch]);
 

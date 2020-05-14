@@ -30,13 +30,13 @@ export default function useVisitedProfil() {
     try {
       await fetchUser(id);
     } catch (err) {
-      throw new Error('Impossible de récupérer le profil de l\'utilisateur');
+      throw new Error('Impossible de récupérer le profil de l\'utilisateur', err);
     }
 
     try {
       await createView(id, currentMood);
     } catch (err) {
-      throw new Error('Impossible de créer la vue');
+      throw new Error('Impossible de créer la vue', err);
     }
 
     NavigationHelper.navigate('MainVisitedProfil');

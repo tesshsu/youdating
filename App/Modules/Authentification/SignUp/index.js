@@ -115,6 +115,9 @@ function AuthentificationSignUp() {
       password: '',
       passwordConfirmation: '',
       gender: '',
+      date: '',
+      month: '',
+      year: '',
       birthday: '',
       formattedAddress: ''
     },
@@ -204,8 +207,8 @@ function AuthentificationSignUp() {
   }, [isLoading, results]);
 
   const options = [
-    { label: "homme", value: "homme" },
-    { label: "femme", value: "femme" }
+    { label: "homme", value: "MALE" },
+    { label: "femme", value: "FEMALE" }
   ];
 
   return (
@@ -276,8 +279,8 @@ function AuthentificationSignUp() {
               <SwitchSelector 
                 label="Sexe"
                 style={globalStyles.switchSelector}
-                buttonColor='#dd6379'
-                options={options}
+                buttonColor="#dd6379"
+                options={options} 
                 initial={0} 
                 onPress={(value) => handleChange('gender')} 
               />
@@ -286,12 +289,12 @@ function AuthentificationSignUp() {
                     scrollViewRef={scrollViewRef}
                     containerStyle={globalStyles.columnTextField}
                     label="Age"
-                    error={errors.birthday}
+                    error={errors.date}
                     textInputProps={{
                       placeholder: 'jour',
                       keyboardType: 'number-pad',
-                      value: values.birthday,
-                      onChangeText: handleChange('birthday')
+                      value: values.date,
+                      onChangeText: handleChange('date')
                     }}
                   /><TextField
                     containerStyle={globalStyles.columnTextField}
@@ -299,8 +302,8 @@ function AuthentificationSignUp() {
                     textInputProps={{
                       placeholder: 'mois',
                       keyboardType: 'number-pad',
-                      value: values.birthday,
-                      onChangeText: handleChange('birthday')
+                      value: values.month,
+                      onChangeText: handleChange('month')
                     }}
                   /><TextField
                     containerStyle={globalStyles.columnTextField}
@@ -308,8 +311,8 @@ function AuthentificationSignUp() {
                     textInputProps={{
                       placeholder: 'annee',
                       keyboardType: 'number-pad',
-                      value: values.birthday,
-                      onChangeText: handleChange('birthday')
+                      value: values.year,
+                      onChangeText: handleChange('year')
                     }}
                   />
               </View>
