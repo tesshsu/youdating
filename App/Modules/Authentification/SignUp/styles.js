@@ -82,5 +82,8 @@ export default StyleSheet.create({
     fontFamily: 'Segoe-UI-Regular',
     fontSize: moderateScale(16),
     color: 'black'
+  },
+  sexeButton: {
+	color: colors.PINK,
   }
 });

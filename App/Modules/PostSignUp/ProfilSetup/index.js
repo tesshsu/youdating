@@ -46,17 +46,17 @@ export default function PostSignUpProfilSetup() {
   const imageSource = useMemo(() => {
     if (logguedUser.moods.PRO.avatar) {
       return { uri: logguedUser.moods.PRO.avatar };
-    }
-
-    return null;
+    } else {
+	  return null;
+	}
   }, [logguedUser]);
 
   const { query, tag } = useMemo(() => {
     if (currentMood) {
       return logguedUser.moods[currentMood];
-    }
-
-    return { query: null, tag: null };
+    }else {
+	  return { query: null, tag: null };
+	}
   }, [logguedUser, currentMood]);
 
   return (

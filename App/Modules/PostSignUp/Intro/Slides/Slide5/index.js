@@ -45,7 +45,7 @@ export default function Slide5() {
         height={verticalScale(30)}
         borderRadius={verticalScale(15)}
         containerStyle={styles.button}
-        onPress={() => NavigationHelper.navigate('PostSignUpProfilSetup')}
+        onPress={() => NavigationHelper.navigate('MainTabsProfile')}
       />
       <View style={styles.dotsContainer}>
         { new Array(5).fill(4).map((v, i) => (

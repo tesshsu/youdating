@@ -21,6 +21,7 @@ export default StyleSheet.create({
   },
   fill: {
     flex: 1,
+    width: '100%'
   },
   keyboardAvoidingViewContent: {
     position: 'relative',
@@ -77,6 +78,20 @@ export default StyleSheet.create({
   textField: {
     width: '100%',
     marginTop: verticalScale(23)
+  },
+  switchSelector: {
+    width: '100%',
+    marginTop: verticalScale(23)
+  },
+  ageView: {
+    flexDirection:'row', 
+    flexWrap:'wrap', 
+    marginTop: 20, 
+    justifyContent: 'space-between', 
+    alignItems: 'center'
+  },
+  columnTextField: {
+    width: '25%'
   },
   submitButton: {
     alignSelf: 'center',

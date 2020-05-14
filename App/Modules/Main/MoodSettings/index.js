@@ -37,7 +37,7 @@ function grabSettings(user, mood) {
 
 export default function MainTabsProfileSettings() {
   const { moodInfos, currentMood } = useCurrentMood();
-  const { logguedUser, updateMoodSettings } = useLogguedUser();
+  const { logguedUser, updateMoodSettings, signOut } = useLogguedUser();
   const [settings, setSettings] = useState(() => grabSettings(logguedUser, currentMood));
   const pristine = useMemo(() => UtilsHelper.deepEqual(settings, grabSettings(logguedUser, currentMood)),
     [settings, logguedUser, currentMood]);
@@ -63,6 +63,10 @@ export default function MainTabsProfileSettings() {
     } catch (err) {
       Alert.alert('Erreur', 'Impossible de mettre à jour les paramètres!');
     }
+  }
+  
+  async function onSignOut() {
+    await signOut();
   }
 
   return (
@@ -122,6 +126,7 @@ export default function MainTabsProfileSettings() {
           />
         </SettingsCard>
         <Button text="Valider" disabled={pristine} onPress={save} />
+		<Button text="Déconnexion" disabled={pristine} onPress={onSignOut} />
       </ScrollView>
     </>
   );
