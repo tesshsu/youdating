@@ -82,6 +82,6 @@ export default function StickyHeader(props) {
 
 StickyHeader.propTypes = {
   isToggled: PropTypes.instanceOf(Animated.Value).isRequired,
-  ImageComponent: PropTypes.element.isRequired,
+  //ImageComponent: PropTypes.element.isRequired,
   personnality: PropTypes.string.isRequired
 };

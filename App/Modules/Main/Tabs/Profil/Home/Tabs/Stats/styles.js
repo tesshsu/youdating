@@ -61,6 +61,13 @@ export default StyleSheet.create({
   starsImage: {
     width: 117,
     height: 24,
-    resizeMode: 'cover'
-  }
+    resizeMode: 'cover',
+    marginBottom: verticalScale(10)
+  },
+  addNoteDescription: {
+    fontFamily: 'Segoe-UI-Regular',
+    fontSize: verticalScale(14),
+    color: '#717171',
+    marginBottom: verticalScale(24),
+  },
 });

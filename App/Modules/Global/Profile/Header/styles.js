@@ -50,6 +50,9 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  bouttomTextContainer: {
+    justifyContent: 'flex-end'
+  },
   headerInner: {
     marginLeft: scale(30),
     marginRight: scale(20),

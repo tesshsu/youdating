@@ -22,12 +22,14 @@ export default function Stats() {
 
   return (
     <>
-      <MoodSelector />
+      <Text  style={[
+        styles.title,
+        { color: moodInfos.color }
+      ]}>STATISTIQUES INDIVIDUELLES</Text>
       <Image
         source={stats.image}
         style={styles.graphImage}
       />
-      <Text style={styles.title}>STATISTIQUES INDIVIDUELLES</Text>
       <View>
         { stats.stats.map(({ title, value }) => (
           <View key={title} style={styles.row}>
@@ -100,29 +102,66 @@ export default function Stats() {
         </Text>
         <View style={styles.line} />
         <Text style={styles.title}>{ logguedUser.personnalities.main }</Text>
-        <View style={styles.row}>
-          <View style={styles.label}>
-            <Text
-              style={[
-                styles.labelText,
-                {
-                  fontFamily: 'Segoe-UI-Bold',
-                  color: moodInfos.color,
-                  fontSize: moderateScale(19),
-                  marginBottom: verticalScale(22)
-                }
-              ]}
-            >
-              { stats.type }
-            </Text>
-          </View>
-          <View style={styles.value}>
-            <Image
-              source={IMAGE_STARS}
-              style={styles.starsImage}
-            />
-          </View>
+        <Text
+          style={[
+            styles.labelText,
+            {
+              fontFamily: 'Segoe-UI-Bold',
+              color: moodInfos.color,
+              fontSize: moderateScale(19),
+              marginBottom: verticalScale(22),
+              textAlign: 'center'
+            }
+          ]}
+        >
+          { stats.type }
+        </Text>
+        <View style={{
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+        }}>
+          <Image
+            source={IMAGE_STARS}
+            style={styles.starsImage}
+          />
         </View>
+        <Text style={styles.addNoteDescription}>
+          { stats.noteAddOn[1].description }
+        </Text>
+        <Text
+          style={[
+            styles.labelText,
+            {
+              fontFamily: 'Segoe-UI-Bold',
+              color: moodInfos.color,
+              fontSize: moderateScale(19),
+              textAlign: 'center'
+            }
+          ]}
+        >
+          { stats.noteAddOn[2].title }
+        </Text>
+        <Text style={styles.title}>{ stats.noteAddOn[2].subtitre }</Text>
+        <Text style={styles.addNoteDescription}>
+          { stats.noteAddOn[3].description }
+        </Text>
+        <Text
+          style={[
+            styles.labelText,
+            {
+              fontFamily: 'Segoe-UI-Bold',
+              color: moodInfos.color,
+              fontSize: moderateScale(19),
+              textAlign: 'center',
+              marginBottom: verticalScale(14),
+            }
+          ]}
+        >
+          { stats.noteAddOn[3].title }
+        </Text>
+        <Text style={styles.addNoteDescription}>
+          { stats.noteAddOn[3].description }
+        </Text>
       </View>
     </>
   );

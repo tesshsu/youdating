@@ -1,16 +1,13 @@
 import React, { useMemo, useCallback, useState } from 'react';
 import { Text, View, Alert } from 'react-native';
 import { useDebouncedCallback } from 'use-debounce';
-
 import styles from './styles';
-
+import { Image } from 'react-native-expo-image-cache';
 import MoodSelector from '../../../../../../Global/MoodSelector';
 import useCurrentMood from '../../../../../../../Hooks/useCurrentMood';
 import useLogguedUser from '../../../../../../../Hooks/useLogguedUser';
 import * as PERSONNALITY_DETAILS from '../../../../../../../PersonnalityDetails';
-import MoodText from '../../../../../../Global/MoodText';
-import CustomSlider from '../../../../../../Global/CustomSlider';
-import { verticalScale } from '../../../../../../../Helpers/ScaleHelper';
+import Stats from '../Stats';
 
 export default function Personnality() {
   const { moodInfos, currentMood } = useCurrentMood();
@@ -26,7 +23,7 @@ export default function Personnality() {
     },
     1000
   );
-
+  const IMAGE_STARS = require('../../../../../../../../assets/images/stars.png');
   const setOpinion = useCallback((value) => {
     let opinion = value;
 
@@ -61,40 +58,7 @@ export default function Personnality() {
       <Text style={styles.paragraph}>
         { content }
       </Text>
-      <View style={styles.line}>
-        <Text
-			style={[
-			  styles.title,
-			  { color: moodInfos.color }
-			]}
-		  >CONSEIL
-		</Text>
-		<Text style={styles.paragraph}>
-        { advice }
-        </Text>      
-      </View>
-	  <View style={styles.line}>
-	    <Text style={styles.blackText}>
-          AMBITIONNEL
-        </Text>
-		<Text
-			style={[
-			  styles.title,
-			  { color: moodInfos.color }
-			]}
-		  >CONQUERANT
-		</Text>
-		<Text
-			style={[
-			  styles.title,
-			  { color: moodInfos.color }
-			]}
-		  >EMOTIONS
-		</Text>
-		<Text style={styles.shortDescription}>
-        {personnality}
-      </Text>
-	  </View>
+      <Stats />
     </>
   );
 }

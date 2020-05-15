@@ -26,7 +26,7 @@ export default function Skills() {
           <Text style={styles.descriptionText}>{logguedUser.moods[currentMood].description || 'Entrez une description'}</Text>
         </TouchableOpacity>
       </View>
-	   <View
+	    <View
                   style={
                     styles.avatarContainer}
                 >
@@ -36,7 +36,7 @@ export default function Skills() {
                     source={IMAGE_GIRL3}
                   />
                 </View>
-	  
-    </>
+
+      </>
   );
 }

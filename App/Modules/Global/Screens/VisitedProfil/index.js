@@ -20,7 +20,7 @@ import Personnality from './Personnality';
 import Skills from './Skills';
 import Stats from './Stats';
 
-export default function MainTabsProfilHome() {
+export default function MainTabsVisitedProfilHome() {
   const { moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
 
@@ -112,6 +112,6 @@ export default function MainTabsProfilHome() {
   );
 }
 
-MainTabsProfilHome.navigationOptions = {
+MainTabsVisitedProfilHome.navigationOptions = {
   header: null
 };

@@ -31,4 +31,29 @@ export default StyleSheet.create({
     shadowOffset: { y: 0, x: 0 },
     elevation: 2
   },
+  buttomOnline: {
+    width: scale(36),
+    height: verticalScale(16),
+    position: 'absolute',
+    left: scale(3),
+    top: verticalScale(55)
+  },
+  nameProfil: {
+    fontFamily: 'Gadugi-Bold',
+    fontSize: moderateScale(20),
+    fontWeight: 'bold',
+    color: 'white',
+    textShadowColor: 'black',
+    textShadowRadius: 3,
+    textShadowOffset: { width: 0, height: 0 },
+    elevation: 2
+  },
+  perfonaliteText: {
+    fontFamily: 'Gadugi-Bold',
+    fontSize: moderateScale(23),
+    fontWeight: 'bold',
+    textShadowColor: 'black',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 3
+  },
 });

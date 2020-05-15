@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   View, SafeAreaView, Text, Dimensions
 } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { Image } from 'react-native-expo-image-cache';
-
+import useLogguedUser from '../../../../Hooks/useLogguedUser';
 import { SharedElement } from 'react-navigation-shared-element';
 import styles, { HEADER_HEIGHT } from './styles';
 import { verticalScale, scale } from '../../../../Helpers/ScaleHelper';
@@ -25,6 +25,7 @@ export default function Header(props) {
     imageSource,
     TopLeftComponent,
     TopCenterComponent,
+	LeftButtomComponent,
     TopRightComponent,
     leftColumnActions,
     rightColumnActions,
@@ -36,8 +37,18 @@ export default function Header(props) {
   const [bottomOffset, setBottomOffset] = useState(0);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [usernameWidth, setUsernameWidth] = useState(0);
-  const { moodInfos } = useCurrentMood();
-
+  const { currentMood, moodInfos } = useCurrentMood();
+  const { logguedUser, uploadAvatar } = useLogguedUser();
+  const { avatar } = logguedUser.moods[currentMood];
+  
+  const startUploadAvatar = useCallback(async (media) => {
+    try {
+      await uploadAvatar(media, currentMood);
+    } catch (err) {
+      Alert.alert('Erreur', 'Une erreur est survenue lors de la mise à jour de votre avatar');
+    }
+  }, [uploadAvatar, currentMood]);
+  
   const imageHeight = interpolate(scrollY, {
     inputRange: [-100, HEADER_HEIGHT],
     outputRange: [HEADER_HEIGHT + 100, 0],
@@ -205,7 +216,11 @@ export default function Header(props) {
           >
             {subPersonnality}
           </Animated.Text>
+		  <View style={styles.bouttomTextContainer}>
+            { LeftButtomComponent }
+          </View>
         </Animated.View>
+		
       )}
     </>
   );
@@ -214,6 +229,7 @@ export default function Header(props) {
 Header.defaultProps = {
   TopLeftComponent: null,
   TopCenterComponent: null,
+  LeftButtomComponent: null,
   TopRightComponent: null,
   leftColumnActions: [],
   rightColumnActions: []
@@ -229,6 +245,7 @@ Header.propTypes = {
   ]).isRequired,
   TopLeftComponent: PropTypes.element,
   TopCenterComponent: PropTypes.element,
+  LeftButtomComponent: PropTypes.element,
   TopRightComponent: PropTypes.element,
   leftColumnActions: PropTypes.arrayOf(PropTypes.element),
   rightColumnActions: PropTypes.arrayOf(PropTypes.element),

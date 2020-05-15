@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-  Alert, KeyboardAvoidingView, View,
+  Alert, KeyboardAvoidingView, Text, View,
 } from 'react-native';
 import Styles from './styles';
 import moment from 'moment';
-import { verticalScale, scale } from '../../../../../Helpers/ScaleHelper';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import useLogguedUser from '../../../../../Hooks/useLogguedUser';
@@ -19,6 +18,7 @@ import { useViews } from '../../../../../Hooks/useViews';
 import Tabs from '../../../../Global/Profile/Tabs';
 import ImageButton from '../../../../Global/ImageButton';
 import useCompatibilityRequests from '../../../../../Hooks/useCompatibilityRequests';
+import styles from './Tabs/Personnality/styles';
 const IMAGE_SETTING = require('../../../../../../assets/icons/menu_setting.png');
 const TAB_SCENES = [
   { title: 'personnalité', key: 'personnality', View: Personnality },
@@ -30,9 +30,6 @@ export default function MainTabsProfilHome() {
   const { fetchAll: fetchAllGoodFeelings } = useGoodFeelings();
   const { fetchAll: fetchAllViews } = useViews();
   const { fetchAll: fetchAllCompatibilityRequests } = useCompatibilityRequests();
-  const [actionsDropDownToggled, setActionsDropDownToggled] = useState(false);
-
-
   const { avatar } = logguedUser.moods[currentMood];
   const imageSource = avatar || logguedUser.avatar;
 
@@ -101,19 +98,14 @@ export default function MainTabsProfilHome() {
                 onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}
                 text="COMPATBILITER"
                 iconName="refresh-cw"
-                iconOffset={{
-                  x: scale(2)
-                }}
               />,
               <ActionButton
                 onPress={() => NavigationHelper.navigate('MainTabsProfilInvite')}
                 text="INVITE"
                 iconName="user-plus"
-                iconOffset={{
-                  x: scale(2)
-                }}
               />
-          ]}
+           ]}
+
           TabComponent={(
             <Tabs
               scenes={TAB_SCENES}

@@ -69,6 +69,13 @@ export default function Profile(props) {
             <Text style={styles.headerText}>{`${age}ANS-${city || 'PARIS'}`}</Text>
           </View>
         )}
+        LeftButtomComponent={(
+          <View style={{ flex: 1 }}>
+            <Text style={styles.nameProfil}>{firstName}</Text>
+            <Text style={[styles.perfonaliteText, { color: moodInfos.color } ]}>{personnality}</Text>
+            <Text style={styles.headerText}>{subPersonnality}</Text>
+          </View>
+        )}
         TopRightComponent={HeaderTopRightComponent}
         leftColumnActions={leftColumnActions}
         rightColumnActions={rightColumnActions}

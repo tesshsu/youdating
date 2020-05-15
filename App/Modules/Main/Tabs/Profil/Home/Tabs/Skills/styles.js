@@ -31,5 +31,8 @@ export default StyleSheet.create({
   imageBackground: {
     height: verticalScale(64),
     width: scale(100)
+  },
+  imageStar: {
+
   }
 });

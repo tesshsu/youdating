@@ -27,20 +27,30 @@ export default StyleSheet.create({
     alignSelf: 'center',
   },
   line: {
-	borderTopColor: '#eee',
+	  borderTopColor: '#eee',
     borderTopWidth: 2,
-	paddingTop: verticalScale(25)
+	  paddingTop: verticalScale(25)
   },
   blackText: {
-	fontFamily: 'NewTaiLue-Bold',
+	  fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(25),
     textTransform: 'uppercase',
-    textAlign: 'center'  
+    textAlign: 'center'
   },
   shortDescription: {
-	fontFamily: 'NewTaiLue-Bold',
+	  fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(16),
     textAlign: 'center',
-	color: '#707070',
+	  color: '#707070',
   },
+  imageCenter: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  starsImage: {
+    width: 117,
+    height: 24,
+    textAlign: 'center',
+    resizeMode: 'cover'
+  }
 });
