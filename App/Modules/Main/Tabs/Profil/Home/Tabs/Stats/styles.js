@@ -68,6 +68,7 @@ export default StyleSheet.create({
     fontFamily: 'Segoe-UI-Regular',
     fontSize: verticalScale(14),
     color: '#717171',
+    textAlign: 'center',
     marginBottom: verticalScale(24),
   },
 });

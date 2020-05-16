@@ -47,5 +47,5 @@ SettingSwitch.propTypes = {
   label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   value: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
 };

@@ -128,6 +128,9 @@ export default function Stats() {
         <Text style={styles.addNoteDescription}>
           { stats.noteAddOn[1].description }
         </Text>
+        <Text style={styles.addNoteDescription}>
+          { stats.noteAddOn[1].plusnote }
+        </Text>
         <Text
           style={[
             styles.labelText,
@@ -159,6 +162,7 @@ export default function Stats() {
         >
           { stats.noteAddOn[3].title }
         </Text>
+        <Text style={styles.title}>{ stats.noteAddOn[3].subtitre }</Text>
         <Text style={styles.addNoteDescription}>
           { stats.noteAddOn[3].description }
         </Text>

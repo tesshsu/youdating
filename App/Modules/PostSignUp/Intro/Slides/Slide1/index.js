@@ -3,10 +3,9 @@ import {
   Text, Image, View, SafeAreaView
 } from 'react-native';
 import Animated from 'react-native-reanimated';
-
 import styles from '../../styles';
-
-const IMAGE = require('../../../../../../assets/images/intro/slide1.png');
+import colors from '../../../../../Assets/css';
+const IMAGE = require('../../../../../../assets/images/quizz/home.png');
 
 const COLOR = '#412EA2';
 
@@ -15,20 +14,23 @@ export default function Slide1() {
     <>
       <Image source={IMAGE} style={styles.image} />
       <Animated.ScrollView style={styles.scrollView}>
-        <Text style={[styles.mainTitleText, { color: COLOR }]}>TECHNOLOGIE A.L.H.D</Text>
-        <Text style={styles.mainSubTitleText}>réseau 3.0</Text>
-        <Text style={[styles.titleText, { color: COLOR }]}>
-          {'Le modèle A.L.H.D est un modèle basé sur des schémas de comportements algorithmiques qui se repètent et qui s\'expriment plus ou moins fortement chez chaque individu. Développer depuis plus d\'une quinzaine d\'années le modèle s\'est perfectionné, il offre 2 avantages majeurs par rapport aux autres modèles déjà existants.'}
+        <Text style={[styles.mainTitleText, { color: colors.BLACK }]}>TEST DE PERSONNALITE</Text>
+        <Text style={styles.mainSubTitleText}>Le test est la derniere etape avant d'utiliser YOU's,
+              Le Test dure un pue moins de 5 minutes
+        </Text>
+        <Text style={[styles.titleText, { color: colors.GREY }]}>
+          {'Ce test nous permettra de dé terminer ta personnalité. Ce qui te permettra d\'interagir de la façon la plus adaptée avec les autres utilisateurs.'}
+        </Text>
+        <Text style={styles.mainSubTitleText}>Réponds aux questions pour découvrir ton profil
+        </Text>
+        <Text style={styles.secondTitle}>
+          CONSEIL
         </Text>
         <Text style={styles.paragraph}>
-          {'Le modèle A.L.H.D identifie rapidement la tendance majoritaire d\'un profil et son comportement en seulement quelques questions.'}
+          {'Aucun profil n\'est meilleur ou pire que l\'autres, ils ont chacun leurs forces et leurs faiblesses, Nous t\'encourageons donc a etre le plus sincere pour une meilleur experience sur YOU\'S.'}
         </Text>
-        <Text style={styles.paragraph}>
-          {'Le modèle A.L.H.D peut aussi anticiper la configuration d\'une relation et vous en informer à l\'avance.'}
-        </Text>
-        <Text style={styles.paragraph}>
-          <Text style={[styles.yousText, { color: COLOR }]}>{'YOU\'S '}</Text>
-          {'se sert d\'une technologie totalement nouvelle et révolutionnaire pour vous aider a mieux connaître votre personnalité et à mieux comprendre vos intéractions avec le monde entier.'}
+        <Text style={styles.mainSubTitleText}>
+          Merci a toi
         </Text>
       </Animated.ScrollView>
       <View style={styles.dotsContainer}>

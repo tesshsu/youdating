@@ -81,11 +81,11 @@ Ce qui te rend trop individualiste pour t'intéresser aux autres et coopérer co
       { title: 'Attitude insouciante', value: 'FAIBLE' },
       { title: 'Attitude posessive', value: 'ÉLEVÉE' },
     ],
-	noteAddOn: [
+    noteAddOn: [
       { title: 'AMBITIONNEL', description: 'Vous faites partie de la grande famille des Ambitionnel !!' },
-      { title: 'CONQUERANT', description: "Votre personnalité est proche d'hommes et de femmes comme : Alexandre le grand, cléopatre, ou même tupac. Vous jouez donc un rôle essentiel au sein de la société. Celui de faire évoluer votre entourage plus rapidement grâce à votre capacité hors norme à entreprendre et à dépasser constament vos limites.FAITES-EN BONNE USAGE" },
-      { title: 'EMOTION', subtitre: 'SENSIBILITE FORTEMENT EXPRIMEE', description: "La plupart du temps vous réagissez spontanément face aux situations que ce soit pour aider quelqu'un ou pour gérer votre propre vie. Ce qui est souvent une bonne choses mais apprenez tout de même à jauger l'intensité" },
-      { title: 'PSYCHOLOGIE', description: 'VOUS AIMEZ VOUS COMPARER AUX AUTRES"Vous avez une vision des choses trés affirmée, ce qui vous donne un certain charisme mais attention à ne pas trop en abuser' },
+      { title: 'CONQUERANT', description: "Votre personnalité est proche d\'hommes et de femmes comme Alexandre le grand, cléopatre, ou même tupac. Vous jouez donc un rôle essentiel au sein de la société. Celui de faire évoluer votre entourage plus rapidement grâce à votre capacité hors norme à entreprendre et à dépasser constament vos limites.", plusnote: 'FAITES-EN BONNE USAGE' },
+      { title: 'EMOTION', subtitre: 'SENSIBILITE FORTEMENT EXPRIMEE', description: "La plupart du temps vous réagissez spontanément face aux situations que ce soit pour aider quelqu\'un ou pour gérer votre propre vie. Ce qui est souvent une bonne choses mais apprenez tout de même à jauger l\'intensité" },
+      { title: 'PSYCHOLOGIE', subtitre: 'VOUS AIMEZ VOUS COMPARER AUX AUTRES', description: 'Vous avez une vision des choses trés affirmée, ce qui vous donne un certain charisme mais attention à ne pas trop en abuser.' },
     ]
   }
 };

@@ -25,7 +25,7 @@ export default function Header(props) {
     imageSource,
     TopLeftComponent,
     TopCenterComponent,
-	LeftButtomComponent,
+	  LeftButtomComponent,
     TopRightComponent,
     leftColumnActions,
     rightColumnActions,
@@ -40,7 +40,7 @@ export default function Header(props) {
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser, uploadAvatar } = useLogguedUser();
   const { avatar } = logguedUser.moods[currentMood];
-  
+
   const startUploadAvatar = useCallback(async (media) => {
     try {
       await uploadAvatar(media, currentMood);
@@ -48,7 +48,7 @@ export default function Header(props) {
       Alert.alert('Erreur', 'Une erreur est survenue lors de la mise à jour de votre avatar');
     }
   }, [uploadAvatar, currentMood]);
-  
+
   const imageHeight = interpolate(scrollY, {
     inputRange: [-100, HEADER_HEIGHT],
     outputRange: [HEADER_HEIGHT + 100, 0],
@@ -63,7 +63,8 @@ export default function Header(props) {
 
   const headerTranslateY = interpolate(scrollY, {
     inputRange: [HEADER_HEIGHT - verticalScale(130), HEADER_HEIGHT],
-    outputRange: [0, -(headerHeight + verticalScale(60))],
+    //outputRange: [0, -(headerHeight + verticalScale(60))],
+    outputRange: [1, 0],
     extrapolate: Extrapolate.CLAMP
   });
 
@@ -75,7 +76,8 @@ export default function Header(props) {
 
   const usernameInfosTranslateX = interpolate(scrollY, {
     inputRange: [verticalScale(40), verticalScale(80)],
-    outputRange: [0, (WINDOW_WIDTH / 2) - (usernameWidth / 2) - scale(10)],
+    outputRange: [1, 0],
+    //outputRange: [0, (WINDOW_WIDTH / 2) - (usernameWidth / 2) - scale(10)],
     extrapolate: Extrapolate.CLAMP
   });
 
@@ -86,7 +88,7 @@ export default function Header(props) {
   });
 
   const buttonsOpacity = interpolate(scrollY, {
-    inputRange: [HEADER_HEIGHT - verticalScale(150), HEADER_HEIGHT - verticalScale(130)],
+    inputRange: [0, verticalScale(30)],
     outputRange: [1, 0],
     extrapolateLeft: Extrapolate.CLAMP
   });
@@ -105,6 +107,7 @@ export default function Header(props) {
     }
   }
 
+  let topLeftComponent = TopLeftComponent;
   return (
     <>
       { !bottomOffset && <View style={styles.bottomOffsetView} onLayout={getBottomOffset} /> }
@@ -133,7 +136,7 @@ export default function Header(props) {
         <SafeAreaView />
         <View style={styles.headerInner}>
           <Animated.View style={{ opacity: buttonsOpacity }}>
-            { TopLeftComponent }
+            { topLeftComponent }
           </Animated.View>
           <View style={styles.headerTextContainer}>
             { TopCenterComponent }
@@ -143,6 +146,7 @@ export default function Header(props) {
           </Animated.View>
         </View>
       </Animated.View>
+
       { bottomOffset > 0 && (
         <ButtonsColumn
           scrollY={scrollY}
@@ -154,6 +158,7 @@ export default function Header(props) {
         >
           { leftColumnActions }
         </ButtonsColumn>
+
       )}
       { bottomOffset > 0 && (
         <ButtonsColumn
@@ -169,58 +174,14 @@ export default function Header(props) {
         </ButtonsColumn>
       )}
       { bottomOffset > 0 && (
-        <Animated.View
-          style={[
-            styles.userInfosContainer,
-            {
-              bottom: bottomOffset + verticalScale(20),
-              transform: [
-                {
-                  translateY: usernameInfosTranslateY,
-                  translateX: usernameInfosTranslateX
-                },
-              ]
-            }
-          ]}
-        >
-          <Text
-            onLayout={({
-              nativeEvent: {
-                layout: {
-                  width
-                }
-              }
-            }) => setUsernameWidth(width)}
-            style={styles.firstNameText}
-          >
-            {firstName}
-          </Text>
-          <Animated.Text
-            style={[
-              styles.profilTypeText,
-              {
-                color: moodInfos.color,
-                opacity: personnalityOpacity
-              }
-            ]}
-          >
-            {personnality}
-          </Animated.Text>
-          <Animated.Text
-            style={[
-              styles.personalityText,
-              {
-                opacity: personnalityOpacity
-              }
-            ]}
-          >
-            {subPersonnality}
-          </Animated.Text>
-		  <View style={styles.bouttomTextContainer}>
-            { LeftButtomComponent }
-          </View>
+        <Animated.View style={[
+          styles.bouttomTextContainer,
+          {
+            opacity: buttonsOpacity
+          }
+        ]}>
+          { LeftButtomComponent }
         </Animated.View>
-		
       )}
     </>
   );

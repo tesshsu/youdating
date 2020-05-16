@@ -84,11 +84,11 @@ Ce qui te rend trop détaché pour te préoccuper véritablement des autres et d
       { title: 'Attitude insouciante', value: 'ÉLEVÉE' },
       { title: 'Attitude posessive', value: 'FAIBLE' },
     ],
-	noteAddOn: [
-      { title: 'AMBITIONNEL', description: 'Vous faites partie de la grande famille des Ambitionnel !!' },
-      { title: 'CONQUERANT', description: "Votre personnalité est proche d'hommes et de femmes comme : Alexandre le grand, cléopatre, ou même tupac. Vous jouez donc un rôle essentiel au sein de la société. Celui de faire évoluer votre entourage plus rapidement grâce à votre capacité hors norme à entreprendre et à dépasser constament vos limites.FAITES-EN BONNE USAGE" },
-      { title: 'EMOTION', subtitre: 'SENSIBILITE FORTEMENT EXPRIMEE', description: "La plupart du temps vous réagissez spontanément face aux situations que ce soit pour aider quelqu'un ou pour gérer votre propre vie. Ce qui est souvent une bonne choses mais apprenez tout de même à jauger l'intensité" },
-      { title: 'PSYCHOLOGIE', description: 'VOUS AIMEZ VOUS COMPARER AUX AUTRES"Vous avez une vision des choses trés affirmée, ce qui vous donne un certain charisme mais attention à ne pas trop en abuser' },
+    noteAddOn: [
+      { title: 'DIPLOMATIST', description: 'Vous faites partie de la grande famille des Diplomatist !!' },
+      { title: 'BON VIVANT', description: " Votre personnalité est proche d\'hommes et de femmes comme Mère Téresa, Nelson Mendela ou même Gandhi Vous jouez donc un rôle essentiel au sein de la société. Celui de faire évoluer le monde grâce à votre ouverture d\'esprit et votre capacité à comprendre les intérets de chacun.", plusnote: 'FAITES-EN BONNE USAGE' },
+      { title: 'EMOTION', subtitre: 'SENSIBILITE FORTEMENT EXPRIMEE', description: "La plupart du temps vous réagissez avec positivisme face aux situations que ce soit pour aider quelqu\'un ou pour gérer votre propre vie. Ce qui est souvent une bonne chose mais apprenez aussi à vous exprimer plus souvent et à dire ce qui vous gène quand cela est nécessaire." },
+      { title: 'PSYCHOLOGIE', subtitre: 'VOUS AIMEZ VOUS INTEGRER AUX  AUTRES', description: 'Vous savez comment suivre la tendance, être cool sans pour autant chercher à tout contrôler, ce qui fait planer une certaine aura de mystère autour de vous mais attention à ne pas trop en abuser.' },
     ]
   }
 };

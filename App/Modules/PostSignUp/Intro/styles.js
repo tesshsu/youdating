@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { scale, verticalScale, moderateScale } from '../../../Helpers/ScaleHelper';
-
+import colors from '../../../Assets/css';
 export const {
   width: SCREEN_WIDTH,
   height: SCREEN_HEIGHT
@@ -9,13 +9,13 @@ export const {
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.WHITE,
     flexDirection: 'row'
   },
   slideWrapper: {
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
-    backgroundColor: 'white'
+    backgroundColor: colors.WHITE
   },
   image: {
     width: scale(416),
@@ -34,7 +34,7 @@ export default StyleSheet.create({
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(15),
     textAlign: 'center',
-    color: 'black',
+    color: colors.PINK,
     paddingHorizontal: scale(30),
   },
   titleText: {
@@ -88,5 +88,12 @@ export default StyleSheet.create({
       height: 2,
       elevation: 2
     }
-  }
+  },
+  secondTitle: {
+    color: colors.GREY,
+    textAlign: 'center',
+    fontFamily: 'NewTaiLue-Bold',
+    fontSize: moderateScale(16),
+    marginTop: verticalScale(15)
+  },
 });

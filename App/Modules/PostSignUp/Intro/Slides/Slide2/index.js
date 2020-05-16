@@ -3,10 +3,9 @@ import {
   Text, Image, View, SafeAreaView
 } from 'react-native';
 import Animated from 'react-native-reanimated';
-
 import styles from '../../styles';
-
-const IMAGE = require('../../../../../../assets/images/intro/slide2.png');
+import colors from '../../../../../Assets/css';
+const IMAGE = require('../../../../../../assets/images/quizz/screen1.png');
 
 const COLOR = '#B2499D';
 
@@ -15,8 +14,7 @@ export default function Slide2() {
     <>
       <Image source={IMAGE} style={styles.image} />
       <Animated.ScrollView style={styles.scrollView}>
-        <Text style={[styles.mainTitleText, { color: COLOR }]}>MOOD SOCIAL</Text>
-        <Text style={styles.mainSubTitleText}>{'ENRICHISSEZ VOTRE CERCLE D\'AMIS'}</Text>
+        <Text style={styles.mainSubTitleText}>{'Te sens-tu constamment poussé a exprimer ce que tu penses en public?'}</Text>
         <Text style={[styles.titleText, { color: COLOR }]}>
           {'Le mood parfait pour vous amuser '}
         </Text>

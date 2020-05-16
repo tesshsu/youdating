@@ -34,18 +34,19 @@ export default function PostSignUpProfilSetup() {
   }
 
   function onSubmit() {
-    if (!currentMood) {
+    /*if (!currentMood) {
       Alert.alert('Erreur', 'Vous n\'avez pas défini de mood');
-    } else if (!logguedUser.moods.PRO.avatar) {
+    } else if (!logguedUser.moods.avatar) {
       Alert.alert('Erreur', 'Vous n\'avez pas choisi de photo de profil');
     } else {
       NavigationHelper.navigate('PostSignUpQuizzIntro');
-    }
+    }*/
+	NavigationHelper.navigate('PostSignUpQuizzIntro');
   }
 
   const imageSource = useMemo(() => {
-    if (logguedUser.moods.PRO.avatar) {
-      return { uri: logguedUser.moods.PRO.avatar };
+    if (logguedUser.moods.avatar) {
+      return { uri: logguedUser.moods.avatar };
     } else {
 	  return null;
 	}
