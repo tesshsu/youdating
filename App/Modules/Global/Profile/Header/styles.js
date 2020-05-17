@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { verticalScale, scale, moderateScale } from '../../../../Helpers/ScaleHelper';
 
-export const HEADER_HEIGHT = verticalScale(400);
+export const HEADER_HEIGHT = verticalScale(480);
 
 export default StyleSheet.create({
   container: {
@@ -53,7 +53,13 @@ export default StyleSheet.create({
   bouttomTextContainer: {
     justifyContent: 'flex-end',
     position: 'absolute',
-    bottom: 340,
+    bottom: 240,
+  },
+  rightColumnActionsContainer: {
+    justifyContent: 'flex-end',
+    position: 'absolute',
+    bottom: 240,
+	right: 0
   },
   headerInner: {
     marginLeft: scale(30),

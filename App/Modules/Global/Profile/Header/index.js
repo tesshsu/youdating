@@ -160,29 +160,26 @@ export default function Header(props) {
         </ButtonsColumn>
 
       )}
+	  { bottomOffset > 0 && (
+			<Animated.View style={[
+			  styles.rightColumnActionsContainer,
+			  {
+				opacity: buttonsOpacity
+			  }
+			]}>
+			  { rightColumnActions }
+			</Animated.View>
+        )}
       { bottomOffset > 0 && (
-        <ButtonsColumn
-          scrollY={scrollY}
-          right
-          containerStyle={{
-            right: scale(10),
-            bottom: bottomOffset + verticalScale(40),
-            zIndex: 10000
-          }}
-        >
-          { rightColumnActions }
-        </ButtonsColumn>
-      )}
-      { bottomOffset > 0 && (
-        <Animated.View style={[
-          styles.bouttomTextContainer,
-          {
-            opacity: buttonsOpacity
-          }
-        ]}>
-          { LeftButtomComponent }
-        </Animated.View>
-      )}
+			<Animated.View style={[
+			  styles.bouttomTextContainer,
+			  {
+				opacity: buttonsOpacity
+			  }
+			]}>
+			  { LeftButtomComponent }
+			</Animated.View>
+        )}
     </>
   );
 }

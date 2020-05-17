@@ -105,7 +105,6 @@ export default function MainTabsProfilHome() {
                 iconName="user-plus"
               />
            ]}
-
           TabComponent={(
             <Tabs
               scenes={TAB_SCENES}
