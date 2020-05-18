@@ -6,8 +6,8 @@ export default StyleSheet.create({
     fontFamily: 'Segoe-UI-Bold',
     fontSize: moderateScale(15),
     color: 'black',
-    paddingTop: verticalScale(24),
-    paddingBottom: verticalScale(24),
+    paddingTop: verticalScale(6),
+    paddingBottom: verticalScale(6),
     textAlign: 'center',
     paddingHorizontal: scale(30),
     textTransform: 'uppercase'
@@ -21,14 +21,15 @@ export default StyleSheet.create({
   },
   messageListItem: {
     flexDirection: 'row',
-    paddingVertical: verticalScale(10)
+    paddingVertical: verticalScale(5)
   },
   imageStyle: {
-    height: verticalScale(60),
-    width: scale(50),
-    marginRight: scale(10),
-    borderRadius: verticalScale(8),
-    resizeMode: 'cover'
+    height: verticalScale(65),
+    width: scale(65),
+    margin: scale(6),
+    borderRadius: verticalScale(50),
+    resizeMode: 'cover',
+    borderWidth: 2,
   },
   body: {
     flex: 1
@@ -46,10 +47,28 @@ export default StyleSheet.create({
     color: 'black',
     textTransform: 'uppercase'
   },
-  personnalityText: {
+  grayText: {
+    fontFamily: 'Segoe-UI-Bold',
+    fontSize: moderateScale(14),
+    color: 'gray',
+    textTransform: 'uppercase'
+  },
+  msgTitle: {
     fontFamily: 'Segoe-UI-Bold',
     fontSize: moderateScale(11),
-    textTransform: 'uppercase'
+    color: 'black',
+    paddingTop: 5
+  },
+  timeText: {
+    fontFamily: 'Segoe-UI-Bold',
+    fontSize: moderateScale(11),
+  },
+  personnalityText: {
+    fontFamily: 'Segoe-UI-Bold',
+    fontSize: moderateScale(12),
+    textTransform: 'uppercase',
+    marginLeft: scale(3),
+    marginRight: scale(3)
   },
   headerRight: {
     flexDirection: 'row',
@@ -70,5 +89,35 @@ export default StyleSheet.create({
   },
   button: {
     marginLeft: scale(8)
+  },
+  imageBackground: {
+    width: scale(170),
+    height: verticalScale(190),
+    borderRadius: verticalScale(25),
+  },
+  imageBackgroundImage: {
+    borderRadius: verticalScale(25)
+  },
+  modeSelector: {
+    marginTop: 8, 
+    marginBottom: 8
+  },
+  searchField: {
+    backgroundColor: 'white', 
+    borderBottomColor: 'transparent', 
+    borderTopColor: 'transparent', 
+    width: '90%'
+  },
+  searchInner: {
+    borderRadius: 15, 
+    backgroundColor: '#e1e1e1'
+  },
+  messageCount: {
+    borderRadius: 50, 
+    width: 20, 
+    alignItems: 'center', 
+    position: 'absolute', 
+    top: 45, 
+    left: 45
   }
 });

@@ -54,5 +54,8 @@ export default StyleSheet.create({
   },
   icon: {
     marginLeft: scale(25)
+  },
+  leftIcon: {
+    marginRight: scale(5)
   }
 });

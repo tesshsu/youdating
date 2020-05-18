@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Text,
   TouchableOpacity,
   FlatList,
   View,
+  ImageBackground,
   RefreshControl,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
@@ -11,15 +12,22 @@ import { Image } from 'react-native-expo-image-cache';
 
 import moment from 'moment';
 import PageHeader from '../../../../Global/PageHeader';
-import MoodSelectorHeaderButton from '../../../../Global/MoodSelectorHeaderButton';
+import MoodSelector from '../../../../Global/MoodSelector';
+import ImageButton from '../../../../Global/ImageButton';
+import SearchField from '../../../../Global/SearchField';
 import { verticalScale } from '../../../../../Helpers/ScaleHelper';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import styles from './styles';
 import ListItemSeparator from '../../../../Global/ListItemSeparator';
 import RoundIconButton from '../../../../Global/RoundIconButton';
+import RoundButton from '../../../../Global/RoundButton';
 import useConversation from '../../../../../Hooks/useConversations';
 import useLogguedUser from '../../../../../Hooks/useLogguedUser';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
+import PersanalDeatils from '../../../../Main/Tabs/Profil/Home';
+
+import backIcon from '../../../../../../assets/icons/back-arrow.png';
+const IMAGE_GIRL3 = require('../../../../../../assets/images/profile_pics/girl3.jpg');
 
 const TEXT = {
   PRO: 'professionnelles',
@@ -29,6 +37,7 @@ const TEXT = {
 };
 
 export default function MainTabsTchat() {
+  const [search, setSearch] = useState(null);
   const {
     conversations,
     startConversation,
@@ -38,6 +47,9 @@ export default function MainTabsTchat() {
 
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
+
+  const { avatar } = logguedUser.moods[currentMood];
+  const imageSource = avatar || logguedUser.avatar;
 
   const openConversation = useCallback((conversation) => {
     const {
@@ -58,15 +70,43 @@ export default function MainTabsTchat() {
   return (
     <View style={styles.container}>
       <PageHeader
-        leftComponent={() => <MoodSelectorHeaderButton />}
+        leftComponent={() => <Feather
+              name="chevron-left"
+              color="white"
+              size={verticalScale(21)}
+              onPress={() => NavigationHelper.navigate('MainTabsProfile')}
+            />}
+        rightComponent={()=> <Feather
+              name="more-vertical"
+              color="white"
+              size={verticalScale(21)}
+            />}
         title="MESSAGERIE"
       />
+      <View style={{ alignItems: 'center'}}>
+        <MoodSelector
+          containerStyle={styles.modeSelector}
+          moods={['PRO', 'SOCIAL', 'LOVE', 'PERSO']}
+        />
+      </View>
       <Text style={styles.titleText}>
         {`Mes conversations ${TEXT[currentMood]}`}
       </Text>
+      <View style={{ alignItems: 'center'}}>
+        <SearchField
+          placeholder="Type Here..."
+          lightTheme={true}
+          onChangeText={(value)=>setSearch(value)}
+          value={search}
+          containerStyle={styles.searchField}
+          inputContainerStyle={styles.searchInner}
+        />
+      </View>
       <FlatList
         contentContainerStyle={styles.flatListContent}
+        horizontal={true}
         ItemSeparatorComponent={ListItemSeparator}
+        showsHorizontalScrollIndicator={true}
         data={conversations}
         refreshing={areConversationsFetching}
         refreshControl={(
@@ -94,54 +134,40 @@ export default function MainTabsTchat() {
           } = item;
 
           const lastMessageStr = author === logguedUser.id ? 'Vous avez' : `${target.firstName} a`;
-          console.log(imageUri, audioUri);
           return (
             <TouchableOpacity
               style={styles.messageListItem}
               onPress={() => openConversation(conversation)}
             >
-              <Image
-                style={styles.imageStyle}
-                uri={target.moods[currentMood].avatar}
-              />
-              <View style={styles.body}>
-                <View style={styles.header}>
-                  <View style={styles.headerLeft}>
-                    <Text style={styles.usernameText}>{ target.firstName }</Text>
-                    <Text
+              <View style={{alignItems: 'center'}}>
+                <Image
+                  style={[styles.imageStyle, {borderColor: moodInfos.color}]}
+                  uri={target.moods[currentMood].avatar}
+                />
+                {
+                  hasNewMessage && (
+                    <View style={[{backgroundColor: moodInfos.color}, styles.messageCount]}>
+                      <Text style={{color: '#fff'}}>
+                        {item[`${newMessageKey}unreadMessageCount`]}
+                      </Text>
+                    </View>
+                  )
+                }
+                <View style={{alignItems: 'center'}}>
+                  <Text style={{fontSize: 12, textTransform: 'uppercase'}}>{ target.firstName }</Text>
+                  <Text
                       style={[
                         styles.personnalityText,
                         { color: moodInfos.color }
                       ]}
                     >
                       { target.personnalities.main }
+                      { hasNewMessage }
                     </Text>
-                  </View>
-                  <View style={styles.headerRight}>
-                    <Text
-                      style={[
-                        styles.lastMsgTimeText,
-                        { color: moodInfos.color }
-                      ]}
-                    >
-                      { moment.unix(sentAt).format('HH:ss') }
-                    </Text>
-                    <Feather
-                      name="chevron-right"
-                      color={moodInfos.color}
-                      size={verticalScale(18)}
-                    />
-                  </View>
                 </View>
+              </View>
+              <View style={styles.body}>
                 <View style={styles.footer}>
-                  <Text
-                    style={styles.lastMsgText}
-                    numberOfLines={2}
-                  >
-                    {content !== '' && content }
-                    {content === '' && imageUri !== undefined && `${lastMessageStr} envoyé une photo!`}
-                    {content === '' && audioUri !== undefined && `${lastMessageStr} envoyé un message vocal!`}
-                  </Text>
                   { hasNewMessage && (
                     <RoundIconButton
                       containerStyle={styles.button}
@@ -159,6 +185,33 @@ export default function MainTabsTchat() {
           );
         }}
       />
+      <View style={{ width: '100%', height: '48%', alignItems: 'center'}}>
+          <Image 
+            style={styles.imageBackground}
+            uri={imageSource} 
+          />
+          <Text style={styles.usernameText}>MOI</Text>
+          <Text style={styles.grayText}>27ANS-PARIS</Text>
+          <Text style={styles.msgTitle}>Aujourd hui</Text>
+          <Text style={[styles.timeText, {color: moodInfos.color}]}>09.13</Text>
+          <View style={{ width: '50%'}}>
+            <Text style={[styles.timeText, {color: 'gray'}]}>I think this message is last message from logged user send.</Text>
+          </View>
+          <View style={{marginTop: 12, width: '50%', flexDirection: 'row', justifyContent: 'space-between'}}>
+            <RoundButton 
+              text="REPONDRE"
+              fontSize={11}
+              borderRadius={50}
+              containerStyle={{width: '45%', height: 20}}
+            />
+            <RoundButton 
+              text="BIPOLARTY"
+              fontSize={11}
+              borderRadius={50}
+              containerStyle={{width: '45%', height: 20}}
+            />
+          </View>
+      </View>
     </View>
   );
 }

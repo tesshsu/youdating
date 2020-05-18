@@ -27,8 +27,8 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   userHeaderImage: {
-    borderRadius: verticalScale(8),
-    height: scale(70),
+    borderRadius: verticalScale(50),
+    height: scale(66),
     width: scale(66),
     marginRight: scale(12),
     resizeMode: 'cover'

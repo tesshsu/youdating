@@ -23,7 +23,7 @@ export default StyleSheet.create({
     left: -scale(60),
     width: scale(50),
     height: scale(50),
-    borderRadius: verticalScale(12),
+    borderRadius: verticalScale(50),
     resizeMode: 'cover'
   },
   audioButtonContainer: {

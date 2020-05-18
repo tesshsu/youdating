@@ -16,6 +16,7 @@ import { MOODS } from '../../../../../GlobalConfig';
 import useConversation from '../../../../../Hooks/useConversations';
 import useGetMedia from '../../../../../Hooks/useGetMedia';
 import Panel from './Panel';
+import AudioUri from './AudioRecorder';
 import AudioButton from '../../../../Global/AudioButton';
 
 const mediaOptions = {
@@ -100,6 +101,12 @@ export default function MessageComposer(props) {
           { backgroundColor: moodInfos.color }
         ]}
       >
+        <Feather
+          style={styles.leftIcon}
+          name="plus"
+          size={verticalScale(20)}
+          color="white"
+        />
         <View style={styles.inputContainer}>
           <TextInput
             style={[
@@ -147,6 +154,7 @@ export default function MessageComposer(props) {
           color="white"
           onPress={getMedia}
         />
+        <AudioUri/>
       </View>
     </>
   );
