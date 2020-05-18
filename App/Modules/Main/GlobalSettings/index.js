@@ -5,7 +5,7 @@ import {
   Alert,
 } from 'react-native';
 import { useDebouncedCallback } from 'use-debounce';
-
+import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
 import styles from './styles';
 import PageHeader from '../../Global/PageHeader';
@@ -168,14 +168,30 @@ export default function GlobalSettings() {
             onChange={() => updateMoodVisible('PERSO', !logguedUser.moods.PERSO.visible)}
           />
         </SettingsCard>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={onSignOut}
-        >
-          <Text style={styles.buttonText}>
-            Déconnexion
-          </Text>
-        </TouchableOpacity>
+		<SettingsCard
+          title="NAVIGATIONS"
+        >   
+		    <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                            style={styles.linearGradient}
+                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsTchat')}> MESSAGERIE </Text>
+            </LinearGradient>
+			<LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                            style={styles.linearGradient}
+                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}> COMPATBILITER </Text>
+            </LinearGradient>
+			<LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                            style={styles.linearGradient}
+                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsProfile')}> PROFILE </Text>
+            </LinearGradient>
+			<LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                            style={styles.linearGradient}
+                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+              <Text style={styles.buttonTextGradient} onPress={onSignOut}> Déconnexion </Text>
+            </LinearGradient>
+		</SettingsCard>
       </ScrollView>
     </>
   );

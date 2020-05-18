@@ -99,25 +99,26 @@ export default StyleSheet.create({
     borderRadius: verticalScale(25)
   },
   modeSelector: {
-    marginTop: 8, 
+    marginTop: 8,
     marginBottom: 8
   },
   searchField: {
-    backgroundColor: 'white', 
-    borderBottomColor: 'transparent', 
-    borderTopColor: 'transparent', 
+    backgroundColor: 'white',
+    borderBottomColor: 'transparent',
+    borderTopColor: 'transparent',
     width: '90%'
   },
   searchInner: {
-    borderRadius: 15, 
+    borderRadius: 10,
+    height: 20,
     backgroundColor: '#e1e1e1'
   },
   messageCount: {
-    borderRadius: 50, 
-    width: 20, 
-    alignItems: 'center', 
-    position: 'absolute', 
-    top: 45, 
+    borderRadius: 50,
+    width: 20,
+    alignItems: 'center',
+    position: 'absolute',
+    top: 45,
     left: 45
   }
 });

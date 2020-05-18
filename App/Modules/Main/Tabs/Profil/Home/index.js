@@ -85,7 +85,7 @@ export default function MainTabsProfilHome() {
             <ImageButton
               imageSource={IMAGE_SETTING}
               imageStyle={Styles.iconStyle}
-              onPress={() => NavigationHelper.navigate('MainMoodSettings')}
+              onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
             />
           )}
 		      rightColumnActions={[

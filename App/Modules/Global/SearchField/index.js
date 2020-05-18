@@ -11,12 +11,9 @@ export default function SearchField(props) {
     placeholder,
     onChangeText,
     value,
-    //containerStyle,
-    //inputContainerStyle,
-    //inputStyle,
+    containerStyle,
+    inputContainerStyle,
     lightTheme,
-    //leftIconContainerStyle,
-    //rightIconContainerStyle,
     searchIcon,
     clearIcon
   } = props;
@@ -28,11 +25,8 @@ export default function SearchField(props) {
         onChangeText={onChangeText}
         value={value}
         lightTheme={lightTheme}
-        //containerStyle={containerStyle}
-        //inputContainerStyle={inputContainerStyle}
-        //inputStyle={inputStyle}
-        //leftIconContainerStyle={leftIconContainerStyle}
-        //rightIconContainerStyle={rightIconContainerStyle}
+        containerStyle={containerStyle}
+        inputContainerStyle={inputContainerStyle}
         searchIcon={searchIcon}
         clearIcon={clearIcon}
       />
@@ -45,11 +39,8 @@ SearchBar.propTypes = {
   onChangeText: PropTypes.func,
   value: PropTypes.string,
   lightTheme: PropTypes.bool,
-  //containerStyle: PropTypes.style,
-  //inputContainerStyle: PropTypes.style,
-  //inputStyle: PropTypes.style,
-  //leftIconContainerStyle: PropTypes.style,
-  //rightIconContainerStyle: PropTypes.style,
+  containerStyle: PropTypes.style,
+  inputContainerStyle: PropTypes.style,
   searchIcon: PropTypes.bool,
   clearIcon: PropTypes.bool,
 };
@@ -58,11 +49,8 @@ SearchBar.defaultProps = {
   placeholder: null,
   onChangeText: {},
   value: null,
-  //containerStyle: {},
-  //inputContainerStyle: {},
-  //inputStyle: {},
-  //leftIconContainerStyle: {},
-  //rightIconContainerStyle: {},
+  containerStyle: {},
+  inputContainerStyle: {},
   searchIcon: true,
   clearIcon: true,
   lightTheme: false

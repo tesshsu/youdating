@@ -74,12 +74,13 @@ export default function MainTabsTchat() {
               name="chevron-left"
               color="white"
               size={verticalScale(21)}
-              onPress={() => NavigationHelper.navigate('MainTabsProfile')}
+              onPress={() => NavigationHelper.back()}
             />}
         rightComponent={()=> <Feather
               name="more-vertical"
               color="white"
               size={verticalScale(21)}
+			  onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
             />}
         title="MESSAGERIE"
       />
@@ -94,7 +95,7 @@ export default function MainTabsTchat() {
       </Text>
       <View style={{ alignItems: 'center'}}>
         <SearchField
-          placeholder="Type Here..."
+          placeholder="RECHERCHE UTILISATEUR"
           lightTheme={true}
           onChangeText={(value)=>setSearch(value)}
           value={search}
@@ -186,9 +187,9 @@ export default function MainTabsTchat() {
         }}
       />
       <View style={{ width: '100%', height: '48%', alignItems: 'center'}}>
-          <Image 
+          <Image
             style={styles.imageBackground}
-            uri={imageSource} 
+            uri={imageSource}
           />
           <Text style={styles.usernameText}>MOI</Text>
           <Text style={styles.grayText}>27ANS-PARIS</Text>
@@ -198,13 +199,13 @@ export default function MainTabsTchat() {
             <Text style={[styles.timeText, {color: 'gray'}]}>I think this message is last message from logged user send.</Text>
           </View>
           <View style={{marginTop: 12, width: '50%', flexDirection: 'row', justifyContent: 'space-between'}}>
-            <RoundButton 
+            <RoundButton
               text="REPONDRE"
               fontSize={11}
               borderRadius={50}
               containerStyle={{width: '45%', height: 20}}
             />
-            <RoundButton 
+            <RoundButton
               text="BIPOLARTY"
               fontSize={11}
               borderRadius={50}

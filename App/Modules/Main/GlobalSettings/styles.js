@@ -14,10 +14,11 @@ export default StyleSheet.create({
   },
   button: {
     height: verticalScale(72),
+	marginTop: 10,
     borderWidth: 2,
     borderColor: colors.PINK,
-    backgroundColor: 'white',
-    shadowColor: 'black',
+    backgroundColor: colors.WHITE,
+    shadowColor: colors.BLACK,
     shadowOpacity: 0.3,
     shadowOffset: {
       width: 0,
@@ -34,4 +35,17 @@ export default StyleSheet.create({
     textAlign: 'center',
     textTransform: 'uppercase'
   },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 40,
+    paddingRight: 40,
+    borderRadius: 20
+  },
+  buttonTextGradient: {
+    fontSize: 18,
+    textAlign: 'center',
+    margin: 10,
+    color: colors.WHITE,
+    backgroundColor: 'transparent',
+  }
 });
