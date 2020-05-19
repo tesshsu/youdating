@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { verticalScale, moderateScale, scale } from '../../../../../../../Helpers/ScaleHelper';
-
+const IMAGE_WIDTH = scale(100);
+const IMAGE_HEIGHT = IMAGE_WIDTH / 4 * 3;
 export default StyleSheet.create({
   section: {
     marginTop: verticalScale(45),
@@ -32,7 +33,23 @@ export default StyleSheet.create({
     height: verticalScale(64),
     width: scale(100)
   },
-  imageStar: {
-
+   imagesContainer: {
+    width: scale(324),
+    alignSelf: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginTop: verticalScale(0)
+  },
+  imageHolderContainer: {
+    marginVertical: verticalScale(4),
+    marginHorizontal: verticalScale(2)
+  },
+  image: {
+    width: IMAGE_WIDTH,
+    height: IMAGE_HEIGHT,
+    marginVertical: verticalScale(4),
+    marginHorizontal: verticalScale(2),
+    resizeMode: 'cover',
   }
 });

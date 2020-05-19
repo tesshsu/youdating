@@ -43,10 +43,10 @@ export default function MainMet() {
         leftComponent={ProfilesModToggler}
         rightComponent={() => (
           <FontAwesome5
-            name="sliders-h"
+            name="ellipsis-v"
             size={verticalScale(19)}
             color="white"
-            onPress={() => NavigationHelper.navigate('MainMoodSettings')}
+            onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
           />
         )}
         title="RENCONTRES"

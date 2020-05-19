@@ -3,12 +3,12 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-
 import styles from './styles';
 import { scale } from '../../../../Helpers/ScaleHelper';
+import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import PageHeader from '../../../Global/PageHeader';
 import MoodSelectorHeaderButton from '../../../Global/MoodSelectorHeaderButton';
+import NavigationHelper from '../../../../Helpers/NavigationHelper';
 import useCurrentMood from '../../../../Hooks/useCurrentMood';
 import CompatibilitiesList from './CompatibilitiesList';
 import CompatibilityResult from './CompatibilityResult';
@@ -21,6 +21,14 @@ export default function MainCompatibility() {
     <>
       <PageHeader
         title="Compatibilité"
+		rightComponent={() => (
+          <FontAwesome5
+            name="ellipsis-v"
+            size={19}
+            color="white"
+            onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
+          />
+        )}
         leftComponent={() => (
           <MoodSelectorHeaderButton />
         )}
