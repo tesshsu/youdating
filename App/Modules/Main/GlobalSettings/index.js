@@ -27,7 +27,7 @@ export default function GlobalSettings() {
     updateSharePosition
   } = useLogguedUser();
   const [settings, setSettings] = useState(logguedUser.settings || {});
-  
+
   useEffect(() => {
     if (!isAuthentificated) {
       NavigationHelper.navigate('AuthentificationNavigator');
@@ -105,7 +105,7 @@ export default function GlobalSettings() {
       >
 		<SettingsCard
           title="Navigations"
-        >   
+        >
 		    <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
                             style={styles.linearGradient}
                             start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
@@ -129,16 +129,16 @@ export default function GlobalSettings() {
 		</SettingsCard>
 		<SettingsCard
           title="confidentialite"
-        >   
+        >
 		    <CheckBox
-			  center
-			  iconRight
-			  title='Click Here'
-			  checked={checked}
-			/>
+          center
+          iconRight
+          title='accepter les termes et conditions'
+          checked={checked}
+			  />
 		    <Text>
-			  Le Site web/Application mobile développés par BEPATIENT vous permettent uniquement de vous informer et de vous accompagner dans la gestion votre état de santé/pathologie spécifique/bien être, elle n’est en aucun cas un outil de diagnostic, de consultation, d’urgence, ou autre activité de télé médecine.
-			</Text>	   
+			    Le Site web/Application mobile développés par BEPATIENT vous permettent uniquement de vous informer et de vous accompagner dans la gestion votre état de santé/pathologie spécifique/bien être, elle n’est en aucun cas un outil de diagnostic, de consultation, d’urgence, ou autre activité de télé médecine.
+			  </Text>
 		</SettingsCard>
       </ScrollView>
     </>

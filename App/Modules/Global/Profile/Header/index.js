@@ -25,7 +25,7 @@ export default function Header(props) {
     imageSource,
     TopLeftComponent,
     TopCenterComponent,
-	  LeftButtomComponent,
+	LeftButtomComponent,
     TopRightComponent,
     leftColumnActions,
     rightColumnActions,

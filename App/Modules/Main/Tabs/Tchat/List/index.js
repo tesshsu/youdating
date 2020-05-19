@@ -38,6 +38,7 @@ const TEXT = {
 
 export default function MainTabsTchat() {
   const [search, setSearch] = useState(null);
+
   const {
     conversations,
     startConversation,
@@ -80,7 +81,7 @@ export default function MainTabsTchat() {
               name="more-vertical"
               color="white"
               size={verticalScale(21)}
-			  onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
+              onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
             />}
         title="MESSAGERIE"
       />
@@ -95,7 +96,7 @@ export default function MainTabsTchat() {
       </Text>
       <View style={{ alignItems: 'center'}}>
         <SearchField
-          placeholder="RECHERCHE UTILISATEUR"
+          placeholder="Type Here..."
           lightTheme={true}
           onChangeText={(value)=>setSearch(value)}
           value={search}
@@ -103,93 +104,101 @@ export default function MainTabsTchat() {
           inputContainerStyle={styles.searchInner}
         />
       </View>
-      <FlatList
-        contentContainerStyle={styles.flatListContent}
-        horizontal={true}
-        ItemSeparatorComponent={ListItemSeparator}
-        showsHorizontalScrollIndicator={true}
-        data={conversations}
-        refreshing={areConversationsFetching}
-        refreshControl={(
-          <RefreshControl
-            refreshing={areConversationsFetching}
-            onRefresh={fetchConversations}
-          />
-        )}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({ item }) => {
-          const target = item.user1.id === logguedUser.id ? item.user2 : item.user1;
-          const newMessageKey = target === item.user1 ? 'user2' : 'user1';
-          const hasNewMessage = item[`${newMessageKey}unreadMessageCount`] > 0;
+      <View style={{ flexDirection: 'row' }}>
+        <FlatList
+          contentContainerStyle={styles.flatListContent}
+          horizontal={true}
+          ItemSeparatorComponent={ListItemSeparator}
+          showsHorizontalScrollIndicator={true}
+          data={conversations}
+          refreshing={areConversationsFetching}
+          refreshControl={(
+            <RefreshControl
+              refreshing={areConversationsFetching}
+              onRefresh={fetchConversations}
+            />
+          )}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => {
+            const target = item.user1.id === logguedUser.id ? item.user2 : item.user1;
+            const newMessageKey = target === item.user1 ? 'user2' : 'user1';
+            const hasNewMessage = item[`${newMessageKey}unreadMessageCount`] > 0;
 
-          const conversation = { ...item };
+            const conversation = { ...item };
 
-          const {
-            lastMessage: {
-              author,
-              sentAt,
-              content,
-              imageUri,
-              audioUri
-            }
-          } = item;
+            const {
+              lastMessage: {
+                author,
+                sentAt,
+                content,
+                imageUri,
+                audioUri
+              }
+            } = item;
 
-          const lastMessageStr = author === logguedUser.id ? 'Vous avez' : `${target.firstName} a`;
-          return (
-            <TouchableOpacity
-              style={styles.messageListItem}
-              onPress={() => openConversation(conversation)}
-            >
-              <View style={{alignItems: 'center'}}>
-                <Image
-                  style={[styles.imageStyle, {borderColor: moodInfos.color}]}
-                  uri={target.moods[currentMood].avatar}
-                />
-                {
-                  hasNewMessage && (
-                    <View style={[{backgroundColor: moodInfos.color}, styles.messageCount]}>
-                      <Text style={{color: '#fff'}}>
-                        {item[`${newMessageKey}unreadMessageCount`]}
-                      </Text>
-                    </View>
-                  )
-                }
+            const lastMessageStr = author === logguedUser.id ? 'Vous avez' : `${target.firstName} a`;
+            return (
+              <TouchableOpacity
+                style={styles.messageListItem}
+                onPress={() => openConversation(conversation)}
+              >
                 <View style={{alignItems: 'center'}}>
-                  <Text style={{fontSize: 12, textTransform: 'uppercase'}}>{ target.firstName }</Text>
-                  <Text
-                      style={[
-                        styles.personnalityText,
-                        { color: moodInfos.color }
-                      ]}
-                    >
-                      { target.personnalities.main }
-                      { hasNewMessage }
-                    </Text>
+                  <Image
+                    style={[styles.imageStyle, {borderColor: moodInfos.color}]}
+                    uri={target.moods[currentMood].avatar}
+                  />
+                  {
+                    hasNewMessage && (
+                      <View style={[{backgroundColor: moodInfos.color}, styles.messageCount]}>
+                        <Text style={{color: '#fff'}}>
+                          {item[`${newMessageKey}unreadMessageCount`]}
+                        </Text>
+                      </View>
+                    )
+                  }
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={{fontSize: 12, textTransform: 'uppercase'}}>{ target.firstName }</Text>
+                    <Text
+                        style={[
+                          styles.personnalityText,
+                          { color: moodInfos.color }
+                        ]}
+                      >
+                        { target.personnalities.main }
+                        { hasNewMessage }
+                      </Text>
+                  </View>
                 </View>
-              </View>
-              <View style={styles.body}>
-                <View style={styles.footer}>
-                  { hasNewMessage && (
-                    <RoundIconButton
-                      containerStyle={styles.button}
-                      backgroundColor={moodInfos.color}
-                      iconColor="white"
-                      iconName="message-square"
-                      size={verticalScale(34)}
-                      iconSize={verticalScale(14)}
-                      onPress={() => startConversation(currentMood, target)}
-                    />
-                  )}
+                <View style={styles.body}>
+                  <View style={styles.footer}>
+                    { hasNewMessage && (
+                      <RoundIconButton
+                        containerStyle={styles.button}
+                        backgroundColor={moodInfos.color}
+                        iconColor="white"
+                        iconName="message-square"
+                        size={verticalScale(34)}
+                        iconSize={verticalScale(14)}
+                        onPress={() => startConversation(currentMood, target)}
+                      />
+                    )}
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          );
-        }}
-      />
-	  <View style={styles.arrow}>
-		<Text style={styles.arrowfont}>scroll ></Text>
-	  </View>
-      <View style={{ width: '100%', height: '48%', alignItems: 'center'}}>
+              </TouchableOpacity>
+            );
+          }}
+        />
+        {
+          !areConversationsFetching &&
+          <Feather
+            name="chevron-right"
+            color={moodInfos.color}
+            style={{paddingTop: '8%', zIndex: 99, marginRight: 20}}
+            size={verticalScale(30)}
+          />
+        }
+      </View>
+      <View style={styles.bigAvatarPart}>
           <Image
             style={styles.imageBackground}
             uri={imageSource}
@@ -207,12 +216,14 @@ export default function MainTabsTchat() {
               fontSize={11}
               borderRadius={50}
               containerStyle={{width: '45%', height: 20}}
+              onPress={() => NavigationHelper.navigate('MainTchatConversationMessages')}
             />
             <RoundButton
               text="BIPOLARTY"
               fontSize={11}
               borderRadius={50}
               containerStyle={{width: '45%', height: 20}}
+              onPress={() => NavigationHelper.navigate('MainTchatConversationBipolarityHistoric')}
             />
           </View>
       </View>

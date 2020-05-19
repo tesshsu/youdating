@@ -1,7 +1,5 @@
-import MALE from './male';
-import FEMALE from './female';
+import MAIN from './male';
 
 export default {
-  MALE,
-  FEMALE
+  MAIN
 };

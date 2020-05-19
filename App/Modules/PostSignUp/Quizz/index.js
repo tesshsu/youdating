@@ -45,7 +45,7 @@ function calculatePersonnalities(answers) {
   };
 }
 
-export default function MainPostSignUpQuizz() {
+export default function PostSignUpQuizz() {
   const { submitQuizzAnswers, logguedUser } = useLogguedUser();
   const [currentScreen, setCurrentScreen] = useState(0);
   const [currentAnswers, setCurrentAnswers] = useState([]);
@@ -87,7 +87,7 @@ export default function MainPostSignUpQuizz() {
       const payload = calculatePersonnalities(answers);
       await submitQuizzAnswers(payload);
     } catch (err) {
-      Alert.alert('Erreur', 'Une erreur est survenue à la soumission du questionnaire.');
+      Alert.alert('Erreur', err);
     }
   }
 

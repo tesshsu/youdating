@@ -1,16 +1,12 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
 import Intro from './Intro';
-import ProfilSetup from './ProfilSetup';
-import QuizzIntro from './QuizzIntro';
 import Quizz from './Quizz';
 
 
 export default createStackNavigator({
   PostSignUpIntro: Intro,
-  PostSignUpProfilSetup: ProfilSetup,
-  PostSignUpQuizz: Quizz,
-  PostSignUpQuizzIntro: QuizzIntro
+  PostSignUpQuizz: Quizz
 }, {
   initialRouteName: 'PostSignUpIntro',
   headerMode: 'none'

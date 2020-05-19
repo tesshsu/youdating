@@ -109,8 +109,7 @@ export default StyleSheet.create({
     width: '90%'
   },
   searchInner: {
-    borderRadius: 10,
-    height: 20,
+    borderRadius: 15,
     backgroundColor: '#e1e1e1'
   },
   messageCount: {
@@ -121,15 +120,11 @@ export default StyleSheet.create({
     top: 45,
     left: 45
   },
-  arrow : {
-    width: 150,
-    position: 'absolute',
-    top: 320,
-	fontSize: 40,
-    right: 0
-  },
-  arrowfont: {
-	fontSize: 20,
-	color: 'red'
-  },
+  bigAvatarPart: {
+    width: '100%',
+    height: '48%',
+    alignItems: 'center',
+    marginTop: 20
+  }
+
 });
