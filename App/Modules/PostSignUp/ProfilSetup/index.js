@@ -34,14 +34,7 @@ export default function PostSignUpProfilSetup() {
   }
 
   function onSubmit() {
-    /*if (!currentMood) {
-      Alert.alert('Erreur', 'Vous n\'avez pas défini de mood');
-    } else if (!logguedUser.moods.avatar) {
-      Alert.alert('Erreur', 'Vous n\'avez pas choisi de photo de profil');
-    } else {
-      NavigationHelper.navigate('PostSignUpQuizzIntro');
-    }*/
-	NavigationHelper.navigate('PostSignUpQuizzIntro');
+	   NavigationHelper.navigate('PostSignUpQuizzIntro');
   }
 
   const imageSource = useMemo(() => {
@@ -103,20 +96,6 @@ export default function PostSignUpProfilSetup() {
                 <Text style={[styles.buttonText, moodInfos && { color: moodInfos.color }]}>{ moodInfos ? `MOOD ${moodInfos.title}` : 'Cliques ici' }</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.section}>
-              <Text style={styles.sectionTitleText}>CHOISIS UNE DES RECHERCHES POSSIBLES</Text>
-              <TouchableOpacity style={styles.button} onPress={openQueryModal}>
-                <Text style={[styles.buttonText, moodInfos && { color: moodInfos.color }]}>{query || 'Cliques ici' }</Text>
-              </TouchableOpacity>
-            </View>
-            { query && (
-              <View style={styles.section}>
-                <Text style={styles.sectionTitleText}>CHOISIS UN HASTAG# POUR PRECISER LA RECHERCHE</Text>
-                <TouchableOpacity style={styles.button} onPress={openTagModal}>
-                  <Text style={[styles.buttonText, moodInfos && { color: moodInfos.color }]}>{ tag ? `#${tag}` : 'Cliques ici' }</Text>
-                </TouchableOpacity>
-              </View>
-            )}
           </View>
         </ScrollView>
         <LinearGradient

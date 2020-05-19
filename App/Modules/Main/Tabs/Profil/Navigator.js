@@ -9,8 +9,7 @@ import Views from './Views';
 import Attractions from './Attractions';
 import Invite from './Invite';
 import EditDescrition from './EditDescription';
-import EditAd from './EditAd';
-import EditJob from './EditJob';
+
 
 
 import { scale } from '../../../../Helpers/ScaleHelper';
@@ -23,8 +22,6 @@ export default createSharedElementStackNavigator({
   MainTabsProfilAttractions: Attractions,
   MainTabsProfilInvite: Invite,
   MainTabsEditDescription: EditDescrition,
-  MainTabsEditAd: EditAd,
-  MainTabsEditJob: EditJob,
 }, {
   initialRouteName: 'MainTabsProfilHome',
   headerMode: 'none',

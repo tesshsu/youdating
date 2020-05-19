@@ -14,18 +14,20 @@ import SettingSwitch from '../../Global/SettingSwitch';
 import useLogguedUser from '../../../Hooks/useLogguedUser';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
 import { MOODS } from '../../../GlobalConfig';
+import { CheckBox } from 'react-native-elements';
 
 export default function GlobalSettings() {
   const {
     isAuthentificated,
     logguedUser,
     signOut,
+	checked = true,
     updateGlobalSettings,
     updateMoodVisibility,
     updateSharePosition
   } = useLogguedUser();
   const [settings, setSettings] = useState(logguedUser.settings || {});
-
+  
   useEffect(() => {
     if (!isAuthentificated) {
       NavigationHelper.navigate('AuthentificationNavigator');
@@ -94,82 +96,15 @@ export default function GlobalSettings() {
   return (
     <>
       <PageHeader
-        title="Réglages"
+        title="paramètres"
         backButton
       />
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.scrollViewContent}
       >
-        <SettingsCard
-          title="LOCALISATION"
-        >
-          <SettingSwitch
-            label="Partager ma position"
-            value={sharePosition}
-            onChange={() => updateSharePositionSetting(!sharePosition)}
-          />
-        </SettingsCard>
-        <SettingsCard
-          title="NOTIFICATIONS"
-        >
-          <SettingSwitch
-            label="Vues"
-            value={views}
-            onChange={() => updateSetting('views', !views)}
-          />
-          <SettingSwitch
-            label="Demandes de compatibilité"
-            value={compatibilities}
-            onChange={() => updateSetting('compatibilities', !compatibilities)}
-          />
-          <SettingSwitch
-            label="Messages"
-            value={messages}
-            onChange={() => updateSetting('messages', !messages)}
-          />
-          <SettingSwitch
-            label="Good Feeling"
-            value={goodFeelings}
-            onChange={() => updateSetting('goodFeelings', !goodFeelings)}
-          />
-          <SettingSwitch
-            label="Opportunités"
-            value={opportunities}
-            onChange={() => updateSetting('opportunities', !opportunities)}
-          />
-        </SettingsCard>
-        <SettingsCard
-          title="VISIBILITÉ"
-        >
-          <SettingSwitch
-            label="Tout les moods"
-            value={areAllMoodVisible}
-            onChange={() => updateAllMoodVisibility(!areAllMoodVisible)}
-          />
-          <SettingSwitch
-            label="Mood professionel"
-            value={logguedUser.moods.PRO.visible}
-            onChange={() => updateMoodVisible('PRO', !logguedUser.moods.PRO.visible)}
-          />
-          <SettingSwitch
-            label="Mood social"
-            value={logguedUser.moods.SOCIAL.visible}
-            onChange={() => updateMoodVisible('SOCIAL', !logguedUser.moods.SOCIAL.visible)}
-          />
-          <SettingSwitch
-            label="Mood couple"
-            value={logguedUser.moods.LOVE.visible}
-            onChange={() => updateMoodVisible('LOVE', !logguedUser.moods.LOVE.visible)}
-          />
-          <SettingSwitch
-            label="Mood personnel"
-            value={logguedUser.moods.PERSO.visible}
-            onChange={() => updateMoodVisible('PERSO', !logguedUser.moods.PERSO.visible)}
-          />
-        </SettingsCard>
 		<SettingsCard
-          title="NAVIGATIONS"
+          title="Navigations"
         >   
 		    <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
                             style={styles.linearGradient}
@@ -191,6 +126,19 @@ export default function GlobalSettings() {
                             start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
               <Text style={styles.buttonTextGradient} onPress={onSignOut}> Déconnexion </Text>
             </LinearGradient>
+		</SettingsCard>
+		<SettingsCard
+          title="confidentialite"
+        >   
+		    <CheckBox
+			  center
+			  iconRight
+			  title='Click Here'
+			  checked={checked}
+			/>
+		    <Text>
+			  Le Site web/Application mobile développés par BEPATIENT vous permettent uniquement de vous informer et de vous accompagner dans la gestion votre état de santé/pathologie spécifique/bien être, elle n’est en aucun cas un outil de diagnostic, de consultation, d’urgence, ou autre activité de télé médecine.
+			</Text>	   
 		</SettingsCard>
       </ScrollView>
     </>

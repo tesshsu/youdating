@@ -10,7 +10,14 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.WHITE,
-    flexDirection: 'row'
+  },
+  backgroundContainer: {
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
   },
   slideWrapper: {
     width: SCREEN_WIDTH,
@@ -88,6 +95,19 @@ export default StyleSheet.create({
       height: 2,
       elevation: 2
     }
+  },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 10
+  },
+  buttonTextGradient: {
+    fontSize: 18,
+    textAlign: 'center',
+    margin: 10,
+    color: colors.WHITE,
+    backgroundColor: 'transparent',
   },
   secondTitle: {
     color: colors.GREY,

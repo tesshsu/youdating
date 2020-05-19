@@ -14,25 +14,27 @@ export default function Slide2() {
     <>
       <Image source={IMAGE} style={styles.image} />
       <Animated.ScrollView style={styles.scrollView}>
-        <Text style={styles.mainSubTitleText}>{'Te sens-tu constamment poussé a exprimer ce que tu penses en public?'}</Text>
-        <Text style={[styles.titleText, { color: COLOR }]}>
-          {'Le mood parfait pour vous amuser '}
+        <Text style={[styles.mainTitleText, { color: colors.BLACK }]}>TEST DE PERSONNALITE</Text>
+        <Text style={styles.mainSubTitleText}>Le test est la derniere etape avant d'utiliser YOU's,
+          Le Test dure un pue moins de 5 minutes
+        </Text>
+        <Text style={[styles.titleText, { color: colors.GREY }]}>
+          {'Ce test nous permettra de dé terminer ta personnalité. Ce qui te permettra d\'interagir de la façon la plus adaptée avec les autres utilisateurs.'}
+        </Text>
+        <Text style={styles.mainSubTitleText}>Réponds aux questions pour découvrir ton profil
+        </Text>
+        <Text style={styles.secondTitle}>
+          CONSEIL
         </Text>
         <Text style={styles.paragraph}>
-          Rencontrez de nouvelles personnes et partagez toutes vos passions.
+          {'Aucun profil n\'est meilleur ou pire que l\'autres, ils ont chacun leurs forces et leurs faiblesses, Nous t\'encourageons donc a etre le plus sincere pour une meilleur experience sur YOU\'S.'}
         </Text>
-        <Text style={styles.paragraph}>
-          {'Sortez et profitez d\'un moment amical avec des gens compatibles.'}
-        </Text>
-        { /* eslint-disable-next-line max-len */}
-        <Text style={styles.paragraph}>Faites progresser vos relations avec succès de la manière la plus adaptée à votre tendance.</Text>
-        <Text style={styles.paragraph}>
-          <Text style={[styles.yousText, { color: COLOR }]}>{'YOU\'S '}</Text>
-          {'vous permet de proposer une activité mais aussi de trouver de nouveaux amis à proximité et dans le même mood que vous. testez YOU\'S et découvrez vos perfects matchs social grâce à la technologie A.L.H.D'}
+        <Text style={styles.mainSubTitleText}>
+          Merci a toi
         </Text>
       </Animated.ScrollView>
       <View style={styles.dotsContainer}>
-        { new Array(5).fill(1).map((v, i) => (
+        { new Array(5).fill(0).map((v, i) => (
           <View
             key={i.toString()}
             style={[

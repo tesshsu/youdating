@@ -186,6 +186,9 @@ export default function MainTabsTchat() {
           );
         }}
       />
+	  <View style={styles.arrow}>
+		<Text style={styles.arrowfont}>scroll ></Text>
+	  </View>
       <View style={{ width: '100%', height: '48%', alignItems: 'center'}}>
           <Image
             style={styles.imageBackground}

@@ -120,5 +120,16 @@ export default StyleSheet.create({
     position: 'absolute',
     top: 45,
     left: 45
-  }
+  },
+  arrow : {
+    width: 150,
+    position: 'absolute',
+    top: 320,
+	fontSize: 40,
+    right: 0
+  },
+  arrowfont: {
+	fontSize: 20,
+	color: 'red'
+  },
 });

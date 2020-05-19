@@ -29,7 +29,7 @@ export default function AuthentificationSignIn() {
   useEffect(() => {
     if (isAuthentificated && logguedUser) {
       const { quizzCompleted } = logguedUser;
-      NavigationHelper.navigate(quizzCompleted ? 'MainNavigator' : 'PostSignUpIntro');
+      NavigationHelper.navigate(quizzCompleted ? 'MainNavigator' : 'PostSignUpProfilSetup');
     }
   }, [isAuthentificated, logguedUser]);
 
