@@ -11,7 +11,7 @@ export default function ProfilesModToggler() {
 
   return (
     <FontAwesome5
-      name={profilesMod === 'GRID' ? 'square' : 'th-large'}
+      name={profilesMod === 'GRID' ? 'th-large' : 'square'}
       solid
       size={verticalScale(19)}
       color="white"

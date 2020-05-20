@@ -8,7 +8,6 @@ import { useViews } from './useViews';
 import useCurrentMood from './useCurrentMood';
 import useGoodFeelings from './useGoodFeelings';
 
-
 export default function useVisitedProfil() {
   const { users, fetchUser } = useUsers();
   const { createView } = useViews();

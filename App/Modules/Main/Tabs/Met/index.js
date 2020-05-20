@@ -55,14 +55,6 @@ export default function MainMet() {
         <MoodSelector
           moods={['PRO', 'SOCIAL', 'LOVE']}
         />
-        <TouchableOpacity onPress={openQueryModal}>
-          <Text style={styles.description}>
-            { query || 'AUCUNE RECHERCHE'}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={openTagModal}>
-          <Text style={styles.tag}>{`#${tag}`}</Text>
-        </TouchableOpacity>
         <UsersCarousel />
       </View>
     </>

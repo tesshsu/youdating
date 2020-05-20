@@ -15,7 +15,7 @@ export default function Single({ users, onConsultProfil }) {
     const { height } = ev.nativeEvent.layout;
 
     if (maxHeight === null && height > 0) {
-      setMaxHeight(height - verticalScale(5));
+      setMaxHeight(height - verticalScale(1));
     }
   }
 

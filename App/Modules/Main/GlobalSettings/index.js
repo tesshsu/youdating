@@ -106,26 +106,31 @@ export default function GlobalSettings() {
 		<SettingsCard
           title="Navigations"
         >
+       <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                      style={styles.linearGradient}
+                      start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+          <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsMet')}> RENCONTRES </Text>
+        </LinearGradient>
 		    <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
                             style={styles.linearGradient}
                             start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
               <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsTchat')}> MESSAGERIE </Text>
-            </LinearGradient>
-			<LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={styles.linearGradient}
-                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}> COMPATBILITER </Text>
-            </LinearGradient>
-			<LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={styles.linearGradient}
-                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsProfile')}> PROFILE </Text>
-            </LinearGradient>
-			<LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={styles.linearGradient}
-                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-              <Text style={styles.buttonTextGradient} onPress={onSignOut}> Déconnexion </Text>
-            </LinearGradient>
+		    </LinearGradient>
+        <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                              style={styles.linearGradient}
+                              start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+                <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}> COMPATBILITER </Text>
+        </LinearGradient>
+        <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                              style={styles.linearGradient}
+                              start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+                <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsProfile')}> PROFILE </Text>
+              </LinearGradient>
+        <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                              style={styles.linearGradient}
+                              start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+                <Text style={styles.buttonTextGradient} onPress={onSignOut}> Déconnexion </Text>
+        </LinearGradient>
 		</SettingsCard>
 		<SettingsCard
           title="confidentialite"
