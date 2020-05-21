@@ -10,7 +10,11 @@ export default StyleSheet.create({
     fontSize: moderateScale(15),
     textTransform: 'uppercase',
     textAlign: 'center',
-    marginTop: verticalScale(25),
     marginBottom: verticalScale(15)
+  },
+  iconStyle: {
+    width: verticalScale(35),
+    height: verticalScale(35),
+    resizeMode: 'cover'
   }
 });

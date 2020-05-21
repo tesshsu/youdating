@@ -7,12 +7,13 @@ import styles from './styles';
 import { scale } from '../../../../Helpers/ScaleHelper';
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import PageHeader from '../../../Global/PageHeader';
-import MoodSelectorHeaderButton from '../../../Global/MoodSelectorHeaderButton';
+import ImageButton from '../../../Global/ImageButton';
+import MoodSelector from '../../../Global/MoodSelector';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
 import useCurrentMood from '../../../../Hooks/useCurrentMood';
 import CompatibilitiesList from './CompatibilitiesList';
 import CompatibilityResult from './CompatibilityResult';
-
+const IMAGE_SETTING = require('../../../../../assets/icons/icon-user-grey.png');
 export default function MainCompatibility() {
   const { moodInfos } = useCurrentMood();
   const [selectedUser, setSelectedUser] = useState(null);
@@ -21,19 +22,24 @@ export default function MainCompatibility() {
     <>
       <PageHeader
         title="Compatibilité"
-		rightComponent={() => (
+        rightComponent={() => (
           <FontAwesome5
-            name="ellipsis-v"
+            name="comment-alt"
             size={19}
             color="white"
-            onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
+            onPress={() => NavigationHelper.navigate('MainCompatibilityDetails')}
           />
         )}
         leftComponent={() => (
-          <MoodSelectorHeaderButton />
+          <ImageButton
+            imageSource={IMAGE_SETTING}
+            imageStyle={styles.iconStyle}
+            onPress={() => NavigationHelper.navigate('MainTabsProfile')}
+          />
         )}
       />
       <View style={styles.container}>
+        <MoodSelector />
         <Text style={styles.title}>{`Mes contacts ${moodInfos.title}`}</Text>
         <CompatibilitiesList
           selectedUser={selectedUser}

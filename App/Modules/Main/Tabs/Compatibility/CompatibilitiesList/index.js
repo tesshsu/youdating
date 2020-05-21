@@ -2,6 +2,8 @@ import React, { useEffect, useCallback, useState } from 'react';
 import {
   View,
   Text,
+  FlatList,
+  refreshControl,
   ImageBackground,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
@@ -9,6 +11,7 @@ import { Feather } from '@expo/vector-icons';
 import styles from './styles';
 import RoundIconButton from '../../../../Global/RoundIconButton';
 import { verticalScale } from '../../../../../Helpers/ScaleHelper';
+import ListItemSeparator from '../../../../Global/ListItemSeparator';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import Carousel from '../../../../Global/Carousel';
 
@@ -105,7 +108,7 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
   });
 
   return (
-    <View style={{ height: verticalScale(160) }}>
+    <View style={{ height: verticalScale(120) }}>
       <Carousel activeIndex={carouselIndex}>
         { slicedUsers.map((chunk, index) => (
           <View key={index.toString()} style={styles.usersContainer}>
@@ -137,29 +140,17 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
                 >
                   { item.personnality }
                 </Text>
-                <RoundIconButton
-                  size={verticalScale(36)}
-                  backgroundColor={item.disabled ? '#BEBFC0' : moodInfos.color}
-                  IconProvider={Feather}
-                  iconName="refresh-cw"
-                  iconColor="white"
-                  iconSize={verticalScale(20)}
-                  onPress={() => handleOnPress(item, idx)}
-                  disabled={item.disabled}
-                />
-                <Text
-                  style={[
-                    styles.compatibilityText,
-                    { color: item.disabled ? '#BEBFC0' : moodInfos.color }
-                  ]}
-                >
-                  compatibilité
-                </Text>
               </View>
             ))}
           </View>
         ))}
       </Carousel>
+        <Feather
+          name="chevron-right"
+          color={moodInfos.color}
+          style={{position: 'absolute', zIndex: 99, right: 0, top: 30}}
+          size={verticalScale(30)}
+        />
     </View>
   );
 }

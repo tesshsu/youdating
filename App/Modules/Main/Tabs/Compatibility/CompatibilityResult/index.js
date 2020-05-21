@@ -9,12 +9,16 @@ import {
 import styles from './styles';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
-
+import { Image } from 'react-native-expo-image-cache';
+import useLogguedUser from '../../../../../Hooks/useLogguedUser';
+import RoundButton from '../../../../Global/RoundButton';
 const IMAGE_GIRL3 = require('../../../../../../assets/images/profile_pics/girl3.jpg');
 
 export default function CompatibilityResult({ user }) {
-  const { moodInfos } = useCurrentMood();
-
+  const { logguedUser } = useLogguedUser();
+  const { currentMood, moodInfos } = useCurrentMood();
+  const { avatar } = logguedUser.moods[currentMood];
+  const imageSource = avatar || logguedUser.avatar;
   if (!user) {
     return (null);
   }
@@ -31,59 +35,15 @@ export default function CompatibilityResult({ user }) {
         >
           {`Excellente compatibilité ${moodInfos.titleFeminize}`}
         </Text>
-        <Text style={styles.resultBodyText}>
-          Profitez de cette opportunité pour réaliser de grands projets ensemble, vous avez trouvé la perle rare !!
-        </Text>
       </View>
-      <View style={styles.usersRow}>
-        <View style={styles.userContainer}>
-          <ImageBackground
-            source={IMAGE_GIRL3}
-            style={styles.imageBackground}
-            imageStyle={styles.imageBackgroundImage}
-          />
-          <Text style={styles.usernameText}>MOI</Text>
+      <View style={styles.bigAvatarPart}>
+        <Image
+          style={styles.imageBackground}
+          uri={imageSource}
+        />
+        <View style={{ width: '100%'}}>
+          <Text style={[styles.timeText, {color: 'gray'}]}>I think this message is last message from logged user send.</Text>
         </View>
-        <Text
-          style={[
-            styles.vsText,
-            { color: moodInfos.color }
-          ]}
-        >
-          VS
-        </Text>
-        <View style={styles.userContainer}>
-          <ImageBackground
-            source={user.avatar}
-            style={styles.imageBackground}
-            imageStyle={styles.imageBackgroundImage}
-          />
-          <Text style={styles.usernameText}>{user.username}</Text>
-        </View>
-      </View>
-      <View>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            { backgroundColor: moodInfos.color }
-          ]}
-          onPress={() => NavigationHelper.navigate('MainCompatibilityDetails', { user })}
-        >
-          <Text style={styles.buttonText}>
-            En savoir plus sur la relation
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            { backgroundColor: moodInfos.color }
-          ]}
-          onPress={() => NavigationHelper.navigate('MainTchatConversation', { user })}
-        >
-          <Text style={styles.buttonText}>
-            Envoie un message privé
-          </Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

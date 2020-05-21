@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { verticalScale, scale } from '../../../../../Helpers/ScaleHelper';
 
+
 export default StyleSheet.create({
   flatListContent: {
     paddingHorizontal: scale(28)
@@ -16,21 +17,27 @@ export default StyleSheet.create({
     height: verticalScale(150)
   },
   avatarContainer: {
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: 'transparent',
-    padding: scale(3),
+    padding: scale(1),
     marginBottom: verticalScale(3),
     marginLeft: scale(2),
     marginRight: scale(2),
-    borderRadius: verticalScale(8),
+    borderRadius: verticalScale(50),
   },
   imageBackground: {
-    height: verticalScale(74),
-    width: scale(74),
-    borderRadius: verticalScale(8),
+    height: verticalScale(65),
+    width: scale(65),
+    margin: scale(6),
+    borderRadius: verticalScale(50),
+    resizeMode: 'cover',
+    borderWidth: 1,
+    borderColor: 'transparent',
   },
   imageBackgroundImage: {
-    borderRadius: verticalScale(8)
+    borderWidth: 1,
+    borderColor: 'transparent',
+    borderRadius: verticalScale(50),
   },
   usernameText: {
     fontFamily: 'Gadugi-Bold',
