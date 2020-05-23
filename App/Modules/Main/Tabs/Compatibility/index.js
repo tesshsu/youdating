@@ -25,9 +25,9 @@ export default function MainCompatibility() {
         rightComponent={() => (
           <FontAwesome5
             name="comment-alt"
-            size={19}
+            size={20}
             color="white"
-            onPress={() => NavigationHelper.navigate('MainCompatibilityDetails')}
+            onPress={() => NavigationHelper.navigate('MainTabsTchat')}
           />
         )}
         leftComponent={() => (

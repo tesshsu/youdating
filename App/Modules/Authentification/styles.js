@@ -77,21 +77,24 @@ export default StyleSheet.create({
   },
   textField: {
     width: '100%',
-    marginTop: verticalScale(23)
+    marginTop: verticalScale(13)
   },
   switchSelector: {
     width: '100%',
-    marginTop: verticalScale(23)
+    marginTop: verticalScale(13)
   },
   ageView: {
-    flexDirection:'row', 
-    flexWrap:'wrap', 
-    marginTop: 20, 
-    justifyContent: 'space-between', 
+    flexDirection:'row',
+    flexWrap:'wrap',
+    marginTop: 10,
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
   columnTextField: {
     width: '25%'
+  },
+  columnTextField2: {
+    width: '35%'
   },
   submitButton: {
     alignSelf: 'center',

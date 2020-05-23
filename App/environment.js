@@ -11,12 +11,12 @@ const ENVS = {
   },
   DEV: {
     ENV: 'DEV',
-    API_URL: 'http://15.188.195.163:8080',
+    API_URL: 'http://35.180.51.194:8080',
     SLACK_HOOK_URL: 'https://hooks.slack.com/services/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'
   },
   STAGING: {
     ENV: 'STAGING',
-	API_URL: 'http://192.168.0.42:8080',
+	  API_URL: 'http://192.168.0.42:8080',
     SLACK_HOOK_URL: 'https://hooks.slack.com/services/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'
   }
 };

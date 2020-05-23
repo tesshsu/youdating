@@ -210,22 +210,6 @@ export default function MainTabsTchat() {
           <View style={{ width: '50%'}}>
             <Text style={[styles.timeText, {color: 'gray'}]}>I think this message is last message from logged user send.</Text>
           </View>
-          <View style={{marginTop: 12, width: '50%', flexDirection: 'row', justifyContent: 'space-between'}}>
-            <RoundButton
-              text="REPONDRE"
-              fontSize={11}
-              borderRadius={50}
-              containerStyle={{width: '45%', height: 20}}
-              onPress={() => NavigationHelper.navigate('MainTchatConversationMessages')}
-            />
-            <RoundButton
-              text="BIPOLARTY"
-              fontSize={11}
-              borderRadius={50}
-              containerStyle={{width: '45%', height: 20}}
-              onPress={() => NavigationHelper.navigate('MainTchatConversationBipolarityHistoric')}
-            />
-          </View>
       </View>
     </View>
   );

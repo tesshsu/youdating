@@ -67,8 +67,17 @@ const SignUpSchema = Yup.object().shape({
   birthday: Yup
     .string()
     .trim()
-    .required('Ce champs est requis')
-    .test('age', 'Vous devez être âgé d\'au moins 18 ans pour utiliser You\'s', checkAge),
+    .required('Ce champs est requis'),
+    //.test('age', 'Vous devez être âgé d\'au moins 18 ans pour utiliser You\'s', checkAge),
+  year: Yup
+    .number()
+    .required('Ce champs est requis'),
+  month: Yup
+    .number()
+    .required('Ce champs est requis'),
+  day: Yup
+    .number()
+    .required('Ce champs est requis'),
   gender: Yup
     .string()
     .trim()
@@ -77,19 +86,18 @@ const SignUpSchema = Yup.object().shape({
   formattedAddress: Yup
     .string()
     .trim()
-    .required('Vous n\'avez pas séléctionné d\'adresse')
 });
 
-function AuthentificationSignUp() {
+export default  function AuthentificationSignUp() {
   const scrollViewRef = useRef();
   const { signUp, isAuthentificated } = useLogguedUser();
   const [address, setAddress] = useState('');
   const [addressQuery] = useDebounce(address, 2000);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isFirst, setFirst] = useState(true);
-  const [ageDate, setAgeDate] = useState(0);
-  const [ageMonth, setAgeMonth] = useState(0);
-  const [ageYear, setAgeYear] = useState(0);
+  const [day, setDay] = useState(0);
+  const [month, setMonth] = useState(0);
+  const [year, setYear] = useState(0);
 
   useEffect(() => {
     if (isAuthentificated) {
@@ -115,10 +123,10 @@ function AuthentificationSignUp() {
       password: '',
       passwordConfirmation: '',
       gender: '',
-      date: '',
+      day: '',
       month: '',
       year: '',
-      birthday: '',
+      birthday: '22/06/1988',
       formattedAddress: ''
     },
     onSubmit
@@ -132,7 +140,7 @@ function AuthentificationSignUp() {
     query: addressQuery,
     apiKey: ENV.GOOGLE_API_KEY,
     options: {
-      types: 'address',
+      types: 'cities',
     }
   });
 
@@ -217,23 +225,23 @@ function AuthentificationSignUp() {
         <Image style={globalStyles.bakcgroundImage} source={Images.back_img_signIn} />
       </View>
       <ScrollView
-          ref={scrollViewRef}
-          style={styles.fill}
-          contentContainerStyle={styles.scrollViewContent}
-          keyboardShouldPersistTaps="handled"
-        >
-          <Text style={styles.yousTitleText}>{'You\'s'}</Text>
-          <Text style={styles.subTitleText}>LA RELATION SUR MESURE</Text>
-          <Text style={styles.subSubTitleText}>Reseau 3.0</Text>
-          <FacebookConnectButton />
-          <View style={globalStyles.or}>
-            <View style={globalStyles.bar} />
-            <Text style={globalStyles.orText}>ou</Text>
-            <View style={globalStyles.bar} />
-          </View>
-          <Text style={styles.createAccountText}>crée un compte</Text>
-          {
-            isFirst ?
+        ref={scrollViewRef}
+        style={styles.fill}
+        contentContainerStyle={styles.scrollViewContent}
+        keyboardShouldPersistTaps="handled"
+      >
+        <Text style={styles.yousTitleText}>{'You\'s'}</Text>
+        <Text style={styles.subTitleText}>LA RELATION SUR MESURE</Text>
+        <Text style={styles.subSubTitleText}>Reseau 3.0</Text>
+        <FacebookConnectButton />
+        <View style={globalStyles.or}>
+          <View style={globalStyles.bar} />
+          <Text style={globalStyles.orText}>ou</Text>
+          <View style={globalStyles.bar} />
+        </View>
+        <Text style={styles.createAccountText}>crée un compte</Text>
+        {
+          isFirst ?
             <>
               <TextField
                 scrollViewRef={scrollViewRef}
@@ -276,85 +284,135 @@ function AuthentificationSignUp() {
                 }}
               />
             </> : <>
-              <SwitchSelector 
+              <TextField
+                scrollViewRef={scrollViewRef}
+                containerStyle={globalStyles.textField}
+                label="Nom"
+                error={errors.lastName}
+                textInputProps={{
+                  placeholder: 'Nom',
+                  autoCapitalize: 'words',
+                  textContentType: 'familyName',
+                  value: values.lastName,
+                  onChangeText: handleChange('lastName')
+                }}
+              />
+              <TextField
+                scrollViewRef={scrollViewRef}
+                containerStyle={globalStyles.textField}
+                label="Prénom"
+                error={errors.firstName}
+                textInputProps={{
+                  placeholder: 'Prénom',
+                  autoCapitalize: 'words',
+                  textContentType: 'name',
+                  value: values.firstName,
+                  onChangeText: handleChange('firstName')
+                }}
+              />
+              <SwitchSelector
                 label="Sexe"
                 style={globalStyles.switchSelector}
                 buttonColor="#dd6379"
-                options={options} 
-                initial={0} 
-                onPress={(value) => handleChange('gender')} 
+                options={options}
+                initial={0}
+                onPress={(value) => handleChange('gender')}
               />
               <View style={globalStyles.ageView}>
-                  <TextField
-                    scrollViewRef={scrollViewRef}
-                    containerStyle={globalStyles.columnTextField}
-                    label="Age"
-                    error={errors.date}
-                    textInputProps={{
-                      placeholder: 'jour',
-                      keyboardType: 'number-pad',
-                      value: values.date,
-                      onChangeText: handleChange('date')
-                    }}
-                  /><TextField
-                    containerStyle={globalStyles.columnTextField}
-                    label=""
-                    textInputProps={{
-                      placeholder: 'mois',
-                      keyboardType: 'number-pad',
-                      value: values.month,
-                      onChangeText: handleChange('month')
-                    }}
-                  /><TextField
-                    containerStyle={globalStyles.columnTextField}
-                    label=""
-                    textInputProps={{
-                      placeholder: 'annee',
-                      keyboardType: 'number-pad',
-                      value: values.year,
-                      onChangeText: handleChange('year')
-                    }}
-                  />
+                <TextField
+                  scrollViewRef={scrollViewRef}
+                  containerStyle={globalStyles.columnTextField}
+                  label="Age"
+                  textInputProps={{
+                    placeholder: 'jour',
+                    keyboardType: 'number-pad',
+                    value: values.day,
+                    onChangeText: handleChange('day')
+                  }}
+                />
+                <TextField
+                containerStyle={globalStyles.columnTextField}
+                label=""
+                textInputProps={{
+                  placeholder: 'mois',
+                  keyboardType: 'number-pad',
+                  value: values.month,
+                  onChangeText: handleChange('month')
+                }}
+               />
+              <TextField
+                containerStyle={globalStyles.columnTextField}
+                label=""
+                textInputProps={{
+                  placeholder: 'annee',
+                  keyboardType: 'number-pad',
+                  value: values.year,
+                  onChangeText: handleChange('year')
+                }}
+              />
               </View>
               <TextField
                 scrollViewRef={scrollViewRef}
                 containerStyle={globalStyles.textField}
-                label="Ville"
+                label="ville"
                 error={errors.formattedAddress}
                 textInputProps={{
-                  placeholder: 'ville',
-                  value: values.formattedAddress,
-                  onChangeText: handleChange('formattedAddress')
+                  placeholder: 'Nice',
+                  autoCapitalize: 'sentences',
+                  textContentType: 'addressCity',
+                  value: selectedPlace ? selectedPlace.description : address,
+                  onChangeText: (val) => {
+                    setSelectedPlace(null);
+                    setAddress(val);
+                  }
                 }}
               />
             </>
-          }
-          <View style={styles.footer}>
-            {
-              isFirst ? 
+        }
+
+        { selectedPlace === null && results.predictions.map(p => (
+          <TouchableOpacity
+            key={p.place_id}
+            onPress={() => {
+              handleChange('formattedAddress')(p.description);
+              setSelectedPlace(p);
+            }}
+            style={styles.predictionButton}
+          >
+            <Feather
+              style={styles.predictionMarker}
+              name="map-pin"
+              size={moderateScale(15)}
+              color="#84B5E4"
+            />
+            <Text style={styles.predictionText}>
+              { p.description }
+            </Text>
+          </TouchableOpacity>
+        ))}
+        <View style={styles.footer}>
+          {
+            isFirst ?
               <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={globalStyles.linearGradient}
-                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+                              style={globalStyles.linearGradient}
+                              start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
                 <Text style={globalStyles.buttonText} onPress={ ()=> setFirst(false) }> suivant </Text>
               </LinearGradient> : <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={globalStyles.linearGradient}
-                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-                <Text style={globalStyles.buttonText} onPress={() => NavigationHelper.navigate('PostSignUpIntro')}> Sign Up </Text>
+                                                  style={globalStyles.linearGradient}
+                                                  start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+                <Text style={globalStyles.buttonText} onPress={handleSubmit}> Créer mon compte </Text>
               </LinearGradient>
-            }
-            
-              <TouchableOpacity
-                style={globalStyles.link}
-                onPress={() => NavigationHelper.navigate('AuthentificationSignIn')}
-              >
-                <Text style={globalStyles.linkText}>
-                  SIGN IN
-                </Text>
-              </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </View>
+          }
+          <TouchableOpacity
+            style={globalStyles.link}
+            onPress={() => NavigationHelper.navigate('AuthentificationSignIn')}
+          >
+            <Text style={globalStyles.linkText}>
+              SIGN IN
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
-
-export default (AuthentificationSignUp);
