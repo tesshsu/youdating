@@ -60,5 +60,16 @@ export default StyleSheet.create({
     fontSize: moderateScale(18),
     textAlign: 'center',
     color: '#BBBABA',
+  },
+  itemStyle: {
+    flex: 1,
+    minWidth: 92,
+    maxWidth: 92,
+    width: 92,
+    height: 120,
+    minHeight: 120,
+    maxHeight: 120,
+    margin: 5,
+    backgroundColor: '#ccc'
   }
 });

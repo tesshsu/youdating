@@ -9,11 +9,41 @@ import Compatibility from './Compatibility';
 import Profile from './Profil/Navigator';
 
 export default createBottomTabNavigator({
-  MainTabsMet: Met,
-  MainTabsTchat: Tchat,
-  MainTabsYousAttract: YousAttract,
-  MainTabsCompatibility: Compatibility,
-  MainTabsProfile: Profile,
+	MainTabsMet: {
+	    screen: Met,
+	    navigationOptions: ({ navigation }) => ({
+	      header: null,
+	      tabBarVisible: false,
+	    }),
+	},
+	MainTabsTchat: {
+	    screen: Tchat,
+	    navigationOptions: ({ navigation }) => ({
+	      header: null,
+	      tabBarVisible: false,
+	    }),
+	},
+	MainTabsYousAttract: {
+	    screen: YousAttract,
+	    navigationOptions: ({ navigation }) => ({
+	      header: null,
+	      tabBarVisible: false,
+	    }),
+	},
+	MainTabsCompatibility: {
+	    screen: Compatibility,
+	    navigationOptions: ({ navigation }) => ({
+	      header: null,
+	      tabBarVisible: false,
+	    }),
+	},
+	MainTabsProfile: {
+	    screen: Profile,
+	    navigationOptions: ({ navigation }) => ({
+	      header: null,
+	      tabBarVisible: false,
+	    }),
+	}
 }, {
   initialRouteName: 'MainTabsMet',
   tabBarComponent: props => (<TabBar {...props} />),

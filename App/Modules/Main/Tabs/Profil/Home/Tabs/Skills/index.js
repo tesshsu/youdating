@@ -10,7 +10,7 @@ import MoodSelector from '../../../../../../Global/MoodSelector';
 import useCurrentMood from '../../../../../../../Hooks/useCurrentMood';
 import { verticalScale } from '../../../../../../../Helpers/ScaleHelper';
 import useLogguedUser from '../../../../../../../Hooks/useLogguedUser';
-//import useVisitedProfil from '../../../../../../../Hooks/useVisitedProfil';
+
 
 export default function Skills() {
   const { moodInfos, currentMood } = useCurrentMood();
@@ -18,7 +18,7 @@ export default function Skills() {
   //const { profil } = useVisitedProfil();
   const { avatar } = logguedUser.moods[currentMood];
   const imageSource = avatar || logguedUser.avatar;
-
+  const IMAGE_GIRL3 = require('../../../../../../../../assets/images/profile_pics/girl3.jpg');
   return (
     <>
       <MoodSelector containerStyle={{ marginBottom: 0 }} />

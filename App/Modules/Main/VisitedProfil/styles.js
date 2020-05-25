@@ -38,8 +38,13 @@ export default StyleSheet.create({
     borderWidth: 2,
     resizeMode: 'cover'
   },
+  topHeaderProfile: {
+    height: '100%',
+    position: 'relative',
+    marginTop: verticalScale(23),
+  },
   backButtonContainer: {
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
 });

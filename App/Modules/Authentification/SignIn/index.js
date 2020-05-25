@@ -28,8 +28,7 @@ export default function AuthentificationSignIn() {
 
   useEffect(() => {
     if (isAuthentificated && logguedUser) {
-      const { quizzCompleted } = logguedUser;
-      NavigationHelper.navigate(quizzCompleted ? 'MainNavigator' : 'PostSignUpProfilSetup');
+      NavigationHelper.navigate('MainNavigator');
     }
   }, [isAuthentificated, logguedUser]);
 
@@ -37,7 +36,7 @@ export default function AuthentificationSignIn() {
     <Formik
       initialValues={{
         email: 'laristo1@hotmail.fr',
-        password: '1StrongPassword$'
+        password: 'Keinanoam24$'
       }}
       onSubmit={async ({ email, password }) => {
         try {

@@ -53,12 +53,12 @@ export default StyleSheet.create({
   bouttomTextContainer: {
     justifyContent: 'flex-end',
     position: 'absolute',
-    bottom: 240,
+    bottom: 300,
   },
   rightColumnActionsContainer: {
     justifyContent: 'flex-end',
     position: 'absolute',
-    bottom: 240,
+    bottom: 300,
 	right: 0
   },
   headerInner: {

@@ -17,6 +17,7 @@ import { MOODS } from '../../../GlobalConfig';
 import { CheckBox } from 'react-native-elements';
 
 export default function GlobalSettings() {
+  const [isChecked, setIsChecked] = useState(true);
   const {
     isAuthentificated,
     logguedUser,
@@ -106,31 +107,31 @@ export default function GlobalSettings() {
 		<SettingsCard
           title="Navigations"
         >
-       <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                      style={styles.linearGradient}
-                      start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-          <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsMet')}> RENCONTRES </Text>
-        </LinearGradient>
-		    <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+		     <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                            style={styles.linearGradient}
+                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsMet')}> RENCONTRES </Text>
+		    </LinearGradient>
+			<LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
                             style={styles.linearGradient}
                             start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
               <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsTchat')}> MESSAGERIE </Text>
 		    </LinearGradient>
-        <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                              style={styles.linearGradient}
-                              start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-                <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}> COMPATBILITER </Text>
-        </LinearGradient>
-        <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                              style={styles.linearGradient}
-                              start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-                <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsProfile')}> PROFILE </Text>
-              </LinearGradient>
-        <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                              style={styles.linearGradient}
-                              start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-                <Text style={styles.buttonTextGradient} onPress={onSignOut}> Déconnexion </Text>
-        </LinearGradient>
+			  <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                            style={styles.linearGradient}
+                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}> COMPATBILITER </Text>
+			  </LinearGradient>
+			  <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                            style={styles.linearGradient}
+                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsProfile')}> PROFILE </Text>
+			  </LinearGradient>
+			 <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                            style={styles.linearGradient}
+                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+              <Text style={styles.buttonTextGradient} onPress={onSignOut}> Déconnexion </Text>
+			 </LinearGradient>
 		</SettingsCard>
 		<SettingsCard
           title="confidentialite"
@@ -139,7 +140,8 @@ export default function GlobalSettings() {
           center
           iconRight
           title='accepter les termes et conditions'
-          checked={checked}
+          checked={isChecked}
+          onPress={()=>setIsChecked(!isChecked)}
 			  />
 		    <Text>
 			    Le Site web/Application mobile développés par BEPATIENT vous permettent uniquement de vous informer et de vous accompagner dans la gestion votre état de santé/pathologie spécifique/bien être, elle n’est en aucun cas un outil de diagnostic, de consultation, d’urgence, ou autre activité de télé médecine.

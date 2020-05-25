@@ -9,6 +9,8 @@ import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import useCurrentMood from '../../../Hooks/useCurrentMood';
 import Profile, { ActionButton } from '../../Global/Profile';
 import useVisitedProfil from '../../../Hooks/useVisitedProfil';
+import useLogguedUser from '../../../Hooks/useLogguedUser';
+import HeaderAvatarButton from './../Tabs/Profil/Home/HeaderAvatarButton';
 import styles from './styles';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
 import { verticalScale, scale } from '../../../Helpers/ScaleHelper';
@@ -38,10 +40,18 @@ const FULL_ACCESS_SCENES = [
 
 export default function MainTabsProfilVisitedProfil() {
   const { currentMood, moodInfos } = useCurrentMood();
+  const { logguedUser, uploadAvatar } = useLogguedUser();
   const { sent: sentGoodFeelings, sendGoodFeeling } = useGoodFeelings();
   const { profil, gotFullAccess } = useVisitedProfil();
   const { createView, sent } = useViews();
   const { startConversation } = useConversation();
+  const startUploadAvatar = useCallback(async (media) => {
+    try {
+      await uploadAvatar(media, currentMood);
+    } catch (err) {
+      Alert.alert('Erreur', 'Une erreur est survenue lors de la mise à jour de votre avatar');
+    }
+  }, [uploadAvatar, currentMood]);
 
   const viewProfil = useCallback(async () => {
     const view = sent.find(s => s.target.id === profil.id);
@@ -68,7 +78,7 @@ export default function MainTabsProfilVisitedProfil() {
       style={{ flex: 1, backgroundColor: 'white' }}
       behavior="position"
     >
-      <View style={{ height: '100%', position: 'relative' }}>
+      <View style={styles.topHeaderProfile} >
         <Profile
           imageSource={profil.moods[currentMood].avatar}
           firstName={profil.firstName}
