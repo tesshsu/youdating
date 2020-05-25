@@ -62,21 +62,11 @@ export default function Moods() {
   return (
     <>
       <MoodSelector />
-      <TouchableOpacity onPress={openQueryModal}>
-        <Text style={styles.description}>
-          { query || 'AUCUNE RECHERCHE'}
-        </Text>
-      </TouchableOpacity>
-      { query && (
-        <TouchableOpacity onPress={openTagModal}>
-          <Text style={styles.tag}>{`#${tag}`}</Text>
-        </TouchableOpacity>
-      )}
       <TouchableOpacity
         onPress={() => NavigationHelper.navigate('MainTabsEditAd')}
         style={styles.descriptionContainer}
       >
-        <Text style={styles.descriptionText}>{logguedUser.moods[currentMood].ad || 'Entrez une annonce'}</Text>
+        <Text style={styles.descriptionText}>{logguedUser.moods[currentMood].description || 'Entrez une description'}</Text>
       </TouchableOpacity>
       <View style={styles.imagesContainer}>
         { photos.map(p => (

@@ -13,20 +13,16 @@ import { Image } from 'react-native-expo-image-cache';
 import moment from 'moment';
 import PageHeader from '../../../../Global/PageHeader';
 import MoodSelector from '../../../../Global/MoodSelector';
-import ImageButton from '../../../../Global/ImageButton';
 import SearchField from '../../../../Global/SearchField';
 import { verticalScale } from '../../../../../Helpers/ScaleHelper';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import styles from './styles';
 import ListItemSeparator from '../../../../Global/ListItemSeparator';
 import RoundIconButton from '../../../../Global/RoundIconButton';
-import RoundButton from '../../../../Global/RoundButton';
 import useConversation from '../../../../../Hooks/useConversations';
 import useLogguedUser from '../../../../../Hooks/useLogguedUser';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
-import PersanalDeatils from '../../../../Main/Tabs/Profil/Home';
 
-import backIcon from '../../../../../../assets/icons/back-arrow.png';
 const IMAGE_GIRL3 = require('../../../../../../assets/images/profile_pics/girl3.jpg');
 
 const TEXT = {

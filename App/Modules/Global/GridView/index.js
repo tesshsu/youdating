@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet, Image, FlatList } from 'react-native';
 import { CheckBox } from 'react-native-elements';
+import GridList from 'react-native-grid-list';
+
 import styles from './styles';
 
 export default function GridView(props) {
@@ -14,21 +16,17 @@ export default function GridView(props) {
     items,
     showSeparator,
     separatorBorderWidth,
-    gridStyle
+    styles
   } = props;
 
   const renderItem = ({item, index}) => (
-    <View>
-    <Image source={item.thumbnail} style={{width: '100%', height: '100%'}}/>
+    <View style={styles}>
+      <Image source={{uri: item}} style={{width: '100%', height: '100%'}}/>
     </View >
   );
 
   return (
     <FlatList
-      onEndReachedThreshold={0}
-      onEndReached={({ distanceFromEnd }) => {
-        console.debug('on end reached ', distanceFromEnd);
-      }}
       contentContainerStyle={{justifyContent: 'flex-start', flexDirection: 'row', flexWrap: 'wrap',}}
       data={items}
       renderItem={renderItem}
@@ -49,5 +47,5 @@ GridView.defaultProps = {
   items: [],
   separatorBorderWidth: 5,
   showSeparator: false,
-  gridStyle: {}
+  styles: {}
 };

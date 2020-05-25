@@ -2,23 +2,18 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, ImageBackground } from 'react-native';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Feather } from '@expo/vector-icons';
-import { SharedElement } from 'react-navigation-shared-element';
 import styles from './styles';
-import { Image } from 'react-native-expo-image-cache';
 import MoodSelector from '../../../../../../Global/MoodSelector';
 import useCurrentMood from '../../../../../../../Hooks/useCurrentMood';
-import { verticalScale } from '../../../../../../../Helpers/ScaleHelper';
+import GridView from '../../../../../../Global/GridView';
 import useLogguedUser from '../../../../../../../Hooks/useLogguedUser';
-
+import NavigationHelper from '../../../../../../../Helpers/NavigationHelper';
 
 export default function Skills() {
   const { moodInfos, currentMood } = useCurrentMood();
   const { logguedUser, updateSkills } = useLogguedUser();
-  //const { profil } = useVisitedProfil();
-  const { avatar } = logguedUser.moods[currentMood];
-  const imageSource = avatar || logguedUser.avatar;
   const IMAGE_GIRL3 = require('../../../../../../../../assets/images/profile_pics/girl3.jpg');
+  const { photos } = logguedUser.moods[currentMood];
   return (
     <>
       <MoodSelector containerStyle={{ marginBottom: 0 }} />
@@ -31,7 +26,10 @@ export default function Skills() {
         </TouchableOpacity>
       </View>
 	   <View style={styles.imagesContainer}>
-
+       <GridView
+         items={photos}
+         styles={styles.itemStyle}
+       />
       </View>
       </>
   );

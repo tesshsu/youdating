@@ -11,6 +11,7 @@ import Profile, { ActionButton } from '../../../../Global/Profile';
 import HeaderAvatarButton from './HeaderAvatarButton';
 import {
   Personnality,
+  Moods,
   Skills
 } from './Tabs';
 import useGoodFeelings from '../../../../../Hooks/useGoodFeelings';
@@ -18,11 +19,10 @@ import { useViews } from '../../../../../Hooks/useViews';
 import Tabs from '../../../../Global/Profile/Tabs';
 import ImageButton from '../../../../Global/ImageButton';
 import useCompatibilityRequests from '../../../../../Hooks/useCompatibilityRequests';
-import styles from './Tabs/Personnality/styles';
 const IMAGE_SETTING = require('../../../../../../assets/icons/menu_setting.png');
 const TAB_SCENES = [
   { title: 'personnalité', key: 'personnality', View: Personnality },
-  { title: 'description', key: 'skills', View: Skills },
+  { title: 'description', key: 'moods', View: Moods },
 ];
 export default function MainTabsProfilHome() {
   const { currentMood, moodInfos } = useCurrentMood();

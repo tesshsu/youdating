@@ -27,7 +27,7 @@ import Tabs from '../../Global/Profile/Tabs';
 import useConversation from '../../../Hooks/useConversations';
 
 const SCENES = [
-  { title: 'moods', key: 'moods', View: Moods },
+  { title: 'personnality', key: 'moods', View: Personnality },
   { title: 'description', key: 'skills', View: Skills },
 ];
 
