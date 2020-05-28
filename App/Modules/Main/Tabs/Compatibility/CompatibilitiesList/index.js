@@ -11,9 +11,11 @@ import { Feather } from '@expo/vector-icons';
 import styles from './styles';
 import RoundIconButton from '../../../../Global/RoundIconButton';
 import { verticalScale } from '../../../../../Helpers/ScaleHelper';
-import ListItemSeparator from '../../../../Global/ListItemSeparator';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
+import useLogguedUser from '../../../../../Hooks/useLogguedUser';
 import Carousel from '../../../../Global/Carousel';
+
+
 
 const IMAGE_GIRL3 = require('../../../../../../assets/images/profile_pics/girl3.jpg');
 const IMAGE_GIRL4 = require('../../../../../../assets/images/profile_pics/girl4.jpg');
@@ -80,7 +82,9 @@ const USERS = [
 
 export default function CompatibilitiesList({ selectedUser, onSelected }) {
   const [carouselIndex, setCarrouselIndex] = useState(0);
-  const { moodInfos } = useCurrentMood();
+  const { currentMood, moodInfos } = useCurrentMood();
+  const { logguedUser } = useLogguedUser();
+
 
   const handleOnPress = useCallback((user) => {
     onSelected(user);
@@ -108,7 +112,7 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
   });
 
   return (
-    <View style={{ height: verticalScale(120) }}>
+    <View style={{ height: verticalScale(180) }}>
       <Carousel activeIndex={carouselIndex}>
         { slicedUsers.map((chunk, index) => (
           <View key={index.toString()} style={styles.usersContainer}>
@@ -139,6 +143,24 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
                   ]}
                 >
                   { item.personnality }
+                </Text>
+                <RoundIconButton
+                  size={verticalScale(36)}
+                  backgroundColor={item.disabled ? '#BEBFC0' : moodInfos.color}
+                  IconProvider={Feather}
+                  iconName="refresh-cw"
+                  iconColor="white"
+                  iconSize={verticalScale(20)}
+                  onPress={() => handleOnPress(item, idx)}
+                  disabled={item.disabled}
+                />
+                <Text
+                  style={[
+                    styles.compatibilityText,
+                    { color: item.disabled ? '#BEBFC0' : moodInfos.color }
+                  ]}
+                >
+                  compatibilité
                 </Text>
               </View>
             ))}

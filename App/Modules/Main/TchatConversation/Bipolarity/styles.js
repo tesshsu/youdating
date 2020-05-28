@@ -42,5 +42,10 @@ export default StyleSheet.create({
     textTransform: 'uppercase',
     color: '#7D7D7D',
     marginBottom: verticalScale(23)
+  },
+  line: {
+    height: 1,
+    backgroundColor: '#fff',
+    marginTop: verticalScale(23)
   }
 });

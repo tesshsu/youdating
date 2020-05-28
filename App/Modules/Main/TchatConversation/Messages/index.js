@@ -112,7 +112,8 @@ export default function TchatConversationMessages() {
             <Feather
               name="more-vertical"
               color="white"
-              size={verticalScale(21)}
+              size={verticalScale(24)}
+              onPress={() => NavigationHelper.navigate('MainTchatConversationBipolarity')}
             />
           </View>
         </SafeAreaView>

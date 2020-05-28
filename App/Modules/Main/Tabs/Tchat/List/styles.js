@@ -17,19 +17,23 @@ export default StyleSheet.create({
     backgroundColor: 'white'
   },
   flatListContent: {
-    paddingHorizontal: scale(20)
+    paddingHorizontal: scale(10)
   },
   messageListItem: {
     flexDirection: 'row',
     paddingVertical: verticalScale(5)
   },
+  messageNameList: {
+    fontSize: 10,
+    textTransform: 'uppercase',
+    fontFamily: 'Segoe-UI-Bold'
+  },
   imageStyle: {
-    height: verticalScale(65),
-    width: scale(65),
+    height: verticalScale(145),
+    width: scale(120),
     margin: scale(6),
-    borderRadius: verticalScale(50),
-    resizeMode: 'cover',
-    borderWidth: 2,
+    borderRadius: verticalScale(10),
+    resizeMode: 'cover'
   },
   body: {
     flex: 1
@@ -64,11 +68,11 @@ export default StyleSheet.create({
     fontSize: moderateScale(11),
   },
   personnalityText: {
-    fontFamily: 'Segoe-UI-Bold',
     fontSize: moderateScale(12),
     textTransform: 'uppercase',
     marginLeft: scale(3),
-    marginRight: scale(3)
+    marginRight: scale(3),
+    marginBottom: verticalScale(10)
   },
   headerRight: {
     flexDirection: 'row',
@@ -109,7 +113,7 @@ export default StyleSheet.create({
     width: '90%'
   },
   searchInner: {
-    borderRadius: 15,
+    borderRadius: 10,
     backgroundColor: '#e1e1e1'
   },
   messageCount: {
@@ -125,6 +129,19 @@ export default StyleSheet.create({
     height: '48%',
     alignItems: 'center',
     marginTop: 20
+  },
+  line: {
+    height: 1,
+    backgroundColor: '#BEBEBE',
+    marginTop: verticalScale(23),
+    marginBottom: verticalScale(23)
+  },
+  iconStyle: {
+    width: verticalScale(60),
+    height: verticalScale(35),
+    position: 'absolute',
+    bottom: 5,
+    left: -5,
+    resizeMode: 'cover'
   }
-
 });

@@ -49,7 +49,8 @@ export default StyleSheet.create({
     fontFamily: 'Gadugi-Bold',
     fontSize: 11,
     textAlign: 'center',
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    marginBottom: 10
   },
   compatibilityText: {
     fontFamily: 'Segoe-UI-Regular',

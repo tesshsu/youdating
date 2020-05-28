@@ -10,6 +10,7 @@ import { Feather } from '@expo/vector-icons';
 
 import styles from './styles';
 import PageHeader from '../../../Global/PageHeader';
+import RoundButton from '../../../Global/RoundButton';
 import useCurrentMood from '../../../../Hooks/useCurrentMood';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
 
@@ -44,8 +45,17 @@ export default function MainTchatConvversationBipolarity() {
         >
           {`Mood ${moodInfos.title}`}
         </Text>
+        <RoundButton
+            text="Pack1: Gout et Interetes"
+            fontSize={12}
+            borderRadius={15}
+            width={280}
+            height={30}
+            onPress={() => NavigationHelper.navigate(' MainTchatConversationBipolarity')}
+        />
         <Text style={styles.questionText}>Question n°1</Text>
         <Text style={styles.text}>Quelle ambiance te correspond le plus ?</Text>
+        <View style={styles.line} />
         <View style={styles.imagesContainer}>
           <TouchableOpacity>
             <ImageBackground

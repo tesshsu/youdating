@@ -52,10 +52,3 @@ export default function MainCompatibility() {
     </>
   );
 }
-
-MainCompatibility.navigationOptions = {
-  tabBarLabel: 'Compatibilité',
-  tabBarIcon: ({ tintColor }) => (
-    <Feather name="refresh-cw" color={tintColor} size={scale(20)} />
-  )
-};
