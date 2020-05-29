@@ -11,6 +11,7 @@ import {
 
 import styles from './styles';
 import RoundIconButton from '../../../../Global/RoundIconButton';
+import Button from '../../../../Global/Button';
 import { verticalScale, scale } from '../../../../../Helpers/ScaleHelper';
 import { MOODS } from '../../../../../GlobalConfig';
 import useConversation from '../../../../../Hooks/useConversations';
@@ -101,12 +102,6 @@ export default function MessageComposer(props) {
           { backgroundColor: moodInfos.color }
         ]}
       >
-        <Feather
-          style={styles.leftIcon}
-          name="plus"
-          size={verticalScale(20)}
-          color="white"
-        />
         <View style={styles.inputContainer}>
           <TextInput
             style={[
@@ -155,6 +150,13 @@ export default function MessageComposer(props) {
           onPress={getMedia}
         />
         <AudioUri/>
+        <Feather
+          style={styles.icon}
+          name="users"
+          size={verticalScale(20)}
+          color="white"
+          onPress={() => NavigationHelper.navigate('MainTchatConversationBipolarity')}
+        />
       </View>
     </>
   );

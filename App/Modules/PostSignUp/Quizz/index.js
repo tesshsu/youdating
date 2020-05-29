@@ -77,10 +77,11 @@ export default function PostSignUpQuizz() {
 
   const currentQuestions = useMemo(() => {
     if (currentScreen !== 2 && currentScreen !== 3) {
-      return QUESTIONS[logguedUser.gender][currentScreen];
+      return QUESTIONS[logguedUser][currentScreen];
     }
-    return QUESTIONS[logguedUser.gender][currentScreen][profileType];
+    return QUESTIONS[logguedUser][currentScreen][profileType];
   }, [currentScreen, logguedUser, profileType]);
+  
 
   async function submitAnswers() {
     try {
@@ -94,7 +95,7 @@ export default function PostSignUpQuizz() {
   function next() {
     answers[currentScreen] = currentAnswers;
     setAnswers([...answers]);
-    if (currentScreen === QUESTIONS[logguedUser.gender].length - 1) {
+    if (currentScreen === QUESTIONS[logguedUser].length - 1) {
       submitAnswers();
     } else {
       setCurrentScreen(currentScreen + 1);

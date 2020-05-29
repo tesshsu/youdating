@@ -165,12 +165,12 @@ export default function MainTabsTchat() {
                   </View>
                   <View style={{alignItems: 'center'}}>
                     <RoundButton
-                      text="BIPOLARTY"
+                      text="MESSAGERIE"
                       fontSize={4}
                       borderRadius={10}
                       width={100}
                       height={25}
-                      onPress={() => NavigationHelper.navigate(' MainTchatConversationBipolarity')}
+                      onPress={() => openConversation(conversation)}
                     />
                   </View>
                 </View>

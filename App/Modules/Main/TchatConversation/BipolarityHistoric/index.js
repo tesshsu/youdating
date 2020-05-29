@@ -72,12 +72,6 @@ export default function BipolarityHistoric() {
             containerStyle={styles.pack}
           />
         </View>
-        <View style={styles.compatibilityResult}>
-          <Text style={styles.compatibilityResultTitle}>{`Compatibilité d'interets pack ${currentPack + 1}`}</Text>
-          <Text style={styles.compatibilityPercentageText}>
-            80%
-          </Text>
-        </View>
         <View style={styles.scrollviewContainer}>
           <ScrollView
             contentContainerStyle={[
@@ -154,6 +148,12 @@ export default function BipolarityHistoric() {
                   </View>
                 </View>
               </View>
+            </View>
+            <View style={styles.compatibilityResult}>
+              <Text style={styles.compatibilityResultTitle}>{`Compatibilité d'interets pack ${currentPack + 1}`}</Text>
+              <Text style={styles.compatibilityPercentageText}>
+                80%
+              </Text>
             </View>
           </ScrollView>
           <View style={styles.buttonContainer} onLayout={onButtonContainerLayout}>
