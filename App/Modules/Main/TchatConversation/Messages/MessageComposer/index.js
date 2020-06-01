@@ -11,7 +11,6 @@ import {
 
 import styles from './styles';
 import RoundIconButton from '../../../../Global/RoundIconButton';
-import Button from '../../../../Global/Button';
 import { verticalScale, scale } from '../../../../../Helpers/ScaleHelper';
 import { MOODS } from '../../../../../GlobalConfig';
 import useConversation from '../../../../../Hooks/useConversations';
@@ -106,12 +105,11 @@ export default function MessageComposer(props) {
           <TextInput
             style={[
               styles.input,
-              { color: moodInfos.color },
-              { height: inputHeight }
+              { color: moodInfos.color }
             ]}
             editable={!isSending}
             multiline
-            underlineColorAndroid="transparent"
+            //underlineColorAndroid="transparent"
             value={input}
             blurOnSubmit={false}
             onContentSizeChange={({ nativeEvent }) => setInputHeight(nativeEvent.contentSize.height)}

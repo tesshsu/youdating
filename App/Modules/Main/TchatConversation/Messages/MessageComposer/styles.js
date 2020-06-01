@@ -8,7 +8,7 @@ export const IMAGE_HEIGHT = IMAGE_WIDTH / 4 * 3;
 
 export default StyleSheet.create({
   composer: {
-    paddingVertical: verticalScale(18),
+    paddingVertical: verticalScale(10),
     paddingHorizontal: scale(28),
     flexDirection: 'row',
     alignItems: 'center',

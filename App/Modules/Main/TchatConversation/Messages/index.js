@@ -83,9 +83,8 @@ export default function TchatConversationMessages() {
   }, [logguedUser, messages, received, sent, target]);
 
   return (
-    <KeyboardAvoidingView
+    <View
       style={styles.container}
-      behavior="padding"
     >
       <View style={{ backgroundColor: moodInfos.color }}>
         <SafeAreaView>
@@ -128,6 +127,6 @@ export default function TchatConversationMessages() {
           </View>
         </SafeAreaView>
       )}
-    </KeyboardAvoidingView>
+    </View>
   );
 }
