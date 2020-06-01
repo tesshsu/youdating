@@ -64,7 +64,7 @@ export default function MainTabsProfileSettings() {
       Alert.alert('Erreur', 'Impossible de mettre à jour les paramètres!');
     }
   }
-  
+
   async function onSignOut() {
     await signOut();
   }
@@ -126,7 +126,6 @@ export default function MainTabsProfileSettings() {
           />
         </SettingsCard>
         <Button text="Valider" disabled={pristine} onPress={save} />
-		<Button text="Déconnexion" disabled={pristine} onPress={onSignOut} />
       </ScrollView>
     </>
   );

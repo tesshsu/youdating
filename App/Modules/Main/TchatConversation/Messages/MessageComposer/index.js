@@ -18,7 +18,7 @@ import useGetMedia from '../../../../../Hooks/useGetMedia';
 import Panel from './Panel';
 import AudioUri from './AudioRecorder';
 import AudioButton from '../../../../Global/AudioButton';
-
+import NavigationHelper from '../../../../../Helpers/NavigationHelper';
 const mediaOptions = {
   mediaTypes: MediaTypeOptions.Images,
   quality: 0.6

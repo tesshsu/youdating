@@ -127,6 +127,11 @@ export default function GlobalSettings() {
                             start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
               <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsProfile')}> PROFILE </Text>
 			  </LinearGradient>
+      <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
+                      style={styles.linearGradient}
+                      start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+        <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainMoodSettings')}> CONFIGURE </Text>
+      </LinearGradient>
 			 <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
                             style={styles.linearGradient}
                             start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>

@@ -14,8 +14,7 @@ import RoundButton from '../../../Global/RoundButton';
 import { verticalScale } from '../../../../Helpers/ScaleHelper';
 import RoundIconButton from '../../../Global/RoundIconButton';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
-
-const IMAGE_PISCINE = require('../../../../../assets/images/piscine.png');
+import {BIPOLARITY_QUETIONS} from '../Questions';
 const IMAGE_PLAGE = require('../../../../../assets/images/plage.png');
 const IMAGE_FERRARI = require('../../../../../assets/images/ferrari.png');
 const IMAGE_MASERATTI = require('../../../../../assets/images/maseratti.png');
@@ -82,16 +81,16 @@ export default function BipolarityHistoric() {
             <View style={styles.answerOuter}>
               <View style={styles.answerCard}>
                 <Text style={styles.responseTitleText}>Reponse N°1</Text>
-                <Text style={styles.responseLabelText}>Quelle ambiance to correspond le plus ?</Text>
+                <Text style={styles.responseLabelText}>{BIPOLARITY_QUETIONS[0].question}</Text>
                 <View style={styles.answersContainer}>
                   <View style={styles.answerContainer}>
                     <Text>TOI</Text>
                     <ImageBackground
-                      source={IMAGE_PISCINE}
+                      source={BIPOLARITY_QUETIONS[0].avatarA}
                       style={styles.imageBackground}
                       imageStyle={styles.imageBackgroundImage}
                     />
-                    <Text style={styles.answerText}>PISCINE</Text>
+                    <Text style={styles.answerText}>{BIPOLARITY_QUETIONS[0].answerA}</Text>
                   </View>
                   <RoundIconButton
                     iconName="thumbs-up"
@@ -104,11 +103,11 @@ export default function BipolarityHistoric() {
                   <View style={styles.answerContainer}>
                     <Text>HENRY</Text>
                     <ImageBackground
-                      source={IMAGE_PLAGE}
+                      source={BIPOLARITY_QUETIONS[0].avatarB}
                       style={styles.imageBackground}
                       imageStyle={styles.imageBackgroundImage}
                     />
-                    <Text style={styles.answerText}>PLAGE</Text>
+                    <Text style={styles.answerText}>{BIPOLARITY_QUETIONS[0].answerB}</Text>
                   </View>
                 </View>
               </View>
@@ -116,16 +115,16 @@ export default function BipolarityHistoric() {
             <View style={styles.answerOuter}>
               <View style={styles.answerCard}>
                 <Text style={styles.responseTitleText}>Reponse N°2</Text>
-                <Text style={styles.responseLabelText}>Laquelle des deux te plaît le plus ?</Text>
+                <Text style={styles.responseLabelText}>{BIPOLARITY_QUETIONS[1].question}</Text>
                 <View style={styles.answersContainer}>
                   <View style={styles.answerContainer}>
                     <Text>TOI</Text>
                     <ImageBackground
-                      source={IMAGE_FERRARI}
+                      source={BIPOLARITY_QUETIONS[1].avatarA}
                       style={styles.imageBackground}
                       imageStyle={styles.imageBackgroundImage}
                     />
-                    <Text style={styles.answerText}>PISCINE</Text>
+                    <Text style={styles.answerText}>{BIPOLARITY_QUETIONS[1].answerA}</Text>
                   </View>
                   <RoundIconButton
                     iconName="thumbs-up"
@@ -140,11 +139,11 @@ export default function BipolarityHistoric() {
                   <View style={styles.answerContainer}>
                     <Text>HENRY</Text>
                     <ImageBackground
-                      source={IMAGE_MASERATTI}
+                      source={BIPOLARITY_QUETIONS[1].avatarB}
                       style={styles.imageBackground}
                       imageStyle={styles.imageBackgroundImage}
                     />
-                    <Text style={styles.answerText}>PLAGE</Text>
+                    <Text style={styles.answerText}>{BIPOLARITY_QUETIONS[1].answerB}</Text>
                   </View>
                 </View>
               </View>
