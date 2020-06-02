@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { verticalScale, scale } from '../../../../../Helpers/ScaleHelper';
+import { verticalScale, scale, moderateScale } from '../../../../../Helpers/ScaleHelper';
 
 
 export default StyleSheet.create({
@@ -14,7 +14,7 @@ export default StyleSheet.create({
   },
   itemContainer: {
     alignItems: 'center',
-    height: verticalScale(150)
+    height: verticalScale(250)
   },
   avatarContainer: {
     borderWidth: 2,
@@ -55,5 +55,41 @@ export default StyleSheet.create({
   compatibilityText: {
     fontFamily: 'Segoe-UI-Regular',
     fontSize: 11
-  }
+  },
+  imageStyle: {
+    height: verticalScale(65),
+    width: scale(65),
+    margin: scale(6),
+    borderRadius: verticalScale(50),
+    resizeMode: 'cover',
+    paddingRight: 10,
+    borderWidth: 2,
+  },
+  usernameText: {
+    fontFamily: 'Segoe-UI-Bold',
+    fontSize: moderateScale(14),
+    color: 'black',
+    textTransform: 'uppercase'
+  },
+  titleText: {
+    fontFamily: 'Segoe-UI-Bold',
+    fontSize: moderateScale(15),
+    color: 'black',
+    paddingTop: verticalScale(6),
+    paddingBottom: verticalScale(6),
+    textAlign: 'center',
+    paddingHorizontal: scale(30),
+    textTransform: 'uppercase'
+  },
+  container: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  flatListContent: {
+    paddingHorizontal: scale(20)
+  },
+  messageListItem: {
+    flexDirection: 'row',
+    paddingVertical: verticalScale(5)
+  },
 });

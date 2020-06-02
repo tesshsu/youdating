@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { moderateScale, verticalScale } from '../../../../Helpers/ScaleHelper';
+import { moderateScale, verticalScale, scale } from '../../../../Helpers/ScaleHelper';
 
 export default StyleSheet.create({
   container: {
@@ -16,5 +16,9 @@ export default StyleSheet.create({
     width: verticalScale(35),
     height: verticalScale(35),
     resizeMode: 'cover'
+  },
+  messageListItem: {
+    flexDirection: 'row',
+    paddingVertical: verticalScale(5)
   }
 });

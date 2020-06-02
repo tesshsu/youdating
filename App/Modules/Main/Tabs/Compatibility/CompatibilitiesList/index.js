@@ -3,7 +3,8 @@ import {
   View,
   Text,
   FlatList,
-  refreshControl,
+  TouchableOpacity,
+  RefreshControl,
   ImageBackground,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
@@ -13,10 +14,9 @@ import RoundIconButton from '../../../../Global/RoundIconButton';
 import { verticalScale } from '../../../../../Helpers/ScaleHelper';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import useLogguedUser from '../../../../../Hooks/useLogguedUser';
-import Carousel from '../../../../Global/Carousel';
-
-
-
+import ListItemSeparator from '../../../../Global/ListItemSeparator';
+import useConversation from '../../../../../Hooks/useConversations';
+import { Image } from 'react-native-expo-image-cache';
 const IMAGE_GIRL3 = require('../../../../../../assets/images/profile_pics/girl3.jpg');
 const IMAGE_GIRL4 = require('../../../../../../assets/images/profile_pics/girl4.jpg');
 const IMAGE_GIRL5 = require('../../../../../../assets/images/profile_pics/girl5.jpg');
@@ -84,7 +84,12 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
   const [carouselIndex, setCarrouselIndex] = useState(0);
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
-
+  const {
+    conversations,
+    startConversation,
+    fetchConversations,
+    areConversationsFetching
+  } = useConversation();
 
   const handleOnPress = useCallback((user) => {
     onSelected(user);
@@ -99,6 +104,22 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
     onSelected(USERS[0]);
   }, [onSelected, moodInfos]);
 
+
+  const openConversation = useCallback((conversation) => {
+    const {
+      user1,
+      user2,
+      lastMessage
+    } = conversation;
+
+    const target = user1.id === logguedUser.id ? user2 : user1;
+
+    if (lastMessage.isOpportunity && lastMessage.author !== logguedUser.id) {
+      NavigationHelper.navigate('MainTchatNewMessage', { conversation, target });
+    } else {
+      startConversation(currentMood, target);
+    }
+  }, [currentMood, logguedUser.id, startConversation]);
   const slicedUsers = [];
 
   USERS.forEach((u) => {
@@ -113,37 +134,64 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
 
   return (
     <View style={{ height: verticalScale(180) }}>
-      <Carousel activeIndex={carouselIndex}>
-        { slicedUsers.map((chunk, index) => (
-          <View key={index.toString()} style={styles.usersContainer}>
-            { chunk.map((item, idx) => (
-              <View
-                key={idx.toString()}
-                disabled={item.disabled}
-                style={styles.itemContainer}
-                onPress={() => handleOnPress(item, index)}
-              >
-                <View
-                  style={[
-                    styles.avatarContainer,
-                    selectedUser === item && { borderColor: moodInfos.color },
-                  ]}
-                >
-                  <ImageBackground
-                    style={styles.imageBackground}
-                    imageStyle={styles.imageBackgroundImage}
-                    source={item.avatar}
-                  />
+      <FlatList
+        contentContainerStyle={styles.flatListContent}
+        horizontal={true}
+        ItemSeparatorComponent={ListItemSeparator}
+        showsHorizontalScrollIndicator={true}
+        data={conversations}
+        refreshing={areConversationsFetching}
+        refreshControl={(
+          <RefreshControl
+            refreshing={areConversationsFetching}
+            onRefresh={fetchConversations}
+          />
+        )}
+        keyExtractor={item => item.id}
+        renderItem={({ item, index }) => {
+          const target = item.user1.id === logguedUser.id ? item.user2 : item.user1;
+          const newMessageKey = target === item.user1 ? 'user2' : 'user1';
+          const hasNewMessage = item[`${newMessageKey}unreadMessageCount`] > 0;
+
+          const conversation = { ...item };
+
+          const {
+            lastMessage: {
+              author,
+              sentAt,
+              content,
+              imageUri,
+              audioUri
+            }
+          } = item;
+          return (
+            <TouchableOpacity
+              style={styles.messageListItem}
+              onPress={() => openConversation(conversation)}
+            >
+              <View style={{alignItems: 'center'}}>
+                <Image
+                  style={[styles.imageStyle, {borderColor: moodInfos.color}]}
+                  uri={target.moods[currentMood].avatar}
+                />
+                {
+                  hasNewMessage && (
+                    <View style={[{backgroundColor: moodInfos.color}, styles.messageCount]}>
+                      <Text style={{color: '#fff'}}>
+                        {item[`${newMessageKey}unreadMessageCount`]}
+                      </Text>
+                    </View>
+                  )
+                }
+                <View style={{alignItems: 'center'}}>
+                  <Text style={{fontSize: 12, textTransform: 'uppercase'}}>{ target.firstName }</Text>
+                  <Text
+                    style={styles.personnalityText}
+                  >
+                    { target.personnalities.main }
+                    { hasNewMessage }
+                  </Text>
                 </View>
-                <Text style={styles.usernameText}>{ item.username }</Text>
-                <Text
-                  style={[
-                    styles.personnalityText,
-                    selectedUser === item && { color: moodInfos.color }
-                  ]}
-                >
-                  { item.personnality }
-                </Text>
                 <RoundIconButton
                   size={verticalScale(36)}
                   backgroundColor={item.disabled ? '#BEBFC0' : moodInfos.color}
@@ -151,7 +199,7 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
                   iconName="refresh-cw"
                   iconColor="white"
                   iconSize={verticalScale(20)}
-                  onPress={() => handleOnPress(item, idx)}
+                  onPress={() => handleOnPress(item, index)}
                   disabled={item.disabled}
                 />
                 <Text
@@ -163,10 +211,10 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
                   compatibilité
                 </Text>
               </View>
-            ))}
-          </View>
-        ))}
-      </Carousel>
+            </TouchableOpacity>
+          );
+        }}
+      />
         <Feather
           name="chevron-right"
           color={moodInfos.color}
