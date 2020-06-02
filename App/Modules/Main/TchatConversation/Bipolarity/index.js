@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
+  Image,
   ScrollView
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
@@ -59,9 +60,9 @@ export default function MainTchatConvversationBipolarity() {
           {`Mood ${moodInfos.title}`}
         </Text>
         <Carousel activeIndex={carouselIndex}>
-          { slicedQuestions.map((chunk, index) => (
+          {slicedQuestions.map((chunk, index) => (
             <View key={index.toString()}>
-              { chunk.map((item, idx) => (
+              {chunk.map((item, idx) => (
                 <View
                   key={idx.toString()}
                   disabled={item.disabled}
@@ -69,7 +70,7 @@ export default function MainTchatConvversationBipolarity() {
                   onPress={() => handleOnPress(item, index)}
                 >
                   <RoundButton
-                    text= { item.title }
+                    text={item.title}
                     fontSize={12}
                     borderRadius={15}
                     width={280}
@@ -77,39 +78,36 @@ export default function MainTchatConvversationBipolarity() {
                     height={30}
                     onPress={() => handleOnPress(item, idx)}
                   />
-                  <Text style={styles.question}>{ item.question }</Text>
+                  <Text style={styles.question}>{item.question}</Text>
                   <View style={styles.line} />
                   <View style={styles.imageContainer} >
-                    <TouchableOpacity>
-                      <ImageBackground
-                        style={styles.imageBackground}
-                        imageStyle={styles.imageBackgroundImage}
-                        source={item.avatarA}
-                      />
-                      <Text
-                        style={[
-                          styles.imageLabelText,
-                          { color: item.disabled ? '#BEBFC0' : moodInfos.color }
-                        ]}
-                      >
-                        { item.answerA }
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <ImageBackground
-                        style={styles.imageBackground}
-                        imageStyle={styles.imageBackgroundImage}
-                        source={item.avatarB}
-                      />
-                      <Text
-                        style={[
-                          styles.imageLabelText,
-                          { color: item.disabled ? '#BEBFC0' : moodInfos.color }
-                        ]}
-                      >
-                        { item.answerB }
-                      </Text>
-                    </TouchableOpacity>
+                    <View style={styles.imageBackground}>
+                      <TouchableOpacity>
+                        <Image source={item.avatarA} style={styles.imageBackgroundImage} />
+                        <Text
+                          style={[
+                            styles.imageLabelText,
+                            { color: item.disabled ? '#BEBFC0' : moodInfos.color }
+                          ]}
+                        >
+                          {item.answerA}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.imageBackground}>
+                      <TouchableOpacity>
+                        <Image source={item.avatarB} style={styles.imageBackgroundImage} />
+                        <Text
+                          style={[
+                            styles.imageLabelText,
+                            { color: item.disabled ? '#BEBFC0' : moodInfos.color }
+                          ]}
+                        >
+                          {item.answerB}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
                 </View>
               ))}

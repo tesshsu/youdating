@@ -1,28 +1,36 @@
-import { StyleSheet } from 'react-native';
-import { verticalScale, scale, moderateScale } from '../../../../Helpers/ScaleHelper';
+import { Dimensions, StyleSheet } from 'react-native';
+import { moderateScale, scale, verticalScale } from '../../../../Helpers/ScaleHelper';
+const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+  },
+  itemContainer: {
+    width,
     alignItems: 'center'
   },
   imageContainer: {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width,
   },
   imageBackground: {
     width: scale(420),
-    height: verticalScale(200)
+    height: verticalScale(200),
+    alignItems: 'center',
   },
   imageLabelText: {
     fontFamily: 'Segoe-UI-Bold',
     fontSize: moderateScale(20),
-    marginTop: -20,
+    alignSelf: 'flex-start',
+    marginTop:5,
     marginLeft: 10
   },
   imageBackgroundImage: {
     width: scale(350),
     height: verticalScale(170),
-    borderRadius: verticalScale(30)
+    borderRadius: verticalScale(30),
   },
   moodTitleText: {
     textAlign: 'center',

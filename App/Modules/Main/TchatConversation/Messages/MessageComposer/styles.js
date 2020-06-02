@@ -32,7 +32,7 @@ export default StyleSheet.create({
     fontSize: moderateScale(18),
     padding: 0,
     margin: 0,
-    lineHeight: 0,
+    // lineHeight: 0,
     borderWidth: 0,
   },
   mediaImage: {
