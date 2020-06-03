@@ -21,9 +21,22 @@ import {BIPOLARITY_QUETIONS} from '../Questions';
 
 export default function MainTchatConvversationBipolarity() {
   const [carouselIndex, setCarrouselIndex] = useState(0);
+  const [countA, setCounterA] = useState(0);
+  const [countB, setCounterB] = useState(0);
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
   const slicedQuestions = [];
+
+  const setCountA = () => {
+    setCounterA(countA + 1);
+    console.log('countA', countA);
+  };
+
+  const setCountB = () => {
+    setCounterB(countB + 1);
+    console.log('countB', countB);
+  };
+
   BIPOLARITY_QUETIONS.forEach((u) => {
     const lastArray = slicedQuestions[slicedQuestions.length - 1];
 
@@ -67,7 +80,6 @@ export default function MainTchatConvversationBipolarity() {
                   key={idx.toString()}
                   disabled={item.disabled}
                   style={styles.itemContainer}
-                  onPress={() => handleOnPress(item, index)}
                 >
                   <RoundButton
                     text={item.title}
@@ -76,13 +88,12 @@ export default function MainTchatConvversationBipolarity() {
                     width={280}
                     style={styles.passBoutton}
                     height={30}
-                    onPress={() => handleOnPress(item, idx)}
                   />
                   <Text style={styles.question}>{item.question}</Text>
                   <View style={styles.line} />
                   <View style={styles.imageContainer} >
                     <View style={styles.imageBackground}>
-                      <TouchableOpacity>
+                      <TouchableOpacity onClick={setCountA}>
                         <Image source={item.avatarA} style={styles.imageBackgroundImage} />
                         <Text
                           style={[
@@ -94,9 +105,8 @@ export default function MainTchatConvversationBipolarity() {
                         </Text>
                       </TouchableOpacity>
                     </View>
-
                     <View style={styles.imageBackground}>
-                      <TouchableOpacity>
+                      <TouchableOpacity onClick={setCountB}>
                         <Image source={item.avatarB} style={styles.imageBackgroundImage} />
                         <Text
                           style={[
@@ -116,7 +126,7 @@ export default function MainTchatConvversationBipolarity() {
         </Carousel>
       </ScrollView>
       <View style={styles.passBoutton}>
-        <Button text="Je pass mon tour" onPress={() => NavigationHelper.navigate('MainTabsTchat')} />
+        <Button text="Je pass mon tour" onPress={() => NavigationHelper.navigate('MainTabsTchatList')} />
       </View>
     </>
   );

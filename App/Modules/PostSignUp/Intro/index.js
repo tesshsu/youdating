@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import {
   Text, View, TouchableOpacity, KeyboardAvoidingView
 } from 'react-native';
@@ -8,19 +8,21 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
 import MoodSelector from '../../Global/MoodSelector';
+import useCurrentMood from '../../../Hooks/useCurrentMood';
 import HeaderAvatarButton from '../../Main/Tabs/Profil/Home/HeaderAvatarButton';
-
+import useLogguedUser from '../../../Hooks/useLogguedUser';
 
 export default function PostSignUpIntro() {
-  //const { logguedUser, uploadAvatar } = useLogguedUser();
-  const startUploadAvatar = null;
-  /*const startUploadAvatar = useCallback(async (media) => {
+  const { logguedUser, uploadAvatar } = useLogguedUser();
+  const { currentMood, moodInfos } = useCurrentMood();
+  //const startUploadAvatar = null;
+  const startUploadAvatar = useCallback(async (media) => {
     try {
       await uploadAvatar(media, currentMood);
     } catch (err) {
       Alert.alert('Erreur', 'Une erreur est survenue lors de la mise à jour de votre avatar');
     }
-  }, [uploadAvatar, currentMood]);*/
+  }, [uploadAvatar, currentMood]);
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function PostSignUpIntro() {
         <View style={styles.uploadPhotoCenterPart}>
           <TouchableOpacity
             style={styles.textMood}
-            onPress={() => NavigationHelper.navigate('ForgetPassword')}
+            onPress={() => startUploadAvatar()}
           >
             <Text style={styles.textPhoto}>
               AJOUTE UNE PHOTO
@@ -42,9 +44,13 @@ export default function PostSignUpIntro() {
           </TouchableOpacity>
         </View>
         <View style={styles.line} />
-        <Text style={styles.textMood}>
-          CHOISIS UN DES 4 MOODS POUR DEMARRER
-        </Text>
+        <TouchableOpacity
+             onPress={() => NavigationHelper.navigate('MainNavigator')}
+        >
+          <Text style={styles.textMood}>
+            CHOISIS UN DES 4 MOODS POUR DEMARRER
+          </Text>
+        </TouchableOpacity>
         <MoodSelector />
         <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
                         style={styles.linearGradient}
