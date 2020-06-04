@@ -59,7 +59,6 @@ export default function CompatibilityResult({ user }) {
   imageSource = imageSource.avatar;
   firstName = target.firstName;
   personnality = personnalities.main;
-  // age = undefined;
   city = target.city;
   subPersonnality = PERSONNALITY_DETAILS[currentMood][personnality].personnality, [currentMood, personnality]
 

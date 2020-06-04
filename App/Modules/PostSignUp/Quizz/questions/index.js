@@ -1,5 +1,5 @@
-import MAIN from './male';
+import QUESTIONS from './questions';
 
 export default {
-  MAIN
+  QUESTIONS
 };
