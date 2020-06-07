@@ -58,5 +58,9 @@ export default StyleSheet.create({
   buttonsRow: {
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  buttonFinish: {
+    marginStart: 10,
+    borderRadius: verticalScale(48 / 2)
   }
 });

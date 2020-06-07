@@ -1,17 +1,13 @@
-import React, {
-  useState, useEffect, useCallback, useMemo
-} from 'react';
-import {
-  Text, View, ImageBackground, SafeAreaView, Alert
-} from 'react-native';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Alert, ImageBackground, SafeAreaView, Text, View } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-
-import styles from './styles';
-import QUESTIONS from './questions';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
-import RoundIconButton from '../../Global/RoundIconButton';
 import { verticalScale } from '../../../Helpers/ScaleHelper';
 import useLogguedUser from '../../../Hooks/useLogguedUser';
+import RoundButton from '../../Global/RoundButton';
+import RoundIconButton from '../../Global/RoundIconButton';
+import QUESTIONS from './questions';
+import styles from './styles';
 
 const MAPPING = [
   ['AMBITIONNEL', 'LEADERENT'],
@@ -76,12 +72,9 @@ export default function PostSignUpQuizz() {
   }, [answers]);
 
   const currentQuestions = useMemo(() => {
-    if (currentScreen !== 2 && currentScreen !== 3) {
-      return QUESTIONS[logguedUser][currentScreen];
-    }
-    return QUESTIONS[logguedUser][currentScreen][profileType];
+    return QUESTIONS.QUESTIONS[currentScreen];
   }, [currentScreen, logguedUser, profileType]);
-  
+
 
   async function submitAnswers() {
     try {
@@ -95,11 +88,7 @@ export default function PostSignUpQuizz() {
   function next() {
     answers[currentScreen] = currentAnswers;
     setAnswers([...answers]);
-    if (currentScreen === QUESTIONS[logguedUser].length - 1) {
-      submitAnswers();
-    } else {
-      setCurrentScreen(currentScreen + 1);
-    }
+    setCurrentScreen(currentScreen + 1);
   }
 
   function back() {
@@ -115,6 +104,8 @@ export default function PostSignUpQuizz() {
     }
   }
 
+  const lastQuestions = currentScreen === QUESTIONS.QUESTIONS.length - 1;
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -125,10 +116,10 @@ export default function PostSignUpQuizz() {
         <Text style={styles.questionNumberText}>{`${currentScreen + 1}/6`}</Text>
       </ImageBackground>
       <ScrollView style={styles.scollView} contentContainerStyle={styles.scrollViewContent}>
-        { currentQuestions.questions.map((q, i) => (
+        {currentQuestions.questions.map((q, i) => (
           <View key={i.toString()} style={styles.question}>
-            <Text style={styles.questionTitle}>{ q.question }</Text>
-            { q.answers.map((a, i2) => (
+            <Text style={styles.questionTitle}>{q.question}</Text>
+            {q.answers.map((a, i2) => (
               <TouchableOpacity
                 key={i2.toString()}
                 style={styles.answer}
@@ -140,7 +131,7 @@ export default function PostSignUpQuizz() {
                     a.type === currentAnswers[i] && { color: '#B45A6F' }
                   ]}
                 >
-                  { a.answer }
+                  {a.answer}
                 </Text>
               </TouchableOpacity>
             ))}
@@ -157,18 +148,35 @@ export default function PostSignUpQuizz() {
             iconSize={verticalScale(21)}
             onPress={back}
           />
-          <RoundIconButton
-            size={verticalScale(48)}
-            backgroundColor="#B45A6F"
-            containerStyle={[
-              currentAnswers.length !== currentQuestions.questions.length && { opacity: 0.6 }
-            ]}
-            iconName="chevron-right"
-            iconColor="white"
-            iconSize={verticalScale(21)}
-            disabled={currentAnswers.length !== currentQuestions.questions.length}
-            onPress={next}
-          />
+          {!lastQuestions && (
+            <RoundIconButton
+              size={verticalScale(48)}
+              backgroundColor="#B45A6F"
+              containerStyle={[
+                currentAnswers.length !== currentQuestions.questions.length && { opacity: 0.6 }
+              ]}
+              iconName="chevron-right"
+              iconColor="white"
+              iconSize={verticalScale(21)}
+              disabled={currentAnswers.length !== currentQuestions.questions.length}
+              onPress={next}
+            />
+          )}
+          {lastQuestions && (
+            <View style={{ flex: 1 }}>
+              <RoundButton
+                text="Decouveres Ta personnalite"
+                backgroundColor={currentAnswers.length !== currentQuestions.questions.length ? "#B45A6FCC" : "#B45A6F"}
+                containerStyle={styles.buttonFinish}
+                height={verticalScale(48)}
+                uppercase
+                onPress={async () => {
+                  await submitAnswers();
+                  NavigationHelper.navigate('MainTabsProfile');
+                }}
+              />
+            </View>
+          )}
         </View>
         <SafeAreaView />
       </View>
