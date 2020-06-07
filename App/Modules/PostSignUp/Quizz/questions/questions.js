@@ -57,22 +57,22 @@ const SCREEN_3 = {
       {
         question: 'PENSES-TU QUE TON AMBITION S’EXPRIME ESSENTIELLEMENT À TRAVERS ?',
         answers: [
-          { type: 160, answer: 'Ta vision des choses.' },
-          { type: 180, answer: 'Tes actes quotidiens.' },
+          { type: 1, answer: 'Ta vision des choses.' },
+          { type: 2, answer: 'Tes actes quotidiens.' },
         ]
       },
       {
         question: 'LORSQUE TU DÉSIRES QUELQUE CHOSE, COMMENT RÉAGIS-TU EN GÉNÉRAL ?',
         answers: [
-          { type: 180, answer: 'C’est trop difficile de patienter, il te le faut de suite.' },
-          { type: 160, answer: 'C’est très difficile de patienter mais tu sais que tu l’auras bientôt de toutes façons.' },
+          { type: 1, answer: 'C’est trop difficile de patienter, il te le faut de suite.' },
+          { type: 2, answer: 'C’est très difficile de patienter mais tu sais que tu l’auras bientôt de toutes façons.' },
         ]
       },
       {
         question: 'FACE À UN DÉSACCORD DIRAIS-TU QUE TU ES ?',
         answers: [
-          { type: 180, answer: 'Plus spontané dans tes réactions que stratégique.' },
-          { type: 160, answer: 'Plus stratégique dans tes réactions que spontané.' },
+          { type: 1, answer: 'Plus spontané dans tes réactions que stratégique.' },
+          { type: 2, answer: 'Plus stratégique dans tes réactions que spontané.' },
         ]
       }
     ]
@@ -84,15 +84,15 @@ const SCREEN_4 = {
       {
         question: 'POUR TOI, LORSQUE TU TE RETROUVES FACE À UN OBSTACLE ?',
         answers: [
-          { type: 180, answer: 'c’est le moyen d’en faire une force.' },
-          { type: 160, answer: 'c’est la nécessité de réfléchir davantage.' },
+          { type: 1, answer: 'c’est le moyen d’en faire une force.' },
+          { type: 2, answer: 'c’est la nécessité de réfléchir davantage.' },
         ]
       },
       {
         question: 'QUELLE PLACE PREND L’AVIS DES AUTRES DANS TES DÉCISIONS ?',
         answers: [
-          { type: 160, answer: 'J’ai besoin de l’avis des autres même si je finis par les prendre seul.' },
-          { type: 180, answer: 'Je n’ai pas besoin des autres pour prendre mes décisions..' },
+          { type: 1, answer: 'J’ai besoin de l’avis des autres même si je finis par les prendre seul.' },
+          { type: 2, answer: 'Je n’ai pas besoin des autres pour prendre mes décisions..' },
         ]
       }
     ]
@@ -104,19 +104,19 @@ const SCREEN_5 = {
     {
       question: 'QUEL GENRE DE COLLABORATEUR(TRICE) RECHERCHES-TU POUR CRÉER UN PROJET ?',
       answers: [
-        { type: 180, answer: 'Un(e) partenaire qui entreprend beaucoup et qui est compétitif(ve)' },
-        { type: 280, answer: 'n(e) partenaire qui collabore beaucoup et qui est serviable.' },
-        { type: 160, answer: 'Un(e) partenaire qui réfléchit beaucoup et qui est très stratégique.' },
-        { type: 260, answer: 'Un(e) partenaire qui tolère beaucoup et qui est diplomate.' },
+        { type: 1, answer: 'Un(e) partenaire qui entreprend beaucoup et qui est compétitif(ve)' },
+        { type: 2, answer: 'n(e) partenaire qui collabore beaucoup et qui est serviable.' },
+        { type: 3, answer: 'Un(e) partenaire qui réfléchit beaucoup et qui est très stratégique.' },
+        { type: 4, answer: 'Un(e) partenaire qui tolère beaucoup et qui est diplomate.' },
       ]
     },
     {
       question: 'PERSONNELLEMENT QU’ATTENDS-TU DE TES PROCHES ?',
       answers: [
-        { type: 180, answer: 'Des proches impliqués et francs' },
-        { type: 280, answer: 'Des proches ouverts et fêtards' },
-        { type: 260, answer: 'Des proches attentionnés et à l’écoute' },
-        { type: 160, answer: 'Des proches directif et fédérateurs' },
+        { type: 1, answer: 'Des proches impliqués et francs' },
+        { type: 2, answer: 'Des proches ouverts et fêtards' },
+        { type: 3, answer: 'Des proches attentionnés et à l’écoute' },
+        { type: 4, answer: 'Des proches directif et fédérateurs' },
       ]
     },
   ]
@@ -128,19 +128,19 @@ const SCREEN_6 = {
     {
       question: 'QUEL GENRE DE PETITE AMIE RECHERCHES-TU POUR ÊTRE HEUREUX ?',
       answers: [
-        { type: 180, answer: 'Une petite amie spontanée et décisionnaire, qui cherche toujours à tout contrôler.' },
-        { type: 280, answer: 'Une petite amie arrangeante et accueillante, qui ne dit pas vraiment ce qu’elle pense.' },
-        { type: 160, answer: 'Une petite amie impliquée et à l’écoute, qui se sert trop souvent des autres.' },
-        { type: 260, answer: 'Une petite amie compatissante et bienveillante, qui se laisse trop vite influencer.' }
+        { type: 1, answer: 'Une petite amie spontanée et décisionnaire, qui cherche toujours à tout contrôler.' },
+        { type: 2, answer: 'Une petite amie arrangeante et accueillante, qui ne dit pas vraiment ce qu’elle pense.' },
+        { type: 3, answer: 'Une petite amie impliquée et à l’écoute, qui se sert trop souvent des autres.' },
+        { type: 4, answer: 'Une petite amie compatissante et bienveillante, qui se laisse trop vite influencer.' }
       ]
     },
     {
       question: 'QUELS GENRES D’AMIS RECHERCHES-TU POUR PASSER UN BON MOMENT ? ',
       answers: [
-        { type: 260, answer: 'Des amis attentionnés qui te soutiennent et qui ne prennent pas suffisamment d’initiatives envers toi.' },
-        { type: 180, answer: 'Des amis engagés sûrs d’eux, qui se mettent trop souvent en avant.' },
-        { type: 160, answer: 'Des amis persuasifs et pertinents, qui cherchent toujours le petit détail.' },
-        { type: 280, answer: 'Des amis très discrets et conciliants, qui manquent de spontanéité. ' },
+        { type: 1, answer: 'Des amis attentionnés qui te soutiennent et qui ne prennent pas suffisamment d’initiatives envers toi.' },
+        { type: 2, answer: 'Des amis engagés sûrs d’eux, qui se mettent trop souvent en avant.' },
+        { type: 3, answer: 'Des amis persuasifs et pertinents, qui cherchent toujours le petit détail.' },
+        { type: 4, answer: 'Des amis très discrets et conciliants, qui manquent de spontanéité. ' },
       ]
     },
   ]
