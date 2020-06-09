@@ -94,6 +94,13 @@ const SCREEN_4 = {
           { type: 1, answer: 'J’ai besoin de l’avis des autres même si je finis par les prendre seul.' },
           { type: 2, answer: 'Je n’ai pas besoin des autres pour prendre mes décisions..' },
         ]
+      },
+      {
+        question: 'Face a des personnes extraverties et expansive as-tu tendances  ?',
+        answers: [
+          { type: 1, answer: 'A continuer a collaborer même si c’est un peu lourd pour toi.' },
+          { type: 2, answer: 'A décrocher parce que c’est trop lourd pour toi.' },
+        ]
       }
     ]
 };
@@ -102,21 +109,31 @@ const SCREEN_5 = {
   image: IMAGE_SCREEN_5,
   questions: [
     {
-      question: 'QUEL GENRE DE COLLABORATEUR(TRICE) RECHERCHES-TU POUR CRÉER UN PROJET ?',
+      question: 'Le plus souvent , tu te sens plutôt ?',
       answers: [
-        { type: 1, answer: 'Un(e) partenaire qui entreprend beaucoup et qui est compétitif(ve)' },
-        { type: 2, answer: 'n(e) partenaire qui collabore beaucoup et qui est serviable.' },
-        { type: 3, answer: 'Un(e) partenaire qui réfléchit beaucoup et qui est très stratégique.' },
-        { type: 4, answer: 'Un(e) partenaire qui tolère beaucoup et qui est diplomate.' },
+        { type: 1, answer: 'Vivre l’instant présent comme il vient.' },
+        { type: 2, answer: 'Vivre avec le besoin de participer à de nombreux projets.' },
       ]
     },
     {
-      question: 'PERSONNELLEMENT QU’ATTENDS-TU DE TES PROCHES ?',
+      question: 'Pour toi vaut-il mieux ?',
       answers: [
-        { type: 1, answer: 'Des proches impliqués et francs' },
-        { type: 2, answer: 'Des proches ouverts et fêtards' },
-        { type: 3, answer: 'Des proches attentionnés et à l’écoute' },
-        { type: 4, answer: 'Des proches directif et fédérateurs' },
+        { type: 1, answer: 'Se lancer dans plusieurs projets au risque de ne pas aboutir.' },
+        { type: 2, answer: 'Eviter de se lancer si tu penses ne pas aboutir.' },
+      ]
+    },
+    {
+      question: 'pour toi, est ce un probleme de remettre au lendemain ce que l’on peut faire le jour même ?',
+      answers: [
+        { type: 1, answer: 'Je préfère éviter, autant faire ce qu’il y a à faire.' },
+        { type: 2, answer: 'On est pas à la minute,  je pourrais toujours le faire demain.' },
+      ]
+    },
+    {
+      question: 'En groupe tu es plutôt du genre ?',
+      answers: [
+        { type: 1, answer: 'A participer, collaborer, aider les autres, c’est ta deuxième nature.' },
+        { type: 2, answer: 'Tu es la, mais tu préfères rester en retrait pour observer et écouter les gens' },
       ]
     },
   ]
@@ -141,6 +158,24 @@ const SCREEN_6 = {
         { type: 2, answer: 'Des amis engagés sûrs d’eux, qui se mettent trop souvent en avant.' },
         { type: 3, answer: 'Des amis persuasifs et pertinents, qui cherchent toujours le petit détail.' },
         { type: 4, answer: 'Des amis très discrets et conciliants, qui manquent de spontanéité. ' },
+      ]
+    },
+    {
+      question: 'Quels  genres de collaborateurs recherches-tu en priorité pour crée un projet ?  ',
+      answers: [
+        { type: 1, answer: 'Un(e) partenaire qui entreprend beaucoup et qui est compétitif(ve).' },
+        { type: 2, answer: 'Un(e) partenaire qui collabore beaucoup et qui est serviable.' },
+        { type: 3, answer: 'Un(e) partenaire qui réfléchit beaucoup et qui est très stratégique.' },
+        { type: 4, answer: 'Un(e) partenaire qui tolère beaucoup et qui est diplomate. ' },
+      ]
+    },
+    {
+      question: 'Personnellement, qu’attends-tu de tes proches ?   ',
+      answers: [
+        { type: 1, answer: 'Des proches impliqués et francs.' },
+        { type: 2, answer: 'Des proches ouverts et fêtards.' },
+        { type: 3, answer: 'Des proches attentionnés et à l’écoute.' },
+        { type: 4, answer: 'Des proches directif et fédérateurs. ' },
       ]
     },
   ]

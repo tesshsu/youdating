@@ -55,7 +55,7 @@ export default StyleSheet.create({
   birthdaylabelText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(14),
-    color: '#837777',
+    color: colors.WHITE,
     marginBottom: verticalScale(7),
     marginTop: verticalScale(23),
     textTransform: 'uppercase'

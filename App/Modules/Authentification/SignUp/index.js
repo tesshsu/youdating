@@ -7,7 +7,9 @@ import {
   Alert,
   Image, Linking,
 } from 'react-native';
-import { Formik } from 'formik';
+import moment from 'moment';
+import * as Yup from 'yup';
+import { Formik, useFormik } from 'formik';
 import { LinearGradient } from 'expo-linear-gradient';
 import SwitchSelector from '../../Global/SwitchSelector';
 import styles from './styles';
@@ -18,8 +20,49 @@ import FacebookConnectButton from '../../Global/FacebookConnectButton';
 import TextField from '../../Global/TextField';
 import Images from '../../../Assets/images';
 
+function checkAge(birthday) {
+  const birthdayMoment = moment.unix(birthday);
+
+  return moment().diff(birthdayMoment, 'years') >= 18;
+}
+
+const emailFaker = () => {
+  let chars = 'abcdefghijklmnopqrstuvwxyz'
+  return 'testing'+chars[Math.floor(Math.random() * 26)]
+    + Math.random().toString(36).substring(2, 11)
+    + '@mail.com';
+}
+
+const SignUpSchema = Yup.object().shape({
+  email: Yup
+    .string()
+    .trim()
+    .email('Ce n\'est pas une adresse email valide').required('Ce champs est requis'),
+  lastName: Yup.string().required('Ce champs est requis'),
+  firstName: Yup.string().required('Ce champs est requis'),
+  password: Yup
+    .string()
+    .trim()
+    .required('Ce champs est requis')
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+      'Le mot de passe doit contenir au moins 6 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial'
+    ),
+  birthday: Yup
+    .string()
+    .trim()
+    .required('Ce champs est requis')
+    .test('age', 'Vous devez être âgé d\'au moins 18 ans pour utiliser You\'s', checkAge),
+  gender: Yup
+    .string()
+    .trim()
+    .oneOf(['MALE', 'FEMALE'])
+    .required('Ce champs est requis')
+});
+
 export default function AuthentificationSignUp() {
   const [isFirst, setFirst] = useState(true);
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const {
     signUp,
     isAuthentificated,
@@ -37,15 +80,56 @@ export default function AuthentificationSignUp() {
     }
   }, [isAuthentificated, logguedUser]);
 
+  async function onSubmit(formValues) {
+    let location;
+    const {
+      birthday,
+      ...payload
+    } = formValues;
+
+    try {
+      await signUp({
+        ...payload,
+        birthday: Number(birthday)
+      });
+    } catch (err) {
+      console.warn(err);
+      if (err.response && err.response.status === 422) {
+        setErrors({
+          email: 'Cet email est déjà utilisée'
+        });
+      } else {
+        Alert.alert('Enregistrement', 'Impossible de créer le compte');
+      }
+    }
+  }
+  const {
+    handleChange,
+    values,
+    handleSubmit,
+    errors,
+    setErrors
+  } = useFormik({
+    validationSchema: SignUpSchema,
+    validateOnChange: true,
+    validateOnBlur: false,
+    validateOnMount: false,
+    onSubmit
+  });
+
+
+  const randomEmail = emailFaker();
+
   return (
     <Formik
       initialValues={{
-        email: 'testingVacha6@gmail.com',
+        email: randomEmail,
         password: '1StrongPassword$',
         gender: 'male',
-        birthday: '02101990',
+        birthday: '',
         firstName: 'tess',
-        lastName: 'hsu'
+        lastName: 'hsu',
+        ville: 'Nice'
       }}
       onSubmit={async ({
         email,
@@ -53,7 +137,8 @@ export default function AuthentificationSignUp() {
         gender,
         birthday,
         firstName,
-        lastName
+        lastName,
+        ville
       }) => {
         try {
           const data = {};
@@ -63,13 +148,14 @@ export default function AuthentificationSignUp() {
           data.birthday = birthday.trim();
           data.firstName = firstName.trim();
           data.lastName = lastName.trim();
+          data.ville = ville.trim();
           await signUp(data);
         } catch (err) {
           Alert.alert('SignIn error', err.message);
         }
       }}
     >
-      { ({ handleChange, handleSubmit, values }) => (
+      {({ handleChange, handleSubmit, values }) => (
         <View style={globalStyles.scrollViewContainer}>
           <View style={globalStyles.backgroundContainer}>
             <Image style={globalStyles.bakcgroundImage} source={Images.back_img_signIn} />
@@ -91,29 +177,29 @@ export default function AuthentificationSignUp() {
             {
               isFirst ?
                 <>
-                <TextField
-                  containerStyle={globalStyles.textField}
-                  label="ADRESS EMAIL"
-                  textInputProps={{
-                    autoCapitalize: 'none',
-                    placeholder: 'email',
-                    keyboardType: 'email-address',
-                    textContentType: 'emailAddress',
-                    onChangeText: handleChange('email'),
-                    value: values.email,
-                  }}
-                />
-                <TextField
-                  containerStyle={globalStyles.textField}
-                  label="MOT DE PASSE"
-                  textInputProps={{
-                    autoCapitalize: 'none',
-                    placeholder: 'mot de passe',
-                    onChangeText: handleChange('password'),
-                    value: values.password,
-                    secureTextEntry: true,
-                  }}
-                />
+                  <TextField
+                    containerStyle={globalStyles.textField}
+                    label="ADRESS EMAIL"
+                    textInputProps={{
+                      autoCapitalize: 'none',
+                      placeholder: 'email',
+                      keyboardType: 'email-address',
+                      textContentType: 'emailAddress',
+                      onChangeText: handleChange('email'),
+                      value: values.email,
+                    }}
+                  />
+                  <TextField
+                    containerStyle={globalStyles.textField}
+                    label="MOT DE PASSE"
+                    textInputProps={{
+                      autoCapitalize: 'none',
+                      placeholder: 'mot de passe',
+                      onChangeText: handleChange('password'),
+                      value: values.password,
+                      secureTextEntry: true,
+                    }}
+                  />
                   <TextField
                     containerStyle={globalStyles.textField}
                     label="firstName"
@@ -145,19 +231,52 @@ export default function AuthentificationSignUp() {
                     initial={0}
                     onPress={(value) => handleChange('gender')}
                   />
-                <TextField
-                  containerStyle={globalStyles.textField}
-                  label="birthday"
-                  placeholder='02101990'
-                  keyboardType="numeric"
-                  textInputProps={{
-                    autoCapitalize: 'none',
-                    placeholder: 'birthday',
-                    onChangeText: handleChange('birthday'),
-                    value: values.birthday,
-                    secureTextEntry: false,
-                  }}
-                />
+                  <TouchableOpacity
+                    onPress={() => setIsDatePickerVisible(true)}
+                  >
+                    <Text style={styles.birthdaylabelText}>
+                      Date de naissance
+                    </Text>
+                    <View style={styles.birthdayRow} pointerEvents="none">
+                      <TextField
+                        containerStyle={styles.birthdayTextField}
+                        textInputProps={{
+                          placeholder: 'JJ',
+                          autoCapitalize: 'none',
+                          value: values.birthday ? moment.unix(values.birthday).format('DD') : '',
+                        }}
+                      />
+                      <TextField
+                        containerStyle={styles.birthdayTextField}
+                        textInputProps={{
+                          placeholder: 'MM',
+                          value: values.birthday ? moment.unix(values.birthday).format('MM') : '',
+                        }}
+                      />
+                      <TextField
+                        containerStyle={[
+                          styles.birthdayTextField,
+                          { marginRight: 0 }
+                        ]}
+                        textInputProps={{
+                          placeholder: 'YYYY',
+                          value: values.birthday ? moment.unix(values.birthday).format('YYYY') : '',
+                        }}
+                      />
+                      {errors.birthday && <Text style={styles.errorText}>{ errors.birthday }</Text>}
+                    </View>
+                  </TouchableOpacity>
+                  <TextField
+                    containerStyle={globalStyles.textField}
+                    label="ville"
+                    textInputProps={{
+                      autoCapitalize: 'none',
+                      placeholder: 'ville',
+                      onChangeText: handleChange('ville'),
+                      value: values.ville,
+                      secureTextEntry: false,
+                    }}
+                  />
                 </>
             }
 
@@ -167,7 +286,7 @@ export default function AuthentificationSignUp() {
                   <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
                                   style={globalStyles.linearGradient}
                                   start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-                    <Text style={globalStyles.buttonText} onPress={ ()=> setFirst(false) }> suivant </Text>
+                    <Text style={globalStyles.buttonText} onPress={() => setFirst(false)}> suivant </Text>
                   </LinearGradient> : <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
                                                       style={globalStyles.linearGradient}
                                                       start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
@@ -182,7 +301,7 @@ export default function AuthentificationSignUp() {
                   SIGN IN
                 </Text>
               </TouchableOpacity>
-             </View>
+            </View>
           </ScrollView>
         </View>
       )}

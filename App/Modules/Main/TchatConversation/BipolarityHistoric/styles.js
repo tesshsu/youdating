@@ -21,13 +21,12 @@ export default StyleSheet.create({
     marginVertical: verticalScale(17)
   },
   packsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: verticalScale(30)
   },
   pack: {
-    paddingVertical: verticalScale(8),
-    paddingHorizontal: scale(12),
+    paddingVertical: verticalScale(10),
+    paddingHorizontal: scale(100),
     elevation: 2,
     shadowColor: 'black',
     shadowOpacity: 0.4,

@@ -1,13 +1,14 @@
 import { StyleSheet } from 'react-native';
 import { scale, verticalScale, moderateScale } from '../../../Helpers/ScaleHelper';
-
+import colors from '../../../Assets/css';
 export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white'
   },
   button: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: 90,
   },
   scrollView: {
     flex: 1
@@ -30,7 +31,7 @@ export default StyleSheet.create({
   titleText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(15),
-    color: '#84B5E4',
+    color: colors.PURPLE,
     marginTop: verticalScale(16),
     textAlign: 'center'
   },
@@ -38,6 +39,7 @@ export default StyleSheet.create({
     marginTop: verticalScale(16),
     fontFamily: 'NewTaiLue-Bold',
     textAlign: 'center',
+    color: colors.GREY,
     fontSize: moderateScale(14)
   },
   paragraph: {

@@ -56,20 +56,6 @@ export default function BipolarityHistoric() {
             onPress={() => setCurrentPack(0)}
             containerStyle={styles.pack}
           />
-          <RoundButton
-            text="PACK 2"
-            borderRadius={verticalScale(10)}
-            backgroundColor={currentPack === 1 ? '#69A7F1' : '#D2D2D2'}
-            onPress={() => setCurrentPack(1)}
-            containerStyle={styles.pack}
-          />
-          <RoundButton
-            text="PACK 3"
-            borderRadius={verticalScale(10)}
-            backgroundColor={currentPack === 2 ? '#69A7F1' : '#D2D2D2'}
-            onPress={() => setCurrentPack(2)}
-            containerStyle={styles.pack}
-          />
         </View>
         <View style={styles.scrollviewContainer}>
           <ScrollView

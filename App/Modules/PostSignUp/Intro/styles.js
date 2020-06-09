@@ -71,5 +71,13 @@ export default StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0
+  },
+  buttonFinish: {
+    marginStart: 10,
+    borderRadius: verticalScale(48 / 2),
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 70,
+    textAlign: 'center'
   }
 });

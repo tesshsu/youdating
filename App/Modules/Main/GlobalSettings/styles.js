@@ -14,7 +14,7 @@ export default StyleSheet.create({
   },
   button: {
     height: verticalScale(72),
-	marginTop: 10,
+	  marginTop: 10,
     borderWidth: 2,
     borderColor: colors.PINK,
     backgroundColor: colors.WHITE,
@@ -45,7 +45,20 @@ export default StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     margin: 10,
-    color: colors.WHITE,
-    backgroundColor: 'transparent',
+    color: colors.WHITE
+  },
+  button: {
+    alignSelf: 'center',
+    marginTop: verticalScale(5),
+    width: verticalScale(254),
+    height: verticalScale(54),
+    borderRadius: verticalScale(10),
+    shadowColor: 'black',
+    shadowOpacity: 0.33,
+    shadowRadius: 3,
+    backgroundColor: 'white',
+    elevation: 2,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

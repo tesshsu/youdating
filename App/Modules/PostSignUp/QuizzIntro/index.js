@@ -10,7 +10,6 @@ import { scale, verticalScale } from '../../../Helpers/ScaleHelper';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
 
 const IMAGE = require('../../../../assets/images/quizz/home.png');
-
 export default function QuizzIntro() {
   return (
     <>
@@ -22,7 +21,7 @@ export default function QuizzIntro() {
           {'Ce test nous permettra de déterminer ta personnalité, ce qui te permettra d\'interagir de la façon la plus adaptée avec les autres utilisateurs.'}
         </Text>
         <Text style={styles.titleText}>
-          Réponds aux 16 questions pour découvrir ton profil.
+          Réponds aux questions pour découvrir ton profil.
         </Text>
         <Text style={styles.adviceText}>
           CONSEIL
@@ -36,7 +35,7 @@ export default function QuizzIntro() {
       </Animated.ScrollView>
       <RoundButton
         text="BON TEST"
-        backgroundColor="#84B5E4"
+        backgroundColor="#d412c7"
         width={scale(172)}
         height={verticalScale(50)}
         borderRadius={verticalScale(26)}

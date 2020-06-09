@@ -6,7 +6,7 @@ export default StyleSheet.create({
     fontFamily: 'Segoe-UI-Bold',
     fontSize: moderateScale(15),
     color: 'black',
-    paddingTop: verticalScale(6),
+    paddingTop: verticalScale(10),
     paddingBottom: verticalScale(6),
     textAlign: 'center',
     paddingHorizontal: scale(30),
@@ -103,18 +103,22 @@ export default StyleSheet.create({
     borderRadius: verticalScale(25)
   },
   modeSelector: {
-    marginTop: 8,
+    marginTop: 20,
     marginBottom: 8
   },
   searchField: {
     backgroundColor: 'white',
     borderBottomColor: 'transparent',
     borderTopColor: 'transparent',
+    height: '10%',
     width: '90%'
   },
+  searchBlock: {
+    alignItems: 'center',
+    marginTop: 10
+  },
   searchInner: {
-    borderRadius: 10,
-    backgroundColor: '#e1e1e1'
+    borderRadius: 10
   },
   messageCount: {
     borderRadius: 50,
@@ -133,7 +137,7 @@ export default StyleSheet.create({
   line: {
     height: 1,
     backgroundColor: '#BEBEBE',
-    marginTop: verticalScale(23),
+    marginTop: verticalScale(0),
     marginBottom: verticalScale(23)
   },
   iconStyle: {

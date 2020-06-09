@@ -13,6 +13,7 @@ import moment from 'moment';
 import PageHeader from '../../../../Global/PageHeader';
 import MoodSelector from '../../../../Global/MoodSelector';
 import SearchField from '../../../../Global/SearchField';
+import { SearchBar } from 'react-native-elements';
 import { verticalScale } from '../../../../../Helpers/ScaleHelper';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import styles from './styles';
@@ -91,7 +92,7 @@ export default function MainTabsTchat() {
       <Text style={styles.titleText}>
         {`Mes conversations ${TEXT[currentMood]}`}
       </Text>
-      <View style={{ alignItems: 'center'}}>
+      <View style={styles.searchBlock}>
         <SearchField
           placeholder="RECHERCHE PAR NOM D'UTILISATEUR..."
           lightTheme={true}

@@ -17,8 +17,8 @@ export default StyleSheet.create({
     borderColor: '#fff',
     borderWidth: 1,
     backgroundColor: '#fff',
-    paddingVertical: verticalScale(10),
-    paddingHorizontal: scale(16),
+    paddingVertical: verticalScale(5),
+    paddingHorizontal: scale(10),
     borderRadius: verticalScale(13),
     color: 'black'
   },

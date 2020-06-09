@@ -61,6 +61,7 @@ export default StyleSheet.create({
   },
   buttonFinish: {
     marginStart: 10,
-    borderRadius: verticalScale(48 / 2)
+    borderRadius: verticalScale(48 / 2),
+    marginBottom: 10
   }
 });

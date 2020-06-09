@@ -7,22 +7,28 @@ import {
 import { useDebouncedCallback } from 'use-debounce';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
+import { CheckBox } from 'react-native-elements';
+import { scale, verticalScale } from '../../../Helpers/ScaleHelper';
 import styles from './styles';
 import PageHeader from '../../Global/PageHeader';
 import SettingsCard from '../../Global/SettingsCard';
-import SettingSwitch from '../../Global/SettingSwitch';
+import RoundButton from '../../Global/RoundIconButton';
 import useLogguedUser from '../../../Hooks/useLogguedUser';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
+import useCurrentMood from '../../../Hooks/useCurrentMood';
 import { MOODS } from '../../../GlobalConfig';
-import { CheckBox } from 'react-native-elements';
 
 export default function GlobalSettings() {
+  const {
+    moodInfos,
+    currentMood
+  } = useCurrentMood();
   const [isChecked, setIsChecked] = useState(true);
   const {
     isAuthentificated,
     logguedUser,
     signOut,
-	checked = true,
+	  checked = true,
     updateGlobalSettings,
     updateMoodVisibility,
     updateSharePosition
@@ -104,54 +110,72 @@ export default function GlobalSettings() {
         style={styles.container}
         contentContainerStyle={styles.scrollViewContent}
       >
-		<SettingsCard
-          title="Navigations"
-        >
-			 <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={styles.linearGradient}
-                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsMet')}> RENCONTRES </Text>
-		    </LinearGradient>
-			<LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={styles.linearGradient}
-                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsTchat')}> MESSAGERIE </Text>
-		    </LinearGradient>
-			  <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={styles.linearGradient}
-                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}> COMPATBILITER </Text>
-			  </LinearGradient>
-			  <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={styles.linearGradient}
-                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-              <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsProfile')}> PROFILE </Text>
-			  </LinearGradient>
-      <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                      style={styles.linearGradient}
-                      start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-        <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainMoodSettings')}> CONFIGURE </Text>
-      </LinearGradient>
-			 <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                            style={styles.linearGradient}
-                            start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-              <Text style={styles.buttonTextGradient} onPress={onSignOut}> Déconnexion </Text>
-			 </LinearGradient>
-		</SettingsCard>
-		<SettingsCard
+        {/* eslint-disable-next-line no-tabs */}
+        <SettingsCard title="Navigations">
+          <TouchableOpacity
+            style={[
+              styles.button,
+              { backgroundColor: moodInfos.color }
+            ]}
+          >
+            <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsMet')}> RENCONTRES </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              { backgroundColor: moodInfos.color }
+            ]}
+          >
+            <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsTchat')}> MESSAGERIE </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              { backgroundColor: moodInfos.color }
+            ]}
+          >
+            <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}> COMPATBILITER </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              { backgroundColor: moodInfos.color }
+            ]}
+          >
+            <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsProfile')}> PROFILE </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              { backgroundColor: moodInfos.color }
+            ]}
+          >
+            <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainMoodSettings')}> CONFIGURE </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.button,
+              { backgroundColor: moodInfos.color }
+            ]}
+          >
+            <Text style={styles.buttonTextGradient} onPress={onSignOut}> Déconnexion </Text>
+          </TouchableOpacity>
+          {/* eslint-disable-next-line no-tabs */}
+        </SettingsCard>
+        <SettingsCard
           title="confidentialite"
         >
-		    <CheckBox
-          center
-          iconRight
-          title='accepter les termes et conditions'
-          checked={isChecked}
-          onPress={()=>setIsChecked(!isChecked)}
-			  />
-		    <Text>
-			    Le Site web/Application mobile développés par BEPATIENT vous permettent uniquement de vous informer et de vous accompagner dans la gestion votre état de santé/pathologie spécifique/bien être, elle n’est en aucun cas un outil de diagnostic, de consultation, d’urgence, ou autre activité de télé médecine.
-			  </Text>
-		</SettingsCard>
+          <CheckBox
+            center
+            iconRight
+            title="accepter les termes et conditions"
+            checked={isChecked}
+            onPress={() => setIsChecked(!isChecked)}
+          />
+          <Text>
+            Le Site web/Application mobile développés par BEPATIENT vous permettent uniquement de vous informer et de vous accompagner dans la gestion votre état de santé/pathologie spécifique/bien être, elle n’est en aucun cas un outil de diagnostic, de consultation, d’urgence, ou autre activité de télé médecine.
+          </Text>
+        </SettingsCard>
       </ScrollView>
     </>
   );

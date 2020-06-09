@@ -24,7 +24,7 @@ const Actions = () => {
         iconName="message-square"
       />
       <ActionButton
-        onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}
+        onPress={() => NavigationHelper.navigate('MainCompatibilityDetails', { user })}
         text="COMPATBILITER"
         iconName="refresh-cw"
       />
