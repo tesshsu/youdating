@@ -22,11 +22,12 @@ export default StyleSheet.create({
   },
   packsContainer: {
     alignItems: 'center',
-    paddingHorizontal: verticalScale(30)
+    paddingHorizontal: verticalScale(30),
+    marginTop: 20
   },
   pack: {
     paddingVertical: verticalScale(10),
-    paddingHorizontal: scale(100),
+    paddingHorizontal: scale(90),
     elevation: 2,
     shadowColor: 'black',
     shadowOpacity: 0.4,
@@ -101,7 +102,7 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 20,
     left: 0,
     right: 0,
     alignItems: 'center',

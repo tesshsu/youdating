@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import {
   Text,
   View,
   ScrollView,
   SafeAreaView,
-  ImageBackground
+  ImageBackground, TouchableOpacity, Image
 } from 'react-native';
 
 import styles from './styles';
@@ -12,17 +12,31 @@ import PageHeader from '../../../Global/PageHeader';
 import useCurrentMood from '../../../../Hooks/useCurrentMood';
 import RoundButton from '../../../Global/RoundButton';
 import { verticalScale } from '../../../../Helpers/ScaleHelper';
-import RoundIconButton from '../../../Global/RoundIconButton';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
-import {BIPOLARITY_QUETIONS} from '../Questions';
-const IMAGE_PLAGE = require('../../../../../assets/images/plage.png');
-const IMAGE_FERRARI = require('../../../../../assets/images/ferrari.png');
-const IMAGE_MASERATTI = require('../../../../../assets/images/maseratti.png');
+import * as Questions from '../Questions';
+import Carousel from '../../../Global/Carousel';
+import useLogguedUser from '../../../../Hooks/useLogguedUser';
+import useConversation from '../../../../Hooks/useConversations';
 
 export default function BipolarityHistoric() {
+  const [carouselIndex, setCarrouselIndex] = useState(0);
   const [buttonContainerHeight, setButtonContainerheight] = useState(null);
   const [currentPack, setCurrentPack] = useState(0);
-  const { moodInfos } = useCurrentMood();
+  const { currentMood, moodInfos } = useCurrentMood();
+  const { logguedUser } = useLogguedUser();
+  const {
+    startConversation
+  } = useConversation();
+  const slicedQuestions = [];
+  const setCountA = () => {
+    setCounterA(countA + 1);
+    console.log('countA', countA);
+  };
+
+  const setCountB = () => {
+    setCounterB(countB + 1);
+    console.log('countB', countB);
+  };
 
   function onButtonContainerLayout(ev) {
     const { height } = ev.nativeEvent.layout;
@@ -31,6 +45,33 @@ export default function BipolarityHistoric() {
       setButtonContainerheight(height);
     }
   }
+  
+  const ModeQuestions = useMemo(() => Questions[currentMood][questions].question, [currentMood, question]);
+  ModeQuestions.forEach((u) => {
+    const lastArray = slicedQuestions[slicedQuestions.length - 1];
+
+    if (!lastArray || lastArray.length === 1) {
+      slicedQuestions.push([u]);
+    } else {
+      lastArray.push(u);
+    }
+  });
+
+  const openConversation = useCallback((conversation) => {
+    const {
+      user1,
+      user2,
+      lastMessage
+    } = conversation;
+
+    const target = user1.id === logguedUser.id ? user2 : user1;
+
+    if (lastMessage.isOpportunity && lastMessage.author !== logguedUser.id) {
+      NavigationHelper.navigate('MainTchatNewMessage', { conversation, target });
+    } else {
+      startConversation(currentMood, target);
+    }
+  }, [currentMood, logguedUser.id, startConversation]);
 
   return (
     <>
@@ -47,12 +88,11 @@ export default function BipolarityHistoric() {
         >
           {`Mood ${moodInfos.title}`}
         </Text>
-        <Text style={styles.resultText}>Résultats</Text>
         <View style={styles.packsContainer}>
           <RoundButton
-            text="PACK 1"
+            text="PACK 1 : Goûts et Intérêts"
             borderRadius={verticalScale(10)}
-            backgroundColor={currentPack === 0 ? '#69A7F1' : '#D2D2D2'}
+            backgroundColor={moodInfos.color}
             onPress={() => setCurrentPack(0)}
             containerStyle={styles.pack}
           />
@@ -64,76 +104,58 @@ export default function BipolarityHistoric() {
               { paddingBottom: buttonContainerHeight + verticalScale(40) }
             ]}
           >
-            <View style={styles.answerOuter}>
-              <View style={styles.answerCard}>
-                <Text style={styles.responseTitleText}>Reponse N°1</Text>
-                <Text style={styles.responseLabelText}>{BIPOLARITY_QUETIONS[0].question}</Text>
-                <View style={styles.answersContainer}>
-                  <View style={styles.answerContainer}>
-                    <Text>TOI</Text>
-                    <ImageBackground
-                      source={BIPOLARITY_QUETIONS[0].avatarA}
-                      style={styles.imageBackground}
-                      imageStyle={styles.imageBackgroundImage}
-                    />
-                    <Text style={styles.answerText}>{BIPOLARITY_QUETIONS[0].answerA}</Text>
-                  </View>
-                  <RoundIconButton
-                    iconName="thumbs-up"
-                    iconColor="white"
-                    iconSize={verticalScale(15)}
-                    size={verticalScale(32)}
-                    backgroundColor={moodInfos.color}
-                    containerStyle={styles.thumbsUp}
-                  />
-                  <View style={styles.answerContainer}>
-                    <Text>HENRY</Text>
-                    <ImageBackground
-                      source={BIPOLARITY_QUETIONS[0].avatarB}
-                      style={styles.imageBackground}
-                      imageStyle={styles.imageBackgroundImage}
-                    />
-                    <Text style={styles.answerText}>{BIPOLARITY_QUETIONS[0].answerB}</Text>
-                  </View>
+            <Carousel activeIndex={carouselIndex}>
+              {slicedQuestions.map((chunk, index) => (
+                <View key={index.toString()}>
+                  {chunk.map((item, idx) => (
+                    <View
+                      key={idx.toString()}
+                      disabled={item.disabled}
+                      style={styles.itemContainer}
+                    >
+                      <RoundButton
+                        text={item.title}
+                        fontSize={12}
+                        borderRadius={15}
+                        width={280}
+                        style={styles.passBoutton}
+                        height={30}
+                      />
+                      <Text style={styles.question}>{item.question}</Text>
+                      <View style={styles.line} />
+                      <View style={styles.imageContainer} >
+                        <View style={styles.imageBackground}>
+                          <TouchableOpacity onClick={setCountA}>
+                            <Image source={item.avatarA} style={styles.imageBackgroundImage} />
+                            <Text
+                              style={[
+                                styles.imageLabelText,
+                                { color: item.disabled ? '#BEBFC0' : moodInfos.color }
+                              ]}
+                            >
+                              {item.answerA}
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
+                        <View style={styles.imageBackground}>
+                          <TouchableOpacity onClick={setCountB}>
+                            <Image source={item.avatarB} style={styles.imageBackgroundImage} />
+                            <Text
+                              style={[
+                                styles.imageLabelText,
+                                { color: item.disabled ? '#BEBFC0' : moodInfos.color }
+                              ]}
+                            >
+                              {item.answerB}
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </View>
+                  ))}
                 </View>
-              </View>
-            </View>
-            <View style={styles.answerOuter}>
-              <View style={styles.answerCard}>
-                <Text style={styles.responseTitleText}>Reponse N°2</Text>
-                <Text style={styles.responseLabelText}>{BIPOLARITY_QUETIONS[1].question}</Text>
-                <View style={styles.answersContainer}>
-                  <View style={styles.answerContainer}>
-                    <Text>TOI</Text>
-                    <ImageBackground
-                      source={BIPOLARITY_QUETIONS[1].avatarA}
-                      style={styles.imageBackground}
-                      imageStyle={styles.imageBackgroundImage}
-                    />
-                    <Text style={styles.answerText}>{BIPOLARITY_QUETIONS[1].answerA}</Text>
-                  </View>
-                  <RoundIconButton
-                    iconName="thumbs-up"
-                    iconColor="white"
-                    iconSize={verticalScale(15)}
-                    size={verticalScale(32)}
-                    backgroundColor={moodInfos.color}
-                    containerStyle={styles.thumbsUp}
-                    disabled
-                    onPress={() => {}}
-                  />
-                  <View style={styles.answerContainer}>
-                    <Text>HENRY</Text>
-                    <ImageBackground
-                      source={BIPOLARITY_QUETIONS[1].avatarB}
-                      style={styles.imageBackground}
-                      imageStyle={styles.imageBackgroundImage}
-                    />
-                    <Text style={styles.answerText}>{BIPOLARITY_QUETIONS[1].answerB}</Text>
-                  </View>
-                </View>
-              </View>
-            </View>
+              ))}
+            </Carousel>
             <View style={styles.compatibilityResult}>
               <Text style={styles.compatibilityResultTitle}>{`Compatibilité d'interets pack ${currentPack + 1}`}</Text>
               <Text style={styles.compatibilityPercentageText}>
@@ -146,10 +168,10 @@ export default function BipolarityHistoric() {
               <RoundButton
                 containerStyle={styles.button}
                 backgroundColor={moodInfos.color}
-                text="revenir plus tard"
+                text="DISCUTEZ-EN"
                 color="white"
                 borderRadius={23}
-                onPress={() => { NavigationHelper.back(); }}
+                onPress={() => openConversation(conversation)}
               />
             </SafeAreaView>
           </View>

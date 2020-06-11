@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useMemo } from 'react';
 import {
   Text,
   View,
@@ -17,7 +17,7 @@ import useCurrentMood from '../../../../Hooks/useCurrentMood';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
 import Carousel from '../../../Global/Carousel';
 import useLogguedUser from '../../../../Hooks/useLogguedUser';
-import {BIPOLARITY_QUETIONS} from '../Questions';
+import * as Questions from '../Questions';
 
 export default function MainTchatConvversationBipolarity() {
   const [carouselIndex, setCarrouselIndex] = useState(0);
@@ -36,8 +36,11 @@ export default function MainTchatConvversationBipolarity() {
     setCounterB(countB + 1);
     console.log('countB', countB);
   };
+  let QUETIONS = [];
+  //let question = questions.question;
+  const ModeQuestions = useMemo(() => Questions[currentMood].QUETIONS, [currentMood, QUETIONS]);
 
-  BIPOLARITY_QUETIONS.forEach((u) => {
+  ModeQuestions.forEach((u) => {
     const lastArray = slicedQuestions[slicedQuestions.length - 1];
 
     if (!lastArray || lastArray.length === 1) {
@@ -89,6 +92,7 @@ export default function MainTchatConvversationBipolarity() {
                     style={styles.passBoutton}
                     height={30}
                   />
+				  <Text style={styles.questionTitle}>{item.title}</Text>
                   <Text style={styles.question}>{item.question}</Text>
                   <View style={styles.line} />
                   <View style={styles.imageContainer} >
@@ -126,7 +130,7 @@ export default function MainTchatConvversationBipolarity() {
         </Carousel>
       </ScrollView>
       <View style={styles.passBoutton}>
-        <Button text="Je pass mon tour" onPress={() => NavigationHelper.navigate('MainTabsTchatList')} />
+        <Button text="aucun de deux"/>
       </View>
     </>
   );

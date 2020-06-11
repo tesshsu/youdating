@@ -126,7 +126,7 @@ export default function AuthentificationSignUp() {
         email: randomEmail,
         password: '1StrongPassword$',
         gender: 'male',
-        birthday: '',
+        birthday: '20111988',
         firstName: 'tess',
         lastName: 'hsu',
         ville: 'Nice'

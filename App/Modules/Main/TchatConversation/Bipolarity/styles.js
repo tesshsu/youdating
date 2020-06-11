@@ -18,6 +18,7 @@ export default StyleSheet.create({
   imageBackground: {
     width: scale(420),
     height: verticalScale(200),
+	marginTop: 15,
     alignItems: 'center',
   },
   imageLabelText: {
@@ -40,13 +41,22 @@ export default StyleSheet.create({
     marginBottom: verticalScale(18),
     marginTop: verticalScale(18)
   },
+  questionTitle: {
+    fontFamily: 'Segoe-UI-Bold',
+    textTransform: 'uppercase',
+    color: '#222',
+	fontSize: 18,
+    marginTop: 15,
+    marginLeft: 30
+  },
   question: {
     fontFamily: 'Segoe-UI-Regular',
     textTransform: 'uppercase',
     color: '#7D7D7D',
+	textAlign: 'center',
+	fontSize: 15,
     marginTop: 15,
-    marginLeft: 30,
-    marginBottom: 25
+    marginLeft: 30
   },
   line: {
     height: 1,

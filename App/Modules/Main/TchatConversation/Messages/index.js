@@ -54,7 +54,6 @@ export default function TchatConversationMessages() {
       && lastMessage.author === logguedUser.id
     ) {
       return {
-		//if need to block change to false
         canSendMessage: true,
         reason: `Vous devez attendre que ${target.firstName} vous réponde`
       };
