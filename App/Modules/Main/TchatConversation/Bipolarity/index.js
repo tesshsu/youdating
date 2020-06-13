@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState, useMemo } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import {
   Text,
   View,
@@ -17,30 +17,57 @@ import useCurrentMood from '../../../../Hooks/useCurrentMood';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
 import Carousel from '../../../Global/Carousel';
 import useLogguedUser from '../../../../Hooks/useLogguedUser';
-import * as Questions from '../Questions';
+import { BIPOLARITY_QUETIONS } from '../Questions';
 
-export default function MainTchatConvversationBipolarity() {
+export default function MainTchatConvversationBipolarity({ navigation }) {
+  const { state: { params: { opponent } } } = navigation;
   const [carouselIndex, setCarrouselIndex] = useState(0);
   const [countA, setCounterA] = useState(0);
   const [countB, setCounterB] = useState(0);
+  const [answers, setAnswers] = useState([]);
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
   const slicedQuestions = [];
 
-  const setCountA = () => {
-    setCounterA(countA + 1);
-    console.log('countA', countA);
+  const setCountA = async () => {
+    await setCounterA(countA + 1);
+    setAnswer();
   };
 
-  const setCountB = () => {
-    setCounterB(countB + 1);
-    console.log('countB', countB);
+  const setCountB = async () => {
+    await setCounterB(countB + 1);
+    setAnswer();
   };
-  let QUETIONS = [];
-  //let question = questions.question;
-  const ModeQuestions = useMemo(() => Questions[currentMood].QUETIONS, [currentMood, QUETIONS]);
 
-  ModeQuestions.forEach((u) => {
+  const skip = async () => {
+    await setAnswers([...answers, {}]);
+  }
+
+  const setAnswer = async () => {
+    const ans = slicedQuestions[carouselIndex];
+    await setAnswers([...answers, ...ans]);
+  }
+
+  const next = () => {
+    const lastQuestions = answers.length === slicedQuestions.length;
+    !lastQuestions ?
+      setCarrouselIndex(carouselIndex + 1)
+      :
+      navigation.navigate('MainTchatConversationBipolarityHistoric', {
+        answers,
+        countA,
+        countB,
+        totalQuestion: slicedQuestions.length,
+        opponent
+      });
+  }
+
+  useEffect(() => {
+    if (answers.length == carouselIndex + 1) next();
+  }, [answers]);
+
+
+  BIPOLARITY_QUETIONS.forEach((u) => {
     const lastArray = slicedQuestions[slicedQuestions.length - 1];
 
     if (!lastArray || lastArray.length === 1) {
@@ -92,12 +119,11 @@ export default function MainTchatConvversationBipolarity() {
                     style={styles.passBoutton}
                     height={30}
                   />
-				  <Text style={styles.questionTitle}>{item.title}</Text>
                   <Text style={styles.question}>{item.question}</Text>
                   <View style={styles.line} />
                   <View style={styles.imageContainer} >
                     <View style={styles.imageBackground}>
-                      <TouchableOpacity onClick={setCountA}>
+                      <TouchableOpacity onPress={setCountA}>
                         <Image source={item.avatarA} style={styles.imageBackgroundImage} />
                         <Text
                           style={[
@@ -110,7 +136,7 @@ export default function MainTchatConvversationBipolarity() {
                       </TouchableOpacity>
                     </View>
                     <View style={styles.imageBackground}>
-                      <TouchableOpacity onClick={setCountB}>
+                      <TouchableOpacity onPress={setCountB}>
                         <Image source={item.avatarB} style={styles.imageBackgroundImage} />
                         <Text
                           style={[
@@ -130,7 +156,7 @@ export default function MainTchatConvversationBipolarity() {
         </Carousel>
       </ScrollView>
       <View style={styles.passBoutton}>
-        <Button text="aucun de deux"/>
+        <Button text="Aucun des deux" onPress={skip} />
       </View>
     </>
   );

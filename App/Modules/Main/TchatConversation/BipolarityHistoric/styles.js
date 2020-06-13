@@ -1,10 +1,13 @@
-import { StyleSheet } from 'react-native';
-import { moderateScale, verticalScale, scale } from '../../../../Helpers/ScaleHelper';
+import { Dimensions, StyleSheet } from 'react-native';
+import { moderateScale, scale, verticalScale } from '../../../../Helpers/ScaleHelper';
+
+const { width, height } = Dimensions.get('window');
+
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: verticalScale(24),
+    paddingTop: verticalScale(10),
     alignItems: 'stretch',
   },
   moodTitleText: {
@@ -23,7 +26,7 @@ export default StyleSheet.create({
   packsContainer: {
     alignItems: 'center',
     paddingHorizontal: verticalScale(30),
-    marginTop: 20
+    marginTop: 10
   },
   pack: {
     paddingVertical: verticalScale(10),
@@ -36,14 +39,13 @@ export default StyleSheet.create({
     borderRadius: verticalScale(10)
   },
   compatibilityResult: {
-    paddingVertical: verticalScale(13),
     borderTopColor: '#CECBCB',
     borderTopWidth: 1,
     borderBottomColor: '#CECBCB',
     borderBottomWidth: 1,
-    marginTop: verticalScale(40),
+    marginTop: verticalScale(10),
     marginBottom: verticalScale(5),
-    marginHorizontal: verticalScale(30)
+    marginHorizontal: verticalScale(10),
   },
   compatibilityResultTitle: {
     fontFamily: 'Segoe-UI-Bold',
@@ -57,7 +59,8 @@ export default StyleSheet.create({
     fontFamily: 'Segoe-UI-Bold',
     fontSize: moderateScale(20),
     color: '#69A7F1',
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingBottom: 7
   },
   responseTitleText: {
     fontFamily: 'Segoe-UI-Bold',
@@ -73,9 +76,8 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
   scrollviewContent: {
-    paddingTop: verticalScale(10),
-    paddingBottom: verticalScale(60),
-    paddingHorizontal: scale(20),
+    flex: 1,
+    alignItems: 'center',
   },
   answerCard: {
     borderBottomColor: '#CECBCB',
@@ -92,10 +94,6 @@ export default StyleSheet.create({
   answerContainer: {
     alignItems: 'center',
     flex: 1
-  },
-  imageBackground: {
-    width: '100%',
-    height: verticalScale(95)
   },
   scrollviewContainer: {
     flex: 1,
@@ -114,5 +112,74 @@ export default StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 4,
     elevation: 2
-  }
+  },
+  itemContainer: {
+    width,
+    alignItems: 'center'
+  },
+  imageContainer: {
+    justifyContent: 'center',
+    width,
+  },
+  imageBackground: {
+    width: scale(420),
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  imageLabelText: {
+    fontFamily: 'Segoe-UI-Bold',
+    fontSize: moderateScale(15),
+    alignSelf: 'flex-start',
+    marginTop: 5,
+    marginHorizontal: 70
+  },
+  imageBackgroundImage: {
+    width: scale(280),
+    height: verticalScale(150),
+    borderRadius: verticalScale(30),
+  },
+  noAnswer: {
+    width: scale(280),
+    height: verticalScale(150),
+    borderRadius: verticalScale(30),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#4f4f4f'
+  },
+  noAnswerText:{
+    color: 'white',
+    fontWeight: 'bold',
+    paddingHorizontal: 30,
+    textAlign: 'center'
+  },
+  moodTitleText: {
+    textAlign: 'center',
+    fontFamily: 'Segoe-UI-Regular',
+    textTransform: 'uppercase',
+    fontSize: moderateScale(19),
+  },
+  title: {
+    fontFamily: 'Segoe-UI-Regular',
+    textTransform: 'uppercase',
+    color: '#7D7D7D',
+    marginTop: 10,
+    marginLeft: 30,
+    fontWeight: 'bold'
+  },
+  question: {
+    fontFamily: 'Segoe-UI-Regular',
+    textTransform: 'uppercase',
+    color: '#7D7D7D',
+    marginTop: 5,
+    marginHorizontal: 30,
+    textAlign: 'center',
+  },
+  line: {
+    height: 1,
+    backgroundColor: '#7D7D7D',
+    marginBottom: 10
+  },
+  passBoutton: {
+    marginBottom: 10,
+  },
 });

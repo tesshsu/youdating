@@ -1,12 +1,12 @@
-import ActionSheet from 'react-native-action-sheet';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import { useState } from 'react';
-
 import { ensurePermissions } from '../Helpers/PermissionsHelper';
 import useCurrentMood from './useCurrentMood';
 
-function showActionSheet(options) {
+
+function showActionSheet(options, showActionSheetWithOptions) {
   const {
     title,
     libraryText,
@@ -17,19 +17,19 @@ function showActionSheet(options) {
     getMediaFromCamera
   } = options;
 
-  ActionSheet.showActionSheetWithOptions({
+  showActionSheetWithOptions({
     title,
     options: [libraryText, cameraText, cancelText],
     cancelButtonIndex: 2,
     tintColor
   },
-  (buttonIndex) => {
-    if (buttonIndex === 0) {
-      getMediaFromLibrary();
-    } else if (buttonIndex === 1) {
-      getMediaFromCamera();
-    }
-  });
+    (buttonIndex) => {
+      if (buttonIndex === 0) {
+        getMediaFromLibrary();
+      } else if (buttonIndex === 1) {
+        getMediaFromCamera();
+      }
+    });
 }
 
 const defaultUseGetMediaOptions = {
@@ -51,7 +51,7 @@ export default function useGetMedia(useGetMediaOptions = {}) {
   const { moodInfos } = useCurrentMood();
   const [media, setMedia] = useState(null);
   const [error, setError] = useState(null);
-
+  const { showActionSheetWithOptions } = useActionSheet();
 
   async function getMediaFromLibrary() {
     try {
@@ -112,7 +112,7 @@ export default function useGetMedia(useGetMediaOptions = {}) {
       tintColor: moodInfos.color,
       getMediaFromLibrary,
       getMediaFromCamera
-    });
+    }, showActionSheetWithOptions);
   }
 
   function deleteMedia() {

@@ -1,24 +1,18 @@
-import React, { useCallback, useState, useMemo } from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  SafeAreaView,
-  ImageBackground, TouchableOpacity, Image
-} from 'react-native';
-
-import styles from './styles';
-import PageHeader from '../../../Global/PageHeader';
-import useCurrentMood from '../../../../Hooks/useCurrentMood';
-import RoundButton from '../../../Global/RoundButton';
-import { verticalScale } from '../../../../Helpers/ScaleHelper';
+import React, { useCallback, useState } from 'react';
+import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
-import * as Questions from '../Questions';
-import Carousel from '../../../Global/Carousel';
-import useLogguedUser from '../../../../Hooks/useLogguedUser';
+import { verticalScale } from '../../../../Helpers/ScaleHelper';
 import useConversation from '../../../../Hooks/useConversations';
+import useCurrentMood from '../../../../Hooks/useCurrentMood';
+import useLogguedUser from '../../../../Hooks/useLogguedUser';
+import Carousel from '../../../Global/Carousel';
+import PageHeader from '../../../Global/PageHeader';
+import RoundButton from '../../../Global/RoundButton';
+import { BIPOLARITY_QUETIONS } from '../Questions';
+import styles from './styles';
 
-export default function BipolarityHistoric() {
+export default function BipolarityHistoric({ navigation }) {
+  const { state: { params } } = navigation;
   const [carouselIndex, setCarrouselIndex] = useState(0);
   const [buttonContainerHeight, setButtonContainerheight] = useState(null);
   const [currentPack, setCurrentPack] = useState(0);
@@ -27,16 +21,7 @@ export default function BipolarityHistoric() {
   const {
     startConversation
   } = useConversation();
-  const slicedQuestions = [];
-  const setCountA = () => {
-    setCounterA(countA + 1);
-    console.log('countA', countA);
-  };
-
-  const setCountB = () => {
-    setCounterB(countB + 1);
-    console.log('countB', countB);
-  };
+  const slicedAnswers = [];
 
   function onButtonContainerLayout(ev) {
     const { height } = ev.nativeEvent.layout;
@@ -45,17 +30,17 @@ export default function BipolarityHistoric() {
       setButtonContainerheight(height);
     }
   }
-  
-  const ModeQuestions = useMemo(() => Questions[currentMood][questions].question, [currentMood, question]);
-  ModeQuestions.forEach((u) => {
-    const lastArray = slicedQuestions[slicedQuestions.length - 1];
+
+  params.answers.forEach((u) => {
+    const lastArray = slicedAnswers[slicedAnswers.length - 1];
 
     if (!lastArray || lastArray.length === 1) {
-      slicedQuestions.push([u]);
+      slicedAnswers.push([u]);
     } else {
       lastArray.push(u);
     }
   });
+
 
   const openConversation = useCallback((conversation) => {
     const {
@@ -104,8 +89,9 @@ export default function BipolarityHistoric() {
               { paddingBottom: buttonContainerHeight + verticalScale(40) }
             ]}
           >
+
             <Carousel activeIndex={carouselIndex}>
-              {slicedQuestions.map((chunk, index) => (
+              {slicedAnswers.map((chunk, index) => (
                 <View key={index.toString()}>
                   {chunk.map((item, idx) => (
                     <View
@@ -113,19 +99,13 @@ export default function BipolarityHistoric() {
                       disabled={item.disabled}
                       style={styles.itemContainer}
                     >
-                      <RoundButton
-                        text={item.title}
-                        fontSize={12}
-                        borderRadius={15}
-                        width={280}
-                        style={styles.passBoutton}
-                        height={30}
-                      />
+                      <Text style={styles.title}>answer no {index+1}</Text>
                       <Text style={styles.question}>{item.question}</Text>
                       <View style={styles.line} />
-                      <View style={styles.imageContainer} >
-                        <View style={styles.imageBackground}>
-                          <TouchableOpacity onClick={setCountA}>
+                      <View style={styles.imageContainer}>
+
+                        {item.avatarA && (
+                          <View style={styles.imageBackground}>
                             <Image source={item.avatarA} style={styles.imageBackgroundImage} />
                             <Text
                               style={[
@@ -135,21 +115,27 @@ export default function BipolarityHistoric() {
                             >
                               {item.answerA}
                             </Text>
-                          </TouchableOpacity>
-                        </View>
-                        <View style={styles.imageBackground}>
-                          <TouchableOpacity onClick={setCountB}>
-                            <Image source={item.avatarB} style={styles.imageBackgroundImage} />
-                            <Text
-                              style={[
-                                styles.imageLabelText,
-                                { color: item.disabled ? '#BEBFC0' : moodInfos.color }
-                              ]}
-                            >
-                              {item.answerB}
+                          </View>
+                        )}
+
+                        {!item.avatarA && (
+                          <View style={styles.imageBackground}>
+                            <View style={styles.noAnswer}>
+                              <Text style={styles.noAnswerText}>
+                                You didn't answer
                             </Text>
-                          </TouchableOpacity>
+                            </View>
+                          </View>
+                        )}
+
+                        <View style={styles.imageBackground}>
+                          <View style={styles.noAnswer}>
+                            <Text style={styles.noAnswerText}>
+                              En ATTENDEN DE REPONSE DE { params.opponent.firstName }
+                            </Text>
+                          </View>
                         </View>
+
                       </View>
                     </View>
                   ))}
@@ -159,7 +145,7 @@ export default function BipolarityHistoric() {
             <View style={styles.compatibilityResult}>
               <Text style={styles.compatibilityResultTitle}>{`Compatibilité d'interets pack ${currentPack + 1}`}</Text>
               <Text style={styles.compatibilityPercentageText}>
-                80%
+                {(params.countA * params.totalQuestion)}%
               </Text>
             </View>
           </ScrollView>

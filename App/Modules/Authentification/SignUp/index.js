@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   ScrollView,
   Text,
@@ -19,16 +19,16 @@ import useLogguedUser from '../../../Hooks/useLogguedUser';
 import FacebookConnectButton from '../../Global/FacebookConnectButton';
 import TextField from '../../Global/TextField';
 import Images from '../../../Assets/images';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-function checkAge(birthday) {
-  const birthdayMoment = moment.unix(birthday);
-
-  return moment().diff(birthdayMoment, 'years') >= 18;
+function checkAge(dateBorn) {
+  const age = moment().diff(dateBorn, 'years');
+  return age > 18;
 }
 
 const emailFaker = () => {
   let chars = 'abcdefghijklmnopqrstuvwxyz'
-  return 'testing'+chars[Math.floor(Math.random() * 26)]
+  return 'testing' + chars[Math.floor(Math.random() * 26)]
     + Math.random().toString(36).substring(2, 11)
     + '@mail.com';
 }
@@ -63,6 +63,7 @@ const SignUpSchema = Yup.object().shape({
 export default function AuthentificationSignUp() {
   const [isFirst, setFirst] = useState(true);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+
   const {
     signUp,
     isAuthentificated,
@@ -82,18 +83,16 @@ export default function AuthentificationSignUp() {
 
   async function onSubmit(formValues) {
     let location;
-    const {
-      birthday,
-      ...payload
-    } = formValues;
-
     try {
-      await signUp({
-        ...payload,
-        birthday: Number(birthday)
-      });
+      let {
+        birthday,
+        ...payload
+      } = formValues;
+      birthday = checkAge(birthday);
+      const data = { birthday, ...payload };
+      await signUp(data);
     } catch (err) {
-      console.warn(err);
+      console.log(err.response);
       if (err.response && err.response.status === 422) {
         setErrors({
           email: 'Cet email est déjà utilisée'
@@ -103,18 +102,20 @@ export default function AuthentificationSignUp() {
       }
     }
   }
+
   const {
     handleChange,
     values,
     handleSubmit,
     errors,
-    setErrors
+    setErrors,
+    setFieldValue,
   } = useFormik({
     validationSchema: SignUpSchema,
     validateOnChange: true,
     validateOnBlur: false,
     validateOnMount: false,
-    onSubmit
+    // onSubmit
   });
 
 
@@ -126,36 +127,15 @@ export default function AuthentificationSignUp() {
         email: randomEmail,
         password: '1StrongPassword$',
         gender: 'male',
-        birthday: '20111988',
+        birthday: moment(new Date()).format('YYYY-MM-DD'),
         firstName: 'tess',
         lastName: 'hsu',
         ville: 'Nice'
       }}
-      onSubmit={async ({
-        email,
-        password,
-        gender,
-        birthday,
-        firstName,
-        lastName,
-        ville
-      }) => {
-        try {
-          const data = {};
-          data.email = email.trim();
-          data.password = password.trim();
-          data.gender = gender.trim();
-          data.birthday = birthday.trim();
-          data.firstName = firstName.trim();
-          data.lastName = lastName.trim();
-          data.ville = ville.trim();
-          await signUp(data);
-        } catch (err) {
-          Alert.alert('SignIn error', err.message);
-        }
-      }}
+      onSubmit={onSubmit}
+    // validationSchema={SignUpSchema}
     >
-      {({ handleChange, handleSubmit, values }) => (
+      {({ handleChange, handleSubmit, values, setFieldValue, ...props }) => (
         <View style={globalStyles.scrollViewContainer}>
           <View style={globalStyles.backgroundContainer}>
             <Image style={globalStyles.bakcgroundImage} source={Images.back_img_signIn} />
@@ -223,6 +203,19 @@ export default function AuthentificationSignUp() {
                     }}
                   />
                 </> : <>
+                  {isDatePickerVisible && ( // Datepicker 
+                    <DateTimePicker
+                      value={moment(values.birthday).toDate()}
+                      display="default"
+                      onChange={(e, v) => {
+                        setIsDatePickerVisible(false);
+                        const formated = moment(v).format('YYYY-MM-DD');
+                        setFieldValue('birthday', formated);
+                      }}
+                      maximumDate={new Date()}
+                    />
+                  )}
+
                   <SwitchSelector
                     label="Sexe"
                     style={globalStyles.switchSelector}
@@ -243,14 +236,14 @@ export default function AuthentificationSignUp() {
                         textInputProps={{
                           placeholder: 'JJ',
                           autoCapitalize: 'none',
-                          value: values.birthday ? moment.unix(values.birthday).format('DD') : '',
+                          value: values.birthday ? moment(values.birthday).format('DD') : '',
                         }}
                       />
                       <TextField
                         containerStyle={styles.birthdayTextField}
                         textInputProps={{
                           placeholder: 'MM',
-                          value: values.birthday ? moment.unix(values.birthday).format('MM') : '',
+                          value: values.birthday ? moment(values.birthday).format('MM') : '',
                         }}
                       />
                       <TextField
@@ -260,10 +253,10 @@ export default function AuthentificationSignUp() {
                         ]}
                         textInputProps={{
                           placeholder: 'YYYY',
-                          value: values.birthday ? moment.unix(values.birthday).format('YYYY') : '',
+                          value: values.birthday ? moment(values.birthday).format('YYYY') : '',
                         }}
                       />
-                      {errors.birthday && <Text style={styles.errorText}>{ errors.birthday }</Text>}
+                      {errors.birthday && <Text style={styles.errorText}>{errors.birthday}</Text>}
                     </View>
                   </TouchableOpacity>
                   <TextField
@@ -284,13 +277,13 @@ export default function AuthentificationSignUp() {
               {
                 isFirst ?
                   <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                                  style={globalStyles.linearGradient}
-                                  start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+                    style={globalStyles.linearGradient}
+                    start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
                     <Text style={globalStyles.buttonText} onPress={() => setFirst(false)}> suivant </Text>
                   </LinearGradient> : <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
-                                                      style={globalStyles.linearGradient}
-                                                      start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
-                    <Text style={globalStyles.buttonText} onPress={handleSubmit}> Créer mon compte </Text>
+                    style={globalStyles.linearGradient}
+                    start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
+                    <Text style={globalStyles.buttonText} onPress={() => { handleSubmit() }}> Créer mon compte </Text>
                   </LinearGradient>
               }
               <TouchableOpacity

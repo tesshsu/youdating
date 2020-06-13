@@ -1,28 +1,20 @@
-import React, { useCallback, useState } from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  FlatList,
-  View,
-  RefreshControl,
-} from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import React, { useCallback, useEffect, useState } from 'react';
+import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
-
-import moment from 'moment';
-import PageHeader from '../../../../Global/PageHeader';
-import MoodSelector from '../../../../Global/MoodSelector';
-import SearchField from '../../../../Global/SearchField';
-import { SearchBar } from 'react-native-elements';
-import { verticalScale } from '../../../../../Helpers/ScaleHelper';
-import useCurrentMood from '../../../../../Hooks/useCurrentMood';
-import styles from './styles';
-import RoundIconButton from '../../../../Global/RoundIconButton';
-import useConversation from '../../../../../Hooks/useConversations';
-import useLogguedUser from '../../../../../Hooks/useLogguedUser';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
-import RoundButton from '../../../../Global/RoundButton';
+import { verticalScale } from '../../../../../Helpers/ScaleHelper';
+import useConversation from '../../../../../Hooks/useConversations';
+import useCurrentMood from '../../../../../Hooks/useCurrentMood';
+import useLogguedUser from '../../../../../Hooks/useLogguedUser';
 import ImageButton from '../../../../Global/ImageButton';
+import MoodSelector from '../../../../Global/MoodSelector';
+import PageHeader from '../../../../Global/PageHeader';
+import RoundButton from '../../../../Global/RoundButton';
+import RoundIconButton from '../../../../Global/RoundIconButton';
+import SearchField from '../../../../Global/SearchField';
+import styles from './styles';
+
 const COMPATIBILITY_SATIFAISANT = require('../../../../../../assets/icons/icon_compatibilite_satifaisante.png');
 const COMPATIBILITY_MAUVAISE = require('../../../../../../assets/icons/icon_compatibilite_mauvaise.png');
 const COMPATIBILITY_UNSUFFISANTE = require('../../../../../../assets/icons/icon_compatibilite_insuffisante.png');
@@ -37,6 +29,7 @@ const TEXT = {
 
 export default function MainTabsTchat() {
   const [search, setSearch] = useState(null);
+  const [datas, setDatas] = useState(null);
 
   const {
     conversations,
@@ -66,24 +59,45 @@ export default function MainTabsTchat() {
     }
   }, [currentMood, logguedUser.id, startConversation]);
 
+  const filteredConversations = useCallback(filterText => {
+    if (!filterText) {
+      setDatas(conversations);
+      return;
+    }
+
+    const term = filterText.toLowerCase();
+    const filtered = conversations.filter(item => {
+      const { user1, user2 } = item;
+      const target = user1.id === logguedUser.id ? user2 : user1;
+      return target.firstName.toLowerCase().indexOf(term) >= 0;
+    });
+    setDatas(filtered);
+    return;
+  });
+
+  useEffect(() => {
+    filteredConversations(search);
+  }, [search]);
+
+
   return (
     <View style={styles.container}>
       <PageHeader
         leftComponent={() => <Feather
-              name="user"
-              color="white"
-              size={verticalScale(21)}
-              onPress={() => NavigationHelper.navigate('MainTabsProfile')}
-            />}
-        rightComponent={()=> <Feather
-              name="more-vertical"
-              color="white"
-              size={verticalScale(21)}
-              onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
-            />}
+          name="user"
+          color="white"
+          size={verticalScale(21)}
+          onPress={() => NavigationHelper.navigate('MainTabsProfile')}
+        />}
+        rightComponent={() => <Feather
+          name="more-vertical"
+          color="white"
+          size={verticalScale(21)}
+          onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
+        />}
         title="MESSAGERIE"
       />
-      <View style={{ alignItems: 'center'}}>
+      <View style={{ alignItems: 'center' }}>
         <MoodSelector
           containerStyle={styles.modeSelector}
           moods={['PRO', 'SOCIAL', 'LOVE', 'PERSO']}
@@ -96,7 +110,7 @@ export default function MainTabsTchat() {
         <SearchField
           placeholder="RECHERCHE PAR NOM D'UTILISATEUR..."
           lightTheme={true}
-          onChangeText={(value)=>setSearch(value)}
+          onChangeText={(value) => setSearch(value)}
           value={search}
           containerStyle={styles.searchField}
           inputContainerStyle={styles.searchInner}
@@ -106,7 +120,7 @@ export default function MainTabsTchat() {
       <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
         <FlatList
           contentContainerStyle={styles.flatListContent}
-          data={conversations}
+          data={datas}
           refreshing={areConversationsFetching}
           numColumns={3}
           refreshControl={(
@@ -139,9 +153,9 @@ export default function MainTabsTchat() {
                 style={styles.messageListItem}
                 onPress={() => openConversation(conversation)}
               >
-                <View style={{alignItems: 'center'}}>
+                <View style={{ alignItems: 'center' }}>
                   <Image
-                    style={[styles.imageStyle, {borderColor: moodInfos.color}]}
+                    style={[styles.imageStyle, { borderColor: moodInfos.color }]}
                     uri={target.moods[currentMood].avatar}
                   />
                   <ImageButton
@@ -150,34 +164,36 @@ export default function MainTabsTchat() {
                   />
                   {
                     hasNewMessage && (
-                      <View style={[{backgroundColor: moodInfos.color}, styles.messageCount]}>
-                        <Text style={{color: '#fff'}}>
+                      <View style={[{ backgroundColor: moodInfos.color }, styles.messageCount]}>
+                        <Text style={{ color: '#fff' }}>
                           {item[`${newMessageKey}unreadMessageCount`]}
                         </Text>
                       </View>
                     )
                   }
-                  <View style={{alignItems: 'center'}}>
-                    <Text style={styles.messageNameList}>{ target.firstName }</Text>
+                  <View style={{ alignItems: 'center' }}>
+                    <Text style={styles.messageNameList}>{target.firstName}</Text>
                     <Text style={styles.personnalityText} >
-                        { target.personnalities.main }
-                        { hasNewMessage }
-                      </Text>
+                      {target.personnalities.main}
+                      {hasNewMessage}
+                    </Text>
                   </View>
-                  <View style={{alignItems: 'center'}}>
+                  <View style={{ alignItems: 'center' }}>
                     <RoundButton
                       text="BIPOLARITY"
                       fontSize={4}
                       borderRadius={10}
                       width={100}
                       height={25}
-                      onPress={() => NavigationHelper.navigate('MainTchatConversationBipolarity')}
+                      onPress={() => NavigationHelper.navigate('MainTchatConversationBipolarity', {
+                        opponent: target
+                      })}
                     />
                   </View>
                 </View>
                 <View style={styles.body}>
                   <View style={styles.footer}>
-                    { hasNewMessage && (
+                    {hasNewMessage && (
                       <RoundIconButton
                         containerStyle={styles.button}
                         backgroundColor={moodInfos.color}

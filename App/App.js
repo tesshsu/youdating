@@ -7,6 +7,7 @@ import * as Font from 'expo-font';
 import * as Facebook from 'expo-facebook';
 import moment from 'moment';
 import 'moment/locale/fr';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 
 import ENV from './environment';
 import Store from './Redux/Store';
@@ -75,14 +76,16 @@ export default function Yous() {
 
   if (appIsReady) {
     return (
-      <Provider store={Store}>
-        <MoodSelectorModal />
-        <QuerySelectorModal />
-        <TagSelectorModal />
-        <LoadingOverlay />
-        <AppNotifications />
-        <RootContainer />
-      </Provider>
+      <ActionSheetProvider>
+        <Provider store={Store}>
+          <MoodSelectorModal />
+          <QuerySelectorModal />
+          <TagSelectorModal />
+          <LoadingOverlay />
+          <AppNotifications />
+          <RootContainer />
+        </Provider>
+      </ActionSheetProvider>
     );
   }
 
