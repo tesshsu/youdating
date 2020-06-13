@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useMemo } from 'react';
 import {
   Text,
   View,
@@ -17,7 +17,7 @@ import useCurrentMood from '../../../../Hooks/useCurrentMood';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
 import Carousel from '../../../Global/Carousel';
 import useLogguedUser from '../../../../Hooks/useLogguedUser';
-import { BIPOLARITY_QUETIONS } from '../Questions';
+import * as Questions from '../Questions';
 
 export default function MainTchatConvversationBipolarity({ navigation }) {
   const { state: { params: { opponent } } } = navigation;
@@ -28,7 +28,7 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
   const slicedQuestions = [];
-
+  
   const setCountA = async () => {
     await setCounterA(countA + 1);
     setAnswer();
@@ -66,8 +66,10 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
     if (answers.length == carouselIndex + 1) next();
   }, [answers]);
 
-
-  BIPOLARITY_QUETIONS.forEach((u) => {
+  let QUETIONS = [];
+  const ModeQuestions = useMemo(() => Questions[currentMood].QUETIONS, [currentMood, QUETIONS]);
+  
+  ModeQuestions.forEach((u) => {
     const lastArray = slicedQuestions[slicedQuestions.length - 1];
 
     if (!lastArray || lastArray.length === 1) {
@@ -112,14 +114,15 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
                   style={styles.itemContainer}
                 >
                   <RoundButton
-                    text={item.title}
+                    text="PACK 1 : Goûts et Intérêts"
                     fontSize={12}
                     borderRadius={15}
                     width={280}
                     style={styles.passBoutton}
                     height={30}
                   />
-                  <Text style={styles.question}>{item.question}</Text>
+                  <Text style={styles.questionTitle}>{item.title}</Text>
+				  <Text style={styles.question}>{item.question}</Text>
                   <View style={styles.line} />
                   <View style={styles.imageContainer} >
                     <View style={styles.imageBackground}>

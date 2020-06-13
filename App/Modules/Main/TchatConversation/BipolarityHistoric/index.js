@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
 import { verticalScale } from '../../../../Helpers/ScaleHelper';
@@ -8,7 +8,7 @@ import useLogguedUser from '../../../../Hooks/useLogguedUser';
 import Carousel from '../../../Global/Carousel';
 import PageHeader from '../../../Global/PageHeader';
 import RoundButton from '../../../Global/RoundButton';
-import { BIPOLARITY_QUETIONS } from '../Questions';
+import * as Questions from '../Questions';
 import styles from './styles';
 
 export default function BipolarityHistoric({ navigation }) {
