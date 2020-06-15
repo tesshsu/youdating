@@ -10,6 +10,9 @@ import { Image } from 'react-native-expo-image-cache';
 import styles from './styles';
 import useUploads from '../../../../../../Hooks/useUploads';
 import AnimatedDots from '../AnimatedDots';
+import AudioButton from '../../../../../Global/AudioButton';
+import { scale, verticalScale } from '../../../../../../Helpers/ScaleHelper';
+
 
 export default function MessageBubble(props) {
   const {
@@ -19,6 +22,7 @@ export default function MessageBubble(props) {
     imageUri,
     avatarUri,
     onOpenPhoto,
+    audioUri,
     uploadId
   } = props;
 
@@ -28,29 +32,39 @@ export default function MessageBubble(props) {
   return (
     <>
       <View style={[styles.container, containerStyle]}>
-        { avatarUri !== null && (
+        {avatarUri !== null && (
           <Image style={styles.avatar} uri={avatarUri} />
         )}
-        { isTyping && (
+        {isTyping && (
           <AnimatedDots dotsColor="black" />
         )}
-        { imageUri !== null && (
+        {imageUri !== null && (
           <TouchableOpacity onPress={() => onOpenPhoto(imageUri)}>
             <SharedElement key={imageUri} id={imageUri}>
               <Image style={styles.messageImage} uri={imageUri} />
             </SharedElement>
           </TouchableOpacity>
         )}
-        { imageUri !== null && text !== '' && <View style={styles.spacer} />}
-        { text !== '' && <Text style={[styles.text]}>{ text }</Text> }
+        {audioUri && (
+          <AudioButton
+            key="audio-button"
+            iconSize={verticalScale(20)}
+            size={verticalScale(30)}
+            uri={audioUri}
+            // color={moodInfos.color}
+            backgroundColor="white"
+          />
+        )}
+        {imageUri !== null && text !== '' && <View style={styles.spacer} />}
+        {text !== '' && <Text style={[styles.text]}>{text}</Text>}
       </View>
-      { upload !== null && (
+      {upload !== null && (
         <View style={styles.status}>
           <ActivityIndicator size="small" color="black" />
           <Text
             style={styles.statusText}
           >
-            { upload === null ? 'Envoyé' : `${upload.progress}%` }
+            {upload === null ? 'Envoyé' : `${upload.progress}%`}
           </Text>
         </View>
       )}
@@ -64,7 +78,7 @@ MessageBubble.defaultProps = {
   text: null,
   imageUri: null,
   avatarUri: null,
-  onOpenPhoto: () => {},
+  onOpenPhoto: () => { },
   uploadId: null
 };
 
@@ -75,5 +89,6 @@ MessageBubble.propTypes = {
   imageUri: PropTypes.string,
   avatarUri: PropTypes.string,
   onOpenPhoto: PropTypes.func,
-  uploadId: PropTypes.string
+  uploadId: PropTypes.string,
+  audioUri: PropTypes.string
 };

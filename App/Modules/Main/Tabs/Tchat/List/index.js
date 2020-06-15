@@ -39,8 +39,8 @@ export default function MainTabsTchat() {
   } = useConversation();
 
   const { currentMood, moodInfos } = useCurrentMood();
-  const { logguedUser } = useLogguedUser();
-
+  const { logguedUser, uploadAvatar } = useLogguedUser();
+  const { avatar }= logguedUser.moods[currentMood];
   const openConversation = useCallback((conversation) => {
     const {
       user1,

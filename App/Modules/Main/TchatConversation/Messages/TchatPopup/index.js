@@ -226,6 +226,7 @@ export default function TchatPopup() {
             author,
             content,
             imageUri,
+            audioUri
           } = data.message;
 
           return (
@@ -236,6 +237,7 @@ export default function TchatPopup() {
               text={content || ''}
               onOpenPhoto={onOpenPhoto}
               imageUri={imageUri}
+              audioUri={audioUri}
             />
           );
         })}

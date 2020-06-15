@@ -1,160 +1,109 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, {
-  useEffect, useRef, useMemo
-} from 'react';
-import PropTypes from 'prop-types';
-import { View, Alert } from 'react-native';
-import { TapGestureHandler, State } from 'react-native-gesture-handler';
-import Animated from 'react-native-reanimated';
 import { Audio } from 'expo-av';
+import * as FileSystem from 'expo-file-system';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import {
-  onGestureEvent, useValues
-} from 'react-native-redash';
-
-import { Feather } from '@expo/vector-icons';
-import styles from './styles';
-import { verticalScale } from '../../../../../../Helpers/ScaleHelper';
-
-const {
-  eq,
-  neq,
-  and,
-  cond,
-  set,
-  useCode,
-  call,
-  debug,
-  block,
-} = Animated;
-
-export default function AudioRecorder(props) {
-  const {
-    onUri,
-    onRecordingChange
-  } = props;
-
+export const recorder = () => {
   const recordingRef = useRef();
-  const timeoutRef = useRef();
-
-  const [
-    state,
-    isRecording,
-  ] = useValues([
-    State.UNDETERMINED,
-    0,
-  ], []);
-
-  const gestureHandler = useMemo(() => onGestureEvent({
-    state
-  }), []);
-
-  const shouldStartRecord = and(eq(state, State.BEGAN), eq(isRecording, 0));
-  const shouldEndRecord = and(neq(state, State.BEGAN), eq(isRecording, 1));
-
-  useCode(() => block([
-    debug('shoulStartRecord', shouldStartRecord),
-    cond(
-      eq(shouldStartRecord, 1),
-      [
-        set(isRecording, 1),
-        call([], () => startRecord()),
-      ]
-    ),
-    cond(
-      eq(shouldEndRecord, 1),
-      [
-        call([], () => stopRecord()),
-      ]
-    ),
-  ]), []);
-
-  async function init() {
-    recordingRef.current = new Audio.Recording();
-
-    try {
-      await recordingRef.current.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
-    } catch (err) {
-      console.warn(err);
-      Alert.alert('Erreur', 'Impossible de préparer l\'enregistrement!');
-    }
-  }
-
-  async function unload() {
-    if (recordingRef.current) {
-      try {
-        await recordingRef.current.stopAndUnloadAsync();
-      } catch (err) {
-        console.warn(err);
-        Alert.alert('Erreur', 'Impossible de décharger l\'enregistrement!');
-      }
-    }
-  }
-
-  async function startRecord() {
-    if (recordingRef.current) {
-      try {
-        timeoutRef.current = setTimeout(() => {
-          stopRecord();
-        }, 20000);
-        onRecordingChange(true);
-        await recordingRef.current.startAsync();
-      } catch (err) {
-        console.warn(err);
-        Alert.alert('Erreur', 'Impossible de démarrer l\'enregistrement!');
-      }
-    }
-  }
-
-  async function stopRecord() {
-    if (recordingRef.current) {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      try {
-        onRecordingChange(false);
-
-        await recordingRef.current.stopAndUnloadAsync();
-        const uri = recordingRef.current.getURI();
-        state.setValue(State.UNDETERMINED);
-        isRecording.setValue(0);
-        onUri(uri);
-        await init();
-      } catch (err) {
-        console.warn(err);
-        Alert.alert('Erreur', 'Impossible de récupérer le son!');
-      } finally {
-        isRecording.setValue(0);
-        state.setValue(State.UNDETERMINED);
-      }
-    }
-  }
+  const recordingSettings = JSON.parse(JSON.stringify(Audio.RECORDING_OPTIONS_PRESET_LOW_QUALITY));
+  const [recordingState, setRecordingState] = useState({
+    isRecording: false,
+    soundRecorded: null,
+    recordingDuration: 0
+  });
 
   useEffect(() => {
-    init();
-
     return () => {
-      unload();
-    };
-  }, []);
+      recordingRef.current = null;
+    }
+  }, [recordingRef]);
 
-  return (
-    <View style={styles.container}>
-      <TapGestureHandler {...gestureHandler}>
-        <Animated.View>
-          <Feather
-            name="mic"
-            size={verticalScale(20)}
-            color="white"
-          />
-        </Animated.View>
-      </TapGestureHandler>
-    </View>
-  );
+  const initAndRecord = useCallback(async () => {
+    await Audio.setAudioModeAsync({
+      allowsRecordingIOS: true,
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+      playsInSilentModeIOS: true,
+      shouldDuckAndroid: true,
+      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+      playThroughEarpieceAndroid: false,
+      staysActiveInBackground: true,
+    });
+
+    /*if (recordingRef.current !== null) {
+      await recordingRef.current.setOnRecordingStatusUpdate(null);
+      recordingRef.current = null;
+    }*/
+
+    const rec = await new Audio.Recording();
+    await rec.prepareToRecordAsync(recordingSettings);
+    // rec.setProgressUpdateInterval(1000);
+    rec.setOnRecordingStatusUpdate(_updateScreenForRecordingStatus);
+
+    recordingRef.current = rec;
+    await recordingRef.current.startAsync(); // Will call this._updateScreenForRecordingStatus to update the screen.
+  });
+
+  const stopRec = useCallback(async () => {
+    try {
+      await recordingRef.current.stopAndUnloadAsync();
+    } catch (error) {
+      console.log('stop err', error);
+      // Do nothing -- we are already unloaded.
+    }
+  });
+
+  const resetRecorder = useCallback(() => {
+    setRecordingState({
+      isRecording: false,
+      soundRecorded: null,
+      recordingDuration: 0
+    });
+    recordingRef.current.setOnRecordingStatusUpdate(null);
+    recordingRef.current = null;
+  });
+
+  async function _updateScreenForRecordingStatus(status) {
+    if (status.canRecord) {
+      setRecordingState({
+        ...recordingState,
+        isRecording: status.isRecording,
+        recordingDuration: status.durationMillis,
+      });
+    } else if (status.isDoneRecording) {
+      setRecordingState({
+        ...recordingState,
+        isRecording: false,
+        recordingDuration: status.durationMillis,
+      });
+    }
+  }
+
+  const handleRecord = async () => {
+    if (recordingState.isRecording) {
+      await stopRec();
+      const info = await FileSystem.getInfoAsync(recordingRef.current.getURI());
+      setRecordingState({ ...recordingState, isRecording: false, soundRecorded: info });
+    } else {
+      await initAndRecord();
+    }
+  };
+
+  return {
+    handleRecord,
+    recordingState,
+    resetRecorder
+  }
+
+  // return (
+  //   <View style={styles.container}>
+  //     <TouchableOpacity onPress={() => handleRecord()}>
+  //       <Feather
+  //         name="mic"
+  //         size={verticalScale(20)}
+  //         color={recordingState.isRecording ? 'red' : 'white'}
+  //       />
+  //     </TouchableOpacity>
+  //   </View>
+  // );
 }
 
-AudioRecorder.propTypes = {
-  onRecordingChange: PropTypes.func.isRequired,
-  onUri: PropTypes.func.isRequired
-};
+export default recorder;

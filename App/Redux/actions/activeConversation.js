@@ -119,7 +119,7 @@ export function createMessage(payload) {
         });
       } catch (err) {
         console.warn(err);
-        throw new Error('Impossible de créer le message');
+        throw new Error('Impossible de créer le message', err);
       }
 
       try {

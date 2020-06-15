@@ -1,24 +1,21 @@
-import React, {
-  useState, useEffect, useMemo
-} from 'react';
-import PropTypes from 'prop-types';
 import { Feather } from '@expo/vector-icons';
-import { TextInput } from 'react-native-gesture-handler';
 import { MediaTypeOptions } from 'expo-image-picker';
-import {
-  View, Image, ActivityIndicator
-} from 'react-native';
-
-import styles from './styles';
-import RoundIconButton from '../../../../Global/RoundIconButton';
-import { verticalScale, scale } from '../../../../../Helpers/ScaleHelper';
+import PropTypes from 'prop-types';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ActivityIndicator, Image, View } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 import { MOODS } from '../../../../../GlobalConfig';
+import NavigationHelper from '../../../../../Helpers/NavigationHelper';
+import { scale, verticalScale } from '../../../../../Helpers/ScaleHelper';
 import useConversation from '../../../../../Hooks/useConversations';
 import useGetMedia from '../../../../../Hooks/useGetMedia';
-import Panel from './Panel';
-import AudioUri from './AudioRecorder';
 import AudioButton from '../../../../Global/AudioButton';
-import NavigationHelper from '../../../../../Helpers/NavigationHelper';
+import RoundIconButton from '../../../../Global/RoundIconButton';
+import AudioRecorder from './AudioRecorder';
+import Panel from './Panel';
+import styles from './styles';
+
+
 const mediaOptions = {
   mediaTypes: MediaTypeOptions.Images,
   quality: 0.6
@@ -36,12 +33,16 @@ export default function MessageComposer(props) {
     getMedia, media, deleteMedia
   } = useGetMedia(mediaOptions);
   const [mediaInfos, setMediaInfos] = useState(null);
-
   const { mood, input, isSending } = activeConversation;
-
   const moodInfos = MOODS[mood];
+  const { recordingState, handleRecord, resetRecorder } = AudioRecorder();
 
   useEffect(() => {
+    if (recordingState.soundRecorded) {
+      setMediaInfos({ type: 'audio', ...recordingState.soundRecorded })
+      resetRecorder();
+    }
+
     if (media) {
       setMediaInfos({ type: 'image', ...media });
       deleteMedia();
@@ -77,14 +78,14 @@ export default function MessageComposer(props) {
         color={moodInfos.color}
         onClose={closePanel}
       >
-        { mediaInfos !== null && mediaInfos.type === 'image' && (
+        {mediaInfos !== null && mediaInfos.type === 'image' && (
           <Image
             key="media-image"
             style={styles.mediaImage}
             source={{ uri: mediaInfos.uri }}
           />
         )}
-        { mediaInfos !== null && mediaInfos.type === 'audio' && (
+        {mediaInfos !== null && mediaInfos.type === 'audio' && (
           <AudioButton
             key="audio-button"
             iconSize={verticalScale(40)}
@@ -116,7 +117,7 @@ export default function MessageComposer(props) {
             onChangeText={setInputValue}
           />
           <View style={styles.sendButtonContainer}>
-            { !isSending && (
+            {!isSending && (
               <RoundIconButton
                 iconName="arrow-up"
                 iconColor="white"
@@ -132,7 +133,7 @@ export default function MessageComposer(props) {
                 backgroundColor={moodInfos.color}
               />
             )}
-            { isSending && (
+            {isSending && (
               <ActivityIndicator
                 size="small"
                 color={moodInfos.color}
@@ -147,13 +148,12 @@ export default function MessageComposer(props) {
           color="white"
           onPress={getMedia}
         />
-        <AudioUri/>
         <Feather
           style={styles.icon}
-          name="users"
+          name="mic"
           size={verticalScale(20)}
-          color="white"
-          onPress={() => NavigationHelper.navigate('MainTchatConversationBipolarity')}
+          color={recordingState.isRecording ? 'red' : 'white'}
+          onPress={() => handleRecord()}
         />
       </View>
     </>
