@@ -5,7 +5,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { SearchBar } from 'react-native-elements';
 import styles from './styles';
-
+import { ViewPropTypes } from 'react-native';
 export default function SearchField(props) {
   const {
     placeholder,
@@ -39,8 +39,8 @@ SearchBar.propTypes = {
   onChangeText: PropTypes.func,
   value: PropTypes.string,
   lightTheme: PropTypes.bool,
-  containerStyle: PropTypes.style,
-  inputContainerStyle: PropTypes.style,
+  containerStyle: ViewPropTypes.style,
+  inputContainerStyle: ViewPropTypes.style,
   searchIcon: PropTypes.bool,
   clearIcon: PropTypes.bool,
 };

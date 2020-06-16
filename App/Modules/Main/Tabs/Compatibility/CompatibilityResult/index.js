@@ -15,7 +15,27 @@ const COMPATIBILITY_UNSUFFISANTE = require('../../../../../../assets/icons/icon_
 const COMPATIBILITY_EXCELLENT = require('../../../../../../assets/icons/icon_compatibilite_excellent.png');
 
 
-const Actions = () => {
+export default function CompatibilityResult({ user }) {
+  let imageSource, firstName, personnality, age, city, message, subPersonnality;
+  const { logguedUser } = useLogguedUser();
+  const { currentMood, moodInfos } = useCurrentMood();
+  age = moment().diff(moment.unix(logguedUser.birthday), 'years');
+
+  if (!user) {
+    return (null);
+  }
+
+  const { user1, user2, lastMessage } = user;
+  const target = user1.id === logguedUser.id ? user2 : user1;
+  const { moods, personnalities } = target;
+  imageSource = moods[currentMood];
+  imageSource = imageSource.avatar;
+  firstName = target.firstName;
+  personnality = personnalities.main;
+  city = target.city;
+  subPersonnality = PERSONNALITY_DETAILS[currentMood][personnality].personnality, [currentMood, personnality]
+  
+  const Actions = () => {
   return (
     <View style={{ position: 'absolute', right: 4, bottom: 8 }}>
       <ActionButton
@@ -41,26 +61,6 @@ const Actions = () => {
     </View>
   )
 }
-
-export default function CompatibilityResult({ user }) {
-  let imageSource, firstName, personnality, age, city, message, subPersonnality;
-  const { logguedUser } = useLogguedUser();
-  const { currentMood, moodInfos } = useCurrentMood();
-  age = moment().diff(moment.unix(logguedUser.birthday), 'years');
-
-  if (!user) {
-    return (null);
-  }
-
-  const { user1, user2, lastMessage } = user;
-  const target = user1.id === logguedUser.id ? user2 : user1;
-  const { moods, personnalities } = target;
-  imageSource = moods[currentMood];
-  imageSource = imageSource.avatar;
-  firstName = target.firstName;
-  personnality = personnalities.main;
-  city = target.city;
-  subPersonnality = PERSONNALITY_DETAILS[currentMood][personnality].personnality, [currentMood, personnality]
 
   return (
     <View style={styles.compatibilityResult}>

@@ -74,7 +74,7 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
                   uri={target.moods[currentMood].avatar}
                 />
                 <View style={{alignItems: 'center'}}>
-                  <Text style={{fontSize: 12, textTransform: 'uppercase'}}>{ target.firstName }</Text>
+                  <Text style={{fontSize: 10, textTransform: 'uppercase'}}>{ target.firstName }</Text>
                   <Text
                     style={styles.personnalityText}
                   >

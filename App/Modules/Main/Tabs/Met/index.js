@@ -53,7 +53,7 @@ export default function MainMet() {
       />
       <View style={styles.container}>
         <MoodSelector
-          moods={['PRO', 'SOCIAL', 'LOVE']}
+          moods={['PRO', 'SOCIAL', 'LOVE', 'PERSO']}
         />
         <UsersCarousel />
       </View>

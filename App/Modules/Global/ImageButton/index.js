@@ -41,9 +41,3 @@ ImageButton.propTypes = {
     })
   ]).isRequired
 };
-
-ImageButton.defaultProps = {
-  containerStyle: {},
-  imageStyle: {},
-  disabled: false
-};

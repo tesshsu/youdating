@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, Image, FlatList } from 'react-native';
+import { View, StyleSheet, Image, FlatList, ViewPropTypes } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import GridList from 'react-native-grid-list';
 
@@ -39,7 +39,7 @@ GridView.propTypes = {
   separatorBorderWidth: PropTypes.number,
   items: PropTypes.array,
   showSeparator: PropTypes.bool,
-  styles: PropTypes.style,
+  styles: ViewPropTypes.style
 };
 
 GridView.defaultProps = {

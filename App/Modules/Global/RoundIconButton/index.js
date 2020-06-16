@@ -80,7 +80,7 @@ RoundIconButton.propTypes = {
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
   imageSource: PropTypes.node,
-  imageStyle: Image.propTypes.style,
+  imageStyle: ViewPropTypes.style,
   IconProvider: PropTypes.oneOf([
     Feather,
     AntDesign,

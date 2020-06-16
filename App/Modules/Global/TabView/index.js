@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native';
+import { Text, ViewPropTypes } from 'react-native';
 import { TabView as NativeTabView, SceneMap } from 'react-native-tab-view';
 
 import TabBar from './TabBar';
@@ -68,5 +68,5 @@ TabView.propTypes = {
     })
   ),
   onIndexChange: PropTypes.func,
-  labelStyle: Text.propTypes.style,
+  labelStyle: ViewPropTypes.style,
 };

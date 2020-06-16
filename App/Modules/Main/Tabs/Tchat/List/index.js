@@ -96,10 +96,7 @@ export default function MainTabsTchat() {
         title="MESSAGERIE"
       />
       <View style={{ alignItems: 'center' }}>
-        <MoodSelector
-          containerStyle={styles.modeSelector}
-          moods={['PRO', 'SOCIAL', 'LOVE', 'PERSO']}
-        />
+        <MoodSelector />
       </View>
       <Text style={styles.titleText}>
         {`Mes conversations ${TEXT[currentMood]}`}

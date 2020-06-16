@@ -57,8 +57,8 @@ export default StyleSheet.create({
     fontSize: 11
   },
   imageStyle: {
-    height: verticalScale(65),
-    width: scale(65),
+    height: verticalScale(60),
+    width: scale(60),
     margin: scale(6),
     borderRadius: verticalScale(50),
     resizeMode: 'cover',
