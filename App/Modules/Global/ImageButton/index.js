@@ -32,7 +32,7 @@ export default function ImageButton(props) {
 ImageButton.propTypes = {
   containerStyle: ViewPropTypes.style,
   imageStyle: Image.propTypes.style,
-  onPress: PropTypes.func.isRequired,
+  onPress: PropTypes.func,
   disabled: PropTypes.bool,
   imageSource: PropTypes.oneOfType([
     PropTypes.node,

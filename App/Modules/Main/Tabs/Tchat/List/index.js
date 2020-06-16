@@ -39,7 +39,7 @@ export default function MainTabsTchat() {
   } = useConversation();
 
   const { currentMood, moodInfos } = useCurrentMood();
-  const { logguedUser, uploadAvatar } = useLogguedUser();
+  const { logguedUser } = useLogguedUser();
   const { avatar }= logguedUser.moods[currentMood];
   const openConversation = useCallback((conversation) => {
     const {
@@ -115,7 +115,7 @@ export default function MainTabsTchat() {
       <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
         <FlatList
           contentContainerStyle={styles.flatListContent}
-          data={datas}
+          data={conversations}
           refreshing={areConversationsFetching}
           numColumns={3}
           refreshControl={(
