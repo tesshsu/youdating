@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
-  ScrollView
+  ScrollView,
+  Alert
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
@@ -78,7 +79,7 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
       lastArray.push(u);
     }
   });
-
+  
   return (
     <>
       <PageHeader
@@ -89,9 +90,9 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
             name="info"
             color="white"
             size={20}
-            onPress={() => {
-              NavigationHelper.navigate('MainTchatConversationBipolarityHistoric');
-            }}
+           onPress={() => Alert.alert(
+			  "Pour commencer, veuillez cliquer sur l'image ci dessous"
+			)}
           />
         )}
       />
@@ -123,7 +124,6 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
                   />
                   <Text style={styles.questionTitle}>{item.title}</Text>
 				  <Text style={styles.question}>{item.question}</Text>
-                  <View style={styles.line} />
                   <View style={styles.imageContainer} >
                     <View style={styles.imageBackground}>
                       <TouchableOpacity onPress={setCountA}>

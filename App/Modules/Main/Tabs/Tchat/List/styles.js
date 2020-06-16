@@ -137,8 +137,8 @@ export default StyleSheet.create({
   line: {
     height: 1,
     backgroundColor: '#BEBEBE',
-    marginTop: verticalScale(0),
-    marginBottom: verticalScale(23)
+    marginTop: verticalScale(-10),
+    marginBottom: verticalScale(10)
   },
   iconStyle: {
     width: verticalScale(60),

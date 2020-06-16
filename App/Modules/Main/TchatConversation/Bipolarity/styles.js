@@ -18,7 +18,7 @@ export default StyleSheet.create({
   imageBackground: {
     width: scale(420),
     height: verticalScale(200),
-	marginTop: 15,
+	marginTop: 5,
     alignItems: 'center',
   },
   imageLabelText: {
@@ -30,7 +30,7 @@ export default StyleSheet.create({
   },
   imageBackgroundImage: {
     width: scale(350),
-    height: verticalScale(170),
+    height: verticalScale(155),
     borderRadius: verticalScale(30),
   },
   moodTitleText: {
@@ -54,14 +54,9 @@ export default StyleSheet.create({
     textTransform: 'uppercase',
     color: '#7D7D7D',
 	textAlign: 'center',
-	fontSize: 15,
-    marginTop: 15,
+	fontSize: 14,
+    marginTop: 10,
     marginLeft: 30
-  },
-  line: {
-    height: 1,
-    backgroundColor: '#7D7D7D',
-    marginBottom: 20
   },
   passBoutton: {
     marginBottom: 20,
