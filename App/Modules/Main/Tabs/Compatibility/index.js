@@ -10,14 +10,17 @@ import PageHeader from '../../../Global/PageHeader';
 import ImageButton from '../../../Global/ImageButton';
 import MoodSelector from '../../../Global/MoodSelector';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
+import useLogguedUser from '../../../../Hooks/useLogguedUser';
 import useCurrentMood from '../../../../Hooks/useCurrentMood';
 import CompatibilitiesList from './CompatibilitiesList';
 import CompatibilityResult from './CompatibilityResult';
 const IMAGE_SETTING = require('../../../../../assets/icons/icon-user-grey.png');
-export default function MainCompatibility() {
-  const { moodInfos } = useCurrentMood();
-  const [selectedUser, setSelectedUser] = useState(null);
 
+export default function MainCompatibility() {
+  const { currentMood, moodInfos } = useCurrentMood();
+  const { logguedUser } = useLogguedUser();
+  const [selectedUser, setSelectedUser] = useState(null);
+  //const { avatar }= logguedUser.moods[currentMood];
   return (
     <>
       <PageHeader
@@ -45,9 +48,14 @@ export default function MainCompatibility() {
           selectedUser={selectedUser}
           onSelected={setSelectedUser}
         />
-        <CompatibilityResult
-          user={selectedUser}
-        />
+		{ 
+		  setSelectedUser ?
+		  <>
+		   <CompatibilityResult user={selectedUser}/>
+		  </> : <>
+		   <Text>Chosir le personne</Text>
+		   </>
+		}
       </View>
     </>
   );

@@ -90,9 +90,9 @@ export default function MainTabsProfilHome() {
           )}
 		      rightColumnActions={[
               <ActionButton
-                onPress={() => NavigationHelper.navigate('MainTabsTchatList')}
-                text="MESSAGERIE"
-                iconName="message-square"
+                onPress={() => NavigationHelper.navigate('MainTabsProfilSearch')}
+                text="RECHERCHE"
+                iconName="search"
               />,
               <ActionButton
                 onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}

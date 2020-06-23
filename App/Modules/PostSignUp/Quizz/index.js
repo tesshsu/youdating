@@ -81,7 +81,7 @@ export default function PostSignUpQuizz() {
       const payload = calculatePersonnalities(answers);
       await submitQuizzAnswers(payload);
     } catch (err) {
-      Alert.alert('Erreur', err);
+      Alert.alert('Erreur pour calculer', err);
     }
   }
 

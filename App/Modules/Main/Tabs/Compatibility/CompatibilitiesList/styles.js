@@ -91,5 +91,5 @@ export default StyleSheet.create({
   messageListItem: {
     flexDirection: 'row',
     paddingVertical: verticalScale(5)
-  },
+  }
 });

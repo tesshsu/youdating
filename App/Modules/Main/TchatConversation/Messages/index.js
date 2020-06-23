@@ -71,7 +71,7 @@ export default function TchatConversationMessages() {
       }
 
       return {
-        canSendMessage: remainingAllowedMessages > 0,
+        canSendMessage: remainingAllowedMessages > 10000,
         reason: !remainingAllowedMessages ? 'Nombre maximum de messages atteint' : null
       };
     }

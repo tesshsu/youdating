@@ -7,9 +7,16 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingVertical: verticalScale(50)
   },
+  matchingTextYous: {
+    fontFamily: 'Segoe-UI-Bold',
+    fontSize: moderateScale(25),
+    color: 'white',
+    textTransform: 'uppercase',
+    textAlign: 'center'
+  },
   matchingText: {
     fontFamily: 'Segoe-UI-Bold',
-    fontSize: moderateScale(27),
+    fontSize: moderateScale(35),
     color: 'white',
     textTransform: 'uppercase',
     textAlign: 'center'
@@ -29,8 +36,9 @@ export default StyleSheet.create({
     marginTop: verticalScale(17),
   },
   imageBackground: {
-    flex: 1,
-    width: '100%',
+    width: '80%',
+	height: '35%',
+	borderRadius: 20,
     marginVertical: verticalScale(10),
     backgroundColor: 'white',
     shadowColor: 'black',
@@ -44,9 +52,10 @@ export default StyleSheet.create({
   },
   resultValueText: {
     fontFamily: 'NewTaiLue-Bold',
-    fontSize: moderateScale(30),
+    fontSize: moderateScale(18),
     textAlign: 'center',
     textTransform: 'uppercase',
+	padding: 10,
     textShadowColor: 'black',
     textShadowOffset: {
       width: 0,
@@ -62,17 +71,20 @@ export default StyleSheet.create({
     textTransform: 'uppercase'
   },
   personnalityTypeText: {
+	width: '80%',
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(20),
+	marginVertical: verticalScale(10),
     color: 'white',
     textAlign: 'center',
     textTransform: 'uppercase'
   },
   personnalityDescText: {
+	width: '80%',
     fontFamily: 'NewTaiLue-Bold',
     textAlign: 'center',
     fontSize: moderateScale(15),
     color: 'white',
-    marginVertical: verticalScale(18)
+	lineHeight: 20
   }
 });

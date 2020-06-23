@@ -24,7 +24,7 @@ export default function FacebookConnectButton(props) {
     } catch (err) {
       Alert.alert(
         'Erreur',
-        'La connexion avec facebook a échouée'
+        err
       );
     }
   }

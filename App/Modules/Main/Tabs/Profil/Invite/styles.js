@@ -23,7 +23,7 @@ export default StyleSheet.create({
   buttonsRow: {
     alignSelf: 'stretch',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     paddingHorizontal: 34
   },
   button: {

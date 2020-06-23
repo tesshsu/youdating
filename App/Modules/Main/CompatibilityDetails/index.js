@@ -9,11 +9,11 @@ import useCurrentMood from '../../../Hooks/useCurrentMood';
 import RoundIconButton from '../../Global/RoundIconButton';
 import { verticalScale } from '../../../Helpers/ScaleHelper';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
-
-const IMAGE_BACKGROUND_PRO = require('../../../../assets/images/image_background_pro.png');
-const IMAGE_BACKGROUND_SOCIALE = require('../../../../assets/images/image_background_social.png');
-const IMAGE_BACKGROUND_PERSO = require('../../../../assets/images/image_background_perso.png');
-const IMAGE_BACKGROUND_LOVE = require('../../../../assets/images/image_background_love.png');
+import Button from '../../Global/Button';
+const IMAGE_BACKGROUND_PRO = require('../../../../assets/images/match/professionnel/insuf.png');
+const IMAGE_BACKGROUND_SOCIALE = require('../../../../assets/images/match/couple/insuf.png');
+const IMAGE_BACKGROUND_PERSO = require('../../../../assets/images/match/personnel/insuf.png');
+const IMAGE_BACKGROUND_LOVE = require('../../../../assets/images/match/couple/insuf.png');
 
 const IMAGES = {
   PRO: IMAGE_BACKGROUND_PRO,
@@ -36,41 +36,34 @@ export default function CompatibilityDetails({ navigation }) {
       style={styles.container}
       source={IMAGES[currentMood]}
     >
-      <Text style={styles.matchingText}>Matching</Text>
-      <Text style={styles.usernameText}>Clara</Text>
-      <Text style={styles.compatibilityText}>{`Compatibilité ${moodInfos.titleFeminize}`}</Text>
+      <Text style={styles.matchingTextYous}>YOU'S</Text>
+	  <Text style={styles.matchingText}>MATCHING</Text>
+	  <Button
+        text={`Compatibilité ${moodInfos.titleFeminize}`}
+        size={verticalScale(50)}
+        onPress={() => NavigationHelper.back()}
+      />
       <ImageBackground
         style={styles.imageBackground}
         imageStyle={styles.imagebackgroundImage}
         source={user.avatar}
-      >
-        <Text
-          style={[
-            styles.resultValueText,
-            { color: moodInfos.color }
-          ]}
-        >
-          Faible
-        </Text>
-      </ImageBackground>
-      <Text
-        style={[
-          styles.personnalityText,
-          { color: moodInfos.color }
-        ]}
-      >
-        Leaderent
+      />
+      <Text style={styles.personnalityDescText}>
+        Dans cette relation vous etes complementaire avec
       </Text>
       <Text style={styles.personnalityTypeText}>Personnalité directive</Text>
       <Text style={styles.personnalityDescText} numberOfLines={3}>
-        {'Il faudra faire des efforts l\'un envers l\'autre  si vous  voulez reussir a atteindre une excellente compatibilite'}
+        mais rien de grave avec plus de volonté et d'implication, vos plus grandes faiblesses pourraient vite
+		devenir vos plus grandes forces.
+		Dans la configuration actuelle, vous risquez d'avoir des difficultés à vous entendre sur la manière de
+		procéder. Aucun de vous n'est véritablement satisfait du comportement de l'autre. Vos attentes étant
+		différentes, votre collaboration risque inévitablement d'en souffrir ce qui pourrait a terme vous empêcher
+		d'evoluer plus sérieusement dans des projets en communs. Essayez donc d'être plus conciliant et
+		apprenez a mieux comprendre la pensée de l'autre pour être plus performant dans votre partenariat.
       </Text>
-      <RoundIconButton
-        backgroundColor={moodInfos.color}
+      <Button
+        text={'REVENIR PLUS TARD'}
         size={verticalScale(50)}
-        iconColor="white"
-        iconName="x"
-        iconSize={verticalScale(20)}
         onPress={() => NavigationHelper.back()}
       />
     </ImageBackground>

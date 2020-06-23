@@ -28,8 +28,7 @@ export default function CompatibilityResult({ user }) {
   const { user1, user2, lastMessage } = user;
   const target = user1.id === logguedUser.id ? user2 : user1;
   const { moods, personnalities } = target;
-  imageSource = moods[currentMood];
-  imageSource = imageSource.avatar;
+  imageSource = moods[currentMood].avatar;
   firstName = target.firstName;
   personnality = personnalities.main;
   city = target.city;

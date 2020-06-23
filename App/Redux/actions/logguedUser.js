@@ -76,7 +76,7 @@ export function signInUsingFacebook() {
       } = await Facebook.logInWithReadPermissionsAsync({
         permissions: ['public_profile', 'email', 'user_birthday', 'user_gender', 'user_location'],
         behavior: 'native'
-      });
+      }).toString();
 
       if (type === 'success') {
         const { token, user: { id: userId } } = await API.Auth.signInWithFacebook({ accessToken });
