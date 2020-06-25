@@ -96,14 +96,17 @@ export default function MainTabsTchat() {
         title="MESSAGERIE"
       />
       <View style={{ alignItems: 'center' }}>
-        <MoodSelector />
+        <MoodSelector	
+          containerStyle={styles.modeSelector}	
+          moods={['PRO', 'SOCIAL', 'LOVE', 'PERSO']}	
+        />
       </View>
       <Text style={styles.titleText}>
         {`Mes conversations ${TEXT[currentMood]}`}
       </Text>
       <View style={styles.searchBlock}>
         <SearchField
-          placeholder="RECHERCHE PAR NOM D'UTILISATEUR..."
+          placeholder="RECHERCHE D'UTILISATEUR..."
           lightTheme={true}
           onChangeText={(value) => setSearch(value)}
           value={search}

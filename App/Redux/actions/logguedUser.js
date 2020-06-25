@@ -88,7 +88,7 @@ export function signInUsingFacebook() {
         return;
       }
     } catch (err) {
-      console.warn(err);
+      console.warn('Connexion error',err);
       throw err;
     } finally {
       dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));

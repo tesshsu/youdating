@@ -23,7 +23,7 @@ export default function FacebookConnectButton(props) {
       await signInUsingFacebook();
     } catch (err) {
       Alert.alert(
-        'Erreur',
+        'Connexion error',
         err
       );
     }

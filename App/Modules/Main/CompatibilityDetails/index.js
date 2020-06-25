@@ -26,7 +26,7 @@ export default function CompatibilityDetails({ navigation }) {
   const { moodInfos, currentMood } = useCurrentMood();
 
   const user = navigation.getParam('user');
-
+ 
   if (!user) {
     return (null);
   }
@@ -39,14 +39,14 @@ export default function CompatibilityDetails({ navigation }) {
       <Text style={styles.matchingTextYous}>YOU'S</Text>
 	  <Text style={styles.matchingText}>MATCHING</Text>
 	  <Button
-        text={`Compatibilité ${moodInfos.titleFeminize}`}
+        text={moodInfos.match.mauvaise.title}
         size={verticalScale(50)}
         onPress={() => NavigationHelper.back()}
       />
       <ImageBackground
         style={styles.imageBackground}
         imageStyle={styles.imagebackgroundImage}
-        source={user.avatar}
+        source={moodInfos.match.mauvaise.backgroundImage}
       />
       <Text style={styles.personnalityDescText}>
         Dans cette relation vous etes complementaire avec
