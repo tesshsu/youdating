@@ -39,49 +39,6 @@ export default function TchatConversationMessages() {
     fetchRemainingAllowedMessages();
   }, [fetchRemainingAllowedMessages]);
 
-  const {
-    canSendMessage,
-    reason
-  } = useMemo(() => {
-    const { remainingAllowedMessages } = logguedUser;
-    const lastMessage = messages[messages.length - 1];
-
-    console.log(remainingAllowedMessages);
-
-    if (
-      lastMessage
-      && lastMessage.isOpportunity
-      && lastMessage.author === logguedUser.id
-    ) {
-      return {
-        canSendMessage: true,
-        reason: `Vous devez attendre que ${target.firstName} vous réponde`
-      };
-    }
-
-    if (!lastMessage) {
-      const recevivedGF = received.some(r => r.author.id === target.id);
-      const sentGF = sent.some(s => s.target.id === target.id);
-
-      if (recevivedGF && sentGF) {
-        return {
-          canSendMessage: true,
-          reason: null
-        };
-      }
-
-      return {
-        canSendMessage: remainingAllowedMessages > 10000,
-        reason: !remainingAllowedMessages ? 'Nombre maximum de messages atteint' : null
-      };
-    }
-
-    return {
-      canSendMessage: true,
-      reason: null
-    };
-  }, [logguedUser, messages, received, sent, target]);
-
   return (
     <View
       style={styles.container}
@@ -118,15 +75,7 @@ export default function TchatConversationMessages() {
         </SafeAreaView>
       </View>
       <TchatPopup />
-      { canSendMessage && <MessageComposer /> }
-      { !canSendMessage && (
-        <SafeAreaView style={[styles.locked, { backgroundColor: moodInfos.color }]}>
-          <View style={styles.locked}>
-            <Feather name="lock" color="white" size={moderateScale(25)} />
-            <Text style={styles.lockedText}>{ reason }</Text>
-          </View>
-        </SafeAreaView>
-      )}
+       <MessageComposer />
     </View>
   );
 }
