@@ -1,8 +1,8 @@
 import React from 'react';
-import { FontAwesome5 } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import useProfilesMod from '../../../../../Hooks/useProfilesMod';
 import { verticalScale } from '../../../../../Helpers/ScaleHelper';
-
+import NavigationHelper from '../../../../../Helpers/NavigationHelper';
 export default function ProfilesModToggler() {
   const {
     profilesMod,
@@ -10,12 +10,11 @@ export default function ProfilesModToggler() {
   } = useProfilesMod();
 
   return (
-    <FontAwesome5
-      name={profilesMod === 'GRID' ? 'th-large' : 'square'}
-      solid
-      size={verticalScale(19)}
-      color="white"
-      onPress={() => toggleMod()}
-    />
+    <Feather
+         name="chevron-left"
+         color='white'
+         size={21}
+         onPress={() => NavigationHelper.navigate('MainTabsProfile')}
+     />
   );
 }

@@ -43,7 +43,5 @@ export default function UsersCarousel() {
   if (!isFetching && !results.length) {
     return (<NoResults />);
   }
-  return profilesMod === 'SINGLE'
-    ? (<Single users={users} onConsultProfil={consultProfil} />)
-    : (<Grid users={users} onConsultProfil={consultProfil} />);
+  return <Single users={users} onConsultProfil={consultProfil} />;
 }

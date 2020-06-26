@@ -38,7 +38,7 @@ export function signIn({ email, password }) {
       await dispatch(fetch());
       await dispatch({ type: LOGIN });
     } catch (err) {
-      console.warn(err);
+      await dispatch({ type: LOGIN });
       throw err;
     } finally {
       dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
@@ -73,8 +73,8 @@ export function signInUsingFacebook() {
       const {
         type,
         token: accessToken
-      } = await Facebook.logInWithReadPermissionsAsync({
-        permissions: ['public_profile', 'email', 'user_birthday', 'user_gender', 'user_location'],
+      } = await Facebook.logInWithReadPermissionsAsync('862552420923956', {
+        permissions: ['public_profile','email'],
         behavior: 'native'
       }).toString();
 

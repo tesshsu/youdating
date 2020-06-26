@@ -9,6 +9,7 @@ import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import useLogguedUser from '../../../../../Hooks/useLogguedUser';
 import ImageButton from '../../../../Global/ImageButton';
 import MoodSelector from '../../../../Global/MoodSelector';
+import NoResults from '../../../../Global/NoResults';
 import PageHeader from '../../../../Global/PageHeader';
 import RoundButton from '../../../../Global/RoundButton';
 import RoundIconButton from '../../../../Global/RoundIconButton';
@@ -30,7 +31,7 @@ const TEXT = {
 export default function MainTabsTchat() {
   const [search, setSearch] = useState(null);
   const [datas, setDatas] = useState(null);
-
+  const [conversation, setConversation] = useState(null)
   const {
     conversations,
     startConversation,
@@ -96,9 +97,9 @@ export default function MainTabsTchat() {
         title="MESSAGERIE"
       />
       <View style={{ alignItems: 'center' }}>
-        <MoodSelector	
-          containerStyle={styles.modeSelector}	
-          moods={['PRO', 'SOCIAL', 'LOVE', 'PERSO']}	
+        <MoodSelector
+          containerStyle={styles.modeSelector}
+          moods={['PRO', 'SOCIAL', 'LOVE', 'PERSO']}
         />
       </View>
       <Text style={styles.titleText}>
@@ -116,6 +117,7 @@ export default function MainTabsTchat() {
       </View>
       <View style={styles.line} />
       <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+		  {conversations.length > 0 ?
         <FlatList
           contentContainerStyle={styles.flatListContent}
           data={conversations}
@@ -208,6 +210,8 @@ export default function MainTabsTchat() {
             );
           }}
         />
+		: <NoResults />
+		  } 
       </View>
     </View>
   );

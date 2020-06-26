@@ -19,6 +19,7 @@ export default function BipolarityHistoric({ navigation }) {
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
   const {
+	conversations,
     startConversation
   } = useConversation();
   const slicedAnswers = [];
@@ -156,7 +157,7 @@ export default function BipolarityHistoric({ navigation }) {
                 backgroundColor={moodInfos.color}
                 text="DISCUTEZ-EN"
                 color="white"
-                borderRadius={23}
+                borderRadius={23} MainTabsTchatList
                 onPress={() => openConversation(conversation)}
               />
             </SafeAreaView>

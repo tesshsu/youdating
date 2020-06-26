@@ -3,7 +3,7 @@ import {
   View,
   Text
 } from 'react-native';
-import { Feather, FontAwesome5 } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { useIsFocused } from 'react-navigation-hooks';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -42,12 +42,12 @@ export default function MainMet() {
       <PageHeader
         leftComponent={ProfilesModToggler}
         rightComponent={() => (
-          <FontAwesome5
-            name="ellipsis-v"
-            size={verticalScale(19)}
-            color="white"
-            onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
-          />
+		  <Feather
+				 name="sliders"
+				 color='white'
+				 size={21}
+				 onPress={() => NavigationHelper.navigate('MainMoodSettings')}
+			 />
         )}
         title="RENCONTRES"
       />

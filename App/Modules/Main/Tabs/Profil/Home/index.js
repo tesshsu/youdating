@@ -94,6 +94,16 @@ export default function MainTabsProfilHome() {
                 text="RECHERCHE"
                 iconName="search"
               />,
+			  <ActionButton
+                onPress={() => NavigationHelper.navigate('MainTabsMet')}
+                text="RENCONTRE"
+                iconName="users"
+              />,
+			  <ActionButton
+                onPress={() => NavigationHelper.navigate('MainTabsTchat')}
+                text="MESSAGERIE"
+                iconName="message-square"
+              />,
               <ActionButton
                 onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}
                 text="COMPATBILITER"

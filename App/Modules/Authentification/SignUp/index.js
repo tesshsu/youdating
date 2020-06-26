@@ -16,7 +16,6 @@ import styles from './styles';
 import globalStyles from '../styles';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
 import useLogguedUser from '../../../Hooks/useLogguedUser';
-import FacebookConnectButton from '../../Global/FacebookConnectButton';
 import TextField from '../../Global/TextField';
 import Images from '../../../Assets/images';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -115,7 +114,6 @@ export default function AuthentificationSignUp() {
     validateOnChange: true,
     validateOnBlur: false,
     validateOnMount: false,
-    // onSubmit
   });
 
 
@@ -133,7 +131,6 @@ export default function AuthentificationSignUp() {
         ville: 'Nice'
       }}
       onSubmit={onSubmit}
-    // validationSchema={SignUpSchema}
     >
       {({ handleChange, handleSubmit, values, setFieldValue, ...props }) => (
         <View style={globalStyles.scrollViewContainer}>
@@ -146,8 +143,7 @@ export default function AuthentificationSignUp() {
           >
             <Text style={styles.yousTitleText}>{'You\'s'}</Text>
             <Text style={styles.subTitleText}>LA RELATION SUR MESURE</Text>
-            <Text style={styles.subSubTitleText}>Reseau 3.0</Text>
-            <FacebookConnectButton />
+            <Text style={styles.subSubTitleText}>Reseau 3.0</Text>           
             <View style={globalStyles.or}>
               <View style={globalStyles.bar} />
               <Text style={globalStyles.orText}>ou</Text>

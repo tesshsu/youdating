@@ -16,7 +16,7 @@ export default StyleSheet.create({
     color: colors.PINK,
     textAlign: 'center',
     textTransform: 'uppercase',
-    marginTop: verticalScale(43)
+    marginTop: verticalScale(53)
   },
   subTitleText: {
     fontFamily: 'NewTaiLue-Bold',
@@ -30,8 +30,7 @@ export default StyleSheet.create({
     fontSize: moderateScale(10),
     color: colors.PINK,
     textAlign: 'center',
-    textTransform: 'uppercase',
-    marginBottom: verticalScale(42)
+    textTransform: 'uppercase'
   },
   createAccountText: {
     fontFamily: 'NewTaiLue-Bold',
