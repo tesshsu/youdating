@@ -63,7 +63,7 @@ export default function MainTchatNewMessage() {
               { color: moodInfos.color }
             ]}
           >
-            { PERSONNALITY_DETAILS[mood][user.personnalities.main].personnality }
+            { PERSONNALITY_DETAILS[mood][user.personalities.main].personnality }
           </Text>
         </View>
         <View style={styles.message}>

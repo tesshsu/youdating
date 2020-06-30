@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
@@ -9,6 +9,7 @@ import ImageButton from '../../../../Global/ImageButton';
 import { ActionButton } from '../../../../Global/Profile';
 import * as PERSONNALITY_DETAILS from './../../../../../PersonnalityDetails';
 import styles from './styles';
+import useCompatibilityRequests from '../../../../../Hooks/useCompatibilityRequests';
 const COMPATIBILITY_SATIFAISANT = require('../../../../../../assets/icons/icon_compatibilite_satifaisante.png');
 const COMPATIBILITY_MAUVAISE = require('../../../../../../assets/icons/icon_compatibilite_mauvaise.png');
 const COMPATIBILITY_UNSUFFISANTE = require('../../../../../../assets/icons/icon_compatibilite_insuffisante.png');
@@ -16,9 +17,10 @@ const COMPATIBILITY_EXCELLENT = require('../../../../../../assets/icons/icon_com
 
 
 export default function CompatibilityResult({ user }) {
-  let imageSource, firstName, personnality, age, city, message, subPersonnality;
+  let imageSource, firstName, personnality, age, city, message, subPersonnality, result;
   const { logguedUser } = useLogguedUser();
   const { currentMood, moodInfos } = useCurrentMood();
+  const { create } = useCompatibilityRequests();
   age = moment().diff(moment.unix(logguedUser.birthday), 'years');
 
   if (!user) {
@@ -27,12 +29,18 @@ export default function CompatibilityResult({ user }) {
 
   const { user1, user2, lastMessage } = user;
   const target = user1.id === logguedUser.id ? user2 : user1;
-  const { moods, personnalities } = target;
+  const { moods, personalities } = target;
   imageSource = moods[currentMood].avatar;
   firstName = target.firstName;
-  personnality = personnalities.main;
+  personnality = personalities.main;
   city = target.city;
   subPersonnality = PERSONNALITY_DETAILS[currentMood][personnality].personnality, [currentMood, personnality]
+  //result = target.resultCo.result;
+
+  function onSubmit(user) {
+	    NavigationHelper.navigate('MainCompatibilityDetails', { user });
+		console.log('test_resulst_create_compatbilite',create.result);
+  }
   
   const Actions = () => {
   return (
@@ -43,8 +51,9 @@ export default function CompatibilityResult({ user }) {
         iconName="message-square"
       />
       <ActionButton
-        onPress={() => NavigationHelper.navigate('MainCompatibilityDetails', { user })}
-        text="COMPATBILITER"
+        //onPress={() => NavigationHelper.navigate('MainCompatibilityDetails', { user })}
+	    onPress={() => onSubmit( user )}
+        text="COMPATIBILITER"
         iconName="refresh-cw"
       />
       <ActionButton

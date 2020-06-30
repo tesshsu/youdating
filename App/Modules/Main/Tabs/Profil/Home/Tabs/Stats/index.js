@@ -18,7 +18,7 @@ export default function Stats() {
   const { moodInfos, currentMood } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
 
-  const { stats } = PERSONNALITY_DETAILS[currentMood][logguedUser.personnalities.main];
+  const { stats } = PERSONNALITY_DETAILS[currentMood][logguedUser.personalities.main];
 
   return (
     <>
@@ -101,7 +101,7 @@ export default function Stats() {
           { stats.advice }
         </Text>
         <View style={styles.line} />
-        <Text style={styles.title}>{ logguedUser.personnalities.main }</Text>
+        <Text style={styles.title}>{ logguedUser.personalities.main }</Text>
         <Text
           style={[
             styles.labelText,

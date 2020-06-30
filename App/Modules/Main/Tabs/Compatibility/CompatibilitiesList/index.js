@@ -78,7 +78,7 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
                   <Text
                     style={styles.personnalityText}
                   >
-                    { target.personnalities.main }
+                    { target.personalities.main }
                     { hasNewMessage }
                   </Text>
                 </View>

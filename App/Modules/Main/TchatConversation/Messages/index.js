@@ -61,7 +61,7 @@ export default function TchatConversationMessages() {
               </TouchableOpacity>
               <View>
                 <Text style={styles.usernameText}>{target.firstName}</Text>
-                <Text style={styles.personnality}>{target.personnalities.main}</Text>
+                <Text style={styles.personnality}>{target.personalities.main}</Text>
                 <Text style={styles.mood}>{`mood ${moodInfos.title}`}</Text>
               </View>
             </View>

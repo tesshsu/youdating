@@ -76,7 +76,7 @@ export default function MainTabsProfilHome() {
           firstName={logguedUser.firstName}
           city={logguedUser.city ? logguedUser.city.toUpperCase() : 'MONTPELLIERS'}
           age={moment().diff(moment.unix(logguedUser.birthday), 'years')}
-          personnality={logguedUser.personnalities.main}
+          personnality={logguedUser.personalities.main}
           subPersonnality="Personnalité compétitive"
           HeaderTopLeftComponent={(
             <HeaderAvatarButton onMedia={startUploadAvatar} iconName="instagram"/>
@@ -106,7 +106,7 @@ export default function MainTabsProfilHome() {
               />,
               <ActionButton
                 onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}
-                text="COMPATBILITER"
+                text="COMPATIBILITER"
                 iconName="refresh-cw"
               />,
               <ActionButton

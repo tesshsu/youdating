@@ -5,9 +5,12 @@ import {
 } from 'react-native';
 
 import styles from './styles';
+import { Image } from 'react-native-expo-image-cache';
 import useCurrentMood from '../../../Hooks/useCurrentMood';
 import RoundIconButton from '../../Global/RoundIconButton';
 import { verticalScale } from '../../../Helpers/ScaleHelper';
+import useLogguedUser from '../../../Hooks/useLogguedUser';
+import useCompatibilityRequests from '../../../Hooks/useCompatibilityRequests';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
 import Button from '../../Global/Button';
 const IMAGE_BACKGROUND_PRO = require('../../../../assets/images/match/professionnel/insuf.png');
@@ -24,12 +27,22 @@ const IMAGES = {
 
 export default function CompatibilityDetails({ navigation }) {
   const { moodInfos, currentMood } = useCurrentMood();
-
+  const { logguedUser } = useLogguedUser();
+  const { fetchAll: fetchAllCompatibilityRequests, fetch } = useCompatibilityRequests();
   const user = navigation.getParam('user');
- 
+
   if (!user) {
     return (null);
   }
+
+  let imageSource, firstName, personnality;
+  const { user1, user2 } = user;
+  const target = logguedUser.id ? user2 : user1;
+  const { moods, personalities } = target;
+  imageSource = moods[currentMood].avatar;
+  firstName = target.firstName;
+  personnality = personalities.main;
+
 
   return (
     <ImageBackground
@@ -43,15 +56,14 @@ export default function CompatibilityDetails({ navigation }) {
         size={verticalScale(50)}
         onPress={() => NavigationHelper.back()}
       />
-      <ImageBackground
-        style={styles.imageBackground}
-        imageStyle={styles.imagebackgroundImage}
-        source={moodInfos.match.mauvaise.backgroundImage}
-      />
+	  <Image
+            uri={imageSource}
+            style={[styles.imageBackground]}
+       />
       <Text style={styles.personnalityDescText}>
-        Dans cette relation vous etes complementaire avec
+        Dans cette relation vous etes complementaire avec {firstName}
       </Text>
-      <Text style={styles.personnalityTypeText}>Personnalité directive</Text>
+      <Text style={styles.personnalityTypeText}>{personnality}</Text>
       <Text style={styles.personnalityDescText} numberOfLines={3}>
         mais rien de grave avec plus de volonté et d'implication, vos plus grandes faiblesses pourraient vite
 		devenir vos plus grandes forces.

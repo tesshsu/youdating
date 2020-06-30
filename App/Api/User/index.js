@@ -43,9 +43,9 @@ export async function deletePhoto(userId, payload) {
     .put(`users/${userId}/photos`, payload);
 }
 
-export async function setPersonnalities(userId, payload) {
+export async function setpersonalities(userId, payload) {
   return client
-    .post(`users/${userId}/personnalities`, payload);
+    .post(`users/${userId}/personalities`, payload);
 }
 
 export async function updateSkills(userId, payload) {

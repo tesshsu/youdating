@@ -109,7 +109,7 @@ export default function TchatPopup() {
   const [scrollData, lastMessageId] = useMemo(() => {
     let lastMessage = null;
     const data = messages.reduce((acc, message, index) => {
-      const messageMoment = moment.unix(message.sentAt);
+      const messageMoment = moment(message.sentAt);
 
       if (index === 0) {
         acc.push({

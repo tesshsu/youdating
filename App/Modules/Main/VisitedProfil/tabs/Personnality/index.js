@@ -10,12 +10,12 @@ import useVisitedProfil from '../../../../../Hooks/useVisitedProfil';
 
 export default function Personnality() {
   const { moodInfos, currentMood } = useCurrentMood();
-  const { profil: { personnalities, gender } } = useVisitedProfil();
+  const { profil: { personalities, gender } } = useVisitedProfil();
 
   const {
     title,
     content
-  } = useMemo(() => PERSONNALITY_DETAILS[currentMood][personnalities.main], [currentMood, personnalities]);
+  } = useMemo(() => PERSONNALITY_DETAILS[currentMood][personalities.main], [currentMood, personalities]);
 
   return (
     <>

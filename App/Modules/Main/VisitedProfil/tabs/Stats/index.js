@@ -18,7 +18,7 @@ export default function Stats() {
   const { moodInfos, currentMood } = useCurrentMood();
   const { profil } = useVisitedProfil();
 
-  const { stats } = PERSONNALITY_DETAILS[currentMood][profil.personnalities.main];
+  const { stats } = PERSONNALITY_DETAILS[currentMood][profil.personalities.main];
 
   return (
     <>

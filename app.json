@@ -1,10 +1,14 @@
 {
   "expo": {
     "name": "you's",
-    "slug": "yous",
+    "slug": "yous-dating",
     "privacy": "public",
     "sdkVersion": "36.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,14 +20,16 @@
     "updates": {
       "fallbackToCacheTimeout": 20000
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.test.yous"
     },
-    "facebookAppId": "510619869796975",
+    "facebookAppId": "862552420923956",
     "facebookDisplayName": "Yous APP",
-    "facebookScheme": "fb510619869796975",
+    "facebookScheme": "fb862552420923956",
     "hooks": {
       "postPublish": [
         {
@@ -35,6 +41,7 @@
           }
         }
       ]
-    }
+    },
+    "description": "You's dating APP"
   }
 }

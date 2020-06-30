@@ -35,8 +35,8 @@ export default function AuthentificationSignIn() {
     <Formik
       initialValues={{
         email: 'laristo1@hotmail.fr',
-        //password: '1StrongPassword$'
-		password: 'Keinanoam24$'
+        password: '1StrongPassword$'
+		//password: 'Keinanoam24$'
       }}
       onSubmit={async ({ email, password }) => {
         try {

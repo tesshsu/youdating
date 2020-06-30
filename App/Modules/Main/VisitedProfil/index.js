@@ -84,7 +84,7 @@ export default function MainTabsProfilVisitedProfil() {
           firstName={profil.firstName}
           age={moment().diff(moment.unix(profil.birthday), 'years')}
           city={profil.city ? profil.city.toUpperCase() : 'PARIS'}
-          personnality={profil.personnalities.main}
+          personnality={profil.personalities.main}
           subPersonnality="Personnalité compétitive"
           HeaderTopLeftComponent={(
             <View style={styles.backButtonContainer}>

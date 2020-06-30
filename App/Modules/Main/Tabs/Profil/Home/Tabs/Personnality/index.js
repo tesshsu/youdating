@@ -11,7 +11,7 @@ import Stats from '../Stats';
 
 export default function Personnality() {
   const { moodInfos, currentMood } = useCurrentMood();
-  const { logguedUser: { gender, personnalities, ...logguedUser }, updateSkills } = useLogguedUser();
+  const { logguedUser: { gender, personalities, ...logguedUser }, updateSkills } = useLogguedUser();
   const [skills, setSkills] = useState(() => logguedUser.skills);
   const [debouncedUpdate] = useDebouncedCallback(
     async () => {
@@ -42,7 +42,7 @@ export default function Personnality() {
     content,
 	advice,
 	personnality
-  } = useMemo(() => PERSONNALITY_DETAILS[currentMood][personnalities.main], [currentMood, personnalities]);
+  } = useMemo(() => PERSONNALITY_DETAILS[currentMood][personalities.main], [currentMood, personalities]);
 
   return (
     <>

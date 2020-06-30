@@ -244,9 +244,9 @@ export function submitQuizzAnswers(payload) {
     const { user } = getState().logguedUser;
 
     try {
-      await API.User.setPersonnalities(user.id, payload);
+      await API.User.setpersonalities(user.id, payload);
       user.quizzCompleted = true;
-      user.personnalities = payload;
+      user.personalities = payload;
       dispatch(update(user));
       NavigationHelper.navigate('MainTabsProfile');
     } catch (err) {

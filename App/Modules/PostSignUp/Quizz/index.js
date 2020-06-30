@@ -16,7 +16,7 @@ const MAPPING = [
   ['HUMANIST', 'DIPLOMATIST']
 ];
 
-function calculatePersonnalities(answers) {
+function calculatepersonalities(answers) {
   let persoAnswers = answers.slice(2, 4);
 
   persoAnswers = persoAnswers
@@ -78,7 +78,7 @@ export default function PostSignUpQuizz() {
 
   async function submitAnswers() {
     try {
-      const payload = calculatePersonnalities(answers);
+      const payload = calculatepersonalities(answers);
       await submitQuizzAnswers(payload);
     } catch (err) {
       Alert.alert('Erreur pour calculer', err);

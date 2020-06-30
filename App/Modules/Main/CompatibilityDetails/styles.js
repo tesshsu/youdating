@@ -50,6 +50,10 @@ export default StyleSheet.create({
     paddingTop: verticalScale(10),
     shadowRadius: 3
   },
+  avatarImage: {
+    flex: 1,
+    borderRadius: 20
+  },
   resultValueText: {
     fontFamily: 'NewTaiLue-Bold',
     fontSize: moderateScale(18),

@@ -4,6 +4,7 @@ import { Alert } from 'react-native';
 
 import useCurrentMood from './useCurrentMood';
 import * as COMPATIBILITY_REQUESTS_ACTIONS from '../Redux/actions/compatibilityRequests';
+import NavigationHelper from '../Helpers/NavigationHelper';
 
 export default function useCompatibilityRequests() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ export default function useCompatibilityRequests() {
   const create = useCallback(async (target) => {
     try {
       await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.create(target, currentMood));
+      NavigationHelper.navigate('MainCompatibilityDetails', { target });
     } catch (err) {
       Alert.alert('useCompatibilityRequests target', err);
     }

@@ -174,7 +174,7 @@ export default function MainTabsTchat() {
                   <View style={{ alignItems: 'center' }}>
                     <Text style={styles.messageNameList}>{target.firstName}</Text>
                     <Text style={styles.personnalityText} >
-                      {target.personnalities.main}
+                      {target?.personalities?.main}
                       {hasNewMessage}
                     </Text>
                   </View>
