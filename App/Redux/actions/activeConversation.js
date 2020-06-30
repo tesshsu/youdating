@@ -107,7 +107,7 @@ export function createMessage(payload) {
     try {
       try {
         message = await API.Messages.createMessage({
-          sentAt: moment().unix(),
+          sentAt: moment(),
           ...payload
         });
 
