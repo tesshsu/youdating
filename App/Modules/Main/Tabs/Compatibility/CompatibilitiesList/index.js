@@ -54,15 +54,8 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
 
           const conversation = { ...item };
 
-          const {
-            lastMessage: {
-              author,
-              sentAt,
-              content,
-              imageUri,
-              audioUri
-            }
-          } = item;
+          const { lastMessage } = item;
+
           return (
             <TouchableOpacity
               style={styles.messageListItem}
@@ -71,14 +64,14 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
               <View style={{alignItems: 'center'}}>
                 <Image
                   style={[styles.imageStyle, {borderColor: moodInfos.color}]}
-                  uri={target.moods[currentMood].avatar}
+                  uri={target?.moods[currentMood]?.avatar}
                 />
                 <View style={{alignItems: 'center'}}>
-                  <Text style={{fontSize: 10, textTransform: 'uppercase'}}>{ target.firstName }</Text>
+                  <Text style={{fontSize: 10, textTransform: 'uppercase'}}>{ target?.firstName }</Text>
                   <Text
                     style={styles.personnalityText}
                   >
-                    { target.personalities.main }
+                    { target?.personalities?.main }
                     { hasNewMessage }
                   </Text>
                 </View>

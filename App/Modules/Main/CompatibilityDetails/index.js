@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Text,
   ImageBackground
@@ -28,6 +28,12 @@ const IMAGES = {
 export default function CompatibilityDetails({ navigation }) {
   const { moodInfos, currentMood } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
+  const [datas, setDatas] = useState(null);
+  const [conversation, setConversation] = useState(null)
+
+  console.log(datas);
+  console.log(conversation);
+
   const { fetchAll: fetchAllCompatibilityRequests, fetch } = useCompatibilityRequests();
   const user = navigation.getParam('user');
 
@@ -37,7 +43,7 @@ export default function CompatibilityDetails({ navigation }) {
 
   let imageSource, firstName, personnality;
   const { user1, user2 } = user;
-  const target = logguedUser.id ? user2 : user1;
+  const target = user1.id === logguedUser.id ? user2 : user1;
   const { moods, personalities } = target;
   imageSource = moods[currentMood].avatar;
   firstName = target.firstName;
