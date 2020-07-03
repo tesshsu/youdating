@@ -253,7 +253,7 @@ export default function TchatPopup() {
         { uploads.map(u => (
           <MessageBubble
             key={u.uploadId}
-            text={u.content}
+            text={u.content}PR
             containerStyle={styles.bubbleAuthor}
             uploadId={u.id}
             imageUri={u.type === 'image' ? u.uri : undefined}
