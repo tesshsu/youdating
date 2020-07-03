@@ -51,7 +51,7 @@ export default function MainTabsTchat() {
 
     const target = user1.id === logguedUser.id ? user2 : user1;
 
-    if (lastMessage.isOpportunity && lastMessage.author !== logguedUser.id) {
+    if (lastMessage?.isOpportunity && lastMessage?.author !== logguedUser.id) {
       NavigationHelper.navigate('MainTchatNewMessage', { conversation, target });
     } else {
       startConversation(currentMood, target);
@@ -137,17 +137,9 @@ export default function MainTabsTchat() {
 
             const conversation = { ...item };
 
-            const {
-              lastMessage: {
-                author,
-                sentAt,
-                content,
-                imageUri,
-                audioUri
-              }
-            } = item;
+            const { lastMessage } = item;
 
-            const lastMessageStr = author === logguedUser.id ? 'Vous avez' : `${target.firstName} a`;
+            const lastMessageStr = lastMessage?.author === logguedUser.id ? 'Vous avez' : `${target?.firstName} a`;
             return (
               <TouchableOpacity
                 style={styles.messageListItem}
@@ -156,7 +148,7 @@ export default function MainTabsTchat() {
                 <View style={{ alignItems: 'center' }}>
                   <Image
                     style={[styles.imageStyle, { borderColor: moodInfos.color }]}
-                    uri={target.moods[currentMood].avatar}
+                    uri={target?.moods[currentMood]?.avatar}
                   />
                   <ImageButton
                     imageSource={COMPATIBILITY_SATIFAISANT}
@@ -172,7 +164,7 @@ export default function MainTabsTchat() {
                     )
                   }
                   <View style={{ alignItems: 'center' }}>
-                    <Text style={styles.messageNameList}>{target.firstName}</Text>
+                    <Text style={styles.messageNameList}>{target?.firstName}</Text>
                     <Text style={styles.personnalityText} >
                       {target?.personalities?.main}
                       {hasNewMessage}
