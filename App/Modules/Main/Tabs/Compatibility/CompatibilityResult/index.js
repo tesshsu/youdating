@@ -42,6 +42,7 @@ export default function CompatibilityResult({ user }) {
     return (null);
   }
 
+  age = moment().diff(moment(logguedUser.birthday), 'years');
   const { user1, user2, lastMessage } = user;
   const target = user1.id === logguedUser.id ? user2 : user1;
   const { moods, personalities } = target;

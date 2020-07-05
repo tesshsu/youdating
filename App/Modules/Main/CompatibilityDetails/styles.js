@@ -84,11 +84,14 @@ export default StyleSheet.create({
     textTransform: 'uppercase'
   },
   personnalityDescText: {
-	width: '80%',
+	width: '90%',
     fontFamily: 'NewTaiLue-Bold',
     textAlign: 'center',
     fontSize: moderateScale(15),
     color: 'white',
 	lineHeight: 20
+  },
+  scrollView: {
+    width: '90%'
   }
 });

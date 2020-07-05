@@ -75,7 +75,7 @@ export default function MainTabsProfilHome() {
           imageSource={imageSource}
           firstName={logguedUser.firstName}
           city={logguedUser.city ? logguedUser.city.toUpperCase() : 'MONTPELLIERS'}
-          age={moment().diff(moment.unix(logguedUser.birthday), 'years')}
+          age={moment().diff(moment(logguedUser.birthday), 'years')}
           personnality={logguedUser.personalities.main}
           subPersonnality="Personnalité compétitive"
           HeaderTopLeftComponent={(

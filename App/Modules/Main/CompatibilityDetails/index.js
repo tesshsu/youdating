@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
   Text,
-  ImageBackground
+  ImageBackground,
+  ScrollView
 } from 'react-native';
 
 import styles from './styles';
@@ -44,7 +45,9 @@ export default function CompatibilityDetails({ navigation }) {
 
   // Results could be
   const crResult = !compatibilityRequestResults.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
-
+  if (!crResult) {
+    return (null);
+  }
   return (
     <ImageBackground
       style={styles.container}
@@ -64,9 +67,12 @@ export default function CompatibilityDetails({ navigation }) {
       <Text style={styles.personnalityTypeText}>
         {moodInfos.match[crResult].contentTitle}
       </Text>
-      <Text style={styles.personnalityDescText} numberOfLines={5}>
+      <ScrollView
+       style={styles.scrollView}>
+      <Text style={styles.personnalityDescText} >
         {moodInfos.match[crResult].content}
       </Text>
+      </ScrollView>
       <Button
         text={'REVENIR PLUS TARD'}
         size={verticalScale(50)}
