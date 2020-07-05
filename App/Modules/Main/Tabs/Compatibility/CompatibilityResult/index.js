@@ -27,13 +27,12 @@ export default function CompatibilityResult({ user }) {
   const { logguedUser } = useLogguedUser();
   const { avatar } = logguedUser.moods[currentMood];
   const startCompatibilityRequest = useCallback((conversation) => {
-       NavigationHelper.navigate('MainCompatibilityDetails', { user });
-        const {
-           user1,
-           user2
-         } = conversation;
-
-        const target = user1.id === logguedUser.id ? user2 : user1;
+       const {
+          user1,
+          user2
+        } = conversation;
+       const target = user1.id === logguedUser.id ? user2 : user1;
+       NavigationHelper.navigate('MainCompatibilityDetails', { target });
      	create( target );
   }, [currentMood, logguedUser.id, create]);
 
@@ -62,7 +61,6 @@ export default function CompatibilityResult({ user }) {
             iconName="message-square"
           />
           <ActionButton
-            //onPress={() => NavigationHelper.navigate('MainCompatibilityDetails', { user })}
             onPress={() => startCompatibilityRequest(user )}
             text="COMPATIBILITER"
             iconName="refresh-cw"
