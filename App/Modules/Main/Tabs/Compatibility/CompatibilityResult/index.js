@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, View } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
@@ -17,12 +17,27 @@ const COMPATIBILITY_EXCELLENT = require('../../../../../../assets/icons/icon_com
 
 
 export default function CompatibilityResult({ user }) {
-  let imageSource, firstName, personnality, age, city, message, subPersonnality, result;
-  const { logguedUser } = useLogguedUser();
-  const { currentMood, moodInfos } = useCurrentMood();
-  const { create } = useCompatibilityRequests();
-  age = moment().diff(moment.unix(logguedUser.birthday), 'years');
+  const [search, setSearch] = useState(null);
+  const [datas, setDatas] = useState(null);
+  const [conversation, setConversation] = useState(null);
+  const [compatibilityRequests] = useState(null);
+  const { create, fetchAll } = useCompatibilityRequests();
 
+  const { currentMood, moodInfos } = useCurrentMood();
+  const { logguedUser } = useLogguedUser();
+  const { avatar } = logguedUser.moods[currentMood];
+  const startCompatibilityRequest = useCallback((conversation) => {
+       const {
+          user1,
+          user2
+        } = conversation;
+       const target = user1.id === logguedUser.id ? user2 : user1;
+       NavigationHelper.navigate('MainCompatibilityDetails', { target });
+     	create( target );
+  }, [currentMood, logguedUser.id, create]);
+
+
+  let imageSource, firstName, personality, age, city, message, subPersonality, result;
   if (!user) {
     return (null);
   }
@@ -32,43 +47,37 @@ export default function CompatibilityResult({ user }) {
   const { moods, personalities } = target;
   imageSource = moods[currentMood].avatar;
   firstName = target.firstName;
-  personnality = personalities.main;
+  personality = personalities.main;
   city = target.city;
-  subPersonnality = PERSONNALITY_DETAILS[currentMood][personnality].personnality, [currentMood, personnality]
+  subPersonality = PERSONNALITY_DETAILS[currentMood][personality].personality, [currentMood, personality]
   //result = target.resultCo.result;
 
-  function onSubmit(user) {
-	    NavigationHelper.navigate('MainCompatibilityDetails', { user });
-		console.log('test_resulst_create_compatbilite',create.result);
-  }
-  
   const Actions = () => {
-  return (
-    <View style={{ position: 'absolute', right: 4, bottom: 8 }}>
-      <ActionButton
-        onPress={() => NavigationHelper.navigate('MainTabsTchat')}
-        text="MESSAGERIE"
-        iconName="message-square"
-      />
-      <ActionButton
-        //onPress={() => NavigationHelper.navigate('MainCompatibilityDetails', { user })}
-	    onPress={() => onSubmit( user )}
-        text="COMPATIBILITER"
-        iconName="refresh-cw"
-      />
-      <ActionButton
-        onPress={() => NavigationHelper.navigate('MainTabsProfilInvite')}
-        text="INVITE"
-        iconName="user-plus"
-      />
-      <ImageButton
-        onPress={() => { }}
-        imageSource={COMPATIBILITY_SATIFAISANT}
-        imageStyle={styles.iconStyle}
-      />
-    </View>
-  )
-}
+      return (
+        <View style={{ position: 'absolute', right: 4, bottom: 8 }}>
+          <ActionButton
+            onPress={() => NavigationHelper.navigate('MainTabsTchat')}
+            text="MESSAGERIE"
+            iconName="message-square"
+          />
+          <ActionButton
+            onPress={() => startCompatibilityRequest(user )}
+            text="COMPATIBILITER"
+            iconName="refresh-cw"
+          />
+          <ActionButton
+            onPress={() => NavigationHelper.navigate('MainTabsProfilInvite')}
+            text="INVITE"
+            iconName="user-plus"
+          />
+          <ImageButton
+            onPress={() => { }}
+            imageSource={COMPATIBILITY_SATIFAISANT}
+            imageStyle={styles.iconStyle}
+          />
+        </View>
+      )
+    }
 
   return (
     <View style={styles.compatibilityResult}>
@@ -89,8 +98,8 @@ export default function CompatibilityResult({ user }) {
           </View>
           <View style={styles.userInfos}>
             <Text style={styles.usernameText}>{firstName}</Text>
-            <Text style={[styles.personaliteText, { color: moodInfos.color }]}>{personnality}</Text>
-            <Text style={styles.subPersonaliteText}>{subPersonnality}</Text>
+            <Text style={[styles.personaliteText, { color: moodInfos.color }]}>{personality}</Text>
+            <Text style={styles.subPersonaliteText}>{subPersonality}</Text>
           </View>
           <Actions />
         </View>

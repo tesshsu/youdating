@@ -39,8 +39,7 @@ export default function useCompatibilityRequests() {
 
   const create = useCallback(async (target) => {
     try {
-      await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.create(target, currentMood));
-      NavigationHelper.navigate('MainCompatibilityDetails', { target });
+      await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.create(target.id, currentMood));
     } catch (err) {
       Alert.alert('useCompatibilityRequests target', err);
     }
