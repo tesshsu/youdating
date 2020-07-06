@@ -43,6 +43,17 @@ const IMAGE_BACKGROUND_SOCIALE_SATIS = require('../assets/images/match/couple/sa
 const IMAGE_BACKGROUND_PERSO_SATIS = require('../assets/images/match/personnel/satis.png');
 const IMAGE_BACKGROUND_LOVE_SATIS = require('../assets/images/match/couple/satis.png');
 
+const COMPATIBILITY_SATIFAISANT = require('../assets/icons/icon_compatibilite_satifaisante.png');
+const COMPATIBILITY_MAUVAISE = require('../assets/icons/icon_compatibilite_mauvaise.png');
+const COMPATIBILITY_UNSUFFISANTE = require('../assets/icons/icon_compatibilite_insuffisante.png');
+const COMPATIBILITY_EXCELLENT = require('../assets/icons/icon_compatibilite_excellent.png');
+
+const MATCHGRAPHIC = {
+  SATIFAISANT: COMPATIBILITY_SATIFAISANT,
+  MAUVAISE: COMPATIBILITY_MAUVAISE,
+  UNSUFFISANTE: COMPATIBILITY_UNSUFFISANTE,
+  EXCELLENT: COMPATIBILITY_EXCELLENT
+}
 
 const MATCHBACKGROUND = {
   PRO_INSUF: IMAGE_BACKGROUND_PRO_INSUF,
@@ -99,6 +110,7 @@ const MOODS = {
 	   mauvaise : {
 		   title: 'COMPATIBILITE PROFESSIONNEL MAUVAISE',
 		   note: 25,
+		   graphic: MATCHGRAPHIC.MAUVAISE,
 		   contentTitle: "Risque de désaccords à l'horizon",
 		   backgroundImage: MATCHBACKGROUND.PRO_MAUV,
 		   content: `vos attentes concernant votre avenirs professionnelles ne sont pas les mêmes du tout mais pas de stresse, vous pouvez toujours trouver 
@@ -110,6 +122,7 @@ const MOODS = {
 	   insuffisante: {
 		   title: 'COMPATIBILITE PROFESSIONNEL INSUFFISANTE',
 		   note: 50,
+		   graphic: MATCHGRAPHIC.UNSUFFISANTE,
 		   contentTitle: "Votre coopération n'est pas la plus optimale qui soit ",
 		   backgroundImage: MATCHBACKGROUND.PRO_INSUF,
 		   content: `mais rien de grave avec plus de volonté et d'implication, vos plus grandes faiblesses pourraient vite devenir vos plus grandes forces.
@@ -122,6 +135,7 @@ const MOODS = {
 	   satisfaisante: {
 		   title: 'COMPATIBILITE PROFESSIONNEL SATISFAISANTE',
 		   note: 70,
+		   graphic: MATCHGRAPHIC.SATIFAISANT,
 		   backgroundImage: MATCHBACKGROUND.PRO_SATIS,
 		   contentTitle: " Votre compatibilé est trés encourageante ",
 		   content: `mais attention ils vous restent encore quelques étapes à franchir pour être véritablement au 
@@ -132,6 +146,7 @@ const MOODS = {
 	   excellente: {
 		   title: 'COMPATIBILITE PROFESSIONNEL EXCELLENTE',
 		   note: 90,
+		   graphic: MATCHGRAPHIC.EXCELLENT,
 		   backgroundImage: MATCHBACKGROUND.PRO_EXCEL,
 		   contentTitle: " Bravo, vous êtes au top, vous formez un duo de choc",
 		   content: `vous pouvez accomplir de grandes choses ensemble alors profitez-en des maintenant.
@@ -187,6 +202,7 @@ const MOODS = {
 	   mauvaise : {
 		   title: 'COMPATIBILITE SOCIAL MAUVAISE',
 		   note: 25,
+		   graphic: MATCHGRAPHIC.MAUVAISE,
 		   backgroundImage: MATCHBACKGROUND.SOCIAL_MAUV,
 		   contentTitle: "Vos besoins s'opposent fortement",
 		   content: `vous ne recherchez pas le même genre d'amitier mais il y a une bonne nouvelle vous pouvez 
@@ -203,6 +219,7 @@ const MOODS = {
 	   insuffisante: {
 		   title: 'COMPATIBILITE SOCIAL INSUFFISANTE',
 		   note: 50,
+		   graphic: MATCHGRAPHIC.UNSUFFISANTE,
 		   backgroundImage: MATCHBACKGROUND.SOCIAL_INSUF,
 		   contentTitle: "votre entente pourrait être meilleur ",
 		   content: `mais rassurez vous il n'est jamais trop tard pour devenir les meilleurs amis du monde !!
@@ -214,6 +231,7 @@ const MOODS = {
 	   satisfaisante: {
 		   title: 'COMPATIBILITE SOCIAL SATISFAISANTE',
 		   note: 70,
+		   graphic: MATCHGRAPHIC.SATIFAISANT,
 		   backgroundImage: MATCHBACKGROUND.SOCIAL_SATIS,
 		   contentTitle: "C'est plutot bon signe ",
 		   content: `vous êtes sur la bonne voie alors profitez de votre entente pour sortir, discuter et rigoler ensemble comme le font tous les véritables amis !!
@@ -225,6 +243,7 @@ const MOODS = {
 	   excellente: {
 		   title: 'COMPATIBILITE SOCIAL EXCELLENTE',
 		   note: 90,
+		   graphic: MATCHGRAPHIC.EXCELLENT,
 		   backgroundImage: MATCHBACKGROUND.SOCIAL_EXCEL,
 		   contentTitle: " félicitation, vous êtes sur la plus haute marche du podium ",
 		   content: `vos personnalités se complètent parfaitement. votre entente fait de vous de véritables amis.
@@ -260,6 +279,7 @@ const MOODS = {
 	   mauvaise : {
 		   title: 'COMPATIBILITE COUPLE MAUVAISE',
 		   note: 25,
+		   graphic: MATCHGRAPHIC.MAUVAISE,
 		   backgroundImage: MATCHBACKGROUND.LOVE_MAUV,
 		   contentTitle: " Vos attentes divergent enormement ",
 		   content: `mais pas de panique pour chaques problèmes il existe des solutions que vous pouvez adapter pour améliorer votre relation amoureuse!!
@@ -272,6 +292,7 @@ const MOODS = {
 	   insuffisante: {
 		   title: 'COMPATIBILITE COUPLE INSUFFISANTE',
 		   note: 50,
+		   graphic: MATCHGRAPHIC.UNSUFFISANTE,
 		   backgroundImage: MATCHBACKGROUND.LOVE_INSUF,
 		   contentTitle: "dans cette configuration vos personnalités se font obstacles  ",
 		   content: `mais rien n'est définitif soyez en certain. les compromis peuvent véritablement améliorer votre relation de couple 
@@ -284,6 +305,7 @@ const MOODS = {
 	   satisfaisante: {
 		   title: 'COMPATIBILITE COUPLE SATISFAISANTE',
 		   note: 70,
+		   graphic: MATCHGRAPHIC.SATIFAISANT,
 		   backgroundImage: MATCHBACKGROUND.LOVE_SATIS,
 		   contentTitle: "votre relation est très encourageante ",
 		   content: `vous êtes sur la bonne voie . le perfect match n'est pas si loin !!
@@ -296,6 +318,7 @@ const MOODS = {
 	   excellente: {
 		   title: 'COMPATIBILITE COUPLE EXCELLENTE',
 		   note: 90,
+		   graphic: MATCHGRAPHIC.EXCELLENT,
 		   backgroundImage: MATCHBACKGROUND.LOVE_EXCEL,
 		   contentTitle: " félicitation votre relation atteint des sommets ",
 		   content: `Vos personnalités s'accordent merveilleusement bien, vous avez tout ce qu'il faut pour former le couple parfait.
@@ -355,6 +378,7 @@ const MOODS = {
 	   mauvaise : {
 		   title: 'COMPATIBILITE PERSONNELLE MAUVAISE',
 		   note: 25,
+		   graphic: MATCHGRAPHIC.MAUVAISE,
 		   backgroundImage: MATCHBACKGROUND.PERSO_MAUV,
 		   contentTitle: " Vos attentes sont aux antipodes !! ",
 		   content: `Vous n'abordez pas la vie de la même facon mais pas de panique rien ne vous empêchent d'apprendre à mieux vous connaître 
@@ -369,6 +393,7 @@ const MOODS = {
 	   insuffisante: {
 		   title: 'COMPATIBILITE PERSONNELLE INSUFFISANTE',
 		   note: 50,
+		   graphic: MATCHGRAPHIC.UNSUFFISANTE,
 		   backgroundImage: MATCHBACKGROUND.PERSO_INSUF,
 		   contentTitle: "vous attendez beaucoup plus l'un de l'autre  ",
 		   content: `vos besoins ne sont pas assez pris en compte, ce qui vous oblige à faire du surplace au lieu 
@@ -381,6 +406,7 @@ const MOODS = {
 	   satisfaisante: {
 		   title: 'COMPATIBILITE PERSONNELLE SATISFAISANTE',
 		   note: 70,
+		   graphic: MATCHGRAPHIC.SATIFAISANT,
 		   backgroundImage: MATCHBACKGROUND.PERSO_SATIS,
 		   contentTitle: " Vous savez tout les deux faire des compromis pour avancer ",
 		   content: ` Votre compatibilité est plutôt bonne mais sachez quand même que l'un de vous deux fait plus 
@@ -394,6 +420,7 @@ const MOODS = {
 	   excellente: {
 		   title: 'Votre compatibilité est au maximum',
 		   note: 90,
+		   graphic: MATCHGRAPHIC.EXCELLENT,
 		   backgroundImage: MATCHBACKGROUND.PERSO_EXCEL,
 		   contentTitle: " félicitation votre relation atteint des sommets ",
 		   content: `Vos attentes s'accordent parfaitement avec les siennes. Plus rien ne peut vous arrêtter alors  

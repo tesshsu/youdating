@@ -9,6 +9,7 @@ import styles from './styles';
 import { Image } from 'react-native-expo-image-cache';
 import useCurrentMood from '../../../Hooks/useCurrentMood';
 import RoundIconButton from '../../Global/RoundIconButton';
+import ImageButton from '../../Global/ImageButton';
 import { verticalScale } from '../../../Helpers/ScaleHelper';
 import useLogguedUser from '../../../Hooks/useLogguedUser';
 import useCompatibilityRequests from '../../../Hooks/useCompatibilityRequests';
@@ -64,6 +65,11 @@ export default function CompatibilityDetails({ navigation }) {
             uri={imageSource}
             style={[styles.imageBackground]}
        />
+        <ImageButton
+                         onPress={() => { }}
+                         imageSource={moodInfos.match[crResult].graphic}
+                         imageStyle={styles.iconStyle}
+                       />
       <Text style={styles.personnalityTypeText}>
         {moodInfos.match[crResult].contentTitle}
       </Text>

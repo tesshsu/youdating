@@ -93,5 +93,11 @@ export default StyleSheet.create({
   },
   scrollView: {
     width: '90%'
-  }
+  },
+  iconStyle: {
+      width: verticalScale(60),
+      height: verticalScale(35),
+      right: 0,
+      resizeMode: 'cover'
+    }
 });

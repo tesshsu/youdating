@@ -5,16 +5,10 @@ import { Image } from 'react-native-expo-image-cache';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import useLogguedUser from '../../../../../Hooks/useLogguedUser';
-import ImageButton from '../../../../Global/ImageButton';
 import { ActionButton } from '../../../../Global/Profile';
 import * as PERSONNALITY_DETAILS from './../../../../../PersonnalityDetails';
 import styles from './styles';
 import useCompatibilityRequests from '../../../../../Hooks/useCompatibilityRequests';
-const COMPATIBILITY_SATIFAISANT = require('../../../../../../assets/icons/icon_compatibilite_satifaisante.png');
-const COMPATIBILITY_MAUVAISE = require('../../../../../../assets/icons/icon_compatibilite_mauvaise.png');
-const COMPATIBILITY_UNSUFFISANTE = require('../../../../../../assets/icons/icon_compatibilite_insuffisante.png');
-const COMPATIBILITY_EXCELLENT = require('../../../../../../assets/icons/icon_compatibilite_excellent.png');
-
 
 export default function CompatibilityResult({ user }) {
   const [search, setSearch] = useState(null);
@@ -51,7 +45,6 @@ export default function CompatibilityResult({ user }) {
   personality = personalities.main;
   city = target.city;
   subPersonality = PERSONNALITY_DETAILS[currentMood][personality].personality, [currentMood, personality]
-  //result = target.resultCo.result;
 
   const Actions = () => {
       return (
@@ -70,11 +63,6 @@ export default function CompatibilityResult({ user }) {
             onPress={() => NavigationHelper.navigate('MainTabsProfilInvite')}
             text="INVITE"
             iconName="user-plus"
-          />
-          <ImageButton
-            onPress={() => { }}
-            imageSource={COMPATIBILITY_SATIFAISANT}
-            imageStyle={styles.iconStyle}
           />
         </View>
       )
