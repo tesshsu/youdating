@@ -74,6 +74,13 @@ const MATCHBACKGROUND = {
   LOVE_SATIS: IMAGE_BACKGROUND_LOVE_SATIS
 };
 
+const COMPATIBILITY_RESULT = {
+    POOR:'mauvaise',
+    INSUFFICIENT:'insuffisante',
+    SATISFACTORY:'satisfaisante',
+    PERFECT:'excellente',
+};
+
 const MOODS = {
   PRO: {
     title: 'Professionnel',
@@ -441,5 +448,6 @@ const COLOR_SCHEME = Appearance.getColorScheme();
 export {
   COLORS,
   MOODS,
-  COLOR_SCHEME
+  COLOR_SCHEME,
+  COMPATIBILITY_RESULT
 };

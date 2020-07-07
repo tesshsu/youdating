@@ -15,20 +15,14 @@ import useLogguedUser from '../../../Hooks/useLogguedUser';
 import useCompatibilityRequests from '../../../Hooks/useCompatibilityRequests';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
 import Button from '../../Global/Button';
+import { COMPATIBILITY_RESULT } from '../../../GlobalConfig';
 
-const COMPATIBILITY_RESULT = {
-    POOR:'mauvaise',
-    INSUFFICIENT:'insuffisante',
-    SATISFACTORY:'satisfaisante',
-    PERFECT:'excellente',
-};
 
 export default function CompatibilityDetails({ navigation }) {
   const { moodInfos, currentMood } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
-  const { isFetching, results, compatibilityRequests } = useCompatibilityRequests();
 
-  const { fetchAll: fetchAllCompatibilityRequests, fetch } = useCompatibilityRequests();
+  const { fetchAll: fetchAllCompatibilityRequests, fetch, isFetching, results, compatibilityRequests } = useCompatibilityRequests();
   const target = navigation.getParam('target');
 
   if (!target) {
