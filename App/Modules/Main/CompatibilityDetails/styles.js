@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { verticalScale, moderateScale } from '../../../Helpers/ScaleHelper';
+import useCurrentMood from '../../../Hooks/useCurrentMood';
 
 export default StyleSheet.create({
   container: {
@@ -56,7 +57,7 @@ export default StyleSheet.create({
   },
   resultValueText: {
     fontFamily: 'NewTaiLue-Bold',
-    fontSize: moderateScale(18),
+    fontSize: moderateScale(16),
     textAlign: 'center',
     textTransform: 'uppercase',
 	padding: 10,
@@ -77,7 +78,7 @@ export default StyleSheet.create({
   personnalityTypeText: {
 	width: '80%',
     fontFamily: 'NewTaiLue-Bold',
-    fontSize: moderateScale(20),
+    fontSize: moderateScale(17),
 	marginVertical: verticalScale(10),
     color: 'white',
     textAlign: 'center',
@@ -99,5 +100,22 @@ export default StyleSheet.create({
       height: verticalScale(35),
       right: 0,
       resizeMode: 'cover'
-    }
+    },
+  noteTypeText: {
+       width: '80%',
+       fontSize: 12,
+       textAlign: 'center',
+       marginBottom: 10,
+       color: 'white'
+  },
+  resultTitleText: {
+        fontFamily: 'NewTaiLue-Bold',
+        width: '70%',
+        fontSize: 16,
+        textAlign: 'center',
+        marginVertical: 10,
+        color: 'white',
+        padding: 6,
+        borderRadius: 10
+   }
 });

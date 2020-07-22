@@ -9,12 +9,11 @@ import styles from './styles';
 import { Image } from 'react-native-expo-image-cache';
 import useCurrentMood from '../../../Hooks/useCurrentMood';
 import RoundIconButton from '../../Global/RoundIconButton';
-import ImageButton from '../../Global/ImageButton';
+import Button from '../../Global/Button';
 import { verticalScale } from '../../../Helpers/ScaleHelper';
 import useLogguedUser from '../../../Hooks/useLogguedUser';
 import useCompatibilityRequests from '../../../Hooks/useCompatibilityRequests';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
-import Button from '../../Global/Button';
 import { COMPATIBILITY_RESULT } from '../../../GlobalConfig';
 
 
@@ -29,10 +28,10 @@ export default function CompatibilityDetails({ navigation }) {
     return (null);
   }
 
-  let imageSource;
+  let imageSource, firstName;
   const { moods } = target;
   imageSource = moods[currentMood]?.avatar;
-
+  firstName = target.firstName;
   // get compatibility result
   const compatibilityRequestResults = compatibilityRequests.filter((cr) => {
       return cr.mood === currentMood && cr.target === target.id;
@@ -50,20 +49,20 @@ export default function CompatibilityDetails({ navigation }) {
     >
       <Text style={styles.matchingTextYous}>YOU'S</Text>
 	  <Text style={styles.matchingText}>MATCHING</Text>
-	  <Button
-        text={moodInfos.match[crResult].title}
-        size={verticalScale(50)}
-        onPress={() => NavigationHelper.back()}
-      />
+      <Text style={[
+                      styles.resultTitleText,
+                      { backgroundColor: moodInfos.color }
+                    ]}
+                  >
+         {moodInfos.match[crResult].title}
+      </Text>
 	  <Image
             uri={imageSource}
             style={[styles.imageBackground]}
        />
-        <ImageButton
-                         onPress={() => { }}
-                         imageSource={moodInfos.match[crResult].graphic}
-                         imageStyle={styles.iconStyle}
-                       />
+      <Text style={styles.noteTypeText}>
+         Dans cette relation vous êtes complémentaire à {moodInfos.match[crResult].note}% avec {firstName}
+      </Text>
       <Text style={styles.personnalityTypeText}>
         {moodInfos.match[crResult].contentTitle}
       </Text>
@@ -73,11 +72,14 @@ export default function CompatibilityDetails({ navigation }) {
         {moodInfos.match[crResult].content}
       </Text>
       </ScrollView>
-      <Button
-        text={'REVENIR PLUS TARD'}
-        size={verticalScale(50)}
-        onPress={() => NavigationHelper.back()}
-      />
+      <Text style={[
+                     styles.resultTitleText,
+                     { backgroundColor: moodInfos.color }
+                   ]}
+             onPress={() => NavigationHelper.back()}
+      >
+          REVENIR PLUS TARD
+      </Text>
     </ImageBackground>
   );
 }

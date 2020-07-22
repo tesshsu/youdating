@@ -15,6 +15,8 @@ import RoundButton from '../../../../Global/RoundButton';
 import RoundIconButton from '../../../../Global/RoundIconButton';
 import SearchField from '../../../../Global/SearchField';
 import styles from './styles';
+import useCompatibilityRequests from '../../../../../Hooks/useCompatibilityRequests';
+import { COMPATIBILITY_RESULT } from '../../../../../GlobalConfig';
 
 const COMPATIBILITY_SATIFAISANT = require('../../../../../../assets/icons/icon_compatibilite_satifaisante.png');
 const COMPATIBILITY_MAUVAISE = require('../../../../../../assets/icons/icon_compatibilite_mauvaise.png');
@@ -78,6 +80,12 @@ export default function MainTabsTchat() {
     filteredConversations(search);
   }, [search]);
 
+ // get compatibility result
+ const { create, fetchAll,  isFetching, compatibilityRequests } = useCompatibilityRequests();
+ const compatibilityRequestResults = compatibilityRequests.filter((cr) => {
+       return cr.mood === currentMood && cr.target === target.id;
+   });
+ const crResult = !compatibilityRequestResults.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
 
   return (
     <View style={styles.container}>
@@ -150,10 +158,14 @@ export default function MainTabsTchat() {
                     style={[styles.imageStyle, { borderColor: moodInfos.color }]}
                     uri={target?.moods[currentMood]?.avatar}
                   />
-                  <ImageButton
-                    imageSource={COMPATIBILITY_SATIFAISANT}
-                    imageStyle={styles.iconStyle}
-                  />
+                 {crResult && (
+                              <ImageButton
+                                    onPress={() => { }}
+                                    imageSource={moodInfos.match[crResult].graphic}
+                                    imageStyle={styles.iconStyle}
+                               />
+                    )
+                  }
                   {
                     hasNewMessage && (
                       <View style={[{ backgroundColor: moodInfos.color }, styles.messageCount]}>
