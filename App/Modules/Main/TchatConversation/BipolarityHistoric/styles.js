@@ -182,4 +182,18 @@ export default StyleSheet.create({
   passBoutton: {
     marginBottom: 10,
   },
+  ResultTitleText: {
+       textAlign: 'center',
+       fontSize: moderateScale(15),
+       marginTop: 10
+   },
+   imageToiText: {
+      fontFamily: 'Segoe-UI-Bold',
+      fontSize: moderateScale(25),
+      textTransform: 'uppercase',
+      color: 'white',
+      position: 'absolute',
+      alignSelf: 'center',
+      marginTop: 50
+   }
 });

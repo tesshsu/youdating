@@ -23,7 +23,7 @@ export default function BipolarityHistoric({ navigation }) {
     startConversation
   } = useConversation();
   const slicedAnswers = [];
-
+  let conversation, opponentAnswer;
   function onButtonContainerLayout(ev) {
     const { height } = ev.nativeEvent.layout;
 
@@ -100,7 +100,7 @@ export default function BipolarityHistoric({ navigation }) {
                       disabled={item.disabled}
                       style={styles.itemContainer}
                     >
-                      <Text style={styles.title}>answer no {index+1}</Text>
+                      <Text style={styles.title}>REPONSE N {index+1}</Text>
                       <Text style={styles.question}>{item.question}</Text>
                       <View style={styles.line} />
                       <View style={styles.imageContainer}>
@@ -108,6 +108,7 @@ export default function BipolarityHistoric({ navigation }) {
                         {item.avatarA && (
                           <View style={styles.imageBackground}>
                             <Image source={item.avatarA} style={styles.imageBackgroundImage} />
+                            <Text  style={styles.imageToiText} >TOI</Text>
                             <Text
                               style={[
                                 styles.imageLabelText,
@@ -119,24 +120,39 @@ export default function BipolarityHistoric({ navigation }) {
                           </View>
                         )}
 
-                        {!item.avatarA && (
+                        { (!item.avatarA || !item.avatarB)  && (
                           <View style={styles.imageBackground}>
                             <View style={styles.noAnswer}>
                               <Text style={styles.noAnswerText}>
-                                You didn't answer
+                                Tu n'as pas répondu
                             </Text>
                             </View>
                           </View>
                         )}
 
-                        <View style={styles.imageBackground}>
-                          <View style={styles.noAnswer}>
-                            <Text style={styles.noAnswerText}>
-                              En ATTENDEN DE REPONSE DE { params.opponent.firstName }
-                            </Text>
-                          </View>
-                        </View>
-
+                        { opponentAnswer ? (
+                             <View style={styles.imageBackground}>
+                                 <Image source={opponentAnswer.item.avatarA} style={styles.imageBackgroundImage} />
+                                 <Text  style={styles.imageToiText} >{ params.opponent.firstName }</Text>
+                                 <Text
+                                      style={[
+                                               styles.imageLabelText,
+                                                { color: item.disabled ? '#BEBFC0' : moodInfos.color }
+                                             ]}
+                                      >
+                                      {opponentAnswer.item.answerA}
+                                  </Text>
+                             </View>
+                         ): (
+                               <View style={styles.imageBackground}>
+                                     <View style={styles.noAnswer}>
+                                         <Text style={styles.noAnswerText}>
+                                            En ATTENDEN DE REPONSE DE { params.opponent.firstName }
+                                          </Text>
+                                     </View>
+                                </View>
+                         )
+                         }
                       </View>
                     </View>
                   ))}
@@ -149,19 +165,31 @@ export default function BipolarityHistoric({ navigation }) {
                 {(params.countA * params.totalQuestion)}%
               </Text>
             </View>
+            <View style={styles.buttonContainer} onLayout={onButtonContainerLayout}>
+                        <SafeAreaView>
+                        {conversation ? (
+                               <RoundButton
+                                        containerStyle={styles.button}
+                                        backgroundColor={moodInfos.color}
+                                        text="DISCUTEZ-EN"
+                                        color="white"
+                                        borderRadius={23} MainTabsTchatList
+                                        onPress={() => openConversation(conversation)}
+                                />
+                            ) : (
+                               <RoundButton
+                                         containerStyle={styles.button}
+                                         backgroundColor={moodInfos.color}
+                                         text="REVIENT PLUS TARD"
+                                         color="white"
+                                         borderRadius={23} MainTabsTchatList
+                                         onPress={() => NavigationHelper.back()}
+                                />
+                            )
+                         }
+                        </SafeAreaView>
+                      </View>
           </ScrollView>
-          <View style={styles.buttonContainer} onLayout={onButtonContainerLayout}>
-            <SafeAreaView>
-              <RoundButton
-                containerStyle={styles.button}
-                backgroundColor={moodInfos.color}
-                text="DISCUTEZ-EN"
-                color="white"
-                borderRadius={23} MainTabsTchatList
-                onPress={() => openConversation(conversation)}
-              />
-            </SafeAreaView>
-          </View>
         </View>
       </View>
     </>

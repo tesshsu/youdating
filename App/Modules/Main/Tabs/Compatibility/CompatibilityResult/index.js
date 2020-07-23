@@ -32,7 +32,7 @@ export default function CompatibilityResult({ user }) {
   }, [currentMood, logguedUser.id, create]);
 
 
-  let imageSource, firstName, personality, age, city, message, subPersonality, result;
+  let ProfileimageSource, firstName, personality, age, city, message, subPersonality, result;
   if (!user) {
     return (null);
   }
@@ -41,7 +41,7 @@ export default function CompatibilityResult({ user }) {
   const { user1, user2, lastMessage } = user;
   const target = user1.id === logguedUser.id ? user2 : user1;
   const { moods, personalities } = target;
-  imageSource = moods[currentMood].avatar;
+  ProfileimageSource = moods[currentMood].avatar;
   firstName = target.firstName;
   personality = personalities.main;
   city = target.city;
@@ -95,14 +95,23 @@ export default function CompatibilityResult({ user }) {
       </Text>
       <View style={styles.avatarContainer}>
         <View style={styles.avatarImageContainer}>
-          <Image uri={imageSource} style={styles.avatarImage} />
+          {ProfileimageSource && (
+               <Image uri={ProfileimageSource} style={styles.avatarImage} />
+              )
+           }
           <View style={styles.avatarHeader}>
             <Text style={styles.headerText}> {`${age}ANS-${city || 'PARIS'}`} </Text>
           </View>
           <View style={styles.userInfos}>
             <Text style={styles.usernameText}>{firstName}</Text>
-            <Text style={[styles.personaliteText, { color: moodInfos.color }]}>{personality}</Text>
-            <Text style={styles.subPersonaliteText}>{subPersonality}</Text>
+            {personality && (
+                 <Text style={[styles.personaliteText, { color: moodInfos.color }]}>{personality}</Text>
+                 )
+            }
+             {subPersonality && (
+                   <Text style={styles.subPersonaliteText}>{subPersonality}</Text>
+                   )
+             }
           </View>
           <Actions />
 
