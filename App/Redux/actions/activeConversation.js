@@ -184,7 +184,6 @@ export function createUpload({
       if (axios.isCancel(err)) {
         return;
       }
-
       console.warn(err);
       throw new Error('Impossible de créer l\'upload');
     } finally {

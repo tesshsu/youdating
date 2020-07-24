@@ -125,8 +125,8 @@ export default StyleSheet.create({
     width: 20,
     alignItems: 'center',
     position: 'absolute',
-    top: 45,
-    left: 45
+    top: 0,
+    right: 0
   },
   bigAvatarPart: {
     width: '100%',

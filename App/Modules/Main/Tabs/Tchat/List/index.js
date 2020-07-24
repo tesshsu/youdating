@@ -81,11 +81,12 @@ export default function MainTabsTchat() {
   }, [search]);
 
  // get compatibility result
- const { create, fetchAll,  isFetching, compatibilityRequests } = useCompatibilityRequests();
+ const { fetchAll: fetchAllCompatibilityRequests, fetch, isFetching, results, compatibilityRequests } = useCompatibilityRequests();
  const compatibilityRequestResults = compatibilityRequests.filter((cr) => {
        return cr.mood === currentMood && cr.target === target.id;
    });
  const crResult = !compatibilityRequestResults.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
+
 
   return (
     <View style={styles.container}>
@@ -164,15 +165,6 @@ export default function MainTabsTchat() {
                                     imageSource={moodInfos.match[crResult].graphic}
                                     imageStyle={styles.iconStyle}
                                />
-                    )
-                  }
-                  {
-                    hasNewMessage && (
-                      <View style={[{ backgroundColor: moodInfos.color }, styles.messageCount]}>
-                        <Text style={{ color: '#fff' }}>
-                          {item[`${newMessageKey}unreadMessageCount`]}
-                        </Text>
-                      </View>
                     )
                   }
                   <View style={{ alignItems: 'center' }}>

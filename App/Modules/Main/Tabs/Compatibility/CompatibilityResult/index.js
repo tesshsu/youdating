@@ -5,6 +5,7 @@ import { Image } from 'react-native-expo-image-cache';
 import NavigationHelper from '../../../../../Helpers/NavigationHelper';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import useLogguedUser from '../../../../../Hooks/useLogguedUser';
+import useConversation from '../../../../../Hooks/useConversations';
 import { ActionButton } from '../../../../Global/Profile';
 import ImageButton from '../../../../Global/ImageButton';
 import * as PERSONNALITY_DETAILS from './../../../../../PersonnalityDetails';
@@ -20,6 +21,7 @@ export default function CompatibilityResult({ user }) {
 
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
+  const { startConversation } = useConversation();
   const { avatar } = logguedUser.moods[currentMood];
   const startCompatibilityRequest = useCallback((conversation) => {
        const {
@@ -57,7 +59,7 @@ export default function CompatibilityResult({ user }) {
       return (
         <View style={{ position: 'absolute', right: 4, bottom: 8 }}>
           <ActionButton
-            onPress={() => NavigationHelper.navigate('MainTabsTchat')}
+            onPress={() => startConversation(currentMood, target)}
             text="MESSAGERIE"
             iconName="message-square"
           />
