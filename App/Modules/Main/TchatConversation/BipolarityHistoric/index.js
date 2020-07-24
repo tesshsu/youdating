@@ -174,7 +174,7 @@ export default function BipolarityHistoric({ navigation }) {
                                         text="DISCUTEZ-EN"
                                         color="white"
                                         borderRadius={23} MainTabsTchatList
-                                        onPress={() => openConversation(conversation)}
+                                        onPress={() => startConversation(currentMood, target)}
                                 />
                             ) : (
                                <RoundButton
@@ -183,7 +183,7 @@ export default function BipolarityHistoric({ navigation }) {
                                          text="REVIENT PLUS TARD"
                                          color="white"
                                          borderRadius={23} MainTabsTchatList
-                                         onPress={() => NavigationHelper.back()}
+                                         onPress={() => NavigationHelper.navigate('MainTabsProfile')}
                                 />
                             )
                          }
