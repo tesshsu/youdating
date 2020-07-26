@@ -199,7 +199,7 @@ export default function AuthentificationSignUp() {
                     }}
                   />
                 </> : <>
-                  {isDatePickerVisible && ( // Datepicker 
+                  {isDatePickerVisible && (
                     <DateTimePicker
                       value={moment(values.birthday).toDate()}
                       display="default"

@@ -6,6 +6,7 @@ import * as Storage from './Storage';
 import * as Messages from './Messages';
 import * as Conversations from './Conversations';
 import * as CompatibilityRequests from './CompatibilityRequests';
+import * as BipolarityRequests from './BipolarityRequests';
 
 export {
   Auth,
@@ -15,5 +16,6 @@ export {
   Storage,
   Messages,
   Conversations,
-  CompatibilityRequests
+  CompatibilityRequests,
+  BipolarityRequests
 };
