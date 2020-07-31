@@ -33,8 +33,8 @@ export default function CompatibilityDetails({ navigation }) {
   imageSource = moods[currentMood]?.avatar;
   firstName = target.firstName;
   // get compatibility result
-  const compatibilityRequestResults = compatibilityRequests.filter((cr) => {
-      return cr.mood === currentMood && cr.target === target.id;
+  const compatibilityRequestResults = compatibilityRequests.compatibilityRequests.filter((cr) => {
+      return cr.mood === currentMood && cr.target.id === target.id;
   });
 
   // Results could be

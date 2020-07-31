@@ -17,7 +17,7 @@ export default function CompatibilityResult({ user }) {
   const [search, setSearch] = useState(null);
   const [datas, setDatas] = useState(null);
   const [conversation, setConversation] = useState(null);
-  const { create, fetchAll,  isFetching, compatibilityRequests } = useCompatibilityRequests();
+  const { create, fetchAll: fetchAllCompatibilityRequests,  isFetching, compatibilityRequests } = useCompatibilityRequests();
 
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
@@ -50,9 +50,10 @@ export default function CompatibilityResult({ user }) {
   subPersonality = PERSONNALITY_DETAILS[currentMood][personality].personality, [currentMood, personality]
 
   // get compatibility result
-  const compatibilityRequestResults = compatibilityRequests.filter((cr) => {
-      return cr.mood === currentMood && cr.target === target.id;
+  const compatibilityRequestResults = compatibilityRequests.compatibilityRequests.filter((cr) => {
+      return cr.mood === currentMood && cr.target.id === target.id;
   });
+
   const crResult = !compatibilityRequestResults.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
 
   const Actions = () => {
