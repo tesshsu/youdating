@@ -29,8 +29,10 @@ const addOrUpdateState = (state, { compatibilityRequest }) => {
 
 const moodsReducer = createMoodsReducer((state, action) => {
   switch (action.type) {
+    case COMPATIBILITY_REQUESTS_ACTIONS.SET_FETCHING:
+        return { ...state, isFetching: action.payload.isFetching };
     case COMPATIBILITY_REQUESTS_ACTIONS.SET_COMPATIBILITY_REQUESTS:
-      return [...action.payload.compatibilityRequest];
+      return {...state, compatibilityRequests : action.payload.compatibilityRequests };
     case COMPATIBILITY_REQUESTS_ACTIONS.ADD_OR_UPDATE_COMPATIBILITY_REQUEST:
       return addOrUpdateState(state, action.payload);
     default:
