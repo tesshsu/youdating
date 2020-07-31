@@ -50,7 +50,7 @@ export default function TchatConversationMessages() {
               name="chevron-left"
               color="white"
               size={verticalScale(21)}
-              onPress={() => NavigationHelper.navigate('MainTabsTchatList')}
+              onPress={() => NavigationHelper.back()}
             />
             <View style={styles.userInfos} onPress={() => visitProfil(target.id)}>
               <TouchableOpacity onPress={() => visitProfil(target.id)}>

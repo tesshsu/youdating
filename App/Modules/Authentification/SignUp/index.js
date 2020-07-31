@@ -70,8 +70,8 @@ export default function AuthentificationSignUp() {
   } = useLogguedUser();
 
   const options = [
-    { label: "homme", value: "MALE" },
-    { label: "femme", value: "FEMALE" }
+    { label: "homme", value: "male" },
+    { label: "femme", value: "female" }
   ];
 
   useEffect(() => {
@@ -94,7 +94,7 @@ export default function AuthentificationSignUp() {
       console.log(err.response);
       if (err.response && err.response.status === 422) {
         setErrors({
-          email: 'Cet email est déjà utilisé'
+          email: 'Cet email est déjà utilisée'
         });
       } else {
         Alert.alert('Enregistrement', 'Impossible de créer le compte');
@@ -124,7 +124,7 @@ export default function AuthentificationSignUp() {
       initialValues={{
         email: randomEmail,
         password: '1StrongPassword$',
-        gender: 'MALE',
+        gender: 'male',
         birthday: moment(new Date()).format('YYYY-MM-DD'),
         firstName: 'tess',
         lastName: 'hsu',

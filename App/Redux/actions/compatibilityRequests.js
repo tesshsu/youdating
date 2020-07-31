@@ -37,6 +37,7 @@ export function fetchAll() {
 
     try {
       const crs = await API.CompatibilityRequests.getAll();
+
       const moodsCr = crs.reduce((prev, curr) => {
         prev[curr.mood].push(curr);
 
@@ -49,7 +50,13 @@ export function fetchAll() {
       });
 
       Object.keys(moodsCr).forEach((mood) => {
-        dispatch(setCompatibilityRequests(moodsCr[mood], mood));
+        dispatch({
+          type: SET_COMPATIBILITY_REQUESTS,
+          payload: {
+            compatibilityRequests: moodsCr[mood],
+            mood
+          }
+        });
       });
     } catch (err) {
       throw err;
@@ -103,17 +110,6 @@ export function accept(crId, mood) {
     } catch (err) {
       console.warn(err);
       throw err;
-    }
-  };
-}
-
-export function setCompatibilityRequests(compatibilityRequests, mood) {
-
-  return {
-    type: SET_COMPATIBILITY_REQUESTS,
-    payload: {
-      compatibilityRequests,
-      mood
     }
   };
 }

@@ -167,7 +167,7 @@ export default function BipolarityHistoric({ navigation }) {
             </View>
             <View style={styles.buttonContainer} onLayout={onButtonContainerLayout}>
                         <SafeAreaView>
-                        {conversation ? (
+                        {opponentAnswer ? (
                                <RoundButton
                                         containerStyle={styles.button}
                                         backgroundColor={moodInfos.color}

@@ -80,8 +80,13 @@ export default function MainTabsTchat() {
     filteredConversations(search);
   }, [search]);
 
+ // get compatibility result
+ const { fetchAll: fetchAllCompatibilityRequests, fetch, isFetching, results, compatibilityRequests } = useCompatibilityRequests();
+ const compatibilityRequestResults = compatibilityRequests.filter((cr) => {
+       return cr.mood === currentMood && cr.target === target.id;
+   });
+ const crResult = !compatibilityRequestResults.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
 
- const { compatibilityRequests } = useCompatibilityRequests();
 
   return (
     <View style={styles.container}>
@@ -142,11 +147,6 @@ export default function MainTabsTchat() {
             const conversation = { ...item };
 
             const { lastMessage } = item;
-             // get compatibility result
-             const compatibilityRequestResults = compatibilityRequests?.compatibilityRequests?.filter((cr) => {
-                   return cr.mood === currentMood && cr?.target.id === target?.id;
-               });
-             const crResult = !compatibilityRequestResults?.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
 
             const lastMessageStr = lastMessage?.author === logguedUser.id ? 'Vous avez' : `${target?.firstName} a`;
             return (
