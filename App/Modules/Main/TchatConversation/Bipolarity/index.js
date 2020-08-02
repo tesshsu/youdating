@@ -16,6 +16,7 @@ import RoundButton from '../../../Global/RoundButton';
 import Button from '../../../Global/Button';
 import useCurrentMood from '../../../../Hooks/useCurrentMood';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
+import useConversation from '../../../../Hooks/useConversations';
 import Carousel from '../../../Global/Carousel';
 import useLogguedUser from '../../../../Hooks/useLogguedUser';
 import * as Questions from '../Questions';
@@ -29,7 +30,6 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
   const slicedQuestions = [];
-  
   const setCountA = async () => {
     await setCounterA(countA + 1);
     setAnswer();

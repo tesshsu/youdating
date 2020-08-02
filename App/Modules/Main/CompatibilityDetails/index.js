@@ -15,7 +15,6 @@ import useLogguedUser from '../../../Hooks/useLogguedUser';
 import useCompatibilityRequests from '../../../Hooks/useCompatibilityRequests';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
 import { COMPATIBILITY_RESULT } from '../../../GlobalConfig';
-import ImageButton from '../../Global/ImageButton';
 
 export default function CompatibilityDetails({ navigation }) {
   const { moodInfos, currentMood } = useCurrentMood();
@@ -33,9 +32,9 @@ export default function CompatibilityDetails({ navigation }) {
   imageSource = moods[currentMood]?.avatar;
   firstName = target.firstName;
   // get compatibility result
-  const compatibilityRequestResults = compatibilityRequests.compatibilityRequests.filter((cr) => {
-      return cr.mood === currentMood && cr.target.id === target.id;
-  });
+ const compatibilityRequestResults = compatibilityRequests.compatibilityRequests.filter((cr) => {
+       return cr.mood === currentMood && cr.target.id === target.id;
+   });
 
   // Results could be
   const crResult = !compatibilityRequestResults.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
@@ -60,13 +59,6 @@ export default function CompatibilityDetails({ navigation }) {
             uri={imageSource}
             style={[styles.imageBackground]}
        />
-       {crResult && (
-                   <ImageButton
-                                       onPress={() => { }}
-                                       imageSource={moodInfos.match[crResult].graphic}
-                                       imageStyle={styles.iconStyle}
-                            />
-                  )}
       <Text style={styles.noteTypeText}>
          Dans cette relation vous êtes complémentaire à {moodInfos.match[crResult].note}% avec {firstName}
       </Text>

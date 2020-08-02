@@ -59,6 +59,6 @@ export default StyleSheet.create({
     marginLeft: 30
   },
   passBoutton: {
-    marginBottom: 20,
-  },
+    marginBottom: 10,
+  }
 });
