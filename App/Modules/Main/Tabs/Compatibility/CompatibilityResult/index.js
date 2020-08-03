@@ -30,7 +30,8 @@ export default function CompatibilityResult({ user }) {
         } = conversation;
        const target = user1.id === logguedUser.id ? user2 : user1;
        NavigationHelper.navigate('MainCompatibilityDetails', { target });
-     	create( target );
+
+     create( target );
   }, [currentMood, logguedUser.id, create]);
 
 
@@ -50,11 +51,11 @@ export default function CompatibilityResult({ user }) {
   subPersonality = PERSONNALITY_DETAILS[currentMood][personality].personality, [currentMood, personality]
 
   // get compatibility result
-  const compatibilityRequestResults = compatibilityRequests.compatibilityRequests.filter((cr) => {
-      return cr.mood === currentMood && cr.target.id === target.id;
+  const compatibilityRequestResults = compatibilityRequests?.compatibilityRequests?.filter((cr) => {
+      return cr.mood === currentMood && (cr.target === target.id  || cr.target?.id === target.id);
   });
 
-  const crResult = !compatibilityRequestResults.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
+  const crResult = !compatibilityRequestResults?.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
 
   const Actions = () => {
       return (

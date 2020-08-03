@@ -53,7 +53,7 @@ export default function MainCompatibility() {
 		  <>
 		   <CompatibilityResult user={selectedUser}/>
 		  </> : <>
-		   <Text>Chosir le personne</Text>
+		   <Text>Choisir la personne</Text>
 		   </>
 		}
       </View>

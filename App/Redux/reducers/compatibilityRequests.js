@@ -12,7 +12,7 @@ function isFetchingReducer(state = false, action) {
 }
 
 const addOrUpdateState = (state, { compatibilityRequest }) => {
-  const compatibilityRequests = state.map((cr) => {
+  const compatibilityRequests = state?.compatibilityRequests.map((cr) => {
     if (cr.id === compatibilityRequest.id) {
       return { ...cr, ...compatibilityRequest };
     }
@@ -20,11 +20,14 @@ const addOrUpdateState = (state, { compatibilityRequest }) => {
     return cr;
   });
 
-  if (!compatibilityRequests.some(cr => cr.id === compatibilityRequests.id)) {
+  if (!compatibilityRequests.some(cr => cr.id === compatibilityRequest.id)) {
     compatibilityRequests.push(compatibilityRequest);
   }
 
-  return compatibilityRequests;
+ return {
+    ...state,
+    compatibilityRequests
+  };
 };
 
 const moodsReducer = createMoodsReducer((state, action) => {
@@ -32,7 +35,7 @@ const moodsReducer = createMoodsReducer((state, action) => {
     case COMPATIBILITY_REQUESTS_ACTIONS.SET_FETCHING:
         return { ...state, isFetching: action.payload.isFetching };
     case COMPATIBILITY_REQUESTS_ACTIONS.SET_COMPATIBILITY_REQUESTS:
-      return {...state, compatibilityRequests : action.payload.compatibilityRequests };
+      return {...state, compatibilityRequests: action.payload.compatibilityRequests };
     case COMPATIBILITY_REQUESTS_ACTIONS.ADD_OR_UPDATE_COMPATIBILITY_REQUEST:
       return addOrUpdateState(state, action.payload);
     default:

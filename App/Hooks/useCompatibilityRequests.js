@@ -17,7 +17,7 @@ export default function useCompatibilityRequests() {
     try {
       await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.fetchAll());
     } catch (err) {
-      console.log('error compatibility requests', err);
+      console.log('error compatibility requests', err.message);
     }
   }, [dispatch]);
 
@@ -25,7 +25,7 @@ export default function useCompatibilityRequests() {
     try {
       await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.fetchById(id));
     } catch (err) {
-      Alert.alert('useCompatibilityRequests', err);
+      Alert.alert('useCompatibilityRequests', err.message);
     }
   }, [dispatch]);
 
@@ -33,15 +33,15 @@ export default function useCompatibilityRequests() {
     try {
       await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.accept(id, currentMood));
     } catch (err) {
-      Alert.alert('useCompatibilityRequests currentMood', err);
+      Alert.alert('useCompatibilityRequests currentMood', err.message);
     }
   }, [currentMood, dispatch]);
 
   const create = useCallback(async (target) => {
     try {
-      await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.create(target.id, currentMood));
+      await dispatch(COMPATIBILITY_REQUESTS_ACTIONS.create(target, currentMood));
     } catch (err) {
-      Alert.alert('useCompatibilityRequests target', err);
+      Alert.alert('useCompatibilityRequests create', err.message);
     }
   }, [currentMood, dispatch]);
 

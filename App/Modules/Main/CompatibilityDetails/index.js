@@ -20,7 +20,7 @@ export default function CompatibilityDetails({ navigation }) {
   const { moodInfos, currentMood } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
 
-  const { fetchAll: fetchAllCompatibilityRequests, fetch, isFetching, results, compatibilityRequests } = useCompatibilityRequests();
+  const { fetchAll: fetchAllCompatibilityRequests, fetch, isFetching, compatibilityRequests } = useCompatibilityRequests();
   const target = navigation.getParam('target');
 
   if (!target) {
@@ -31,14 +31,15 @@ export default function CompatibilityDetails({ navigation }) {
   const { moods } = target;
   imageSource = moods[currentMood]?.avatar;
   firstName = target.firstName;
+
   // get compatibility result
- const compatibilityRequestResults = compatibilityRequests.compatibilityRequests.filter((cr) => {
-       return cr.mood === currentMood && cr.target.id === target.id;
+ const compatibilityRequestResults = compatibilityRequests?.compatibilityRequests?.filter((cr) => {
+       return cr.mood === currentMood && (cr.target === target.id  || cr.target?.id === target.id);
    });
 
   // Results could be
-  const crResult = !compatibilityRequestResults.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
-  if (!crResult) {
+  const crResult = !compatibilityRequestResults?.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
+  if (!crResult ) {
     return (null);
   }
   return (

@@ -9,7 +9,7 @@ export function create(target, mood) {
   return async (dispatch) => {
     try {
       const compatibilityRequest = await API.CompatibilityRequests.create({
-        target,
+        target: target?.id,
         mood
       });
 
@@ -108,7 +108,6 @@ export function accept(crId, mood) {
 }
 
 export function setCompatibilityRequests(compatibilityRequests, mood) {
-
   return {
     type: SET_COMPATIBILITY_REQUESTS,
     payload: {

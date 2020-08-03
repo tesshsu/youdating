@@ -144,7 +144,7 @@ export default function MainTabsTchat() {
             const { lastMessage } = item;
              // get compatibility result
              const compatibilityRequestResults = compatibilityRequests?.compatibilityRequests?.filter((cr) => {
-                   return cr.mood === currentMood && cr?.target.id === target?.id;
+                   return cr.mood === currentMood && (cr.target === target.id  || cr.target?.id === target.id);
                });
              const crResult = !compatibilityRequestResults?.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
 
