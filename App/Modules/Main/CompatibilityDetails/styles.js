@@ -107,5 +107,15 @@ export default StyleSheet.create({
        textAlign: 'center',
        marginBottom: 10,
        color: 'white'
-  }
+  },
+  resultTitleText: {
+          fontFamily: 'NewTaiLue-Bold',
+          width: '70%',
+          fontSize: 16,
+          textAlign: 'center',
+          marginVertical: 10,
+          color: 'white',
+          padding: 6,
+          borderRadius: 10
+     }
 });
