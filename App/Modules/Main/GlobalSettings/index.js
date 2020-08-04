@@ -5,30 +5,21 @@ import {
   Alert,
 } from 'react-native';
 import { useDebouncedCallback } from 'use-debounce';
-import { LinearGradient } from 'expo-linear-gradient';
+
 import { ScrollView } from 'react-native-gesture-handler';
-import { CheckBox } from 'react-native-elements';
-import { scale, verticalScale } from '../../../Helpers/ScaleHelper';
 import styles from './styles';
 import PageHeader from '../../Global/PageHeader';
 import SettingsCard from '../../Global/SettingsCard';
-import RoundButton from '../../Global/RoundIconButton';
+import SettingSwitch from '../../Global/SettingSwitch';
 import useLogguedUser from '../../../Hooks/useLogguedUser';
 import NavigationHelper from '../../../Helpers/NavigationHelper';
-import useCurrentMood from '../../../Hooks/useCurrentMood';
 import { MOODS } from '../../../GlobalConfig';
 
 export default function GlobalSettings() {
   const {
-    moodInfos,
-    currentMood
-  } = useCurrentMood();
-  const [isChecked, setIsChecked] = useState(true);
-  const {
     isAuthentificated,
     logguedUser,
     signOut,
-	  checked = true,
     updateGlobalSettings,
     updateMoodVisibility,
     updateSharePosition
@@ -49,7 +40,7 @@ export default function GlobalSettings() {
     try {
       await updateGlobalSettings(settings);
     } catch (err) {
-      Alert.alert('Erreur', 'Erreur lors de la mise à jour de vos paramètres');
+      Alert.alert('Erreur', 'Erreur lors de la mise jour de vos parametres');
     }
   };
 
@@ -64,7 +55,7 @@ export default function GlobalSettings() {
     try {
       await updateSharePosition(value);
     } catch (err) {
-      Alert.alert('Erreur', 'Impossible de mettre à jour l\'activation de la geolocalisation!');
+      Alert.alert('Erreur', 'Impossible de mettre  jour l\'activation de la geolocalisation!');
     }
   }
 
@@ -72,7 +63,7 @@ export default function GlobalSettings() {
     try {
       await updateMoodVisibility(mood, value);
     } catch (err) {
-      Alert.alert('Erreur', `Impossible de mettre à jour la visibilité du mood ${mood}`);
+      Alert.alert('Erreur', `Impossible de mettre  jour la visibilité du mood ${mood}`);
     }
   }
 
@@ -103,79 +94,93 @@ export default function GlobalSettings() {
   return (
     <>
       <PageHeader
-        title="paramètres"
+        title="Réglages"
         backButton
       />
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.scrollViewContent}
       >
-        {/* eslint-disable-next-line no-tabs */}
-        <SettingsCard title="Navigations">
-          <TouchableOpacity
-            style={[
-              styles.button,
-              { backgroundColor: moodInfos.color }
-            ]}
-          >
-            <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsMet')}> RENCONTRES </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.button,
-              { backgroundColor: moodInfos.color }
-            ]}
-          >
-            <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsTchat')}> MESSAGERIE </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.button,
-              { backgroundColor: moodInfos.color }
-            ]}
-          >
-            <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}> COMPATBILITER </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.button,
-              { backgroundColor: moodInfos.color }
-            ]}
-          >
-            <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainTabsProfile')}> PROFILE </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.button,
-              { backgroundColor: moodInfos.color }
-            ]}
-          >
-            <Text style={styles.buttonTextGradient} onPress={() => NavigationHelper.navigate('MainMoodSettings')}> CONFIGURE </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.button,
-              { backgroundColor: moodInfos.color }
-            ]}
-          >
-            <Text style={styles.buttonTextGradient} onPress={onSignOut}> Déconnexion </Text>
-          </TouchableOpacity>
-          {/* eslint-disable-next-line no-tabs */}
+        <SettingsCard
+          title="LOCALISATION"
+        >
+          <SettingSwitch
+            label="Partager ma position"
+            value={sharePosition}
+            onChange={() => updateSharePositionSetting(!sharePosition)}
+          />
         </SettingsCard>
         <SettingsCard
-          title="confidentialite"
+          title="NOTIFICATIONS"
         >
-          <CheckBox
-            center
-            iconRight
-            title="accepter les termes et conditions"
-            checked={isChecked}
-            onPress={() => setIsChecked(!isChecked)}
+          <SettingSwitch
+            label="Vues"
+            value={views}
+            onChange={() => updateSetting('views', !views)}
           />
-          <Text>
-            Le Site web/Application mobile développés par BEPATIENT vous permettent uniquement de vous informer et de vous accompagner dans la gestion votre état de santé/pathologie spécifique/bien être, elle n’est en aucun cas un outil de diagnostic, de consultation, d’urgence, ou autre activité de télé médecine.
-          </Text>
+          <SettingSwitch
+            label="Demandes de compatibilité"
+            value={compatibilities}
+            onChange={() => updateSetting('compatibilities', !compatibilities)}
+          />
+          <SettingSwitch
+            label="Messages"
+            value={messages}
+            onChange={() => updateSetting('messages', !messages)}
+          />
+          <SettingSwitch
+            label="Good Feeling"
+            value={goodFeelings}
+            onChange={() => updateSetting('goodFeelings', !goodFeelings)}
+          />
+          <SettingSwitch
+            label="Opportunités"
+            value={opportunities}
+            onChange={() => updateSetting('opportunities', !opportunities)}
+          />
+          <SettingSwitch
+             label="Bipolarities"
+             value={opportunities}
+             onChange={() => updateSetting('bipolarities', !bipolarities)}
+           />
         </SettingsCard>
+        <SettingsCard
+          title="VISIBILIT"
+        >
+          <SettingSwitch
+            label="Tout les moods"
+            value={areAllMoodVisible}
+            onChange={() => updateAllMoodVisibility(!areAllMoodVisible)}
+          />
+          <SettingSwitch
+            label="Mood professionel"
+            value={logguedUser.moods.PRO.visible}
+            onChange={() => updateMoodVisible('PRO', !logguedUser.moods.PRO.visible)}
+          />
+          <SettingSwitch
+            label="Mood social"
+            value={logguedUser.moods.SOCIAL.visible}
+            onChange={() => updateMoodVisible('SOCIAL', !logguedUser.moods.SOCIAL.visible)}
+          />
+          <SettingSwitch
+            label="Mood couple"
+            value={logguedUser.moods.LOVE.visible}
+            onChange={() => updateMoodVisible('LOVE', !logguedUser.moods.LOVE.visible)}
+          />
+          <SettingSwitch
+            label="Mood personnel"
+            value={logguedUser.moods.PERSO.visible}
+            onChange={() => updateMoodVisible('PERSO', !logguedUser.moods.PERSO.visible)}
+          />
+        </SettingsCard>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={onSignOut}
+        >
+          <Text style={styles.buttonText}>
+            Deconnexion
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </>
   );
