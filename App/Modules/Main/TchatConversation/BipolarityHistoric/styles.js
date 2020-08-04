@@ -43,8 +43,8 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     borderBottomColor: '#CECBCB',
     borderBottomWidth: 1,
-    marginTop: verticalScale(10),
-    marginBottom: verticalScale(5),
+    marginTop: verticalScale(0),
+    marginBottom: verticalScale(0),
     marginHorizontal: verticalScale(10),
   },
   compatibilityResultTitle: {
@@ -100,14 +100,15 @@ export default StyleSheet.create({
   },
   buttonContainer: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 2,
     left: 0,
     right: 0,
     alignItems: 'center',
   },
   button: {
     width: scale(187),
-    height: verticalScale(47),
+    height: verticalScale(37),
+    marginTop: 10,
     shadowOpacity: 0.4,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 4,

@@ -85,12 +85,8 @@ export default function BipolarityHistoric({ navigation }) {
         </View>
         <View style={styles.scrollviewContainer}>
           <ScrollView
-            contentContainerStyle={[
-              styles.scrollviewContent,
-              { paddingBottom: buttonContainerHeight + verticalScale(40) }
-            ]}
+            contentContainerStyle={styles.scrollviewContent}
           >
-
             <Carousel activeIndex={carouselIndex}>
               {slicedAnswers.map((chunk, index) => (
                 <View key={index.toString()}>
@@ -101,7 +97,7 @@ export default function BipolarityHistoric({ navigation }) {
                       style={styles.itemContainer}
                     >
                       <Text style={styles.title}>REPONSE N {index+1}</Text>
-                      <Text style={styles.question}>{item.question}</Text>
+                      <Text style={styles.question}>{item.question} </Text>
                       <View style={styles.line} />
                       <View style={styles.imageContainer}>
 
@@ -150,45 +146,43 @@ export default function BipolarityHistoric({ navigation }) {
                                             En ATTENDEN DE REPONSE DE { params.opponent.firstName }
                                           </Text>
                                      </View>
+
                                 </View>
                          )
                          }
                       </View>
+                       <View style={styles.compatibilityResult}>
+                                    <Text style={styles.compatibilityResultTitle}>{`Compatibilité d'interets pack ${currentPack + 1}`}</Text>
+                                    <Text style={styles.compatibilityPercentageText}>
+                                      {(params.countA * params.totalQuestion)}%
+                                    </Text>
+                       </View>
+                                  {index != 9 ? (
+                                                  <RoundButton
+                                                      containerStyle={styles.button}
+                                                      backgroundColor={moodInfos.color}
+                                                      text="DISCUTEZ-EN"
+                                                      color="white"
+                                                      borderRadius={23} MainTabsTchatList
+                                                      onPress={() => startConversation(currentMood, target)}
+                                                  />
+                                                  ) : (
+                                                        <RoundButton
+                                                             containerStyle={styles.button}
+                                                             backgroundColor={moodInfos.color}
+                                                             text="REVIENT PLUS TARD"
+                                                             color="white"
+                                                             borderRadius={23} MainTabsTchatList
+                                                             onPress={() => NavigationHelper.navigate('MainTabsProfile')}
+                                                        />
+                                                   )
+                                  }
+
                     </View>
                   ))}
                 </View>
               ))}
             </Carousel>
-            <View style={styles.compatibilityResult}>
-              <Text style={styles.compatibilityResultTitle}>{`Compatibilité d'interets pack ${currentPack + 1}`}</Text>
-              <Text style={styles.compatibilityPercentageText}>
-                {(params.countA * params.totalQuestion)}%
-              </Text>
-            </View>
-            <View style={styles.buttonContainer} onLayout={onButtonContainerLayout}>
-                        <SafeAreaView>
-                        {opponentAnswer ? (
-                               <RoundButton
-                                        containerStyle={styles.button}
-                                        backgroundColor={moodInfos.color}
-                                        text="DISCUTEZ-EN"
-                                        color="white"
-                                        borderRadius={23} MainTabsTchatList
-                                        onPress={() => startConversation(currentMood, target)}
-                                />
-                            ) : (
-                               <RoundButton
-                                         containerStyle={styles.button}
-                                         backgroundColor={moodInfos.color}
-                                         text="REVIENT PLUS TARD"
-                                         color="white"
-                                         borderRadius={23} MainTabsTchatList
-                                         onPress={() => NavigationHelper.navigate('MainTabsProfile')}
-                                />
-                            )
-                         }
-                        </SafeAreaView>
-                      </View>
           </ScrollView>
         </View>
       </View>
