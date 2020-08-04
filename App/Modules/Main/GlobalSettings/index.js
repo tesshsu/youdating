@@ -173,6 +173,7 @@ export default function GlobalSettings() {
             onChange={() => updateMoodVisible('PERSO', !logguedUser.moods.PERSO.visible)}
           />
         </SettingsCard>
+
         <TouchableOpacity
           style={styles.button}
           onPress={onSignOut}

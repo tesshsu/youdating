@@ -46,7 +46,7 @@ export default function MainMet() {
 				 name="sliders"
 				 color='white'
 				 size={21}
-				 onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
+				 onPress={() => NavigationHelper.navigate('MainMoodSettings')}
 			 />
         )}
         title="RENCONTRES"
