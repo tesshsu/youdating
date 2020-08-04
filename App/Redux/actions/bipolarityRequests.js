@@ -1,9 +1,9 @@
 import * as API from '../../Api';
 
 export const SET_FETCHING = 'bipolarityRequests/SET_FETCHING';
-export const SET_COMPATIBILITY_REQUESTS = 'bipolarityRequests/SET_BIPOLARITY_REQUESTS';
-export const ADD_OR_UPDATE_COMPATIBILITY_REQUEST = 'bipolarityRequests/ADD_BIPOLARITY_REQUEST';
-export const UPDATE_COMPATIBILITY_REQUEST = 'bipolarityRequests/UPDATE_BIPOLARITY_REQUEST';
+export const SET_BIPOLARITIES = 'bipolarityRequests/SET_BIPOLARITIES';
+export const ADD_OR_UPDATE_BIPOLARITY= 'bipolarityRequests/ADD_BIPOLARITY_REQUEST';
+export const UPDATE_BIPOLARITY_RESULT = 'bipolarityRequests/UPDATE_BIPOLARITY_RESULT';
 
 export function create(target, mood) {
   return async (dispatch) => {
@@ -14,7 +14,7 @@ export function create(target, mood) {
       });
 
       dispatch({
-        type: ADD_OR_UPDATE_BIPOLARITY_REQUEST,
+        type: ADD_OR_UPDATE_BIPOLARITY,
         payload: {
           bipolarityRequest,
           mood
@@ -51,7 +51,7 @@ export function fetchAll() {
 
       Object.keys(moodsCr).forEach((mood) => {
         dispatch({
-          type: SET_BIPOLARITY_REQUESTS,
+          type: SET_BIPOLARITIES,
           payload: {
             bipolarityRequests: moodsCr[mood],
             mood
@@ -77,7 +77,7 @@ export function fetchById(crId) {
       const bipolarityRequest = await API.BipolarityRequests.getById(crId);
 
       dispatch({
-        type: ADD_OR_UPDATE_BIPOLARITY_REQUEST,
+        type: ADD_OR_UPDATE_BIPOLARITY,
         payload: {
           bipolarityRequest,
           mood: bipolarityRequest.mood
@@ -90,26 +90,3 @@ export function fetchById(crId) {
   };
 }
 
-export function accept(crId, mood) {
-  return async (dispatch, getState) => {
-    const { bipolarityRequests } = getState();
-
-    const bipolarityRequest = bipolarityRequests[mood].find(cr => cr.id === crId);
-    try {
-      await API.BipolarityRequests.updateHasBeenAccepted(crId);
-
-      dispatch({
-        type: ADD_OR_UPDATE_BIPOLARITY_REQUEST,
-        payload: {
-          bipolarityRequest: {
-            ...bipolarityRequest,
-            hasBeenAccepted: true
-          }
-        }
-      });
-    } catch (err) {
-      console.warn(err);
-      throw err;
-    }
-  };
-}

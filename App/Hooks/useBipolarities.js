@@ -4,14 +4,14 @@ import { Alert } from 'react-native';
 
 import useCurrentMood from './useCurrentMood';
 import * as BIPOLARITY_REQUESTS_ACTIONS from '../Redux/actions/bipolarityRequests';
-import NavigationHelper from '../Helpers/NavigationHelper';
 
-export default function useBipolarityRequests() {
+export default function useBipolarities() {
   const dispatch = useDispatch();
   const { currentMood } = useCurrentMood();
-  const { isFetching, ...allCrs } = useSelector(state => state.bipolarityRequests);
+  const isFetching = false;
+  //const { isFetching, ...allCrs } = useSelector(state => state.bipolarityRequests);
 
-  const bipolarityRequests = useMemo(() => allCrs[currentMood], [allCrs, currentMood]);
+  const bipolarityRequests = undefined; //useMemo(() => allCrs[currentMood], [allCrs, currentMood]);
 
   const fetchAll = useCallback(async () => {
     try {
@@ -29,13 +29,6 @@ export default function useBipolarityRequests() {
     }
   }, [dispatch]);
 
-  const accept = useCallback(async (id) => {
-    try {
-      await dispatch(BIPOLARITY_REQUESTS_ACTIONS.accept(id, currentMood));
-    } catch (err) {
-      Alert.alert('useBipolarityRequests currentMood', err);
-    }
-  }, [currentMood, dispatch]);
 
   const create = useCallback(async (target) => {
     try {
@@ -50,7 +43,6 @@ export default function useBipolarityRequests() {
     fetchAll,
     fetch,
     create,
-    accept,
     bipolarityRequests
   };
 }

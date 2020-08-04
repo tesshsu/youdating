@@ -16,6 +16,7 @@ import RoundIconButton from '../../../../Global/RoundIconButton';
 import SearchField from '../../../../Global/SearchField';
 import styles from './styles';
 import useCompatibilityRequests from '../../../../../Hooks/useCompatibilityRequests';
+import useBipolarities from '../../../../../Hooks/useBipolarities';
 import { COMPATIBILITY_RESULT } from '../../../../../GlobalConfig';
 
 const COMPATIBILITY_SATIFAISANT = require('../../../../../../assets/icons/icon_compatibilite_satifaisante.png');
@@ -33,7 +34,7 @@ const TEXT = {
 export default function MainTabsTchat() {
   const [search, setSearch] = useState(null);
   const [datas, setDatas] = useState(null);
-  const [conversation, setConversation] = useState(null)
+  const [conversation, setConversation] = useState(null);
   const {
     conversations,
     startConversation,
@@ -82,6 +83,13 @@ export default function MainTabsTchat() {
 
 
  const { compatibilityRequests } = useCompatibilityRequests();
+ const { create: createBipolarity } = useBipolarities();
+
+  const onPressBipolarity = useCallback((target) => {
+    NavigationHelper.navigate('MainTchatConversationBipolarity', { opponent: target });
+    createBipolarity( target );
+   }, [currentMood, logguedUser.id]);
+
 
   return (
     <View style={styles.container}>
@@ -181,9 +189,7 @@ export default function MainTabsTchat() {
                       borderRadius={10}
                       width={100}
                       height={25}
-                      onPress={() => NavigationHelper.navigate('MainTchatConversationBipolarity', {
-                        opponent: target
-                      })}
+                      onPress={() => onPressBipolarity(target) }
                     />
                   </View>
                 </View>
@@ -207,7 +213,7 @@ export default function MainTabsTchat() {
           }}
         />
 		: <NoResults />
-		  } 
+		  }
       </View>
     </View>
   );
