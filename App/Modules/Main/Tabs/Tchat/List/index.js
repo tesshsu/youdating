@@ -190,7 +190,7 @@ export default function MainTabsTchat() {
                       borderRadius={10}
                       width={100}
                       height={25}
-                      onPress={() => NavigationHelper.navigate('MainTchatConversationBipolarity', { opponent: target }) }
+                      onPress={() => onPressBipolarity( target) }
                     />
                   </View>
                 </View>

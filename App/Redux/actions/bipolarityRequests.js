@@ -26,6 +26,24 @@ export function create(target, mood) {
   };
 }
 
+export function update(data) {
+  return async (dispatch) => {
+    try {
+      const bipolarityRequest = await API.BipolarityRequests.update(data);
+
+      /*dispatch({
+        type: ADD_OR_UPDATE_BIPOLARITY,
+        payload: {
+          bipolarityRequest,
+          data.mood
+        }
+      });*/
+    } catch (err) {
+      throw err;
+    }
+  };
+}
+
 export function fetchAll() {
   return async (dispatch) => {
     dispatch({

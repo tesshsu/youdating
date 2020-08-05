@@ -19,6 +19,7 @@ import NavigationHelper from '../../../../Helpers/NavigationHelper';
 import useConversation from '../../../../Hooks/useConversations';
 import Carousel from '../../../Global/Carousel';
 import useLogguedUser from '../../../../Hooks/useLogguedUser';
+import useBipolarities from '../../../../Hooks/useBipolarities';
 import * as Questions from '../Questions';
 
 export default function MainTchatConvversationBipolarity({ navigation }) {
@@ -27,6 +28,7 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
   const [answers, setAnswers] = useState([]);
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
+  const { update: updateBipolarity } = useBipolarities();
   const slicedQuestions = [];
 
 
@@ -49,11 +51,29 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
   const next = () => {
     const lastQuestions = answers.length === slicedQuestions.length;
     if(lastQuestions){
+      score = answers.filter(a => a.response === 'A').length * slicedQuestions.length;
       navigation.navigate('MainTchatConversationBipolarityHistoric', {
         answers,
+        score,
         totalQuestion: slicedQuestions.length,
         opponent
       });
+
+      // update result to backend
+      let bipolarityResult = {};
+      bipolarityResult.mood = currentMood;
+      bipolarityResult.target = opponent.id;
+      bipolarityResult.result = score;
+      bipolarityResult.questions = [];
+      bipolarityResult.questions = answers.map(a => {
+         let q = {};
+         q.questionId= a.id;
+         q.result= a.response;
+         return q;
+      })
+
+      updateBipolarity(bipolarityResult);
+
     } else if( carouselIndex === slicedQuestions.length){
         const answered = answers.map(a => a.id);
         const noAnswers = slicedQuestions.map(arr => arr[0]).filter(q => !answered.includes(q.id) );

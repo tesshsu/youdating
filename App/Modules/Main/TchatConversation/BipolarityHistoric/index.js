@@ -23,7 +23,7 @@ export default function BipolarityHistoric({ navigation }) {
     startConversation
   } = useConversation();
   const slicedAnswers = [];
-  let score = 0;
+  const score = params.score;
   let conversation, opponentAnswer;
   function onButtonContainerLayout(ev) {
     const { height } = ev.nativeEvent.layout;
@@ -42,7 +42,9 @@ export default function BipolarityHistoric({ navigation }) {
     }
   });
 
-  score = (params.answers.filter(a => a.response === 'A').length * params.totalQuestion);
+
+
+  // We have response an
 
 
   const openConversation = useCallback((conversation) => {
@@ -103,7 +105,7 @@ export default function BipolarityHistoric({ navigation }) {
                       <View style={styles.line} />
                       <View style={styles.imageContainer}>
 
-                        {item.avatarA && (
+                        {item.response === 'A' && (
                           <View style={styles.imageBackground}>
                             <Image source={item.avatarA} style={styles.imageBackgroundImage} />
                             <Text  style={styles.imageToiText} >TOI</Text>
@@ -117,8 +119,22 @@ export default function BipolarityHistoric({ navigation }) {
                             </Text>
                           </View>
                         )}
+                        {item.response === 'B' && (
+                           <View style={styles.imageBackground}>
+                             <Image source={item.avatarB} style={styles.imageBackgroundImage} />
+                             <Text  style={styles.imageToiText} >TOI</Text>
+                             <Text
+                               style={[
+                                 styles.imageLabelText,
+                                 { color: item.disabled ? '#BEBFC0' : moodInfos.color }
+                               ]}
+                             >
+                               {item.answerB}
+                             </Text>
+                           </View>
+                         )}
 
-                        { (!item.avatarA || !item.avatarB)  && (
+                        { (item.response !== 'A' && item.response !== 'B')  && (
                           <View style={styles.imageBackground}>
                             <View style={styles.noAnswer}>
                               <Text style={styles.noAnswerText}>

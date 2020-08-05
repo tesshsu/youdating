@@ -13,13 +13,13 @@ export function getById(bpId) {
 }
 
 export function update(payload) {
+console.log("update=", payload);
   return client
-    .put('/bipolarities', payload)
-    .then(({ data }) => data);
+    .put('/bipolarities', payload);
 }
 
 export function create(payload) {
-console.log(payload);
+console.log("create=", payload);
   return client
     .post('/bipolarities', payload)
     .then(({ data }) => data);

@@ -4,6 +4,7 @@ import { Alert } from 'react-native';
 
 import useCurrentMood from './useCurrentMood';
 import * as BIPOLARITY_REQUESTS_ACTIONS from '../Redux/actions/bipolarityRequests';
+import * as API from '../Api';
 
 export default function useBipolarities() {
   const dispatch = useDispatch();
@@ -38,11 +39,22 @@ export default function useBipolarities() {
     }
   }, [currentMood, dispatch]);
 
+
+  const update = async (data) => {
+    try {
+      //await dispatch(BIPOLARITY_REQUESTS_ACTIONS.update(data));
+      await API.BipolarityRequests.update(data);
+    } catch (err) {
+      Alert.alert('useBipolarityRequests target', err);
+    }
+  };
+
   return {
     isFetching,
     fetchAll,
     fetch,
     create,
+    update,
     bipolarityRequests
   };
 }
