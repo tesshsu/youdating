@@ -15,7 +15,7 @@ export function getById(bpId) {
 export function update(payload) {
 console.log("update=", payload);
   return client
-    .put('/bipolarities', payload);
+    .patch('/bipolarities', payload);
 }
 
 export function create(payload) {
