@@ -90,26 +90,31 @@ export default function MainTabsProfilHome() {
           )}
 		      rightColumnActions={[
               <ActionButton
+                key="search"
                 onPress={() => NavigationHelper.navigate('MainTabsProfilSearch')}
                 text="RECHERCHE"
                 iconName="search"
               />,
 			  <ActionButton
+			    key="meet"
                 onPress={() => NavigationHelper.navigate('MainTabsMet')}
                 text="RENCONTRE"
                 iconName="users"
               />,
 			  <ActionButton
+			    key="message"
                 onPress={() => NavigationHelper.navigate('MainTabsTchat')}
                 text="MESSAGERIE"
                 iconName="message-square"
               />,
               <ActionButton
+                key="compatibility"
                 onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}
                 text="COMPATIBILITER"
                 iconName="refresh-cw"
               />,
               <ActionButton
+                key="invite"
                 onPress={() => NavigationHelper.navigate('MainTabsProfilInvite')}
                 text="INVITE"
                 iconName="user-plus"

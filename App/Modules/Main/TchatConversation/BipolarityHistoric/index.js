@@ -23,6 +23,7 @@ export default function BipolarityHistoric({ navigation }) {
     startConversation
   } = useConversation();
   const slicedAnswers = [];
+  let score = 0;
   let conversation, opponentAnswer;
   function onButtonContainerLayout(ev) {
     const { height } = ev.nativeEvent.layout;
@@ -31,7 +32,6 @@ export default function BipolarityHistoric({ navigation }) {
       setButtonContainerheight(height);
     }
   }
-
   params.answers.forEach((u) => {
     const lastArray = slicedAnswers[slicedAnswers.length - 1];
 
@@ -41,6 +41,8 @@ export default function BipolarityHistoric({ navigation }) {
       lastArray.push(u);
     }
   });
+
+  score = (params.answers.filter(a => a.response === 'A').length * params.totalQuestion);
 
 
   const openConversation = useCallback((conversation) => {
@@ -143,7 +145,7 @@ export default function BipolarityHistoric({ navigation }) {
                                <View style={styles.imageBackground}>
                                      <View style={styles.noAnswer}>
                                          <Text style={styles.noAnswerText}>
-                                            En ATTENDEN DE REPONSE DE { params.opponent.firstName }
+                                            En ATTENTE DE REPONSE DE { params.opponent.firstName }
                                           </Text>
                                      </View>
 
@@ -154,7 +156,7 @@ export default function BipolarityHistoric({ navigation }) {
                        <View style={styles.compatibilityResult}>
                                     <Text style={styles.compatibilityResultTitle}>{`Compatibilité d'interets pack ${currentPack + 1}`}</Text>
                                     <Text style={styles.compatibilityPercentageText}>
-                                      {(params.countA * params.totalQuestion)}%
+                                      { score }%
                                     </Text>
                        </View>
                                   {index != 9 ? (

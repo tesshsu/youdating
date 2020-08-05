@@ -88,7 +88,7 @@ export default function MainTabsTchat() {
   const onPressBipolarity = useCallback((target) => {
     NavigationHelper.navigate('MainTchatConversationBipolarity', { opponent: target });
     createBipolarity( target );
-   }, [currentMood, logguedUser.id]);
+   }, [currentMood, logguedUser.id, createBipolarity]);
 
 
   return (
@@ -159,6 +159,7 @@ export default function MainTabsTchat() {
             const lastMessageStr = lastMessage?.author === logguedUser.id ? 'Vous avez' : `${target?.firstName} a`;
             return (
               <TouchableOpacity
+                key={conversation?.id}
                 style={styles.messageListItem}
                 onPress={() => openConversation(conversation)}
               >
@@ -189,7 +190,7 @@ export default function MainTabsTchat() {
                       borderRadius={10}
                       width={100}
                       height={25}
-                      onPress={() => onPressBipolarity(target) }
+                      onPress={() => NavigationHelper.navigate('MainTchatConversationBipolarity', { opponent: target }) }
                     />
                   </View>
                 </View>
