@@ -9,10 +9,8 @@ import * as API from '../Api';
 export default function useBipolarities() {
   const dispatch = useDispatch();
   const { currentMood } = useCurrentMood();
-  const isFetching = false;
-  //const { isFetching, ...allCrs } = useSelector(state => state.bipolarityRequests);
-
-  const bipolarityRequests = undefined; //useMemo(() => allCrs[currentMood], [allCrs, currentMood]);
+  const { isFetching, ...allBps } = useSelector(state => state.bipolarityRequests);
+  const bipolarityRequests = useMemo(() => allBps[currentMood], [allBps, currentMood]);
 
   const fetchAll = useCallback(async () => {
     try {
@@ -30,6 +28,13 @@ export default function useBipolarities() {
     }
   }, [dispatch]);
 
+  const get = useCallback(async (target) => {
+      try {
+        await dispatch(BIPOLARITY_REQUESTS_ACTIONS.get(target.id, currentMood));
+      } catch (err) {
+        Alert.alert('useBipolarityRequests get', err);
+      }
+    }, [currentMood, dispatch]);
 
   const create = useCallback(async (target) => {
     try {
@@ -53,6 +58,7 @@ export default function useBipolarities() {
     isFetching,
     fetchAll,
     fetch,
+    get,
     create,
     update,
     bipolarityRequests

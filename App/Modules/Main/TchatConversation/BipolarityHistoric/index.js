@@ -1,10 +1,11 @@
-import React, { useCallback, useState, useMemo } from 'react';
-import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
+import { AppState, Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
 import { verticalScale } from '../../../../Helpers/ScaleHelper';
 import useConversation from '../../../../Hooks/useConversations';
 import useCurrentMood from '../../../../Hooks/useCurrentMood';
 import useLogguedUser from '../../../../Hooks/useLogguedUser';
+import useBipolarities from '../../../../Hooks/useBipolarities';
 import Carousel from '../../../Global/Carousel';
 import PageHeader from '../../../Global/PageHeader';
 import RoundButton from '../../../Global/RoundButton';
@@ -18,13 +19,25 @@ export default function BipolarityHistoric({ navigation }) {
   const [currentPack, setCurrentPack] = useState(0);
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
+  const { bipolarityRequests, get: getBipolarity } = useBipolarities();
+
   const {
 	conversations,
     startConversation
   } = useConversation();
   const slicedAnswers = [];
   const score = params.score;
+  const opponent = params.opponent;
   let conversation, opponentAnswer;
+
+  // retrieve the opponent response
+  const currentBipolarities = bipolarityRequests?.bipolarityRequests?.filter( (bp) => {
+      return (bp.target.id === opponent.id && bp.author.id === logguedUser.id)
+            || (bp.target.id === logguedUser.id && bp.author.id === opponent.id) ;
+   });
+
+   const currentBipolarity = currentBipolarities?.length > 0 ? currentBipolarities[0]: undefined;
+
   function onButtonContainerLayout(ev) {
     const { height } = ev.nativeEvent.layout;
 
@@ -42,11 +55,20 @@ export default function BipolarityHistoric({ navigation }) {
     }
   });
 
+  // update with backend answer
+  slicedAnswers.forEach((slice) => {
+     const answer = currentBipolarity?.questions?.filter(q => q.questionId === slice[0].id.toString());
+     if(logguedUser.id === currentBipolarity.author?.id ){
+        slice[0].response = answer[0].authorResponse;
+        slice[0].opponentResponse = answer[0].targetResponse;
+     } else {
+         slice[0].response = answer[0].targetResponse;
+         slice[0].opponentResponse =  answer[0].authorResponse;
+     }
+  });
 
 
   // We have response an
-
-
   const openConversation = useCallback((conversation) => {
     const {
       user1,
@@ -62,6 +84,11 @@ export default function BipolarityHistoric({ navigation }) {
       startConversation(currentMood, target);
     }
   }, [currentMood, logguedUser.id, startConversation]);
+
+    useEffect(() => {
+       getBipolarity(opponent);
+    }, [getBipolarity, bipolarityRequests]);
+
 
   return (
     <>
@@ -144,9 +171,9 @@ export default function BipolarityHistoric({ navigation }) {
                           </View>
                         )}
 
-                        { opponentAnswer ? (
+                        { (item.opponentResponse === 'A' ) && (
                              <View style={styles.imageBackground}>
-                                 <Image source={opponentAnswer.item.avatarA} style={styles.imageBackgroundImage} />
+                                 <Image source={item.avatarA} style={styles.imageBackgroundImage} />
                                  <Text  style={styles.imageToiText} >{ params.opponent.firstName }</Text>
                                  <Text
                                       style={[
@@ -154,10 +181,27 @@ export default function BipolarityHistoric({ navigation }) {
                                                 { color: item.disabled ? '#BEBFC0' : moodInfos.color }
                                              ]}
                                       >
-                                      {opponentAnswer.item.answerA}
+                                      {item.answerA}
                                   </Text>
                              </View>
-                         ): (
+                         )}
+                          { (item.opponentResponse === 'B' ) && (
+                              <View style={styles.imageBackground}>
+                                  <Image source={item.avatarB} style={styles.imageBackgroundImage} />
+                                  <Text  style={styles.imageToiText} >{ params.opponent.firstName }</Text>
+                                  <Text
+                                       style={[
+                                                styles.imageLabelText,
+                                                 { color: item.disabled ? '#BEBFC0' : moodInfos.color }
+                                              ]}
+                                       >
+                                       {item.answerB}
+                                   </Text>
+                              </View>
+                          )}
+
+
+                        { (item.opponentResponse !== 'A' && item.opponentResponse !== 'B')  && (
                                <View style={styles.imageBackground}>
                                      <View style={styles.noAnswer}>
                                          <Text style={styles.noAnswerText}>
@@ -166,8 +210,7 @@ export default function BipolarityHistoric({ navigation }) {
                                      </View>
 
                                 </View>
-                         )
-                         }
+                         )}
                       </View>
                        <View style={styles.compatibilityResult}>
                                     <Text style={styles.compatibilityResultTitle}>{`Compatibilité d'interets pack ${currentPack + 1}`}</Text>

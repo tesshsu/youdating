@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import createMoodsReducer from '../createMoodsReducer';
 import * as BIPOLARITY_REQUESTS_ACTIONS from '../actions/bipolarityRequests';
-import * as COMPATIBILITY_REQUESTS_ACTIONS from "../actions/compatibilityRequests";
 
 function isFetchingReducer(state = false, action) {
   switch (action.type) {
@@ -13,7 +12,11 @@ function isFetchingReducer(state = false, action) {
 }
 
 const addOrUpdateState = (state, { bipolarityRequest }) => {
-  const bipolarityRequests = state.map((bp) => {
+  if(state.bipolarityRequests === undefined){
+    state.bipolarityRequests = [];
+  }
+
+  const bipolarityRequests = state?.bipolarityRequests?.map((bp) => {
     if (bp.id === bipolarityRequest.id) {
       return { ...bp, ...bipolarityRequest };
     }
@@ -21,8 +24,8 @@ const addOrUpdateState = (state, { bipolarityRequest }) => {
     return bp;
   });
 
-  if (!bipolarityRequests.some(bp => bp.id === bipolarityRequests.id)) {
-    bipolarityRequests.push(bipolarityRequest);
+  if (!bipolarityRequests?.some(bp => bp.id === bipolarityRequest.id)) {
+    bipolarityRequests?.push(bipolarityRequest);
   }
 
   return {
@@ -37,7 +40,7 @@ const moodsReducer = createMoodsReducer((state, action) => {
       return [...action.payload.bipolarityRequest];
     case BIPOLARITY_REQUESTS_ACTIONS.SET_BIPOLARITIES:
       return {...state, bipolarityRequests: action.payload.bipolarityRequests };
-    case BIPOLARITY_REQUESTS_ACTIONS.ADD_OR_UPDATE_BIPOLARITY_REQUEST:
+    case BIPOLARITY_REQUESTS_ACTIONS.ADD_OR_UPDATE_BIPOLARITY:
       return addOrUpdateState(state, action.payload);
     default:
       return state;
