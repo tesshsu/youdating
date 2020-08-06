@@ -67,7 +67,7 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
       bipolarityResult.questions = [];
       bipolarityResult.questions = answers.map(a => {
          let q = {};
-         q.questionId= a.id;
+         q.questionId= a.id.toString();
          q.result= a.response;
          return q;
       })
