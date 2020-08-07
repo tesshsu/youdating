@@ -1,3 +1,7 @@
+import activeConversation from './activeConversation';
+import bipolarityRequests from './bipolarityRequests';
+import conversations from './conversations';
+import compatibilityRequests from './compatibilityRequests';
 import loadingOverlay from './loadingOverlay';
 import logguedUser from './logguedUser';
 import search from './search';
@@ -13,12 +17,11 @@ import views from './views';
 import goodFeelings from './goodFeelings';
 import notifications from './notifications';
 import met from './met';
-import activeConversation from './activeConversation';
-import conversations from './conversations';
-import compatibilityRequests from './compatibilityRequests';
+
 
 
 export {
+  bipolarityRequests,
   loadingOverlay,
   logguedUser,
   search,

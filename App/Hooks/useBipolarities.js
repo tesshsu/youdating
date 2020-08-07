@@ -4,14 +4,13 @@ import { Alert } from 'react-native';
 
 import useCurrentMood from './useCurrentMood';
 import * as BIPOLARITY_REQUESTS_ACTIONS from '../Redux/actions/bipolarityRequests';
-import NavigationHelper from '../Helpers/NavigationHelper';
+import * as API from '../Api';
 
-export default function useBipolarityRequests() {
+export default function useBipolarities() {
   const dispatch = useDispatch();
   const { currentMood } = useCurrentMood();
-  const { isFetching, ...allCrs } = useSelector(state => state.bipolarityRequests);
-
-  const bipolarityRequests = useMemo(() => allCrs[currentMood], [allCrs, currentMood]);
+  const { isFetching, ...allBps } = useSelector(state => state.bipolarityRequests);
+  const bipolarityRequests = useMemo(() => allBps[currentMood], [allBps, currentMood]);
 
   const fetchAll = useCallback(async () => {
     try {
@@ -29,13 +28,13 @@ export default function useBipolarityRequests() {
     }
   }, [dispatch]);
 
-  const accept = useCallback(async (id) => {
-    try {
-      await dispatch(BIPOLARITY_REQUESTS_ACTIONS.accept(id, currentMood));
-    } catch (err) {
-      Alert.alert('useBipolarityRequests currentMood', err);
-    }
-  }, [currentMood, dispatch]);
+  const get = useCallback(async (target) => {
+      try {
+        await dispatch(BIPOLARITY_REQUESTS_ACTIONS.get(target.id, currentMood));
+      } catch (err) {
+        Alert.alert('useBipolarityRequests get', err);
+      }
+    }, [currentMood, dispatch]);
 
   const create = useCallback(async (target) => {
     try {
@@ -45,12 +44,23 @@ export default function useBipolarityRequests() {
     }
   }, [currentMood, dispatch]);
 
+
+  const update = async (data) => {
+    try {
+      //await dispatch(BIPOLARITY_REQUESTS_ACTIONS.update(data));
+      await API.BipolarityRequests.update(data);
+    } catch (err) {
+      Alert.alert('useBipolarityRequests target', err);
+    }
+  };
+
   return {
     isFetching,
     fetchAll,
     fetch,
+    get,
     create,
-    accept,
+    update,
     bipolarityRequests
   };
 }

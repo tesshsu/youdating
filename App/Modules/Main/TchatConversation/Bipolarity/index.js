@@ -19,57 +19,77 @@ import NavigationHelper from '../../../../Helpers/NavigationHelper';
 import useConversation from '../../../../Hooks/useConversations';
 import Carousel from '../../../Global/Carousel';
 import useLogguedUser from '../../../../Hooks/useLogguedUser';
+import useBipolarities from '../../../../Hooks/useBipolarities';
 import * as Questions from '../Questions';
 
 export default function MainTchatConvversationBipolarity({ navigation }) {
   const { state: { params: { opponent } } } = navigation;
   const [carouselIndex, setCarrouselIndex] = useState(0);
-  const [countA, setCounterA] = useState(0);
-  const [countB, setCounterB] = useState(0);
   const [answers, setAnswers] = useState([]);
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
+  const { update: updateBipolarity } = useBipolarities();
   const slicedQuestions = [];
-  const setCountA = async () => {
-    await setCounterA(countA + 1);
-    setAnswer();
-  };
 
-  const setCountB = async () => {
-    await setCounterB(countB + 1);
-    setAnswer();
-  };
 
-  const skip = async () => {
-    await setAnswers([...answers, {}]);
-  }
+  const setAnswer = async (questionId, response) => {
+    // go to next question
+    setCarrouselIndex(questionId + 1);
 
-  const setAnswer = async () => {
-    const ans = slicedQuestions[carouselIndex];
-    await setAnswers([...answers, ...ans]);
+    // check if already respond
+    const previousAns = answers.filter(a => a.id === questionId);
+    if(previousAns.length === 1){
+        previousAns[0].response = response;
+        await setAnswers([...answers]);
+    } else {
+        let ans = slicedQuestions[questionId];
+        ans[0].response = response;
+        await setAnswers([...answers, ...ans]);
+    }
   }
 
   const next = () => {
     const lastQuestions = answers.length === slicedQuestions.length;
-    !lastQuestions ?
-      setCarrouselIndex(carouselIndex + 1)
-      :
+    if(lastQuestions){
+      score = answers.filter(a => a.response === 'A').length * slicedQuestions.length;
       navigation.navigate('MainTchatConversationBipolarityHistoric', {
         answers,
-        countA,
-        countB,
+        score,
         totalQuestion: slicedQuestions.length,
         opponent
       });
+
+      // update result to backend
+      let bipolarityResult = {};
+      bipolarityResult.mood = currentMood;
+      bipolarityResult.target = opponent.id;
+      bipolarityResult.result = score;
+      bipolarityResult.questions = [];
+      bipolarityResult.questions = answers.map(a => {
+         let q = {};
+         q.questionId= a.id.toString();
+         q.result= a.response;
+         return q;
+      })
+
+      updateBipolarity(bipolarityResult);
+
+    } else if( carouselIndex === slicedQuestions.length){
+        const answered = answers.map(a => a.id);
+        const noAnswers = slicedQuestions.map(arr => arr[0]).filter(q => !answered.includes(q.id) );
+        if(noAnswers.length > 0){
+          setCarrouselIndex(noAnswers[0].id - 1);
+        }
+    }
   }
 
   useEffect(() => {
-    if (answers.length == carouselIndex + 1) next();
+    next();
   }, [answers]);
 
   let QUETIONS = [];
   const ModeQuestions = useMemo(() => Questions[currentMood].QUETIONS, [currentMood, QUETIONS]);
-  
+
   ModeQuestions.forEach((u) => {
     const lastArray = slicedQuestions[slicedQuestions.length - 1];
 
@@ -79,7 +99,7 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
       lastArray.push(u);
     }
   });
-  
+
   return (
     <>
       <PageHeader
@@ -126,7 +146,7 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
 				  <Text style={styles.question}>{item.question}</Text>
                   <View style={styles.imageContainer} >
                     <View style={styles.imageBackground}>
-                      <TouchableOpacity onPress={setCountA}>
+                      <TouchableOpacity onPress={() => setAnswer(item.id, 'A')}>
                         <Image source={item.avatarA} style={styles.imageBackgroundImage} />
                         <Text
                           style={[
@@ -139,7 +159,7 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
                       </TouchableOpacity>
                     </View>
                     <View style={styles.imageBackground}>
-                      <TouchableOpacity onPress={setCountB}>
+                      <TouchableOpacity onPress={() => setAnswer(item.id, 'B')}>
                         <Image source={item.avatarB} style={styles.imageBackgroundImage} />
                         <Text
                           style={[
@@ -151,6 +171,11 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
                         </Text>
                       </TouchableOpacity>
                     </View>
+
+                   <View style={styles.passBoutton}>
+                     <Button text="Aucun des deux" onPress={() => setAnswer(item.id, 'NONE')} />
+                   </View>
+
                   </View>
                 </View>
               ))}
@@ -158,9 +183,6 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
           ))}
         </Carousel>
       </ScrollView>
-      <View style={styles.passBoutton}>
-        <Button text="Aucun des deux" onPress={skip} />
-      </View>
     </>
   );
 }

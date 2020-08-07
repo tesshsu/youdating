@@ -1,20 +1,14 @@
 import client from '../client';
 
-export function getAll() {
+export function get(params) {
   return client
-    .get('/bipolarities')
+    .get('/bipolarities', { params })
     .then(({ data }) => data);
 }
 
-export function getById(crId) {
+export function update(payload) {
   return client
-    .get(`/bipolarities/${crId}`)
-    .then(({ data }) => data);
-}
-
-export function updateHasBeenAccepted(crId) {
-  return client
-    .put(`/bipolarities/${crId}/hasBeenAccepted`);
+    .patch('/bipolarities', payload);
 }
 
 export function create(payload) {

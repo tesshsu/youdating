@@ -11,27 +11,36 @@ function isFetchingReducer(state = false, action) {
   }
 }
 
-const addOrUpdateState = (state, { compatibilityRequest }) => {
-  const bipolarityRequests = state.map((cr) => {
-    if (cr.id === bipolarityRequest.id) {
-      return { ...cr, ...bipolarityRequest };
-    }
-
-    return cr;
-  });
-
-  if (!bipolarityRequests.some(cr => cr.id === bipolarityRequests.id)) {
-    bipolarityRequests.push(bipolarityRequest);
+const addOrUpdateState = (state, { bipolarityRequest }) => {
+  if(state.bipolarityRequests === undefined){
+    state.bipolarityRequests = [];
   }
 
-  return bipolarityRequests;
+  const bipolarityRequests = state?.bipolarityRequests?.map((bp) => {
+    if (bp.id === bipolarityRequest.id) {
+      return { ...bp, ...bipolarityRequest };
+    }
+
+    return bp;
+  });
+
+  if (!bipolarityRequests?.some(bp => bp.id === bipolarityRequest.id)) {
+    bipolarityRequests?.push(bipolarityRequest);
+  }
+
+  return {
+    ...state,
+    bipolarityRequests
+  };
 };
 
 const moodsReducer = createMoodsReducer((state, action) => {
   switch (action.type) {
     case BIPOLARITY_REQUESTS_ACTIONS.SET_BIPOLARITY_REQUESTS:
       return [...action.payload.bipolarityRequest];
-    case BIPOLARITY_REQUESTS_ACTIONS.ADD_OR_UPDATE_BIPOLARITY_REQUEST:
+    case BIPOLARITY_REQUESTS_ACTIONS.SET_BIPOLARITIES:
+      return {...state, bipolarityRequests: action.payload.bipolarityRequests };
+    case BIPOLARITY_REQUESTS_ACTIONS.ADD_OR_UPDATE_BIPOLARITY:
       return addOrUpdateState(state, action.payload);
     default:
       return state;

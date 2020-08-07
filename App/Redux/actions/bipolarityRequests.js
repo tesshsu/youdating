@@ -1,20 +1,22 @@
 import * as API from '../../Api';
 
 export const SET_FETCHING = 'bipolarityRequests/SET_FETCHING';
-export const SET_COMPATIBILITY_REQUESTS = 'bipolarityRequests/SET_BIPOLARITY_REQUESTS';
-export const ADD_OR_UPDATE_COMPATIBILITY_REQUEST = 'bipolarityRequests/ADD_BIPOLARITY_REQUEST';
-export const UPDATE_COMPATIBILITY_REQUEST = 'bipolarityRequests/UPDATE_BIPOLARITY_REQUEST';
+export const SET_BIPOLARITIES = 'bipolarityRequests/SET_BIPOLARITIES';
+export const ADD_OR_UPDATE_BIPOLARITY= 'bipolarityRequests/ADD_OR_UPDATE_BIPOLARITY';
+export const UPDATE_BIPOLARITY_RESULT = 'bipolarityRequests/UPDATE_BIPOLARITY_RESULT';
 
-export function create(target, mood) {
+export function get(target, mood) {
   return async (dispatch) => {
     try {
-      const bipolarityRequest = await API.BipolarityRequests.create({
+      const bipolarityRequest = await API.BipolarityRequests.get({
         target,
         mood
       });
 
+
+
       dispatch({
-        type: ADD_OR_UPDATE_BIPOLARITY_REQUEST,
+        type: ADD_OR_UPDATE_BIPOLARITY,
         payload: {
           bipolarityRequest,
           mood
@@ -26,90 +28,43 @@ export function create(target, mood) {
   };
 }
 
-export function fetchAll() {
-  return async (dispatch) => {
-    dispatch({
-      type: SET_FETCHING,
-      payload: {
-        isFetching: true
-      }
-    });
-
-    try {
-      const crs = await API.BipolarityRequests.getAll();
-
-      const moodsCr = crs.reduce((prev, curr) => {
-        prev[curr.mood].push(curr);
-
-        return prev;
-      }, {
-        PRO: [],
-        LOVE: [],
-        SOCIAL: [],
-        PERSO: []
-      });
-
-      Object.keys(moodsCr).forEach((mood) => {
-        dispatch({
-          type: SET_BIPOLARITY_REQUESTS,
-          payload: {
-            bipolarityRequests: moodsCr[mood],
-            mood
-          }
-        });
-      });
-    } catch (err) {
-      throw err;
-    } finally {
-      dispatch({
-        type: SET_FETCHING,
-        payload: {
-          isFetching: false
-        }
-      });
-    }
-  };
-}
-
-export function fetchById(crId) {
+export function create(target, mood) {
   return async (dispatch) => {
     try {
-      const bipolarityRequest = await API.BipolarityRequests.getById(crId);
+      const bipolarityRequest = await API.BipolarityRequests.create({
+        target,
+        mood
+      });
 
       dispatch({
-        type: ADD_OR_UPDATE_BIPOLARITY_REQUEST,
+        type: ADD_OR_UPDATE_BIPOLARITY,
         payload: {
           bipolarityRequest,
-          mood: bipolarityRequest.mood
+          mood
         }
       });
     } catch (err) {
-      console.warn(err);
       throw err;
     }
   };
 }
 
-export function accept(crId, mood) {
-  return async (dispatch, getState) => {
-    const { bipolarityRequests } = getState();
-
-    const bipolarityRequest = bipolarityRequests[mood].find(cr => cr.id === crId);
+export function update(data) {
+  return async (dispatch) => {
     try {
-      await API.BipolarityRequests.updateHasBeenAccepted(crId);
+      const bipolarityRequest = await API.BipolarityRequests.update(data);
 
-      dispatch({
-        type: ADD_OR_UPDATE_BIPOLARITY_REQUEST,
+      /*dispatch({
+        type: ADD_OR_UPDATE_BIPOLARITY,
         payload: {
-          bipolarityRequest: {
-            ...bipolarityRequest,
-            hasBeenAccepted: true
-          }
+          bipolarityRequest,
+          data.mood
         }
-      });
+      });*/
     } catch (err) {
-      console.warn(err);
       throw err;
     }
   };
 }
+
+
