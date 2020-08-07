@@ -83,13 +83,12 @@ export default function MainTabsTchat() {
 
 
  const { compatibilityRequests } = useCompatibilityRequests();
- const { create: createBipolarity } = useBipolarities();
+ const { bipolarityRequests, create: createBipolarity } = useBipolarities();
 
   const onPressBipolarity = useCallback((target) => {
-    NavigationHelper.navigate('MainTchatConversationBipolarity', { opponent: target });
-    createBipolarity( target );
-   }, [currentMood, logguedUser.id, createBipolarity]);
-
+      createBipolarity( target );
+      NavigationHelper.navigate('MainTchatConversationBipolarity', { opponent: target });
+   }, [currentMood, logguedUser.id, createBipolarity, bipolarityRequests]);
 
   return (
     <View style={styles.container}>

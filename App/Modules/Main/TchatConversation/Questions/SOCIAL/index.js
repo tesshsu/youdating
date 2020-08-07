@@ -30,7 +30,7 @@ const question_8 = "pour parler longuement avec votre ami vous êtes plutôt du 
 const question_9 = " quand un ami commet une erreur envers vous , êtes vous plutôt du genre ?";
 const question_10 = "quand vous sortez vous êtes plutôt du style ?";
 
-export const QUETIONS = [
+export const QUESTIONS = [
 	  {
 		id: 0,
 		title: 'question n1',

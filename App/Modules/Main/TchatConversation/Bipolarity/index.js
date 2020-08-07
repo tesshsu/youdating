@@ -28,9 +28,27 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
   const [answers, setAnswers] = useState([]);
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
-  const { update: updateBipolarity } = useBipolarities();
+  const { bipolarityRequests, update: updateBipolarity } = useBipolarities();
   const slicedQuestions = [];
+  let QUESTIONS = [];
+  const ModeQuestions = useMemo(() => Questions[currentMood].QUESTIONS, [currentMood, QUESTIONS]);
 
+   // retrieve the opponent response
+   const currentBipolarities = bipolarityRequests?.bipolarityRequests?.filter( (bp) => {
+         return (bp.target.id === opponent.id && bp.author.id === logguedUser.id)
+               || (bp.target.id === logguedUser.id && bp.author.id === opponent.id) ;
+    });
+  const currentBipolarity = currentBipolarities?.length > 0 ? currentBipolarities[0]: undefined;
+
+  const mineResult = currentBipolarity?.author.id === logguedUser.id ? currentBipolarity?.authorResult : currentBipolarity?.targetResult
+  if(mineResult){
+     navigation.navigate('MainTchatConversationBipolarityHistoric', {
+       answers: ModeQuestions,
+       score : mineResult,
+       totalQuestion: ModeQuestions.length,
+       opponent
+     });
+  }
 
   const setAnswer = async (questionId, response) => {
     // go to next question
@@ -86,9 +104,6 @@ export default function MainTchatConvversationBipolarity({ navigation }) {
   useEffect(() => {
     next();
   }, [answers]);
-
-  let QUETIONS = [];
-  const ModeQuestions = useMemo(() => Questions[currentMood].QUETIONS, [currentMood, QUETIONS]);
 
   ModeQuestions.forEach((u) => {
     const lastArray = slicedQuestions[slicedQuestions.length - 1];
