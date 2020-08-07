@@ -30,7 +30,7 @@ const question_8 = "Quand vous voulez de l'argent en général c'est pour obteni
 const question_9 = "Quand vous en avez l'occasion apres le tavail vous êtes plutôt ?";
 const question_10 = "Au travail, preferez vous accomplir des tâches plutôt ?";
 
-export const QUETIONS = [
+export const QUESTIONS = [
       {
 		id: 0,
 		title: 'question n1',

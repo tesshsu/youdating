@@ -30,7 +30,7 @@ const question_8 = "plutot du genre a boire ?";
 const question_9 = "plutôt vacances ?";
 const question_10 = "quand vous accomplissez quelque chose en générale vous regardez d'abord ?";
 
-export const QUETIONS = [
+export const QUESTIONS = [
 	  {
 		id: 0,
 		title: 'question n1',
