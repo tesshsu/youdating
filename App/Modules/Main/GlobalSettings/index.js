@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -44,12 +44,14 @@ export default function GlobalSettings() {
     }
   };
 
-  const [updateDebounced] = useDebouncedCallback(updateSettings, 800);
+  const [updateDebounced] = useDebouncedCallback( () => {
+        updateSettings();
+  }, 800);
 
-  async function updateSetting(keyName, value) {
+  const updateSetting = useCallback( (keyName, value) => {
     setSettings({ ...settings, [keyName]: value });
     updateDebounced();
-  }
+  }, [updateDebounced, settings]);
 
   async function updateSharePositionSetting(value) {
     try {
@@ -74,6 +76,7 @@ export default function GlobalSettings() {
   }
 
   const {
+    bipolarities,
     compatibilities,
     messages,
     goodFeelings,
@@ -140,7 +143,7 @@ export default function GlobalSettings() {
           />
           <SettingSwitch
              label="Bipolarities"
-             value={opportunities}
+             value={bipolarities}
              onChange={() => updateSetting('bipolarities', !bipolarities)}
            />
         </SettingsCard>
