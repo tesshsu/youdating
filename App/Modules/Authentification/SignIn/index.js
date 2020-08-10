@@ -88,14 +88,6 @@ export default function AuthentificationSignIn() {
                 secureTextEntry: true,
               }}
             />
-            <TouchableOpacity
-              style={globalStyles.link}
-              onPress={() => NavigationHelper.navigate('ForgetPassword')}
-            >
-              <Text style={globalStyles.linkText}>
-                mot de pass oublie
-              </Text>
-            </TouchableOpacity>
             <LinearGradient colors={['#E4C56D', '#DA407D', '#D6266E']}
                             style={globalStyles.linearGradient}
                             start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}>
