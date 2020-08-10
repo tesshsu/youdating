@@ -84,10 +84,27 @@ export default function MainTabsTchat() {
 
  const { compatibilityRequests } = useCompatibilityRequests();
  const { bipolarityRequests, create: createBipolarity } = useBipolarities();
+  // retrieve the opponent response
 
   const onPressBipolarity = useCallback((target) => {
-      createBipolarity( target );
-      NavigationHelper.navigate('MainTchatConversationBipolarity', { opponent: target });
+       const currentBipolarities = bipolarityRequests?.bipolarityRequests?.filter( (bp) => {
+                return (bp.target.id === target.id && bp.author.id === logguedUser.id)
+                      || (bp.target.id === logguedUser.id && bp.author.id === target.id) ;
+           });
+        const currentBipolarity = currentBipolarities?.length > 0 ? currentBipolarities[0]: undefined;
+        const mineResult = currentBipolarity?.author.id === logguedUser.id ? currentBipolarity?.authorResult : currentBipolarity?.targetResult
+
+      if(mineResult){
+         NavigationHelper.navigate('MainTchatConversationBipolarityHistoric', {
+               answers: undefined,
+               score : mineResult,
+               totalQuestion: undefined,
+               opponent: target
+             });
+      } else {
+          createBipolarity( target );
+          NavigationHelper.navigate('MainTchatConversationBipolarity', { opponent: target });
+      }
    }, [currentMood, logguedUser.id, createBipolarity, bipolarityRequests]);
 
   return (
@@ -191,21 +208,6 @@ export default function MainTabsTchat() {
                       height={25}
                       onPress={() => onPressBipolarity( target) }
                     />
-                  </View>
-                </View>
-                <View style={styles.body}>
-                  <View style={styles.footer}>
-                    {hasNewMessage && (
-                      <RoundIconButton
-                        containerStyle={styles.button}
-                        backgroundColor={moodInfos.color}
-                        iconColor="white"
-                        iconName="message-square"
-                        size={verticalScale(34)}
-                        iconSize={verticalScale(14)}
-                        onPress={() => startConversation(currentMood, target)}
-                      />
-                    )}
                   </View>
                 </View>
               </TouchableOpacity>

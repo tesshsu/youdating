@@ -11,6 +11,7 @@ import PageHeader from '../../../Global/PageHeader';
 import RoundButton from '../../../Global/RoundButton';
 import * as Questions from '../Questions';
 import styles from './styles';
+import { Feather } from '@expo/vector-icons';
 
 export default function BipolarityHistoric({ navigation }) {
   const { state: { params } } = navigation;
@@ -29,6 +30,9 @@ export default function BipolarityHistoric({ navigation }) {
   const score = params.score;
   const opponent = params.opponent;
   let conversation, opponentAnswer;
+  let QUESTIONS = [];
+  const ModeQuestions = useMemo(() => Questions[currentMood].QUESTIONS, [currentMood, QUESTIONS]);
+  let answers =  params.answers ?  params.answers : ModeQuestions;
 
   // retrieve the opponent response
   const currentBipolarities = bipolarityRequests?.bipolarityRequests?.filter( (bp) => {
@@ -45,7 +49,7 @@ export default function BipolarityHistoric({ navigation }) {
       setButtonContainerheight(height);
     }
   }
-  params.answers.forEach((u) => {
+  answers?.forEach((u) => {
     const lastArray = slicedAnswers[slicedAnswers.length - 1];
 
     if (!lastArray || lastArray.length === 1) {
@@ -94,7 +98,14 @@ export default function BipolarityHistoric({ navigation }) {
     <>
       <PageHeader
         title="Historique"
-        backButton
+        leftComponent={() => (
+                 <Feather
+                         name="chevron-left"
+                         color='white'
+                         size={21}
+                         onPress={() => NavigationHelper.navigate('MainTabsTchatList')}
+                     />
+                 )}
       />
       <View style={styles.container}>
         <Text
