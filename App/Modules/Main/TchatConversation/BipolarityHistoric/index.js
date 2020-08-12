@@ -21,15 +21,19 @@ export default function BipolarityHistoric({ navigation }) {
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
   const { bipolarityRequests, get: getBipolarity } = useBipolarities();
-
+  const [conversation, setConversation] = useState(null);
   const {
-	conversations,
-    startConversation
+    conversations,
+    startConversation,
+    fetchConversations,
+    areConversationsFetching
   } = useConversation();
+
   const slicedAnswers = [];
   const score = params.score;
   const opponent = params.opponent;
-  let conversation, opponentAnswer;
+  let opponentAnswer;
+
   let QUESTIONS = [];
   const ModeQuestions = useMemo(() => Questions[currentMood].QUESTIONS, [currentMood, QUESTIONS]);
   let answers =  params.answers ?  params.answers : ModeQuestions;
@@ -72,7 +76,9 @@ export default function BipolarityHistoric({ navigation }) {
   });
 
 
-  // We have response an
+  // Check conversation
+  const currentConversation = conversations.find(c => (c?.user1.id === logguedUser.id && c?.user2.id === opponent.id)
+                           || (c?.user1.id === opponent.id && c?.user2.id === logguedUser.id) );
   const openConversation = useCallback((conversation) => {
     const {
       user1,
@@ -85,7 +91,7 @@ export default function BipolarityHistoric({ navigation }) {
     if (lastMessage.isOpportunity && lastMessage.author !== logguedUser.id) {
       NavigationHelper.navigate('MainTchatNewMessage', { conversation, target });
     } else {
-      startConversation(currentMood, target);
+     startConversation(currentMood, target);
     }
   }, [currentMood, logguedUser.id, startConversation]);
 
@@ -229,14 +235,16 @@ export default function BipolarityHistoric({ navigation }) {
                                       { score }%
                                     </Text>
                        </View>
-                                  {index != 9 ? (
+                                  { index != 9
+
+                                  ? (
                                                   <RoundButton
                                                       containerStyle={styles.button}
                                                       backgroundColor={moodInfos.color}
                                                       text="DISCUTEZ-EN"
                                                       color="white"
                                                       borderRadius={23} MainTabsTchatList
-                                                      onPress={() => startConversation(currentMood, target)}
+                                                      onPress={() => openConversation(currentConversation)}
                                                   />
                                                   ) : (
                                                         <RoundButton

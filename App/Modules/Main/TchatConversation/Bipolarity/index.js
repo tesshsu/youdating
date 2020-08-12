@@ -22,7 +22,7 @@ import useLogguedUser from '../../../../Hooks/useLogguedUser';
 import useBipolarities from '../../../../Hooks/useBipolarities';
 import * as Questions from '../Questions';
 
-export default function MainTchatConvversationBipolarity({ navigation }) {
+export default function MainTchatConversationBipolarity({ navigation }) {
   const { state: { params: { opponent } } } = navigation;
   const [carouselIndex, setCarrouselIndex] = useState(0);
   const [answers, setAnswers] = useState([]);

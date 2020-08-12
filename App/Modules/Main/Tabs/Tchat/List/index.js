@@ -27,7 +27,7 @@ const COMPATIBILITY_EXCELLENT = require('../../../../../../assets/icons/icon_com
 const TEXT = {
   PRO: 'professionnelles',
   SOCIAL: 'sociales',
-  LOVE: 'de couples',
+  LOVE: 'couple',
   PERSO: 'personnelles'
 };
 
