@@ -33,8 +33,6 @@ export function fetchMessages() {
       currentMood: mood
     } = getState();
 
-    console.warn(conversations);
-
     dispatch({
       type: SET_FETCHING,
       payload: {

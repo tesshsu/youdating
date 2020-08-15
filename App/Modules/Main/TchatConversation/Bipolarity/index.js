@@ -26,6 +26,7 @@ export default function MainTchatConversationBipolarity({ navigation }) {
   const { state: { params: { opponent } } } = navigation;
   const [carouselIndex, setCarrouselIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
+  const [isHistoricMode, setIsHistoricMode] = useState(false);
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
   const { bipolarityRequests, update: updateBipolarity } = useBipolarities();
@@ -41,8 +42,9 @@ export default function MainTchatConversationBipolarity({ navigation }) {
   const currentBipolarity = currentBipolarities?.length > 0 ? currentBipolarities[0]: undefined;
 
   const mineResult = currentBipolarity?.author.id === logguedUser.id ? currentBipolarity?.authorResult : currentBipolarity?.targetResult
-  if(mineResult){
-     navigation.navigate('MainTchatConversationBipolarityHistoric', {
+  if(mineResult && !isHistoricMode){
+    setIsHistoricMode(true);
+     NavigationHelper.navigate('MainTchatConversationBipolarityHistoric', {
        answers: ModeQuestions,
        score : mineResult,
        totalQuestion: ModeQuestions.length,

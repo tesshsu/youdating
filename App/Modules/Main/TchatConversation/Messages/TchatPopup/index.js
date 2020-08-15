@@ -231,6 +231,7 @@ export default function TchatPopup() {
 
           return (
             <MessageBubble
+              key={id}
               index={id}
               avatarUri={id === lastMessageId ? target.moods[mood].avatar : null}
               containerStyle={author === logguedUser.id ? styles.bubbleAuthor : styles.bubbleTarget}

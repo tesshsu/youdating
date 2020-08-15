@@ -84,9 +84,9 @@ export default function MainTabsTchat() {
 
  const { compatibilityRequests } = useCompatibilityRequests();
  const { bipolarityRequests, create: createBipolarity } = useBipolarities();
-  // retrieve the opponent response
 
-  const onPressBipolarity = useCallback((target) => {
+  // retrieve the opponent response
+  const onPressBipolarity = useCallback(async(target) => {
        const currentBipolarities = bipolarityRequests?.bipolarityRequests?.filter( (bp) => {
                 return (bp.target.id === target.id && bp.author.id === logguedUser.id)
                       || (bp.target.id === logguedUser.id && bp.author.id === target.id) ;
@@ -102,7 +102,7 @@ export default function MainTabsTchat() {
                opponent: target
              });
       } else {
-          createBipolarity( target );
+          await createBipolarity( target );
           NavigationHelper.navigate('MainTchatConversationBipolarity', { opponent: target });
       }
    }, [currentMood, logguedUser.id, createBipolarity, bipolarityRequests]);
