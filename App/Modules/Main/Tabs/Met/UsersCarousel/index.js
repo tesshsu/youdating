@@ -27,8 +27,12 @@ export default function UsersCarousel() {
   }, [addRecent, visitProfil]);
 
   const users = useMemo(() => results.map((r) => {
-    const mood = Object.keys(r.moods)[0];
-    return { ...r, avatar: r.moods[mood].avatar, description: r.moods[mood].description };
+    if(r.moods) {
+        const mood = Object.keys(r.moods)[0];
+        return { ...r, avatar: r.moods[mood].avatar, description: r.moods[mood].description };
+    } else {
+        return { ...r, avatar: undefined, description: undefined };
+    }
   }), [results]);
 
   if (isFetching) {
