@@ -40,7 +40,7 @@ export default function UserCard(props) {
         <View>
           <Text style={styles.usernameText}>{firstName}</Text>
           <YousOn online>
-            <Text style={styles.userInfosText}>{`${moment().diff(moment.unix(birthday), 'years')}ANS-${city}`}</Text>
+            <Text style={styles.userInfosText}>{`${moment().diff(moment(birthday), 'years')}ANS-${city}`}</Text>
           </YousOn>
         </View>
         <RoundButton
