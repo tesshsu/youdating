@@ -15,6 +15,7 @@ import useLogguedUser from '../../../../../Hooks/useLogguedUser';
 import ListItemSeparator from '../../../../Global/ListItemSeparator';
 import useConversation from '../../../../../Hooks/useConversations';
 import { Image } from 'react-native-expo-image-cache';
+import MoodSelector from '../../../../Global/MoodSelector';
 
 export default function CompatibilitiesList({ selectedUser, onSelected }) {
   const {flatListIndex, setFlatListIndex} = useState(0);
@@ -32,7 +33,8 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
   }, [onSelected]);
 
   return (
-    <View style={{ height: verticalScale(120) }}>
+    <View style={{ height: verticalScale(210) }}>
+      <MoodSelector />
       <FlatList
         contentContainerStyle={styles.flatListContent}
         horizontal={true}
@@ -82,9 +84,9 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
         }}
       />
         <Feather
-          name="chevron-right"
+          name="chevron-left"
           color={moodInfos.color}
-          style={{position: 'absolute', zIndex: 99, right: 0, top: 30}}
+          style={{position: 'absolute', zIndex: 99, left: 0, top: 100}}
           size={verticalScale(30)}
         />
     </View>

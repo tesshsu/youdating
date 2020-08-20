@@ -14,7 +14,7 @@ export default StyleSheet.create({
   },
   itemContainer: {
     alignItems: 'center',
-    height: verticalScale(250)
+    height: verticalScale(270)
   },
   avatarContainer: {
     borderWidth: 2,

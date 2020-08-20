@@ -44,7 +44,7 @@ export default function CompatibilityResult({ user }) {
   const { user1, user2, lastMessage } = user;
   const target = user1.id === logguedUser.id ? user2 : user1;
   const { moods, personalities } = target;
-  ProfileimageSource = moods[currentMood].avatar;
+  ProfileimageSource = moods[currentMood]?.avatar;;
   firstName = target.firstName;
   personality = personalities.main;
   city = target.city;
@@ -100,7 +100,7 @@ export default function CompatibilityResult({ user }) {
       <View style={styles.avatarContainer}>
         <View style={styles.avatarImageContainer}>
           {ProfileimageSource && (
-               <Image uri={ProfileimageSource} style={styles.avatarImage} />
+               <Image uri={ProfileimageSource}  style={styles.avatarImage} />
               )
            }
           <View style={styles.avatarHeader}>

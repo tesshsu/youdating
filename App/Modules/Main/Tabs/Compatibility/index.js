@@ -8,7 +8,6 @@ import { scale } from '../../../../Helpers/ScaleHelper';
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import PageHeader from '../../../Global/PageHeader';
 import ImageButton from '../../../Global/ImageButton';
-import MoodSelector from '../../../Global/MoodSelector';
 import NavigationHelper from '../../../../Helpers/NavigationHelper';
 import useLogguedUser from '../../../../Hooks/useLogguedUser';
 import useCurrentMood from '../../../../Hooks/useCurrentMood';
@@ -20,7 +19,7 @@ export default function MainCompatibility() {
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
   const [selectedUser, setSelectedUser] = useState(null);
-  //const { avatar }= logguedUser.moods[currentMood];
+  const { avatar }= logguedUser.moods[currentMood];
   return (
     <>
       <PageHeader
@@ -42,7 +41,6 @@ export default function MainCompatibility() {
         )}
       />
       <View style={styles.container}>
-        <MoodSelector />
         <Text style={styles.title}>{`Mes contacts ${moodInfos.title}`}</Text>
         <CompatibilitiesList
           selectedUser={selectedUser}
