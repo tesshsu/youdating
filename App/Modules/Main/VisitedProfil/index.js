@@ -80,10 +80,10 @@ export default function MainTabsProfilVisitedProfil() {
     >
       <View style={styles.topHeaderProfile} >
         <Profile
-          imageSource={profil.moods[currentMood].avatar}
-          firstName={profil.firstName}
-          age={moment().diff(moment.unix(profil.birthday), 'years')}
-          city={profil.city ? profil.city.toUpperCase() : 'PARIS'}
+          imageSource={profil?.moods[currentMood]?.avatar}
+          firstName={profil?.firstName}
+          age={moment().diff(moment(profil?.birthday), 'years')}
+          city={profil.city ? profil?.city?.toUpperCase() : 'PARIS'}
           personnality={profil.personalities.main}
           subPersonnality="Personnalité compétitive"
           HeaderTopLeftComponent={(
@@ -129,7 +129,7 @@ export default function MainTabsProfilVisitedProfil() {
           ]}
           StickyAvatarImageComponent={(
             <Image
-              uri={profil.moods[currentMood].avatar}
+              uri={profil?.moods[currentMood]?.avatar}
               style={[
                 styles.avatar,
                 {

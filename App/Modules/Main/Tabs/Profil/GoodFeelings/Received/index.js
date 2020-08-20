@@ -51,12 +51,12 @@ export default function Received() {
       )}
       renderItem={({ item }) => (
         <UserListItem
-          onConsultProfil={() => consultProfil(item.author)}
-          image={item.author.moods[currentMood].avatar}
-          title={item.author.firstName}
+          onConsultProfil={() => consultProfil(item?.author)}
+          image={item?.author?.moods[currentMood]?.avatar}
+          title={item?.author?.firstName}
           subTitle={subTitleProps => (
             <YousOn online>
-              <Text {...subTitleProps}>{`${moment().diff(moment.unix(item.author.birthday), 'years')}ANS-PARIS`}</Text>
+              <Text {...subTitleProps}>{`${moment().diff(moment(item?.author?.birthday), 'years')}ANS-PARIS`}</Text>
             </YousOn>
           )}
           subSubTitle="Vous a envoyé un good feeling"
