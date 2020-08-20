@@ -52,11 +52,11 @@ export default function Sent() {
       renderItem={({ item }) => (
         <UserListItem
           onConsultProfil={() => consultProfil(item.target)}
-          image={item.target.moods[currentMood].avatar}
+          image={item?.target?.moods[currentMood]?.avatar}
           title={item.target.firstName}
           subTitle={subTitleProps => (
             <YousOn online>
-              <Text {...subTitleProps}>{`${moment().diff(moment.unix(item.target.birthday), 'years')}-PARIS`}</Text>
+              <Text {...subTitleProps}>{`${moment().diff(moment(item?.target?.birthday), 'years')}-PARIS`}</Text>
             </YousOn>
           )}
           subSubTitle="Vous avez visité son profil"

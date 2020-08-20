@@ -48,7 +48,7 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
         )}
         keyExtractor={item => item.id}
         renderItem={({ item, index }) => {
-          const target = item.user1.id === logguedUser.id ? item.user2 : item.user1;
+          const target = item.user1?.id === logguedUser.id ? item.user2 : item.user1;
           const newMessageKey = target === item.user1 ? 'user2' : 'user1';
           const hasNewMessage = item[`${newMessageKey}unreadMessageCount`] > 0;
 
@@ -58,6 +58,7 @@ export default function CompatibilitiesList({ selectedUser, onSelected }) {
 
           return (
             <TouchableOpacity
+              key={item?.id}
               style={styles.messageListItem}
               onPress={() => handleOnPress(item, index)}
             >

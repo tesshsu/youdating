@@ -159,7 +159,7 @@ export default function MainTabsTchat() {
           )}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => {
-            const target = item.user1.id === logguedUser.id ? item.user2 : item.user1;
+            const target = item.user1?.id === logguedUser.id ? item.user2 : item.user1;
             const newMessageKey = target === item.user1 ? 'user2' : 'user1';
             const hasNewMessage = item[`${newMessageKey}unreadMessageCount`] > 0;
 
@@ -168,7 +168,7 @@ export default function MainTabsTchat() {
             const { lastMessage } = item;
              // get compatibility result
              const compatibilityRequestResults = compatibilityRequests?.compatibilityRequests?.filter((cr) => {
-                   return cr.mood === currentMood && (cr.target === target.id  || cr.target?.id === target.id);
+                   return cr.mood === currentMood && (cr.target === target?.id  || cr.target?.id === target?.id);
                });
              const crResult = !compatibilityRequestResults?.length ? undefined : COMPATIBILITY_RESULT[compatibilityRequestResults[0].result];
 

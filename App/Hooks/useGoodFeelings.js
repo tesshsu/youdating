@@ -36,7 +36,7 @@ export default function useGoodFeelings() {
         showNotification({
           title: `MOOD ${moodInfos.title}`,
           text: `Vous avez envoyé un good feeling à ${user.firstName} !`,
-          image: user.moods[currentMood].avatar,
+          image: user?.moods[currentMood]?.avatar,
           duration: 4000,
           color: moodInfos.color
         });

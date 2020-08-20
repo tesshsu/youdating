@@ -35,7 +35,7 @@ export default function SearchResults() {
           title: 'Récents',
           data: recents.map(r => ({
             ...r,
-            avatar: r.moods[currentMood].avatar
+            avatar: r?.moods[currentMood]?.avatar
           }))
         }
       ];
@@ -46,7 +46,7 @@ export default function SearchResults() {
         title: 'Résultats de recherche',
         data: results.map(r => ({
           ...r,
-          avatar: r.moods[currentMood].avatar
+          avatar: r?.moods[currentMood]?.avatar
         }))
       }
     ];
