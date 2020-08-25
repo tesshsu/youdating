@@ -117,10 +117,10 @@ export default function MainTabsTchat() {
           onPress={() => NavigationHelper.navigate('MainTabsProfile')}
         />}
         rightComponent={() => <Feather
-          name="more-vertical"
+          name="refresh-cw"
           color="white"
           size={verticalScale(21)}
-          onPress={() => NavigationHelper.navigate('MainGlobalSettings')}
+          onPress={() => NavigationHelper.navigate('MainTabsCompatibility')}
         />}
         title="MESSAGERIE"
       />

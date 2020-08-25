@@ -6,6 +6,7 @@ import NavigationHelper from '../../../../../Helpers/NavigationHelper';
 import useCurrentMood from '../../../../../Hooks/useCurrentMood';
 import useLogguedUser from '../../../../../Hooks/useLogguedUser';
 import useConversation from '../../../../../Hooks/useConversations';
+import useVisitedProfil from '../../../../../Hooks/useVisitedProfil';
 import { ActionButton } from '../../../../Global/Profile';
 import ImageButton from '../../../../Global/ImageButton';
 import * as PERSONNALITY_DETAILS from './../../../../../PersonnalityDetails';
@@ -18,7 +19,7 @@ export default function CompatibilityResult({ user }) {
   const [datas, setDatas] = useState(null);
   const [conversation, setConversation] = useState(null);
   const { create, fetchAll: fetchAllCompatibilityRequests,  isFetching, compatibilityRequests } = useCompatibilityRequests();
-
+ const { visitProfil } = useVisitedProfil();
   const { currentMood, moodInfos } = useCurrentMood();
   const { logguedUser } = useLogguedUser();
   const { startConversation } = useConversation();
@@ -33,7 +34,6 @@ export default function CompatibilityResult({ user }) {
 
      create( target );
   }, [currentMood, logguedUser.id, create]);
-
 
   let ProfileimageSource, firstName, personality, age, city, message, subPersonality, result;
   if (!user) {
@@ -71,9 +71,9 @@ export default function CompatibilityResult({ user }) {
             iconName="refresh-cw"
           />
           <ActionButton
-            onPress={() => NavigationHelper.navigate('MainTabsProfilInvite')}
-            text="INVITE"
-            iconName="user-plus"
+            onPress={() => visitProfil(target.id)}
+            text="PROFIL"
+            iconName="user"
           />
           {crResult && (
             <ImageButton
