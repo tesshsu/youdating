@@ -19,6 +19,17 @@ export default StyleSheet.create({
     textShadowOffset: { width: 0, height: 0 },
     elevation: 2
   },
+  subPersonalText: {
+      fontFamily: 'Gadugi-Bold',
+      fontSize: moderateScale(16),
+      fontWeight: 'bold',
+      color: 'white',
+      textShadowColor: 'black',
+      textShadowRadius: 3,
+      textShadowOffset: { width: 0, height: 0 },
+      elevation: 2,
+      marginTop: verticalScale(10)
+   },
   headerOnline: {
     width: scale(6),
     height: verticalScale(6),
@@ -40,7 +51,7 @@ export default StyleSheet.create({
   },
   nameProfil: {
     fontFamily: 'Gadugi-Bold',
-    fontSize: moderateScale(20),
+    fontSize: moderateScale(26),
     fontWeight: 'bold',
     color: 'white',
     textShadowColor: 'black',
