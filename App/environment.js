@@ -7,7 +7,7 @@ const ENVS = {
     GOOGLE_API_KEY: 'AIzaSyAOeGj8aXNwCY52E8ItcNtch8WYTXRk2GE',
     FACEBOOK_APP_ID: '862552420923956',
     FACEBOOK_APP_NAME: 'Yous APP',
-    AWS_BUCKET_URL: 'https://yous-staging.s3.eu-west-3.amazonaws.com'
+    AWS_BUCKET_URL: 'https://yous-app-data-backup.s3.eu-west-3.amazonaws.com'
   },
   DEV: {
     ENV: 'DEV',

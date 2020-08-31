@@ -19,16 +19,16 @@ const IMAGE_Q9B = require('../../../../../../assets/images/Bipolarity/love/quest
 const IMAGE_Q10A = require('../../../../../../assets/images/Bipolarity/love/question10_a.jpg');
 const IMAGE_Q10B = require('../../../../../../assets/images/Bipolarity/love/question10_b.jpg');
 
-const question_1 = "Si vous avez le choix  vous êtes plutôt ?";
-const question_2 = "Pour les petits déplacements a travers la france vous préferez  ?";
-const question_3 = " Vous sentez-vous plus a l'aise quand vous travailler dans ?";
-const question_4 = " Quel marque d'ordinateur utilisez vous ?";
-const question_5 = "Diriez vous que vous êtes plutôt ?";
-const question_6 = "La plupart du temps, lorque l'on vous confie une tâche préférez-vous travailler?";
-const question_7 = "Au travail, vous vous intéressez plutôt a vôtre  ?";
-const question_8 = "Quand vous voulez de l'argent en général c'est pour obtenir plus ?";
-const question_9 = "Quand vous en avez l'occasion apres le tavail vous êtes plutôt ?";
-const question_10 = "Au travail, preferez vous accomplir des tâches plutôt ?";
+const question_1 = " vous êtes plutôt petit déjeuner ?";
+const question_2 = " est-tu ?";
+const question_3 = "  pour passer une bonne soirée canapé tu es plutot ?";
+const question_4 = " avec ton partenaire tu préferes plutôt les soirées ?";
+const question_5 = "en règle genérale quand vous partez en voyage c'est plutôt ?";
+const question_6 = "en soirée ou dans un apéro vous buvez de ?";
+const question_7 = "plutôt du genre ?";
+const question_8 = "vous êtes plutôt ?";
+const question_9 = " le week-end vous préferez ?";
+const question_10 = " êtes-vous plutôt du genre cuisinier ?";
 
 export const QUESTIONS = [
       {
@@ -37,8 +37,8 @@ export const QUESTIONS = [
 		question: question_1,
 		avatarA: IMAGE_Q1A,
 		avatarB: IMAGE_Q1B,
-		answerA: 'téle travail',
-		answerB: 'travail au bureaux'
+		answerA: 'sucré',
+		answerB: 'salé'
 	  },
 	  {
 		id: 1,
@@ -46,8 +46,8 @@ export const QUESTIONS = [
 		question: question_2,
 		avatarA: IMAGE_Q2A,
 		avatarB: IMAGE_Q2B,
-		answerA: 'le train',
-		answerB: "l'avion"
+		answerA: 'fumeur',
+		answerB: "non fumeur"
 	  },
 	  {
 		id: 2,
@@ -55,8 +55,8 @@ export const QUESTIONS = [
 		question: question_3,
 		avatarA: IMAGE_Q3A,
 		avatarB: IMAGE_Q3B,
-		answerA: 'une grande entreprise',
-		answerB: 'une petite entreprise'
+		answerA: 'film',
+		answerB: 'série'
 	  },
 	  {
 		id: 3,
@@ -64,8 +64,8 @@ export const QUESTIONS = [
 		question: question_4,
 		avatarA: IMAGE_Q4A,
 		avatarB: IMAGE_Q4B,
-		answerA: 'mac',
-		answerB: 'pc'
+		answerA: 'en extérieur avec du monde autour',
+		answerB: 'en intérieur dans un cadre intimiste'
 	  },
 	  {
 		id: 4,
@@ -73,8 +73,8 @@ export const QUESTIONS = [
 		question: question_5,
 		avatarA: IMAGE_Q5A,
 		avatarB: IMAGE_Q5B,
-		answerA: 'informatique',
-		answerB: 'manuel'
+		answerA: "voyage organisé",
+		answerB: "voyage à la dernières minutes"
 	  },
 	  {
 		id: 5,
@@ -82,8 +82,8 @@ export const QUESTIONS = [
 		question: question_6,
 		avatarA: IMAGE_Q6A,
 		avatarB: IMAGE_Q6B,
-		answerA: 'en equipe',
-		answerB: 'individuellement'
+		answerA: "l'alcool en tout genre",
+		answerB: "des jus de fruit,soft"
 	  },
 	  {
 		id: 6,
@@ -91,8 +91,8 @@ export const QUESTIONS = [
 		question: question_7,
 		avatarA: IMAGE_Q7A,
 		avatarB: IMAGE_Q7B,
-		answerA: 'carrière professionnelle',
-		answerB: "à votre épanouissement social"
+		answerA: "couche tard",
+		answerB: "couche tôt"
 	  },
 	  {
 		id: 7,
@@ -100,8 +100,8 @@ export const QUESTIONS = [
 		question: question_8,
 		avatarA: IMAGE_Q8A,
 		avatarB: IMAGE_Q8B,
-		answerA: 'de reconnaissance',
-		answerB: 'de liberté'
+		answerA: "grand cercle d'amis",
+		answerB: "d'amis restreint"
 	  },
 	  {
 		id: 8,
@@ -109,8 +109,8 @@ export const QUESTIONS = [
 		question: question_9,
 		avatarA: IMAGE_Q9A,
 		avatarB: IMAGE_Q9B,
-		answerA: 'after work',
-		answerB: 'détente'
+		answerA: 'les activités distrayantes',
+		answerB: 'les activités distrayantes'
 	  },
 	  {
 		id: 9,
@@ -118,7 +118,7 @@ export const QUESTIONS = [
 		question: question_10,
 		avatarA: IMAGE_Q10A,
 		avatarB: IMAGE_Q10B,
-		answerA: 'spécialisé',
-		answerB: 'polyvalente'
+		answerA: 'expert',
+		answerB: 'debutant'
 	  }
 ];

@@ -28,7 +28,7 @@ export default function TabBar(props) {
   } = navigation.state;
 
   return (
-    <SafeAreaView>
+
       <View style={styles.container}>
         <View style={styles.tabsContainer}>
           { routes.map((route, routeIndex) => {
@@ -65,6 +65,6 @@ export default function TabBar(props) {
           })}
         </View>
       </View>
-    </SafeAreaView>
+
   );
 }
