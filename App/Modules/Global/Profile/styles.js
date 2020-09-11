@@ -27,8 +27,7 @@ export default StyleSheet.create({
       textShadowColor: 'black',
       textShadowRadius: 3,
       textShadowOffset: { width: 0, height: 0 },
-      elevation: 2,
-      marginTop: verticalScale(10)
+      elevation: 2
    },
   headerOnline: {
     width: scale(6),
