@@ -27,6 +27,10 @@
       "package": "com.yousdating.yous",
       "versionCode": 2
     },
+    "ios":{
+        "supportsTablet": true,
+        "bundleIdentifier": "com.yousdating.yous"
+    },
     "facebookAppId": "862552420923956",
     "facebookDisplayName": "Yous APP",
     "facebookScheme": "fb862552420923956",
