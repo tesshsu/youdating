@@ -122,13 +122,13 @@ export default function AuthentificationSignUp() {
   return (
     <Formik
       initialValues={{
-        email: randomEmail,
-        password: '1StrongPassword$',
+        email: '',
+        password: '',
         gender: 'MALE',
-        birthday: '1980-01-01',
-        firstName: 'tess2',
-        lastName: 'hsu',
-        ville: 'Nice2'
+        birthday: '02/11/1988',
+        firstName: '',
+        lastName: '',
+        ville: ''
       }}
       onSubmit={onSubmit}
     >
