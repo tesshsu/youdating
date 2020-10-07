@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^3.8.0",
-    "@expo/vector-icons": "^10.0.6",
+    "@expo/vector-icons": "10.2.0",
     "@ptomasroos/react-native-multi-slider": "^2.2.0",
     "@react-native-community/datetimepicker": "^2.1.0",
     "@react-native-community/masked-view": "0.1.5",
@@ -67,7 +67,7 @@
     "redux-persist": "^6.0.0",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "sentry-expo": "^2.0.3",
+    "sentry-expo": "3.0.0",
     "socket.io-client": "^2.3.0",
     "uid": "^1.0.0",
     "use-debounce": "^3.3.0",
