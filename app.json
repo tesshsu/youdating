@@ -3,7 +3,6 @@
     "name": "you's",
     "slug": "yous-dating",
     "privacy": "public",
-    "sdkVersion": "38.0.0",
     "platforms": [
       "ios",
       "android",
@@ -27,9 +26,9 @@
       "package": "com.yousdating.yous",
       "versionCode": 2
     },
-    "ios":{
-        "supportsTablet": true,
-        "bundleIdentifier": "com.yousdating.yous"
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yousdating.yous"
     },
     "facebookAppId": "862552420923956",
     "facebookDisplayName": "Yous APP",

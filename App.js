@@ -16,7 +16,7 @@ Sentry.init({
   debug: true
 });
 
-Sentry.setRelease(Constants.manifest.revisionId);
+//Sentry.setRelease(Constants.manifest.revisionId);
 
 export default function App() {
   return (
