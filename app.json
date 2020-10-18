@@ -28,7 +28,8 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.yousdating.yous"
+      "bundleIdentifier": "com.yousdating.yous",
+      "buildNumber": "2"
     },
     "facebookAppId": "862552420923956",
     "facebookDisplayName": "Yous APP",
